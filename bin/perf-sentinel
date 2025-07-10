@@ -1,1 +1,5 @@
-#!/usr/bin/env node 
+#!/usr/bin/env node
+const { run } = require('../src/index');
+const { hideBin } = require('yargs/helpers');
+
+run(hideBin(process.argv)); 
