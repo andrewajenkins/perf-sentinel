@@ -1,0 +1,60 @@
+[
+  {
+    "projectId": "test-project",
+    "runData": [
+      {
+        "stepText": "I navigate to the login page",
+        "duration": 152,
+        "timestamp": "2023-12-01T10:00:00.000Z"
+      },
+      {
+        "stepText": "I log in as a standard user",
+        "duration": 1220,
+        "timestamp": "2023-12-01T10:00:01.000Z"
+      },
+      {
+        "stepText": "I see the dashboard",
+        "duration": 820,
+        "timestamp": "2023-12-01T10:00:02.000Z"
+      }
+    ],
+    "timestamp": "2023-12-01T10:00:00.000Z"
+  },
+  {
+    "projectId": "test-project",
+    "runData": [
+      {
+        "stepText": "I navigate to the login page",
+        "duration": 148,
+        "timestamp": "2023-12-01T11:00:00.000Z"
+      },
+      {
+        "stepText": "I log in as a standard user",
+        "duration": 1180,
+        "timestamp": "2023-12-01T11:00:01.000Z"
+      },
+      {
+        "stepText": "I see the dashboard",
+        "duration": 780,
+        "timestamp": "2023-12-01T11:00:02.000Z"
+      }
+    ],
+    "timestamp": "2023-12-01T11:00:00.000Z"
+  },
+  {
+    "projectId": "another-project",
+    "runData": [
+      {
+        "stepText": "I open the application",
+        "duration": 500,
+        "timestamp": "2023-12-01T12:00:00.000Z"
+      },
+      {
+        "stepText": "I perform search",
+        "duration": 300,
+        "timestamp": "2023-12-01T12:00:01.000Z"
+      }
+    ],
+    "timestamp": "2023-12-01T12:00:00.000Z"
+  }
+] 

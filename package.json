@@ -7,7 +7,13 @@
     "perf-sentinel": "bin/perf-sentinel"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "test:unit": "jest test/unit",
+    "test:integration": "jest test/integration",
+    "test:e2e": "jest test/e2e",
+    "test:database": "jest test/unit/database.test.js test/unit/storage.test.js test/integration/database.integration.test.js",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +26,7 @@
   },
   "devDependencies": {
     "jest": "^30.0.4",
-    "memfs": "^4.17.2"
+    "memfs": "^4.17.2",
+    "mongodb-memory-server": "^9.1.4"
   }
 }

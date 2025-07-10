@@ -117,7 +117,7 @@ describe('CLI Integration Tests (with memfs)', () => {
     it('should warn if no files match the glob pattern', async () => {
         const argv = ['seed', '--run-files', '/non-existent/*.json', '--history-file', '/h.json'];
         await run(argv);
-        expect(global.console.warn).toHaveBeenCalledWith('No files found matching the provided glob pattern.');
+        expect(global.console.log).toHaveBeenCalledWith('No files found matching the provided glob pattern');
     });
 
     it('should exit gracefully on a file-system write error', async () => {

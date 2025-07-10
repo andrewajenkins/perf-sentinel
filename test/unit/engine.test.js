@@ -1,4 +1,4 @@
-const { analyze, calculateAverage, calculateStdDev } = require('../../src/analysis/engine');
+const { analyze, calculateAverage, calculateStdDev, calculateTrend, shouldReportRegression } = require('../../src/analysis/engine');
 const historyBaseline = require('../fixtures/history-baseline.json');
 const runNormal = require('../fixtures/run-normal.json');
 const runWithRegression = require('../fixtures/run-with-regression.json');
@@ -21,6 +21,72 @@ describe('Analysis Engine', () => {
 
      it('should return 0 for standard deviation if there are less than 2 durations', () => {
       expect(calculateStdDev([150], 150)).toBe(0);
+    });
+  });
+
+  describe('Trend Detection', () => {
+    it('should detect upward trend in durations', () => {
+      const durations = [100, 102, 101, 115, 118, 120]; // Recent 3 avg: 117.7, older 3 avg: 101
+      const { trend, isSignificant } = calculateTrend(durations);
+      expect(trend).toBeCloseTo(16.7, 1);
+      expect(isSignificant).toBe(true);
+    });
+
+    it('should not detect trend with insufficient data', () => {
+      const durations = [100, 102, 101];
+      const { trend, isSignificant } = calculateTrend(durations);
+      expect(trend).toBe(0);
+      expect(isSignificant).toBe(false);
+    });
+
+    it('should not flag small trends as significant', () => {
+      const durations = [100, 102, 101, 105, 104, 106]; // Small trend
+      const { trend, isSignificant } = calculateTrend(durations);
+      expect(isSignificant).toBe(false);
+    });
+  });
+
+  describe('Regression Filtering Logic', () => {
+    it('should filter out small regressions on very fast steps (<50ms)', () => {
+      const historyEntry = { durations: [30, 32, 31, 33, 32] };
+      const shouldReport = shouldReportRegression(45, 32, 2, historyEntry); // 13ms slowdown on 32ms avg
+      expect(shouldReport).toBe(false);
+    });
+
+    it('should report significant regressions on fast steps (>15ms slowdown)', () => {
+      const historyEntry = { durations: [30, 32, 31, 33, 32] };
+      const shouldReport = shouldReportRegression(50, 32, 2, historyEntry); // 18ms slowdown on 32ms avg
+      expect(shouldReport).toBe(true);
+    });
+
+    it('should filter out very small percentage changes (<3%)', () => {
+      const historyEntry = { durations: [200, 202, 201, 203, 202] };
+      const shouldReport = shouldReportRegression(206, 202, 2, historyEntry); // 2% slowdown
+      expect(shouldReport).toBe(false);
+    });
+
+    it('should report significant percentage changes (>3%)', () => {
+      const historyEntry = { durations: [200, 202, 201, 203, 202] };
+      const shouldReport = shouldReportRegression(220, 202, 2, historyEntry); // 8.9% slowdown
+      expect(shouldReport).toBe(true);
+    });
+
+    it('should require cumulative drift for fast steps with long history', () => {
+      const historyEntry = { durations: [50, 52, 51, 53, 52, 54] }; // No significant trend
+      const shouldReport = shouldReportRegression(65, 52, 2, historyEntry); // 13ms slowdown but no trend
+      expect(shouldReport).toBe(false);
+    });
+
+    it('should report fast steps with significant cumulative drift', () => {
+      const historyEntry = { durations: [50, 52, 51, 95, 98, 100] }; // Significant upward trend
+      const shouldReport = shouldReportRegression(110, 74.3, 2, historyEntry);
+      expect(shouldReport).toBe(true);
+    });
+
+    it('should filter out noise with minimum absolute slowdown', () => {
+      const historyEntry = { durations: [500, 502, 501, 503, 502] };
+      const shouldReport = shouldReportRegression(505, 502, 1, historyEntry); // Only 3ms slowdown, very stable
+      expect(shouldReport).toBe(false);
     });
   });
 
@@ -50,7 +116,17 @@ describe('Analysis Engine', () => {
     });
 
     it('should update the history with the new run data', () => {
-      const { updatedHistory } = analyze(runNormal, historyBaseline);
+      // Use a simple baseline for this test
+      const simpleBaseline = {
+        'I navigate to the login page': {
+          durations: [150, 155, 148],
+          average: 151,
+          stdDev: 3.6
+        }
+      };
+      const simpleRun = [{ stepText: 'I navigate to the login page', duration: 152 }];
+      
+      const { updatedHistory } = analyze(simpleRun, simpleBaseline);
       const stepHistory = updatedHistory['I navigate to the login page'];
       
       expect(stepHistory.durations).toHaveLength(4);
@@ -77,6 +153,31 @@ describe('Analysis Engine', () => {
         expect(updatedHistory["A step"].durations).toHaveLength(50);
         // The first element should have been shifted out and the new one pushed in
         expect(updatedHistory["A step"].durations[49]).toBe(110);
+    });
+
+    it('should detect performance drift trends', () => {
+      const driftHistory = {
+        "Slow drifting step": {
+          durations: [100, 102, 104, 118, 120, 122],
+          average: 111,
+          stdDev: 10
+        }
+      };
+      const newRun = [{"stepText": "Slow drifting step", "duration": 115}];
+      const { report } = analyze(newRun, driftHistory);
+      
+      expect(report.trends).toHaveLength(1);
+      expect(report.trends[0].stepText).toBe("Slow drifting step");
+      expect(report.trends[0].trend).toBeGreaterThan(10);
+    });
+
+    it('should include slowdown and percentage in regression reports', () => {
+      const { report } = analyze(runWithRegression, historyBaseline);
+      expect(report.regressions).toHaveLength(1);
+      expect(report.regressions[0]).toHaveProperty('slowdown');
+      expect(report.regressions[0]).toHaveProperty('percentage');
+      expect(report.regressions[0].slowdown).toBeGreaterThan(0);
+      expect(report.regressions[0].percentage).toBeGreaterThan(0);
     });
   });
 }); 

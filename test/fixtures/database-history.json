@@ -1,0 +1,22 @@
+{
+  "projectId": "test-project",
+  "history": {
+    "I navigate to the login page": {
+      "durations": [150, 155, 148, 152],
+      "average": 151.25,
+      "stdDev": 3.09
+    },
+    "I log in as a standard user": {
+      "durations": [1200, 1250, 1180, 1220],
+      "average": 1212.5,
+      "stdDev": 30.82
+    },
+    "I see the dashboard": {
+      "durations": [800, 850, 780, 820],
+      "average": 812.5,
+      "stdDev": 32.02
+    }
+  },
+  "lastUpdated": "2023-12-01T10:00:00.000Z",
+  "seedDate": "2023-11-01T10:00:00.000Z"
+} 
