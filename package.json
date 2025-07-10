@@ -1,0 +1,19 @@
+{
+  "name": "perf-sentinel",
+  "version": "1.0.0",
+  "description": "A lightweight, generic, and automated system that detects performance regressions early in the development lifecycle.",
+  "main": "src/index.js",
+  "bin": {
+    "perf-sentinel": "bin/perf-sentinel"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "yargs": "^17.7.2"
+  }
+}
