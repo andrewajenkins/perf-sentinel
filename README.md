@@ -2,27 +2,15 @@
 
 A lightweight, generic, and automated system that detects performance regressions early in the development lifecycle. It empowers teams by providing immediate feedback on how their code changes impact application speed, directly within their existing workflows.
 
-## Core Principle
-
-The system operates on a simple, three-step principle:
-
-1.  **Capture**: Automatically capture timing data from every test run.
-2.  **Compare**: Analyze the new data against a historical baseline to identify statistically significant slowdowns.
-3.  **Report**: Notify developers of regressions through actionable, non-blocking reports in formats they already use (like PR comments and Slack).
-
-This tool is packaged as a standalone NPM package and is designed to be easily integrated into any Node.js project that uses Cucumber.js for testing.
-
 ## Features
 
 -   **Easy Integration**: Add a simple hook to your Cucumber.js test suite to start capturing data.
 -   **Statistical Analysis**: Uses standard deviation to intelligently detect performance regressions, avoiding noise from minor fluctuations.
--   **File-Based Storage**: No external database required. History is stored in a simple JSON file.
--   **Multiple Reporters**: Get results where you need them:
-    -   Console
-    -   Markdown (for PR comments)
-    -   Slack
-    -   HTML Reports
+-   **Flexible Storage**: Choose between file-based storage (JSON) or database storage (MongoDB/DocumentDB).
+-   **Multi-Project Support**: Organize performance data by project when using database storage.
+-   **Multiple Reporters**: Get results where you need them: Console, Markdown, Slack (TBD), PR Comment (TBD), and HTML (TBD).
 -   **CI/CD Ready**: Designed to be a part of your automated pipeline.
+-   **Auto-Fallback**: Automatically falls back to file storage if database connection fails.
 
 ## Getting Started
 
@@ -41,29 +29,23 @@ const { AfterStep, After, Status } = require('@cucumber/cucumber');
 const fs = require('fs');
 const path = require('path');
 
-// Use a temporary array to store results during the run
 const performanceData = [];
 
 AfterStep(function (testStep) {
-  // We only care about the performance of steps that passed successfully
   if (testStep.result.status === Status.PASSED && testStep.pickleStep) {
     performanceData.push({
       stepText: testStep.pickleStep.text,
-      // The duration from Cucumber is in nanoseconds. We convert to milliseconds.
-      duration: testStep.result.duration.nanos / 1_000_000,
+      duration: testStep.result.duration.nanos / 1_000_000, // Convert to ms
       timestamp: new Date().toISOString()
     });
   }
 });
 
-// After all tests are finished, write the results to a file
 After(async function () {
-  // Ensure the output directory exists
   const outputDir = path.join(process.cwd(), 'performance-results');
   if (!fs.existsSync(outputDir)) {
-    fs.mkdirSync(outputDir);
+    fs.mkdirSync(outputDir, { recursive: true });
   }
-  // Write the data to a file. This is the input for our CLI tool.
   fs.writeFileSync(
     path.join(outputDir, 'latest-run.json'),
     JSON.stringify(performanceData, null, 2)
@@ -71,53 +53,198 @@ After(async function () {
 });
 ```
 
-### 3. Run the Analysis
+## Storage Options
 
-After your tests run and `latest-run.json` is generated, run the analysis tool.
+`perf-sentinel` supports two storage backends:
+
+### File-Based Storage (Default)
+- **Best for**: Small to medium teams, simple setups, getting started
+- **Pros**: No external dependencies, version-controlled history, simple to debug
+- **Cons**: Repository size growth, potential merge conflicts, not suitable for high-frequency runs
+
+### Database Storage (MongoDB/DocumentDB)
+- **Best for**: Large teams, high-frequency testing, multiple projects, production environments
+- **Pros**: Scalable, supports multiple projects, no repository bloat, concurrent access
+- **Cons**: Requires database setup and management
+
+### Configuration
+
+#### Using MongoDB/DocumentDB
 
 ```bash
-npx perf-sentinel analyze --run-file ./performance-results/latest-run.json --history-file ./performance-results/history.json
+# Set environment variables (recommended)
+export MONGODB_CONNECTION_STRING="mongodb+srv://user:pass@cluster.mongodb.net/"
+export MONGODB_DB_NAME="perf-sentinel"
+export PROJECT_ID="my-project"
+
+# Or pass directly via command line
+npx perf-sentinel analyze \
+  --run-file ./performance-results.json \
+  --db-connection "$MONGODB_CONNECTION_STRING" \
+  --db-name "perf-sentinel" \
+  --project-id "my-project"
 ```
 
-## CI/CD Integration Example (GitHub Actions)
+#### Connection String Examples
 
-Here’s how you can integrate `perf-sentinel` into your GitHub Actions workflow:
+```bash
+# MongoDB Atlas
+mongodb+srv://username:password@cluster.mongodb.net/
 
-```yaml
-# .github/workflows/ci.yml
-name: CI with Performance Check
+# Local MongoDB
+mongodb://localhost:27017/
 
-on: [pull_request]
+# AWS DocumentDB
+mongodb://username:password@docdb-cluster.cluster-id.region.docdb.amazonaws.com:27017/
+```
 
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+## Usage
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
+`perf-sentinel` is a command-line tool with two main commands: `analyze` and `seed`.
 
-      - name: Install dependencies
-        run: npm ci
+### `analyze`
 
-      - name: Run E2E Tests
-        # This step runs Cucumber and generates 'latest-run.json'
-        run: npm run test:e2e
+Analyzes a new performance run against historical data, reports regressions, and updates the history file.
 
-      - name: Analyze Performance
-        # This is where our tool runs
-        run: >
-          npx perf-sentinel analyze
-          --run-file ./performance-results/latest-run.json
-          --history-file ./performance-results/history.json
-          --reporter pr-comment
-          --reporter slack
-        env:
-          # Secrets are configured in GitHub repository settings
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_PERF_WEBHOOK }}
-``` 
+```bash
+npx perf-sentinel analyze [options]
+```
+
+#### Options
+
+| Option | Alias | Description | Default | Required |
+| :--- | :--- | :--- | :--- | :--- |
+| `--run-file` | `-r` | Path to the latest performance run JSON file. | | Yes |
+| `--history-file` | `-h` | Path to the historical performance JSON file (fallback when database not used). | | Conditional* |
+| `--reporter` | | Specify the reporter(s) to use. | `console` | No |
+| `--threshold` | `-t` | Number of standard deviations to use as the regression threshold. | `2.0` | No |
+| `--max-history`| | Maximum number of data points to store per test step. | `50` | No |
+| `--db-connection` | | MongoDB connection string (enables database storage). | | Conditional* |
+| `--db-name` | | Database name to use. | `perf-sentinel` | No |
+| `--project-id` | | Project identifier for multi-project support. | `default` | No |
+
+*Either `--db-connection` or `--history-file` must be provided.
+
+### `seed`
+
+Populates a new history file from a collection of past run files. This is useful for establishing an initial performance baseline.
+
+```bash
+npx perf-sentinel seed [options]
+```
+
+#### Options
+
+| Option | Alias | Description | Default | Required |
+| :--- | :--- | :--- | :--- | :--- |
+| `--run-files` | | Glob pattern for the run files to seed from. | | Yes |
+| `--history-file` | `-h` | Path to the historical performance JSON file to create (fallback when database not used). | | Conditional* |
+| `--db-connection` | | MongoDB connection string (enables database storage). | | Conditional* |
+| `--db-name` | | Database name to use. | `perf-sentinel` | No |
+| `--project-id` | | Project identifier for multi-project support. | `default` | No |
+
+*Either `--db-connection` or `--history-file` must be provided.
+
+## How File-Based Storage Works in CI/CD
+
+1. **The history file lives in your repository**: The `history.json` file is committed to your Git repository alongside your code
+2. **Each CI run updates the file**: When the CI pipeline runs `perf-sentinel analyze`, it:
+   - Reads the current `history.json` from the repository
+   - Compares the new run data against it
+   - Updates the file with new data points
+   - The updated file becomes part of the commit/PR
+
+3. **Git handles the persistence**: The history data persists across CI runs because it's version-controlled
+
+## Example Workflows
+
+### File-Based Storage Workflow
+
+```bash
+# In your CI pipeline:
+git checkout main
+npm run test:e2e  # This generates latest-run.json
+npx perf-sentinel analyze \
+  --run-file ./performance-results/latest-run.json \
+  --history-file ./performance-results/history.json
+git add performance-results/history.json
+git commit -m "Update performance history"
+git push
+```
+
+### Database Storage Workflow
+
+```bash
+# In your CI pipeline:
+git checkout main
+npm run test:e2e  # This generates latest-run.json
+
+# Set environment variables (or use CI/CD secrets)
+export MONGODB_CONNECTION_STRING="mongodb+srv://user:pass@cluster.mongodb.net/"
+export PROJECT_ID="my-web-app"
+
+# Analyze with database storage
+npx perf-sentinel analyze \
+  --run-file ./performance-results/latest-run.json \
+  --db-connection "$MONGODB_CONNECTION_STRING" \
+  --project-id "$PROJECT_ID"
+
+# No need to commit history file - it's stored in database
+```
+
+### Multi-Project Setup
+
+```bash
+# Project A
+npx perf-sentinel analyze \
+  --run-file ./results.json \
+  --db-connection "$MONGODB_CONNECTION_STRING" \
+  --project-id "project-a"
+
+# Project B
+npx perf-sentinel analyze \
+  --run-file ./results.json \
+  --db-connection "$MONGODB_CONNECTION_STRING" \
+  --project-id "project-b"
+```
+
+## Pros and Cons
+
+### File-Based Storage
+
+**Pros:**
+- ✅ No external dependencies (no database setup)
+- ✅ Simple to understand and debug
+- ✅ History is version-controlled and auditable
+- ✅ Works offline
+- ✅ No authentication/connection issues
+
+**Cons:**
+- ❌ Repository size grows over time
+- ❌ Potential merge conflicts if multiple PRs update history simultaneously
+- ❌ Not suitable for very high-frequency runs
+- ❌ History is tied to the repository
+
+### Database Storage
+
+**Pros:**
+- ✅ Scalable for high-frequency testing
+- ✅ Multi-project support
+- ✅ No repository bloat
+- ✅ Concurrent access from multiple teams/PRs
+- ✅ Centralized performance data management
+- ✅ Automatic fallback to file storage if database unavailable
+
+**Cons:**
+- ❌ Requires database setup and management
+- ❌ Additional dependency (MongoDB)
+- ❌ Network dependency for CI/CD
+- ❌ Authentication/connection configuration needed
+
+## Getting Started Recommendations
+
+- **Start with file-based storage** if you're new to performance monitoring or have a small team
+- **Migrate to database storage** when you experience repository bloat or merge conflicts
+- **Use database storage from the start** if you have multiple projects or run tests very frequently
+
+The tool automatically falls back to file storage if database connection fails, so you can set up database storage as a future enhancement without breaking existing workflows. 

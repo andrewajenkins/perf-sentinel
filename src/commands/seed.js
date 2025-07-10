@@ -1,7 +1,7 @@
 const fs = require('fs').promises;
 const path = require('path');
 const glob = require('glob');
-const { calculateAverage, calculateStdDev } = require('../analysis/engine');
+const StorageService = require('../storage/storage');
 
 exports.command = 'seed';
 exports.desc = 'Seed the history file from a collection of run files';
@@ -15,16 +15,54 @@ exports.builder = (yargs) => {
     })
     .option('history-file', {
       alias: 'h',
-      describe: 'Path to the historical performance data JSON file to create',
+      describe: 'Path to the historical performance data JSON file to create (fallback when database is not used)',
       type: 'string',
-      demandOption: true,
+    })
+    .option('db-connection', {
+      describe: 'MongoDB connection string (enables database storage)',
+      type: 'string',
+    })
+    .option('db-name', {
+      describe: 'Database name to use',
+      type: 'string',
+      default: 'perf-sentinel',
+    })
+    .option('project-id', {
+      describe: 'Project identifier for multi-project support',
+      type: 'string',
+      default: 'default',
+    })
+    .check((argv) => {
+      if (!argv.dbConnection && !argv.historyFile) {
+        throw new Error('Either --db-connection or --history-file must be provided');
+      }
+      return true;
     });
 };
 
 exports.handler = async (argv) => {
+  const storage = new StorageService({
+    useDatabase: !!argv.dbConnection,
+    connectionString: argv.dbConnection,
+    databaseName: argv.dbName,
+    projectId: argv.projectId,
+  });
+
   try {
-    const historyFilePath = path.resolve(argv.historyFile);
-    console.log(`Seeding history file at: ${historyFilePath}`);
+    const historyFilePath = argv.historyFile ? path.resolve(argv.historyFile) : null;
+    
+    // Initialize database if using database storage
+    if (argv.dbConnection) {
+      await storage.initializeDatabase();
+    }
+
+    console.log(`Using ${storage.getStorageType()} storage`);
+    
+    if (storage.getStorageType() === 'database') {
+      console.log(`Seeding history database for project: ${argv.projectId}`);
+    } else {
+      console.log(`Seeding history file at: ${historyFilePath}`);
+    }
     
     const allFiles = glob.sync(argv.runFiles);
     if (allFiles.length === 0) {
@@ -45,19 +83,20 @@ exports.handler = async (argv) => {
         }
     }
 
-    const newHistory = {};
-    for (const stepText in aggregatedData) {
-        const { durations } = aggregatedData[stepText];
-        const average = calculateAverage(durations);
-        const stdDev = calculateStdDev(durations, average);
-        newHistory[stepText] = { durations, average, stdDev };
+    await storage.seedHistory(aggregatedData, historyFilePath);
+
+    if (storage.getStorageType() === 'database') {
+      console.log(`History seeded successfully in database for project: ${argv.projectId} with data from ${allFiles.length} files.`);
+    } else {
+      console.log(`History seeded successfully with data from ${allFiles.length} files.`);
     }
 
-    await fs.writeFile(historyFilePath, JSON.stringify(newHistory, null, 2));
-    console.log(`History seeded successfully with data from ${allFiles.length} files.`);
+    // Clean up
+    await storage.close();
 
   } catch (error) {
     console.error('Error during seeding:', error);
+    await storage.close();
     process.exit(1);
   }
 }; 
