@@ -1,7 +1,8 @@
 const { vol } = require('memfs');
-const { run } = require('../../src/index'); 
+const { run } = require('../../src/index');
 const historyBaseline = require('../fixtures/history-baseline.json');
 const runNormal = require('../fixtures/run-normal.json');
+const fs = require('fs/promises');
 
 // Mock the file system before each test
 jest.mock('fs', () => require('memfs').fs);
@@ -60,6 +61,29 @@ describe('CLI Integration Tests (with memfs)', () => {
         expect(processExitSpy).toHaveBeenCalledWith(1);
         processExitSpy.mockRestore();
     });
+
+    it('should warn if a specified reporter cannot be found', async () => {
+        vol.fromJSON({
+            '/test/latest-run.json': JSON.stringify(runNormal),
+        });
+        const argv = ['analyze', '--run-file', '/test/latest-run.json', '--history-file', '/h.json', '--reporter', 'non-existent'];
+        await run(argv);
+        expect(global.console.warn).toHaveBeenCalledWith(expect.stringContaining('Could not load reporter: non-existent'));
+    });
+
+    it('should exit gracefully on a file-system read error', async () => {
+        const processExitSpy = jest.spyOn(process, 'exit').mockImplementation(() => {});
+        const readFileSpy = jest.spyOn(fs, 'readFile').mockImplementation(() => Promise.reject(new Error('Read error')));
+
+        const argv = ['analyze', '--run-file', '/test/latest-run.json', '--history-file', '/h.json'];
+        await run(argv);
+
+        expect(global.console.error).toHaveBeenCalledWith('Error during analysis:', expect.any(Error));
+        expect(processExitSpy).toHaveBeenCalledWith(1);
+
+        processExitSpy.mockRestore();
+        readFileSpy.mockRestore();
+    });
   });
 
   describe('seed command', () => {
@@ -80,14 +104,38 @@ describe('CLI Integration Tests (with memfs)', () => {
         // 3. Assert
         const historyRaw = vol.readFileSync('/history.json', 'utf-8');
         const history = JSON.parse(historyRaw);
-        
+
         expect(history['A']).toBeDefined();
         expect(history['A'].durations).toEqual([100, 120]);
         expect(history['A'].average).toBe(110);
-        
+
         expect(history['B']).toBeDefined();
         expect(history['B'].durations).toEqual([200, 210]);
         expect(history['B'].average).toBe(205);
+    });
+
+    it('should warn if no files match the glob pattern', async () => {
+        const argv = ['seed', '--run-files', '/non-existent/*.json', '--history-file', '/h.json'];
+        await run(argv);
+        expect(global.console.warn).toHaveBeenCalledWith('No files found matching the provided glob pattern.');
+    });
+
+    it('should exit gracefully on a file-system write error', async () => {
+        const processExitSpy = jest.spyOn(process, 'exit').mockImplementation(() => {});
+        const writeFileSpy = jest.spyOn(fs, 'writeFile').mockImplementation(() => Promise.reject(new Error('Write error')));
+
+        vol.fromJSON({
+            '/seed/run-1.json': JSON.stringify([{ stepText: 'A', duration: 100 }]),
+        });
+
+        const argv = ['seed', '--run-files', '/seed/*.json', '--history-file', '/history.json'];
+        await run(argv);
+
+        expect(global.console.error).toHaveBeenCalledWith('Error during seeding:', expect.any(Error));
+        expect(processExitSpy).toHaveBeenCalledWith(1);
+
+        processExitSpy.mockRestore();
+        writeFileSpy.mockRestore();
     });
   });
 }); 
