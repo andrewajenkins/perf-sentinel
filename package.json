@@ -7,13 +7,18 @@
     "perf-sentinel": "bin/perf-sentinel"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "chalk": "^4.1.2",
+    "glob": "^7.2.3",
     "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "jest": "^30.0.4",
+    "memfs": "^4.17.2"
   }
 }

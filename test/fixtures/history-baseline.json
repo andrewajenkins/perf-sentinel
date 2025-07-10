@@ -1,0 +1,12 @@
+{
+  "I navigate to the login page": {
+    "durations": [150, 155, 148],
+    "average": 151,
+    "stdDev": 3.605
+  },
+  "I log in as a standard user": {
+    "durations": [540, 550, 535],
+    "average": 541.66,
+    "stdDev": 7.63
+  }
+} 

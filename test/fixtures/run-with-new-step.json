@@ -1,0 +1,12 @@
+[
+  {
+    "stepText": "I navigate to the login page",
+    "duration": 151,
+    "timestamp": "2025-07-12T10:00:00.000Z"
+  },
+  {
+    "stepText": "I see the product inventory page",
+    "duration": 250,
+    "timestamp": "2025-07-12T10:00:01.000Z"
+  }
+] 

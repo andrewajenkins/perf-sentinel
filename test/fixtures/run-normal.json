@@ -1,0 +1,12 @@
+[
+  {
+    "stepText": "I navigate to the login page",
+    "duration": 152,
+    "timestamp": "2025-07-12T10:00:00.000Z"
+  },
+  {
+    "stepText": "I log in as a standard user",
+    "duration": 545,
+    "timestamp": "2025-07-12T10:00:01.000Z"
+  }
+] 
