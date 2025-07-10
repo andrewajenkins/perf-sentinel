@@ -1,22 +1,12 @@
 {
   "I navigate to the login page": {
-    "durations": [
-      150,
-      155,
-      148,
-      152
-    ],
-    "average": 151.25,
-    "stdDev": 2.9860788111948193
+    "durations": [150, 155, 148],
+    "average": 151,
+    "stdDev": 3.6055512754639896
   },
   "I log in as a standard user": {
-    "durations": [
-      540,
-      550,
-      535,
-      545
-    ],
-    "average": 542.5,
-    "stdDev": 6.454972243679028
+    "durations": [540, 550, 535],
+    "average": 541.6666666666666,
+    "stdDev": 7.637626158259734
   }
 }

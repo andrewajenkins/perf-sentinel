@@ -12,7 +12,17 @@ class DatabaseService {
     if (this.client) return this.db;
 
     try {
-      this.client = new MongoClient(this.connectionString);
+      // Configure connection options for faster timeouts
+      const clientOptions = {
+        connectTimeoutMS: 3000,      // 3 second connection timeout
+        serverSelectionTimeoutMS: 3000,  // 3 second server selection timeout  
+        socketTimeoutMS: 5000,       // 5 second socket timeout
+        maxPoolSize: 10,             // Maintain up to 10 socket connections
+        retryWrites: true,           // Enable retry for write operations
+        w: 'majority'                // Write concern
+      };
+
+      this.client = new MongoClient(this.connectionString, clientOptions);
       await this.client.connect();
       this.db = this.client.db(this.databaseName);
       console.log(`Connected to MongoDB database: ${this.databaseName}`);

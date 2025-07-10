@@ -66,7 +66,8 @@ exports.handler = async (argv) => {
     
     const allFiles = glob.sync(argv.runFiles);
     if (allFiles.length === 0) {
-        console.warn('No files found matching the provided glob pattern.');
+        console.log('No files found matching the provided glob pattern');
+        await storage.close();
         return;
     }
 
