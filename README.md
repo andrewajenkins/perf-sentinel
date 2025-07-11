@@ -4,12 +4,19 @@ A lightweight, generic, and automated system that detects performance regression
 
 ## ✨ Enterprise-Scale Features
 
-**NEW: Rich Context & Hierarchical Analysis**
+**✅ IMPLEMENTED: Rich Context & Hierarchical Analysis**
 - **🏢 Suite-Level Intelligence**: Track performance across test suites with health scoring and regression detection
-- **🏷️ Tag-Based Analysis**: Cross-cutting performance insights for `@critical`, `@smoke`, `@slow` operations
+- **🏷️ Tag-Based Analysis**: Cross-cutting performance insights for `@critical`, `@smoke`, `@slow` operations  
 - **📊 Multi-Level Reporting**: Suite → Test → Step level performance breakdown
 - **🎯 Context-Aware Configuration**: Different thresholds and rules based on test context
 - **💡 Smart Recommendations**: Automated suggestions based on performance patterns
+
+**✅ IMPLEMENTED: Storage Adapter Pattern**
+- **📁 FileSystemAdapter**: Zero-setup local development with structured directories
+- **☁️ S3Adapter**: Scalable CI/CD storage with multi-job coordination
+- **🗄️ DatabaseAdapter**: Production analytics with MongoDB/DocumentDB support
+- **🔄 Auto-Detection**: Automatic adapter selection based on configuration
+- **🔗 Multi-Job Coordination**: Built-in job aggregation and result collection
 
 ## Features
 
@@ -19,11 +26,13 @@ A lightweight, generic, and automated system that detects performance regression
 -   **Hierarchical Performance Analysis**: Monitor performance at suite, test, and step levels with health scoring.
 -   **Tag-Based Insights**: Identify critical path issues and cross-cutting performance patterns.
 -   **Context-Aware Configuration**: Apply different performance rules based on test suite, tags, or specific steps.
--   **Flexible Storage**: Choose between file-based storage (JSON) or database storage (MongoDB/DocumentDB).
--   **Multi-Project Support**: Organize performance data by project when using database storage.
+-   **Storage Adapter Pattern**: Choose between FileSystem (dev), S3 (CI/CD), or Database (analytics) storage.
+-   **Multi-Job Coordination**: Aggregate results from parallel test jobs with built-in coordination.
+-   **Auto-Detection**: Automatically selects the best storage adapter based on your configuration.
+-   **Multi-Project Support**: Organize performance data by project across all storage adapters.
 -   **Multiple Reporters**: Get results where you need them: Console, Markdown, Slack (TBD), PR Comment (TBD), and HTML (TBD).
--   **CI/CD Ready**: Designed to be a part of your automated pipeline.
--   **Auto-Fallback**: Automatically falls back to file storage if database connection fails.
+-   **CI/CD Ready**: Designed to be a part of your automated pipeline with enterprise-scale features.
+-   **Auto-Fallback**: Automatically falls back to filesystem storage if other adapters fail.
 
 ## Getting Started
 
@@ -347,17 +356,25 @@ The enhanced analysis provides multi-level insights:
 
 ## Storage Options
 
-`perf-sentinel` supports two storage backends:
+`perf-sentinel` supports three storage adapters through its enterprise-scale Storage Adapter Pattern:
 
-### File-Based Storage (Default)
-- **Best for**: Small to medium teams, simple setups, getting started
-- **Pros**: No external dependencies, version-controlled history, simple to debug
+### FileSystemAdapter (Default)
+- **Best for**: Local development, small teams, getting started, offline work
+- **Pros**: Zero setup, no external dependencies, version-controlled history, simple to debug
 - **Cons**: Repository size growth, potential merge conflicts, not suitable for high-frequency runs
+- **Auto-Selected**: When no other storage options are configured
 
-### Database Storage (MongoDB/DocumentDB)
-- **Best for**: Large teams, high-frequency testing, multiple projects, production environments
-- **Pros**: Scalable, supports multiple projects, no repository bloat, concurrent access
-- **Cons**: Requires database setup and management
+### S3Adapter 
+- **Best for**: CI/CD pipelines, medium to large teams, distributed testing
+- **Pros**: Scalable, no database dependency, cost-effective, built-in multi-job coordination
+- **Cons**: Requires AWS setup, network dependency, file management complexity
+- **Auto-Selected**: When `--bucket-name` is provided or configured
+
+### DatabaseAdapter (MongoDB/DocumentDB)
+- **Best for**: Large teams, high-frequency testing, multiple projects, analytics
+- **Pros**: Atomic operations, concurrent access, advanced queries, real-time dashboards
+- **Cons**: Database setup and management, network dependency, higher complexity  
+- **Auto-Selected**: When `--db-connection` is provided or configured
 
 ### Configuration
 
@@ -392,7 +409,7 @@ mongodb://username:password@docdb-cluster.cluster-id.region.docdb.amazonaws.com:
 
 ## Usage
 
-`perf-sentinel` is a command-line tool with two main commands: `analyze` and `seed`.
+`perf-sentinel` is a command-line tool with three main commands: `analyze`, `seed`, and `aggregate`.
 
 ### `analyze`
 
@@ -438,6 +455,49 @@ npx perf-sentinel analyze --config perf-sentinel.yml --threshold 1.5 --reporter 
 | `--project-id` | | Project identifier for multi-project support. | From config | No |
 
 *Either `--config`, `--db-connection`, or `--history-file` must be provided.
+
+### `aggregate`
+
+Aggregates results from multiple parallel test jobs. This is essential for enterprise CI/CD pipelines where tests run in parallel across multiple workers.
+
+```bash
+npx perf-sentinel aggregate [options]
+```
+
+#### Examples
+
+```bash
+# Using configuration file
+npx perf-sentinel aggregate --config perf-sentinel.yml --job-ids "job-1,job-2,job-3"
+
+# Using S3 storage
+npx perf-sentinel aggregate --bucket-name "my-perf-bucket" --job-ids "auth-job,api-job"
+
+# Using database storage
+npx perf-sentinel aggregate --db-connection mongodb://localhost:27017 --job-ids "suite-a,suite-b"
+
+# Wait for jobs to complete before aggregating
+npx perf-sentinel aggregate --config perf-sentinel.yml --job-ids "job-1,job-2" --wait-for-jobs true --timeout 600
+```
+
+#### Options
+
+| Option | Alias | Description | Default | Required |
+| :--- | :--- | :--- | :--- | :--- |
+| `--config` | `-c` | Path to YAML configuration file. | | Conditional* |
+| `--job-ids` | | Comma-separated list of job IDs to aggregate. | All available | No |
+| `--wait-for-jobs` | | Wait for all jobs to complete before aggregating. | true | No |
+| `--timeout` | | Timeout in seconds to wait for jobs. | 300 | No |
+| `--output-file` | | Path to save aggregated results JSON file. | | No |
+| `--history-file` | `-h` | Path to the historical performance JSON file (fallback when database not used). | | Conditional* |
+| `--db-connection` | | MongoDB connection string (enables database storage). | | Conditional* |
+| `--db-name` | | Database name to use. | From config | No |
+| `--project-id` | | Project identifier for multi-project support. | From config | No |
+| `--bucket-name` | | S3 bucket name for S3 storage. | | Conditional* |
+| `--s3-region` | | S3 region. | us-east-1 | No |
+| `--s3-prefix` | | S3 key prefix. | perf-sentinel | No |
+
+*Either `--config`, `--db-connection`, `--bucket-name`, or `--history-file` must be provided.
 
 ### `seed`
 
@@ -488,11 +548,10 @@ npx perf-sentinel seed --run-files "./historical-runs/*.json" --db-connection mo
 
 ## Example Workflows
 
-### File-Based Storage Workflow
+### FileSystem Adapter Workflow (Local Development)
 
 ```bash
-# In your CI pipeline:
-git checkout main
+# In your local development:
 npm run test:e2e  # This generates latest-run.json
 npx perf-sentinel analyze \
   --run-file ./performance-results/latest-run.json \
@@ -502,24 +561,55 @@ git commit -m "Update performance history"
 git push
 ```
 
-### Database Storage Workflow
+### S3 Adapter Workflow (CI/CD Production)
+
+```bash
+# In your CI/CD pipeline (parallel jobs):
+
+# Job 1: Authentication Tests
+export JOB_ID="auth-tests-${CI_BUILD_ID}"
+npm run test:auth  # Generates performance data with jobId in context
+npx perf-sentinel analyze \
+  --run-file ./performance-results/latest-run.json \
+  --bucket-name "my-perf-bucket" \
+  --project-id "my-web-app"
+
+# Job 2: API Tests  
+export JOB_ID="api-tests-${CI_BUILD_ID}"
+npm run test:api   # Generates performance data with jobId in context
+npx perf-sentinel analyze \
+  --run-file ./performance-results/latest-run.json \
+  --bucket-name "my-perf-bucket" \
+  --project-id "my-web-app"
+
+# Aggregation Job: Collect all results
+npx perf-sentinel aggregate \
+  --bucket-name "my-perf-bucket" \
+  --project-id "my-web-app" \
+  --job-ids "auth-tests-${CI_BUILD_ID},api-tests-${CI_BUILD_ID}" \
+  --wait-for-jobs true \
+  --timeout 600
+```
+
+### Database Adapter Workflow (Analytics)
 
 ```bash
 # In your CI pipeline:
-git checkout main
-npm run test:e2e  # This generates latest-run.json
-
-# Set environment variables (or use CI/CD secrets)
 export MONGODB_CONNECTION_STRING="mongodb+srv://user:pass@cluster.mongodb.net/"
 export PROJECT_ID="my-web-app"
 
-# Analyze with database storage
+# Single job analysis
+npm run test:e2e  # This generates latest-run.json
 npx perf-sentinel analyze \
   --run-file ./performance-results/latest-run.json \
   --db-connection "$MONGODB_CONNECTION_STRING" \
   --project-id "$PROJECT_ID"
 
-# No need to commit history file - it's stored in database
+# Multi-job aggregation
+npx perf-sentinel aggregate \
+  --db-connection "$MONGODB_CONNECTION_STRING" \
+  --project-id "$PROJECT_ID" \
+  --job-ids "job-1,job-2,job-3"
 ```
 
 ### Multi-Project Setup
@@ -531,10 +621,10 @@ npx perf-sentinel analyze \
   --db-connection "$MONGODB_CONNECTION_STRING" \
   --project-id "project-a"
 
-# Project B
+# Project B  
 npx perf-sentinel analyze \
   --run-file ./results.json \
-  --db-connection "$MONGODB_CONNECTION_STRING" \
+  --bucket-name "shared-perf-bucket" \
   --project-id "project-b"
 ```
 
@@ -598,11 +688,18 @@ npx perf-sentinel analyze \
 
 ## Getting Started Recommendations
 
-- **Start with file-based storage** if you're new to performance monitoring or have a small team
-- **Migrate to database storage** when you experience repository bloat or merge conflicts
-- **Use database storage from the start** if you have multiple projects or run tests very frequently
+- **Start with FileSystemAdapter** if you're new to performance monitoring or have a small team
+- **Use S3Adapter for CI/CD** when you need parallel testing and multi-job coordination
+- **Use DatabaseAdapter for analytics** when you need advanced queries, dashboards, or very high frequency testing
 
-The tool automatically falls back to file storage if database connection fails, so you can set up database storage as a future enhancement without breaking existing workflows.
+The tool automatically detects and selects the best adapter based on your configuration, and falls back to FileSystemAdapter if other adapters fail, so you can set up advanced storage as a future enhancement without breaking existing workflows.
+
+### Migration Path
+
+1. **Development**: Start with FileSystemAdapter (zero setup)
+2. **CI/CD Scale**: Add S3Adapter for parallel job coordination  
+3. **Analytics**: Upgrade to DatabaseAdapter for advanced insights
+4. **Enterprise**: Combine all adapters for different use cases
 
 ## Advanced Configuration Examples
 
@@ -728,11 +825,24 @@ Use environment variables and overrides:
 project:
   id: "${PROJECT_ID:-my-app}"
 
+# Storage auto-detection with multiple options
 storage:
-  type: "database"
+  adapter_type: "auto"  # Automatically detects based on config
+  
+  # Database adapter (priority 1 if connection provided)
   database:
     connection: "${MONGODB_CONNECTION_STRING}"
     name: "${MONGODB_DB_NAME:-perf-sentinel}"
+  
+  # S3 adapter (priority 2 if bucket provided)
+  s3:
+    bucket_name: "${S3_BUCKET_NAME}"
+    region: "${AWS_REGION:-us-east-1}"
+    prefix: "${S3_PREFIX:-perf-sentinel}"
+  
+  # FileSystem adapter (fallback)
+  filesystem:
+    base_directory: "./performance-results"
 
 environments:
   production:
@@ -771,8 +881,17 @@ environments:
 Then use:
 
 ```bash
+# Production with database
 export PROJECT_ID="my-app-prod"
 export MONGODB_CONNECTION_STRING="mongodb://prod-server:27017"
-
 npx perf-sentinel analyze --config perf-sentinel.yml --environment production
+
+# Staging with S3
+export PROJECT_ID="my-app-staging"  
+export S3_BUCKET_NAME="my-perf-staging-bucket"
+npx perf-sentinel analyze --config perf-sentinel.yml --environment staging
+
+# Development with filesystem
+export PROJECT_ID="my-app-dev"
+npx perf-sentinel analyze --config perf-sentinel.yml --environment development
 ``` 

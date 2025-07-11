@@ -102,7 +102,11 @@ class ConfigLoader {
       reporter: 'reporting.default_reporters',
       dbConnection: 'storage.database.connection',
       dbName: 'storage.database.name',
-      projectId: 'project.id'
+      projectId: 'project.id',
+      bucketName: 'storage.s3.bucket_name',
+      s3Region: 'storage.s3.region',
+      s3Prefix: 'storage.s3.prefix',
+      baseDirectory: 'storage.filesystem.base_directory'
     };
 
     for (const [cliKey, configPath] of Object.entries(mappings)) {
@@ -111,11 +115,15 @@ class ConfigLoader {
       }
     }
 
-    // Special handling for storage type
-    if (cliOverrides.dbConnection) {
-      result.storage.type = 'database';
+    // Special handling for adapter type detection and legacy options
+    if (cliOverrides.adapterType) {
+      result.storage.adapter_type = cliOverrides.adapterType;
+    } else if (cliOverrides.bucketName) {
+      result.storage.adapter_type = 's3';
+    } else if (cliOverrides.dbConnection) {
+      result.storage.adapter_type = 'database';
     } else if (cliOverrides.historyFile) {
-      result.storage.type = 'file';
+      result.storage.adapter_type = 'filesystem';
       result.storage.file.history_path = cliOverrides.historyFile;
     }
 
@@ -347,6 +355,49 @@ class ConfigLoader {
     }
     
     return 'slow';
+  }
+
+  // Helper method to convert configuration to storage options
+  getStorageOptions(config) {
+    const storageConfig = config.storage;
+    const projectId = config.project?.id || 'default';
+
+    // Base options
+    const options = {
+      projectId,
+      adapterType: storageConfig.adapter_type || 'auto'
+    };
+
+    // Database options
+    if (storageConfig.database) {
+      options.useDatabase = storageConfig.adapter_type === 'database' || !!storageConfig.database.connection;
+      options.connectionString = storageConfig.database.connection;
+      options.databaseName = storageConfig.database.name;
+    }
+
+    // Filesystem options
+    if (storageConfig.filesystem) {
+      options.baseDirectory = storageConfig.filesystem.base_directory;
+    }
+
+    // S3 options
+    if (storageConfig.s3) {
+      options.bucketName = storageConfig.s3.bucket_name;
+      options.region = storageConfig.s3.region;
+      options.prefix = storageConfig.s3.prefix;
+    }
+
+    // Legacy file options for backward compatibility
+    if (storageConfig.file) {
+      options.historyFile = storageConfig.file.history_path;
+    }
+
+    // Retention policies
+    if (storageConfig.retention) {
+      options.retentionPolicy = storageConfig.retention;
+    }
+
+    return options;
   }
 }
 

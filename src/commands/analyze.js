@@ -88,20 +88,15 @@ exports.handler = async (argv) => {
       }
     });
 
-    const storage = new StorageService({
-      useDatabase: config.storage.type === 'database',
-      connectionString: config.storage.database.connection,
-      databaseName: config.storage.database.name,
-      projectId: config.project.id,
-    });
+    // Get storage options from configuration
+    const storageOptions = configLoader.getStorageOptions(config);
+    const storage = new StorageService(storageOptions);
 
     const runFilePath = path.resolve(argv.runFile);
-    const historyFilePath = config.storage.type === 'file' ? path.resolve(config.storage.file.history_path) : null;
+    const historyFilePath = storageOptions.historyFile ? path.resolve(storageOptions.historyFile) : null;
 
-    // Initialize database if using database storage
-    if (config.storage.type === 'database') {
-      await storage.initializeDatabase();
-    }
+    // Initialize storage adapter
+    await storage.initializeAdapter();
 
     console.log(`Reading latest run data from: ${runFilePath}`);
     const latestRunRaw = await fs.readFile(runFilePath, 'utf-8');

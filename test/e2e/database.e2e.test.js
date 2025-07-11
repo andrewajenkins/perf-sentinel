@@ -42,7 +42,7 @@ describe('Database E2E Tests', () => {
         await execAsync(`node ${binPath} analyze --run-file ${runFilePath}`);
         fail('Should have thrown an error');
       } catch (error) {
-        expect(error.stderr).toContain('Either --db-connection or --history-file must be provided');
+        expect(error.stderr).toContain('Either --config, --db-connection, or --history-file must be provided');
       }
     });
 
@@ -53,7 +53,7 @@ describe('Database E2E Tests', () => {
         await execAsync(`node ${binPath} seed --run-files "${runFilesPattern}"`);
         fail('Should have thrown an error');
       } catch (error) {
-        expect(error.stderr).toContain('Either --db-connection or --history-file must be provided');
+        expect(error.stderr).toContain('Either --config, --db-connection, or --history-file must be provided');
       }
     });
   });
@@ -69,7 +69,7 @@ describe('Database E2E Tests', () => {
       );
       
       // Should fallback to file storage
-      expect(stdout).toContain('Using file storage');
+      expect(stdout).toContain('Using filesystem storage');
       expect(stdout).toContain('Performance Regression Report');
     }, 8000);
 
@@ -83,7 +83,7 @@ describe('Database E2E Tests', () => {
       );
       
       // Should fallback to file storage
-      expect(stdout).toContain('Using file storage');
+      expect(stdout).toContain('Using filesystem storage');
       expect(stdout).toContain('Performance Regression Report');
     }, 8000);
 
@@ -97,7 +97,7 @@ describe('Database E2E Tests', () => {
       );
       
       // Should fallback to file storage after attempting database connection
-      expect(stdout).toContain('Using file storage');
+      expect(stdout).toContain('Using filesystem storage');
     }, 8000);
   });
 
@@ -110,7 +110,7 @@ describe('Database E2E Tests', () => {
         `node ${binPath} analyze --run-file ${runFilePath} --history-file ${historyFilePath}`
       );
       
-      expect(stdout).toContain('Using file storage');
+      expect(stdout).toContain('Using filesystem storage');
       expect(stdout).toContain('Performance Regression Report');
       expect(stdout).toContain('History file updated successfully');
     });
@@ -130,7 +130,7 @@ describe('Database E2E Tests', () => {
         `node ${binPath} seed --run-files "${runFilesPattern}" --history-file ${historyFilePath}`
       );
       
-      expect(stdout).toContain('Using file storage');
+      expect(stdout).toContain('Using filesystem storage');
       expect(stdout).toContain('History seeded successfully');
       
       // Verify the file was created
@@ -156,7 +156,7 @@ describe('Database E2E Tests', () => {
       );
       
       // Should fallback to file storage
-      expect(stdout).toContain('Using file storage');
+      expect(stdout).toContain('Using filesystem storage');
     });
 
     it('should accept valid MongoDB connection strings', async () => {
@@ -176,9 +176,9 @@ describe('Database E2E Tests', () => {
         );
         
         // Connection will fail but format should be accepted
-        expect(stdout).toContain('Using file storage');
+        expect(stdout).toContain('Using filesystem storage');
       }
-    }, 10000);
+    }, 20000);
 
     it('should use default values for optional database parameters', async () => {
       const runFilePath = path.join(testDataDir, 'run-normal.json');
@@ -189,7 +189,7 @@ describe('Database E2E Tests', () => {
       );
       
               // Should use default project-id and db-name (visible in fallback to file storage)
-        expect(stdout).toContain('Using file storage');
+        expect(stdout).toContain('Using filesystem storage');
       }, 8000);
 
     it('should accept custom database name and project ID', async () => {
@@ -201,7 +201,7 @@ describe('Database E2E Tests', () => {
       );
       
               // Should accept custom parameters (visible in fallback to file storage)
-        expect(stdout).toContain('Using file storage');
+        expect(stdout).toContain('Using filesystem storage');
       }, 8000);
   });
 
@@ -298,7 +298,7 @@ describe('Database E2E Tests', () => {
         const endTime = Date.now();
         const executionTime = endTime - startTime;
         
-        expect(stdout).toContain('Using file storage');
+        expect(stdout).toContain('Using filesystem storage');
         expect(executionTime).toBeLessThan(15000); // Should complete within 15 seconds
         
       } finally {

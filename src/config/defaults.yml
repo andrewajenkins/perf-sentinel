@@ -9,12 +9,34 @@ project:
 
 # Storage configuration
 storage:
-  type: "file" # or "database"
+  # Storage adapter type: "auto", "filesystem", "database", "s3"
+  # "auto" will detect based on provided configuration
+  adapter_type: "auto"
+  
+  # Database adapter configuration
   database:
     connection: "${MONGODB_CONNECTION_STRING}"
     name: "${MONGODB_DB_NAME:-perf-sentinel}"
+  
+  # Filesystem adapter configuration  
+  filesystem:
+    base_directory: "./performance-results"
+  
+  # S3 adapter configuration
+  s3:
+    bucket_name: "${S3_BUCKET_NAME}"
+    region: "${AWS_REGION:-us-east-1}"
+    prefix: "${S3_PREFIX:-perf-sentinel}"
+  
+  # Legacy file storage (for backward compatibility)
   file:
     history_path: "./performance-results/history.json"
+  
+  # Retention policies for cleanup
+  retention:
+    performance_runs: 90 # days
+    job_coordination: 30 # days  
+    completed_jobs: 7 # days
 
 # Core analysis configuration
 analysis:

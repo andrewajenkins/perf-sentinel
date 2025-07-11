@@ -15,10 +15,31 @@
       152,
       152,
       152,
+      152,
+      152,
+      152,
+      152,
+      152,
+      152,
+      152,
+      152,
+      152,
+      152,
+      152,
+      152,
       152
     ],
-    "average": 151.8,
-    "stdDev": 1.424279266355945
+    "average": 151.88888888888889,
+    "stdDev": 1.0500305245868338,
+    "lastSeen": "2025-07-12T10:00:00.000Z",
+    "context": {
+      "testFile": "unknown.feature",
+      "testName": "Unknown Test",
+      "suite": "unknown",
+      "tags": [],
+      "jobId": "local",
+      "workerId": "local"
+    }
   },
   "I log in as a standard user": {
     "durations": [
@@ -36,10 +57,31 @@
       545,
       545,
       545,
+      545,
+      545,
+      545,
+      545,
+      545,
+      545,
+      545,
+      545,
+      545,
+      545,
+      545,
+      545,
       545
     ],
-    "average": 544.3333333333334,
-    "stdDev": 3.1997023671109233
+    "average": 544.6296296296297,
+    "stdDev": 2.3720836045090485,
+    "lastSeen": "2025-07-12T10:00:01.000Z",
+    "context": {
+      "testFile": "unknown.feature",
+      "testName": "Unknown Test",
+      "suite": "unknown",
+      "tags": [],
+      "jobId": "local",
+      "workerId": "local"
+    }
   },
   "Step 0": {
     "durations": [
@@ -7040,5 +7082,52 @@
     ],
     "average": 557,
     "stdDev": 0
+  },
+  "_suiteHistory": {
+    "unknown": {
+      "avgDurationHistory": [
+        348.5,
+        348.5,
+        348.5,
+        348.5,
+        348.5,
+        348.5,
+        348.5,
+        348.5,
+        348.5,
+        348.5,
+        348.5,
+        348.5
+      ],
+      "totalStepsHistory": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "regressionRateHistory": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "lastUpdated": "2025-07-11T16:06:30.394Z"
+    }
   }
 }
