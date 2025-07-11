@@ -1,6 +1,6 @@
 {
   "name": "perf-sentinel",
-  "version": "0.1.0",
+  "version": "1.0.0-alpha.0",
   "description": "A lightweight, generic, and automated system that detects performance regressions early in the development lifecycle.",
   "main": "src/index.js",
   "bin": {
