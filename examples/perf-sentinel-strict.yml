@@ -1,0 +1,89 @@
+# Strict Performance Monitoring Configuration
+# Use this configuration for performance-critical applications
+# where even small regressions should be caught early
+
+project:
+  id: "critical-app"
+  name: "Critical Application"
+  description: "High-performance application with strict monitoring"
+
+# Analysis configuration for strict monitoring
+analysis:
+  # More sensitive threshold (1.5 standard deviations)
+  threshold: 1.5
+  
+  # Keep more history for better statistical analysis
+  max_history: 100
+  
+  # Stricter step classification
+  step_types:
+    very_fast:
+      max_duration: 25  # Even tighter definition of "very fast"
+      rules:
+        min_absolute_slowdown: 5   # Report 5ms+ slowdowns
+        min_percentage_change: 5   # Report 5%+ changes
+        ignore_small_changes: false
+        
+    fast: 
+      max_duration: 50   # Tighter fast category
+      rules:
+        min_absolute_slowdown: 8
+        min_percentage_change: 8
+        check_trends: true
+        trend_sensitivity: 10
+        
+    medium:
+      max_duration: 200  # Smaller medium category  
+      rules:
+        min_absolute_slowdown: 15
+        min_percentage_change: 3
+        
+    slow:
+      max_duration: null
+      rules:
+        min_absolute_slowdown: 25
+        min_percentage_change: 2   # Very strict for slow operations
+  
+  # Strict global rules
+  global_rules:
+    min_percentage_change: 2     # Report 2%+ changes globally
+    filter_stable_steps: false  # Don't filter out stable steps
+    stable_threshold: 1          # Lower stability threshold
+    stable_min_slowdown: 3       # Lower minimum for stable steps
+  
+  # Enhanced trend detection
+  trends:
+    enabled: true
+    window_size: 5               # Larger window for better trend detection
+    min_significance: 5          # Lower significance threshold
+    min_history_required: 8      # More history before trend analysis
+    only_upward: true
+
+  # Step-specific overrides for critical operations
+  step_overrides:
+    "I log in as a standard user":
+      threshold: 1.2             # Even stricter for login
+      step_type: "fast"
+      rules:
+        min_absolute_slowdown: 25
+        min_percentage_change: 5
+        
+    "I search for products":
+      threshold: 1.3
+      step_type: "medium"
+      rules:
+        min_absolute_slowdown: 30
+        min_percentage_change: 3
+
+# Reporting configuration
+reporting:
+  default_reporters: ["console", "markdown"]
+  
+  console:
+    show_analysis_rules: true
+    show_trends: true
+    colors: true
+    
+  markdown:
+    include_metadata: true
+    show_analysis_rules: true 

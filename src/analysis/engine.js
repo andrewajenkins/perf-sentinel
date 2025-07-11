@@ -10,7 +10,10 @@ function calculateStdDev(durations, average) {
   return Math.sqrt(variance);
 }
 
-function calculateTrend(durations, windowSize = 3) {
+function calculateTrend(durations, config = {}) {
+  const windowSize = config.window_size || 3;
+  const minSignificance = config.min_significance || 10;
+  
   if (durations.length < windowSize * 2) return { trend: 0, isSignificant: false };
   
   const recentWindow = durations.slice(-windowSize);
@@ -20,12 +23,15 @@ function calculateTrend(durations, windowSize = 3) {
   const olderAvg = calculateAverage(olderWindow);
   
   const trend = recentAvg - olderAvg;
-  const isSignificant = Math.abs(trend) > 10; // 10ms minimum trend significance
+  const isSignificant = Math.abs(trend) > minSignificance;
   
   return { trend, isSignificant };
 }
 
-function shouldReportRegression(currentDuration, average, stdDev, historyEntry, threshold = 2.0) {
+function shouldReportRegression(currentDuration, average, stdDev, historyEntry, stepConfig, trendConfig) {
+  const threshold = stepConfig.threshold;
+  const rules = stepConfig.rules;
+  
   const basicRegression = currentDuration > (average + (threshold * stdDev));
   
   if (!basicRegression) return false;
@@ -34,40 +40,39 @@ function shouldReportRegression(currentDuration, average, stdDev, historyEntry, 
   const slowdown = currentDuration - average;
   const percentage = ((slowdown / average) * 100);
   
-  // Rule 1: For very fast steps (under 50ms), be more lenient with small absolute changes
-  if (average < 50 && slowdown < 15) {
+  // Check minimum percentage change
+  if (percentage < rules.min_percentage_change) {
     return false;
   }
   
-  // Rule 2: For fast steps (under 100ms), don't report tiny slowdowns unless significant
-  if (average < 100 && slowdown < 10 && percentage < 10) {
+  // Check minimum absolute slowdown
+  if (slowdown < rules.min_absolute_slowdown) {
     return false;
   }
   
-  // Rule 3: Don't report very small percentage changes on any step (under 3%)
-  if (percentage < 3) {
-    return false;
-  }
-  
-  // Rule 4: For steps under 100ms with sufficient history, check for cumulative drift
-  if (average < 100 && historyEntry.durations.length >= 6) {
-    const { trend, isSignificant } = calculateTrend(historyEntry.durations);
+  // Check for trend-based filtering if enabled
+  if (rules.check_trends && historyEntry.durations.length >= (trendConfig.min_history_required || 6)) {
+    const { trend, isSignificant } = calculateTrend(historyEntry.durations, trendConfig);
     
     // If there's no significant trend and the slowdown is small, skip it
-    if (!isSignificant && slowdown < 20) {
+    if (!isSignificant && slowdown < (rules.trend_sensitivity || 20)) {
       return false;
     }
   }
   
-  // Rule 5: Filter out noise - require minimum absolute slowdown for very stable steps
-  if (stdDev < 2 && slowdown < 5) { // Very stable step with tiny slowdown
+  // Filter out noise - require minimum absolute slowdown for very stable steps
+  if (rules.filter_stable_steps && stdDev < (rules.stable_threshold || 2) && slowdown < (rules.stable_min_slowdown || 5)) {
     return false;
   }
   
   return true;
 }
 
-function analyze(latestRun, history, threshold = 2.0, maxHistory = 50) {
+function analyze(latestRun, history, config, configLoader) {
+  const threshold = config.analysis.threshold;
+  const maxHistory = config.analysis.max_history;
+  const trendConfig = config.analysis.trends;
+  
   const report = {
     regressions: [],
     newSteps: [],
@@ -92,7 +97,8 @@ function analyze(latestRun, history, threshold = 2.0, maxHistory = 50) {
       report.newSteps.push({ stepText, duration });
     } else {
       // This step has a history. Let's analyze it.
-      const isRegression = shouldReportRegression(duration, historyEntry.average, historyEntry.stdDev, historyEntry, threshold);
+      const stepConfig = configLoader.getStepConfig(stepText, historyEntry.average, config);
+      const isRegression = shouldReportRegression(duration, historyEntry.average, historyEntry.stdDev, historyEntry, stepConfig, trendConfig);
 
       if (isRegression && historyEntry.durations.length > 1) { // Don't flag on the first run after seeding
         const slowdown = duration - historyEntry.average;
@@ -111,10 +117,10 @@ function analyze(latestRun, history, threshold = 2.0, maxHistory = 50) {
       }
       
       // Check for significant trends even if not currently regressing
-      if (historyEntry.durations.length >= 6) {
-        const { trend, isSignificant } = calculateTrend(historyEntry.durations);
+      if (trendConfig.enabled && historyEntry.durations.length >= trendConfig.min_history_required) {
+        const { trend, isSignificant } = calculateTrend(historyEntry.durations, trendConfig);
         
-        if (isSignificant && trend > 0) { // Upward trend
+        if (isSignificant && (!trendConfig.only_upward || trend > 0)) {
           report.trends.push({
             stepText,
             trend,

@@ -2,6 +2,7 @@ const fs = require('fs').promises;
 const path = require('path');
 const glob = require('glob');
 const StorageService = require('../storage/storage');
+const ConfigLoader = require('../config/config-loader');
 
 exports.command = 'seed';
 exports.desc = 'Seed the history file from a collection of run files';
@@ -12,6 +13,20 @@ exports.builder = (yargs) => {
       describe: 'Glob pattern for the run files to seed from',
       type: 'string',
       demandOption: true,
+    })
+    .option('config', {
+      alias: 'c',
+      describe: 'Path to YAML configuration file',
+      type: 'string',
+    })
+    .option('profile', {
+      describe: 'Configuration profile to use (strict, lenient, ci_focused)',
+      type: 'string',
+    })
+    .option('environment', {
+      alias: 'e',
+      describe: 'Environment-specific configuration (production, staging, development)',
+      type: 'string',
     })
     .option('history-file', {
       alias: 'h',
@@ -25,41 +40,54 @@ exports.builder = (yargs) => {
     .option('db-name', {
       describe: 'Database name to use',
       type: 'string',
-      default: 'perf-sentinel',
     })
     .option('project-id', {
       describe: 'Project identifier for multi-project support',
       type: 'string',
-      default: 'default',
     })
     .check((argv) => {
-      if (!argv.dbConnection && !argv.historyFile) {
-        throw new Error('Either --db-connection or --history-file must be provided');
+      if (!argv.config && !argv.dbConnection && !argv.historyFile) {
+        throw new Error('Either --config, --db-connection, or --history-file must be provided');
       }
       return true;
     });
 };
 
 exports.handler = async (argv) => {
-  const storage = new StorageService({
-    useDatabase: !!argv.dbConnection,
-    connectionString: argv.dbConnection,
-    databaseName: argv.dbName,
-    projectId: argv.projectId,
-  });
-
+  const configLoader = new ConfigLoader();
+  
   try {
-    const historyFilePath = argv.historyFile ? path.resolve(argv.historyFile) : null;
+    // Load configuration
+    const config = await configLoader.load({
+      configPath: argv.config,
+      environment: argv.environment,
+      profile: argv.profile,
+      cliOverrides: {
+        dbConnection: argv.dbConnection,
+        dbName: argv.dbName,
+        projectId: argv.projectId,
+        historyFile: argv.historyFile
+      }
+    });
+
+    const storage = new StorageService({
+      useDatabase: config.storage.type === 'database',
+      connectionString: config.storage.database.connection,
+      databaseName: config.storage.database.name,
+      projectId: config.project.id,
+    });
+
+    const historyFilePath = config.storage.type === 'file' ? path.resolve(config.storage.file.history_path) : null;
     
     // Initialize database if using database storage
-    if (argv.dbConnection) {
+    if (config.storage.type === 'database') {
       await storage.initializeDatabase();
     }
 
     console.log(`Using ${storage.getStorageType()} storage`);
     
     if (storage.getStorageType() === 'database') {
-      console.log(`Seeding history database for project: ${argv.projectId}`);
+      console.log(`Seeding history database for project: ${config.project.id}`);
     } else {
       console.log(`Seeding history file at: ${historyFilePath}`);
     }
@@ -87,7 +115,7 @@ exports.handler = async (argv) => {
     await storage.seedHistory(aggregatedData, historyFilePath);
 
     if (storage.getStorageType() === 'database') {
-      console.log(`History seeded successfully in database for project: ${argv.projectId} with data from ${allFiles.length} files.`);
+      console.log(`History seeded successfully in database for project: ${config.project.id} with data from ${allFiles.length} files.`);
     } else {
       console.log(`History seeded successfully with data from ${allFiles.length} files.`);
     }
@@ -97,7 +125,6 @@ exports.handler = async (argv) => {
 
   } catch (error) {
     console.error('Error during seeding:', error);
-    await storage.close();
     process.exit(1);
   }
 }; 

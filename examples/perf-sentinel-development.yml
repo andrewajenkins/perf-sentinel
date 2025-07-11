@@ -1,0 +1,71 @@
+# Development Environment Configuration
+# Use this configuration during development to catch major regressions
+# without being overwhelmed by minor fluctuations
+
+project:
+  id: "dev-project"
+  name: "Development Project"
+  description: "Development environment with lenient monitoring"
+
+# Analysis configuration for development
+analysis:
+  # Lenient threshold (3.0 standard deviations)
+  threshold: 3.0
+  
+  # Less history needed in development
+  max_history: 25
+  
+  # Relaxed step classification
+  step_types:
+    very_fast:
+      max_duration: 100  # Larger very fast category
+      rules:
+        min_absolute_slowdown: 50   # Only report major slowdowns
+        min_percentage_change: 25   # Only report 25%+ changes
+        ignore_small_changes: true
+        
+    fast: 
+      max_duration: 250
+      rules:
+        min_absolute_slowdown: 75
+        min_percentage_change: 20
+        check_trends: false         # No trend checking in dev
+        
+    medium:
+      max_duration: 1000
+      rules:
+        min_absolute_slowdown: 100
+        min_percentage_change: 15
+        
+    slow:
+      max_duration: null
+      rules:
+        min_absolute_slowdown: 200
+        min_percentage_change: 10   # Even slow steps need significant change
+  
+  # Very lenient global rules
+  global_rules:
+    min_percentage_change: 15    # Only report major changes
+    filter_stable_steps: true   # Filter out stable steps
+    stable_threshold: 5         # Higher stability threshold
+    stable_min_slowdown: 50     # Higher minimum for stable steps
+  
+  # Minimal trend detection
+  trends:
+    enabled: false              # Disable trend detection in development
+    window_size: 3
+    min_significance: 50
+    min_history_required: 10
+    only_upward: true
+
+  # No step-specific overrides in development
+  step_overrides: {}
+
+# Simple reporting for development
+reporting:
+  default_reporters: ["console"]
+  
+  console:
+    show_analysis_rules: false   # Don't clutter dev output
+    show_trends: false
+    colors: true 

@@ -1,0 +1,146 @@
+# perf-sentinel Default Configuration
+# This file shows all available configuration options with their default values
+
+# Project identification
+project:
+  id: "default"
+  name: "Performance Monitor"
+  description: "Performance monitoring for application"
+
+# Storage configuration
+storage:
+  type: "file" # or "database"
+  database:
+    connection: "${MONGODB_CONNECTION_STRING}"
+    name: "${MONGODB_DB_NAME:-perf-sentinel}"
+  file:
+    history_path: "./performance-results/history.json"
+
+# Core analysis configuration
+analysis:
+  # Base threshold (standard deviations)
+  threshold: 2.0
+  
+  # Maximum historical data points to maintain
+  max_history: 50
+  
+  # Step classification and rules
+  step_types:
+    very_fast:
+      max_duration: 50  # milliseconds
+      rules:
+        min_absolute_slowdown: 15
+        min_percentage_change: 10
+        ignore_small_changes: true
+        
+    fast: 
+      max_duration: 100
+      rules:
+        min_absolute_slowdown: 10
+        min_percentage_change: 10
+        check_trends: true
+        trend_sensitivity: 20
+        
+    medium:
+      max_duration: 500
+      rules:
+        min_absolute_slowdown: 25
+        min_percentage_change: 5
+        
+    slow:
+      max_duration: null  # no upper limit
+      rules:
+        min_absolute_slowdown: 50
+        min_percentage_change: 3
+  
+  # Global rules applied to all steps (can be overridden by step types)
+  global_rules:
+    min_percentage_change: 3
+    filter_stable_steps: true
+    stable_threshold: 2  # stdDev < 2 considered "stable"
+    stable_min_slowdown: 5
+  
+  # Trend detection configuration
+  trends:
+    enabled: true
+    window_size: 3
+    min_significance: 10  # milliseconds
+    min_history_required: 6
+    only_upward: true  # only report increasing trends
+  
+  # Step-specific overrides (exact step text matching)
+  step_overrides: {}
+    # "I log in as a standard user":
+    #   threshold: 1.5  # More sensitive for critical login
+    #   step_type: "medium"
+    #   rules:
+    #     min_absolute_slowdown: 50
+
+# Environment-specific configurations
+environments:
+  production:
+    analysis:
+      threshold: 1.8  # Stricter in production
+      global_rules:
+        min_percentage_change: 2
+        
+  staging:
+    analysis:
+      threshold: 2.0
+      
+  development:
+    analysis:
+      threshold: 2.5  # More lenient in dev
+      trends:
+        enabled: false
+
+# Reporting configuration
+reporting:
+  default_reporters: ["console"]
+  
+  console:
+    show_analysis_rules: true
+    show_trends: true
+    colors: true
+    
+  markdown:
+    include_metadata: true
+    show_analysis_rules: true
+    
+  html:
+    template: "standard"
+    include_charts: true
+    
+  slack:
+    webhook_url: "${SLACK_WEBHOOK_URL}"
+    channel: "#performance"
+    only_regressions: true
+    mention_on_critical: true
+    
+  pr_comment:
+    github_token: "${GITHUB_TOKEN}"
+    only_regressions: true
+
+# Predefined profiles for common scenarios
+profiles:
+  strict:
+    analysis:
+      threshold: 1.5
+      global_rules:
+        min_percentage_change: 2
+        filter_stable_steps: true
+        
+  lenient:
+    analysis:
+      threshold: 3.0
+      global_rules:
+        min_percentage_change: 5
+        filter_stable_steps: false
+        
+  ci_focused:
+    analysis:
+      threshold: 1.8
+      trends:
+        enabled: false  # Focus on immediate regressions in CI
+    reporting:
+      default_reporters: ["console"] 

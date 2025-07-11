@@ -2,6 +2,7 @@ const fs = require('fs').promises;
 const path = require('path');
 const { analyze } = require('../analysis/engine');
 const StorageService = require('../storage/storage');
+const ConfigLoader = require('../config/config-loader');
 const chalk = require('chalk');
 
 exports.command = 'analyze';
@@ -15,6 +16,20 @@ exports.builder = (yargs) => {
       type: 'string',
       demandOption: true,
     })
+    .option('config', {
+      alias: 'c',
+      describe: 'Path to YAML configuration file',
+      type: 'string',
+    })
+    .option('profile', {
+      describe: 'Configuration profile to use (strict, lenient, ci_focused)',
+      type: 'string',
+    })
+    .option('environment', {
+      alias: 'e',
+      describe: 'Environment-specific configuration (production, staging, development)',
+      type: 'string',
+    })
     .option('history-file', {
       alias: 'h',
       describe: 'Path to the historical performance data JSON file (fallback when database is not used)',
@@ -23,18 +38,15 @@ exports.builder = (yargs) => {
     .option('reporter', {
       describe: 'Specify the reporter(s) to use (e.g., console, markdown)',
       type: 'array',
-      default: ['console'],
     })
     .option('threshold', {
       alias: 't',
       describe: 'Number of standard deviations to use as the regression threshold',
       type: 'number',
-      default: 2.0,
     })
     .option('max-history', {
       describe: 'Maximum number of data points to store per test step',
       type: 'number',
-      default: 50,
     })
     .option('db-connection', {
       describe: 'MongoDB connection string (enables database storage)',
@@ -43,35 +55,51 @@ exports.builder = (yargs) => {
     .option('db-name', {
       describe: 'Database name to use',
       type: 'string',
-      default: 'perf-sentinel',
     })
     .option('project-id', {
       describe: 'Project identifier for multi-project support',
       type: 'string',
-      default: 'default',
     })
     .check((argv) => {
-      if (!argv.dbConnection && !argv.historyFile) {
-        throw new Error('Either --db-connection or --history-file must be provided');
+      if (!argv.config && !argv.dbConnection && !argv.historyFile) {
+        throw new Error('Either --config, --db-connection, or --history-file must be provided');
       }
       return true;
     });
 };
 
 exports.handler = async (argv) => {
-  const storage = new StorageService({
-    useDatabase: !!argv.dbConnection,
-    connectionString: argv.dbConnection,
-    databaseName: argv.dbName,
-    projectId: argv.projectId,
-  });
-
+  const configLoader = new ConfigLoader();
+  
   try {
+    // Load configuration
+    const config = await configLoader.load({
+      configPath: argv.config,
+      environment: argv.environment,
+      profile: argv.profile,
+      cliOverrides: {
+        threshold: argv.threshold,
+        maxHistory: argv.maxHistory,
+        reporter: argv.reporter,
+        dbConnection: argv.dbConnection,
+        dbName: argv.dbName,
+        projectId: argv.projectId,
+        historyFile: argv.historyFile
+      }
+    });
+
+    const storage = new StorageService({
+      useDatabase: config.storage.type === 'database',
+      connectionString: config.storage.database.connection,
+      databaseName: config.storage.database.name,
+      projectId: config.project.id,
+    });
+
     const runFilePath = path.resolve(argv.runFile);
-    const historyFilePath = argv.historyFile ? path.resolve(argv.historyFile) : null;
+    const historyFilePath = config.storage.type === 'file' ? path.resolve(config.storage.file.history_path) : null;
 
     // Initialize database if using database storage
-    if (argv.dbConnection) {
+    if (config.storage.type === 'database') {
       await storage.initializeDatabase();
     }
 
@@ -82,7 +110,7 @@ exports.handler = async (argv) => {
     console.log(`Using ${storage.getStorageType()} storage`);
     const history = await storage.getHistory(historyFilePath);
 
-    const { report, updatedHistory } = analyze(latestRun, history, argv.threshold, argv.maxHistory);
+    const { report, updatedHistory } = analyze(latestRun, history, config, configLoader);
 
     // Save the current run to database for historical tracking
     if (storage.getStorageType() === 'database') {
@@ -90,10 +118,11 @@ exports.handler = async (argv) => {
     }
 
     // Invoke reporters
-    for (const reporterName of argv.reporter) {
+    const reporters = config.reporting.default_reporters;
+    for (const reporterName of reporters) {
       try {
         const reporter = require(`../reporters/${reporterName}`);
-        reporter.generateReport(report);
+        reporter.generateReport(report, config.reporting[reporterName] || {});
       } catch (error) {
         console.warn(chalk.yellow(`Could not load reporter: ${reporterName}`));
         console.error(error);
@@ -104,7 +133,7 @@ exports.handler = async (argv) => {
     await storage.saveHistory(updatedHistory, historyFilePath);
     
     if (storage.getStorageType() === 'database') {
-      console.log(`History updated successfully in database for project: ${argv.projectId}`);
+      console.log(`History updated successfully in database for project: ${config.project.id}`);
     } else {
       console.log(`History file updated successfully at ${historyFilePath}`);
     }
@@ -114,7 +143,6 @@ exports.handler = async (argv) => {
 
   } catch (error) {
     console.error('Error during analysis:', error);
-    await storage.close();
     process.exit(1);
   }
 }; 

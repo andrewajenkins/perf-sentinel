@@ -20,7 +20,16 @@ A lightweight, generic, and automated system that detects performance regression
 npm install perf-sentinel --save-dev
 ```
 
-### 2. Add the Cucumber Hook
+### 2. Configuration
+
+`perf-sentinel` supports flexible YAML-based configuration to fine-tune performance monitoring for your specific use case. You can:
+
+- Use the built-in defaults for quick setup
+- Create custom configuration files for different environments
+- Override settings via command-line arguments
+- Use predefined profiles for common scenarios
+
+### 3. Add the Cucumber Hook
 
 Create a `support/hooks.js` file (or add to your existing one) in your test suite:
 
@@ -51,6 +60,106 @@ After(async function () {
     JSON.stringify(performanceData, null, 2)
   );
 });
+```
+
+## Configuration
+
+### Configuration Files
+
+Create a `perf-sentinel.yml` configuration file to customize analysis behavior:
+
+```yaml
+# Basic configuration
+project:
+  id: "my-app"
+  name: "My Application"
+
+# Analysis settings
+analysis:
+  threshold: 2.0              # Standard deviations for regression detection
+  max_history: 50             # Max historical data points per step
+  
+  # Step classification with different rules for different performance categories
+  step_types:
+    very_fast:
+      max_duration: 50        # Steps under 50ms
+      rules:
+        min_absolute_slowdown: 15
+        min_percentage_change: 10
+        
+    fast:
+      max_duration: 100       # Steps under 100ms  
+      rules:
+        min_absolute_slowdown: 10
+        min_percentage_change: 10
+        check_trends: true
+        
+    medium:
+      max_duration: 500       # Steps under 500ms
+      rules:
+        min_absolute_slowdown: 25
+        min_percentage_change: 5
+        
+    slow:
+      max_duration: null      # All other steps
+      rules:
+        min_absolute_slowdown: 50
+        min_percentage_change: 3
+
+  # Trend detection
+  trends:
+    enabled: true
+    window_size: 3
+    min_significance: 10      # Minimum trend significance in ms
+    
+  # Step-specific overrides
+  step_overrides:
+    "I log in as a standard user":
+      threshold: 1.5          # More sensitive for critical steps
+      rules:
+        min_absolute_slowdown: 25
+
+# Reporting configuration  
+reporting:
+  default_reporters: ["console", "markdown"]
+  console:
+    show_analysis_rules: true
+    colors: true
+```
+
+### Environment-Specific Configuration
+
+Use environment overrides for different deployment stages:
+
+```yaml
+# In your perf-sentinel.yml
+environments:
+  production:
+    analysis:
+      threshold: 1.8          # Stricter in production
+      global_rules:
+        min_percentage_change: 2
+        
+  development:
+    analysis:
+      threshold: 3.0          # More lenient in development
+      trends:
+        enabled: false        # Skip trend analysis in dev
+```
+
+### Predefined Profiles
+
+Use built-in profiles for common scenarios:
+
+```bash
+# Strict monitoring for performance-critical applications
+npx perf-sentinel analyze --config perf-sentinel.yml --profile strict
+
+# Lenient monitoring for development
+npx perf-sentinel analyze --config perf-sentinel.yml --profile lenient
+
+# CI/CD optimized settings
+npx perf-sentinel analyze --config perf-sentinel.yml --profile ci_focused
 ```
 
 ## Storage Options
@@ -110,20 +219,42 @@ Analyzes a new performance run against historical data, reports regressions, and
 npx perf-sentinel analyze [options]
 ```
 
+#### Quick Start Examples
+
+```bash
+# Using configuration file
+npx perf-sentinel analyze --config perf-sentinel.yml --run-file results.json
+
+# Using file storage (simple setup)
+npx perf-sentinel analyze --run-file results.json --history-file history.json
+
+# Using database storage
+npx perf-sentinel analyze --run-file results.json --db-connection mongodb://localhost:27017
+
+# Using environment-specific settings
+npx perf-sentinel analyze --config perf-sentinel.yml --environment production
+
+# Override configuration via CLI
+npx perf-sentinel analyze --config perf-sentinel.yml --threshold 1.5 --reporter console markdown
+```
+
 #### Options
 
 | Option | Alias | Description | Default | Required |
 | :--- | :--- | :--- | :--- | :--- |
 | `--run-file` | `-r` | Path to the latest performance run JSON file. | | Yes |
+| `--config` | `-c` | Path to YAML configuration file. | | Conditional* |
+| `--profile` | | Configuration profile to use (strict, lenient, ci_focused). | | No |
+| `--environment` | `-e` | Environment-specific configuration (production, staging, development). | | No |
 | `--history-file` | `-h` | Path to the historical performance JSON file (fallback when database not used). | | Conditional* |
-| `--reporter` | | Specify the reporter(s) to use. | `console` | No |
-| `--threshold` | `-t` | Number of standard deviations to use as the regression threshold. | `2.0` | No |
-| `--max-history`| | Maximum number of data points to store per test step. | `50` | No |
+| `--reporter` | | Specify the reporter(s) to use. | From config | No |
+| `--threshold` | `-t` | Number of standard deviations to use as the regression threshold. | From config | No |
+| `--max-history`| | Maximum number of data points to store per test step. | From config | No |
 | `--db-connection` | | MongoDB connection string (enables database storage). | | Conditional* |
-| `--db-name` | | Database name to use. | `perf-sentinel` | No |
-| `--project-id` | | Project identifier for multi-project support. | `default` | No |
+| `--db-name` | | Database name to use. | From config | No |
+| `--project-id` | | Project identifier for multi-project support. | From config | No |
 
-*Either `--db-connection` or `--history-file` must be provided.
+*Either `--config`, `--db-connection`, or `--history-file` must be provided.
 
 ### `seed`
 
@@ -133,17 +264,33 @@ Populates a new history file from a collection of past run files. This is useful
 npx perf-sentinel seed [options]
 ```
 
+#### Examples
+
+```bash
+# Using configuration file
+npx perf-sentinel seed --config perf-sentinel.yml --run-files "./historical-runs/*.json"
+
+# Using file storage
+npx perf-sentinel seed --run-files "./historical-runs/*.json" --history-file history.json
+
+# Using database storage  
+npx perf-sentinel seed --run-files "./historical-runs/*.json" --db-connection mongodb://localhost:27017
+```
+
 #### Options
 
 | Option | Alias | Description | Default | Required |
 | :--- | :--- | :--- | :--- | :--- |
 | `--run-files` | | Glob pattern for the run files to seed from. | | Yes |
+| `--config` | `-c` | Path to YAML configuration file. | | Conditional* |
+| `--profile` | | Configuration profile to use (strict, lenient, ci_focused). | | No |
+| `--environment` | `-e` | Environment-specific configuration (production, staging, development). | | No |
 | `--history-file` | `-h` | Path to the historical performance JSON file to create (fallback when database not used). | | Conditional* |
 | `--db-connection` | | MongoDB connection string (enables database storage). | | Conditional* |
-| `--db-name` | | Database name to use. | `perf-sentinel` | No |
-| `--project-id` | | Project identifier for multi-project support. | `default` | No |
+| `--db-name` | | Database name to use. | From config | No |
+| `--project-id` | | Project identifier for multi-project support. | From config | No |
 
-*Either `--db-connection` or `--history-file` must be provided.
+*Either `--config`, `--db-connection`, or `--history-file` must be provided.
 
 ## How File-Based Storage Works in CI/CD
 
@@ -247,4 +394,137 @@ npx perf-sentinel analyze \
 - **Migrate to database storage** when you experience repository bloat or merge conflicts
 - **Use database storage from the start** if you have multiple projects or run tests very frequently
 
-The tool automatically falls back to file storage if database connection fails, so you can set up database storage as a future enhancement without breaking existing workflows. 
+The tool automatically falls back to file storage if database connection fails, so you can set up database storage as a future enhancement without breaking existing workflows.
+
+## Advanced Configuration Examples
+
+### Performance-Critical Applications
+
+For applications where performance is critical, use strict monitoring:
+
+```yaml
+# perf-sentinel-strict.yml
+analysis:
+  threshold: 1.5              # More sensitive
+  step_types:
+    very_fast:
+      max_duration: 25        # Tighter categories
+      rules:
+        min_absolute_slowdown: 5
+        min_percentage_change: 5
+    fast:
+      max_duration: 50
+      rules:
+        min_absolute_slowdown: 8
+        min_percentage_change: 8
+  global_rules:
+    min_percentage_change: 2   # Report 2%+ changes
+    filter_stable_steps: false # Don't filter anything
+  trends:
+    window_size: 5            # Better trend detection
+    min_significance: 5
+```
+
+### Development Environment
+
+For development, use lenient settings to avoid noise:
+
+```yaml
+# perf-sentinel-dev.yml
+analysis:
+  threshold: 3.0              # Very lenient
+  step_types:
+    very_fast:
+      max_duration: 100       # Larger categories
+      rules:
+        min_absolute_slowdown: 50
+        min_percentage_change: 25
+  global_rules:
+    min_percentage_change: 15 # Only major changes
+  trends:
+    enabled: false            # No trend analysis
+```
+
+### CI/CD Pipeline
+
+For continuous integration, focus on immediate regressions:
+
+```yaml
+# perf-sentinel-ci.yml  
+analysis:
+  threshold: 1.8
+  trends:
+    enabled: false            # Faster execution
+reporting:
+  default_reporters: ["console"]
+  console:
+    colors: false             # Better for CI logs
+    show_analysis_rules: false
+```
+
+### Step-Specific Tuning
+
+Customize rules for specific operations:
+
+```yaml
+analysis:
+  step_overrides:
+    "I log in as a standard user":
+      threshold: 1.2          # Critical login flow
+      rules:
+        min_absolute_slowdown: 25
+        min_percentage_change: 5
+        
+    "I search for products":
+      threshold: 2.5          # Search can be variable
+      rules:
+        min_absolute_slowdown: 100
+        min_percentage_change: 15
+        
+    "I load large dataset":
+      threshold: 3.0          # Expected to be slow
+      step_type: "slow"
+      rules:
+        min_absolute_slowdown: 500
+        min_percentage_change: 20
+```
+
+### Multi-Environment Setup
+
+Use environment variables and overrides:
+
+```yaml
+# Base configuration
+project:
+  id: "${PROJECT_ID:-my-app}"
+
+storage:
+  type: "database"
+  database:
+    connection: "${MONGODB_CONNECTION_STRING}"
+    name: "${MONGODB_DB_NAME:-perf-sentinel}"
+
+environments:
+  production:
+    analysis:
+      threshold: 1.5
+      global_rules:
+        min_percentage_change: 2
+  staging:
+    analysis:
+      threshold: 2.0
+  development:
+    analysis:
+      threshold: 3.0
+      trends:
+        enabled: false
+```
+
+Then use:
+
+```bash
+export PROJECT_ID="my-app-prod"
+export MONGODB_CONNECTION_STRING="mongodb://prod-server:27017"
+
+npx perf-sentinel analyze --config perf-sentinel.yml --environment production
+``` 

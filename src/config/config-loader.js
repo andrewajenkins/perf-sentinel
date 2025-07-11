@@ -1,0 +1,246 @@
+const fs = require('fs').promises;
+const path = require('path');
+const yaml = require('js-yaml');
+
+class ConfigLoader {
+  constructor() {
+    this.defaultConfigPath = path.join(__dirname, 'defaults.yml');
+  }
+
+  async load(options = {}) {
+    try {
+      // Start with default configuration
+      const defaultConfig = await this.loadConfigFile(this.defaultConfigPath);
+      let config = this.deepClone(defaultConfig);
+
+      // Load user config file if provided
+      if (options.configPath) {
+        const userConfig = await this.loadConfigFile(options.configPath);
+        config = this.mergeConfigs(config, userConfig);
+      }
+
+      // Apply environment-specific overrides
+      if (options.environment) {
+        config = this.applyEnvironmentOverrides(config, options.environment);
+      }
+
+      // Apply profile overrides
+      if (options.profile) {
+        config = this.applyProfileOverrides(config, options.profile);
+      }
+
+      // Apply CLI argument overrides
+      if (options.cliOverrides) {
+        config = this.applyCLIOverrides(config, options.cliOverrides);
+      }
+
+      // Interpolate environment variables
+      config = this.interpolateEnvironmentVariables(config);
+
+      // Validate configuration
+      this.validateConfig(config);
+
+      return config;
+    } catch (error) {
+      throw new Error(`Failed to load configuration: ${error.message}`);
+    }
+  }
+
+  async loadConfigFile(filePath) {
+    try {
+      const content = await fs.readFile(filePath, 'utf8');
+      return yaml.load(content);
+    } catch (error) {
+      if (error.code === 'ENOENT') {
+        throw new Error(`Configuration file not found: ${filePath}`);
+      }
+      throw new Error(`Failed to parse YAML configuration: ${error.message}`);
+    }
+  }
+
+  mergeConfigs(base, override) {
+    if (!override) return base;
+    
+    const result = this.deepClone(base);
+    
+    for (const key in override) {
+      if (override[key] && typeof override[key] === 'object' && !Array.isArray(override[key])) {
+        result[key] = this.mergeConfigs(result[key] || {}, override[key]);
+      } else {
+        result[key] = override[key];
+      }
+    }
+    
+    return result;
+  }
+
+  applyEnvironmentOverrides(config, environment) {
+    if (!config.environments || !config.environments[environment]) {
+      return config;
+    }
+
+    const envOverrides = config.environments[environment];
+    return this.mergeConfigs(config, envOverrides);
+  }
+
+  applyProfileOverrides(config, profile) {
+    if (!config.profiles || !config.profiles[profile]) {
+      throw new Error(`Profile '${profile}' not found in configuration`);
+    }
+
+    const profileOverrides = config.profiles[profile];
+    return this.mergeConfigs(config, profileOverrides);
+  }
+
+  applyCLIOverrides(config, cliOverrides) {
+    const result = this.deepClone(config);
+    
+    // Map CLI arguments to config paths
+    const mappings = {
+      threshold: 'analysis.threshold',
+      maxHistory: 'analysis.max_history',
+      reporter: 'reporting.default_reporters',
+      dbConnection: 'storage.database.connection',
+      dbName: 'storage.database.name',
+      projectId: 'project.id'
+    };
+
+    for (const [cliKey, configPath] of Object.entries(mappings)) {
+      if (cliOverrides[cliKey] !== undefined) {
+        this.setNestedValue(result, configPath, cliOverrides[cliKey]);
+      }
+    }
+
+    // Special handling for storage type
+    if (cliOverrides.dbConnection) {
+      result.storage.type = 'database';
+    } else if (cliOverrides.historyFile) {
+      result.storage.type = 'file';
+      result.storage.file.history_path = cliOverrides.historyFile;
+    }
+
+    return result;
+  }
+
+  interpolateEnvironmentVariables(config) {
+    const result = this.deepClone(config);
+    return this.processValue(result);
+  }
+
+  processValue(value) {
+    if (typeof value === 'string') {
+      return this.interpolateString(value);
+    } else if (Array.isArray(value)) {
+      return value.map(item => this.processValue(item));
+    } else if (value && typeof value === 'object') {
+      const result = {};
+      for (const [key, val] of Object.entries(value)) {
+        result[key] = this.processValue(val);
+      }
+      return result;
+    }
+    return value;
+  }
+
+  interpolateString(str) {
+    return str.replace(/\$\{([^}]+)\}/g, (match, varExpr) => {
+      // Handle default values: ${VAR:-default}
+      const [varName, defaultValue] = varExpr.split(':-');
+      return process.env[varName] || defaultValue || match;
+    });
+  }
+
+  setNestedValue(obj, path, value) {
+    const keys = path.split('.');
+    let current = obj;
+    
+    for (let i = 0; i < keys.length - 1; i++) {
+      if (!current[keys[i]]) {
+        current[keys[i]] = {};
+      }
+      current = current[keys[i]];
+    }
+    
+    current[keys[keys.length - 1]] = value;
+  }
+
+  validateConfig(config) {
+    // Validate required fields
+    if (!config.analysis) {
+      throw new Error('analysis configuration is required');
+    }
+
+    if (!config.analysis.threshold || config.analysis.threshold <= 0) {
+      throw new Error('analysis.threshold must be a positive number');
+    }
+
+    if (!config.analysis.max_history || config.analysis.max_history <= 0) {
+      throw new Error('analysis.max_history must be a positive number');
+    }
+
+    // Validate step types
+    if (config.analysis.step_types) {
+      for (const [stepType, stepConfig] of Object.entries(config.analysis.step_types)) {
+        if (!stepConfig.rules) {
+          throw new Error(`step_types.${stepType}.rules is required`);
+        }
+      }
+    }
+
+    // Validate storage configuration
+    if (config.storage.type === 'database' && !config.storage.database.connection) {
+      throw new Error('storage.database.connection is required when using database storage');
+    }
+
+    // Validate reporting configuration
+    if (!config.reporting.default_reporters || !Array.isArray(config.reporting.default_reporters)) {
+      throw new Error('reporting.default_reporters must be an array');
+    }
+  }
+
+  deepClone(obj) {
+    return JSON.parse(JSON.stringify(obj));
+  }
+
+  // Helper method to get step configuration
+  getStepConfig(stepText, averageDuration, config) {
+    // Check for step-specific overrides first
+    if (config.analysis.step_overrides && config.analysis.step_overrides[stepText]) {
+      const override = config.analysis.step_overrides[stepText];
+      const baseStepType = override.step_type || this.getStepTypeForDuration(averageDuration, config);
+      const baseConfig = config.analysis.step_types[baseStepType] || {};
+      
+      return this.mergeConfigs(baseConfig, {
+        threshold: override.threshold || config.analysis.threshold,
+        rules: override.rules || {}
+      });
+    }
+
+    // Use step type based on duration
+    const stepType = this.getStepTypeForDuration(averageDuration, config);
+    const stepConfig = config.analysis.step_types[stepType] || config.analysis.step_types.slow;
+    
+    return {
+      threshold: config.analysis.threshold,
+      rules: this.mergeConfigs(config.analysis.global_rules, stepConfig.rules || {})
+    };
+  }
+
+  getStepTypeForDuration(duration, config) {
+    const stepTypes = config.analysis.step_types;
+    
+    if (stepTypes.very_fast && duration < stepTypes.very_fast.max_duration) {
+      return 'very_fast';
+    }
+    if (stepTypes.fast && duration < stepTypes.fast.max_duration) {
+      return 'fast';
+    }
+    if (stepTypes.medium && duration < stepTypes.medium.max_duration) {
+      return 'medium';
+    }
+    
+    return 'slow';
+  }
+}
+
+module.exports = ConfigLoader; 
