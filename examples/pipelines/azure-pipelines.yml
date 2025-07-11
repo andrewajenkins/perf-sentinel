@@ -1,0 +1,473 @@
+# Azure DevOps Pipeline for Performance Testing with perf-sentinel
+
+trigger:
+  branches:
+    include:
+      - main
+      - develop
+
+pr:
+  branches:
+    include:
+      - main
+
+variables:
+  # Configure perf-sentinel for CI/CD
+  PROJECT_ID: 'my-web-app'
+  NODE_VERSION: '20.x'
+  AWS_REGION: 'us-east-1'
+  
+  # Performance testing configuration
+  PERFORMANCE_RESULTS_DIR: 'performance-results'
+  AGGREGATE_TIMEOUT: '600'
+  
+  # Azure DevOps specific variables
+  AZURE_DEVOPS_JOB_ID: '$(Build.BuildId)'
+  AZURE_DEVOPS_PIPELINE_ID: '$(Build.BuildNumber)'
+  AZURE_DEVOPS_AGENT_ID: '$(Agent.Name)'
+
+# Define stages for the pipeline
+stages:
+  # Stage 1: Setup and Parallel Testing
+  - stage: TestParallel
+    displayName: 'Parallel Performance Tests'
+    jobs:
+      # Job 1: Authentication Tests
+      - job: TestAuth
+        displayName: 'Authentication Tests'
+        pool:
+          vmImage: 'ubuntu-latest'
+        variables:
+          JOB_ID: 'auth-tests-$(Build.BuildId)'
+          TEST_SUITE: 'authentication'
+        steps:
+          - task: NodeTool@0
+            displayName: 'Install Node.js'
+            inputs:
+              versionSpec: '$(NODE_VERSION)'
+          
+          - script: |
+              npm ci
+              mkdir -p $(PERFORMANCE_RESULTS_DIR)
+            displayName: 'Install dependencies'
+          
+          - script: |
+              echo "Running authentication tests..."
+              echo "Job ID: $(JOB_ID)"
+              echo "Test Suite: $(TEST_SUITE)"
+              echo "Build ID: $(Build.BuildId)"
+              
+              # Run authentication test suite
+              npm run test:auth || true
+              
+              # Analyze results immediately
+              npx perf-sentinel analyze \
+                --run-file ./$(PERFORMANCE_RESULTS_DIR)/latest-run.json \
+                --config ./examples/perf-sentinel-ci.yml \
+                --project-id "$(PROJECT_ID)" \
+                --environment production
+              
+              echo "Authentication tests completed"
+            displayName: 'Run authentication tests'
+            env:
+              JOB_ID: $(JOB_ID)
+              CI_JOB_ID: $(JOB_ID)
+              BUILD_BUILDID: $(Build.BuildId)
+              AGENT_NAME: $(Agent.Name)
+          
+          - task: PublishTestResults@2
+            displayName: 'Publish test results'
+            inputs:
+              testResultsFormat: 'JUnit'
+              testResultsFiles: '$(PERFORMANCE_RESULTS_DIR)/junit.xml'
+              failTaskOnFailedTests: false
+            condition: always()
+          
+          - task: PublishBuildArtifacts@1
+            displayName: 'Publish performance artifacts'
+            inputs:
+              pathToPublish: '$(PERFORMANCE_RESULTS_DIR)'
+              artifactName: 'auth-performance-data'
+            condition: always()
+
+      # Job 2: API Tests
+      - job: TestAPI
+        displayName: 'API Tests'
+        pool:
+          vmImage: 'ubuntu-latest'
+        variables:
+          JOB_ID: 'api-tests-$(Build.BuildId)'
+          TEST_SUITE: 'api'
+        steps:
+          - task: NodeTool@0
+            displayName: 'Install Node.js'
+            inputs:
+              versionSpec: '$(NODE_VERSION)'
+          
+          - script: |
+              npm ci
+              mkdir -p $(PERFORMANCE_RESULTS_DIR)
+            displayName: 'Install dependencies'
+          
+          - script: |
+              echo "Running API tests..."
+              echo "Job ID: $(JOB_ID)"
+              echo "Test Suite: $(TEST_SUITE)"
+              echo "Build ID: $(Build.BuildId)"
+              
+              # Run API test suite
+              npm run test:api || true
+              
+              # Analyze results immediately
+              npx perf-sentinel analyze \
+                --run-file ./$(PERFORMANCE_RESULTS_DIR)/latest-run.json \
+                --config ./examples/perf-sentinel-ci.yml \
+                --project-id "$(PROJECT_ID)" \
+                --environment production
+              
+              echo "API tests completed"
+            displayName: 'Run API tests'
+            env:
+              JOB_ID: $(JOB_ID)
+              CI_JOB_ID: $(JOB_ID)
+              BUILD_BUILDID: $(Build.BuildId)
+              AGENT_NAME: $(Agent.Name)
+          
+          - task: PublishTestResults@2
+            displayName: 'Publish test results'
+            inputs:
+              testResultsFormat: 'JUnit'
+              testResultsFiles: '$(PERFORMANCE_RESULTS_DIR)/junit.xml'
+              failTaskOnFailedTests: false
+            condition: always()
+          
+          - task: PublishBuildArtifacts@1
+            displayName: 'Publish performance artifacts'
+            inputs:
+              pathToPublish: '$(PERFORMANCE_RESULTS_DIR)'
+              artifactName: 'api-performance-data'
+            condition: always()
+
+      # Job 3: UI Tests
+      - job: TestUI
+        displayName: 'UI Tests'
+        pool:
+          vmImage: 'ubuntu-latest'
+        variables:
+          JOB_ID: 'ui-tests-$(Build.BuildId)'
+          TEST_SUITE: 'ui'
+        steps:
+          - task: NodeTool@0
+            displayName: 'Install Node.js'
+            inputs:
+              versionSpec: '$(NODE_VERSION)'
+          
+          - script: |
+              npm ci
+              mkdir -p $(PERFORMANCE_RESULTS_DIR)
+            displayName: 'Install dependencies'
+          
+          - script: |
+              echo "Running UI tests..."
+              echo "Job ID: $(JOB_ID)"
+              echo "Test Suite: $(TEST_SUITE)"
+              echo "Build ID: $(Build.BuildId)"
+              
+              # Run UI test suite
+              npm run test:ui || true
+              
+              # Analyze results immediately
+              npx perf-sentinel analyze \
+                --run-file ./$(PERFORMANCE_RESULTS_DIR)/latest-run.json \
+                --config ./examples/perf-sentinel-ci.yml \
+                --project-id "$(PROJECT_ID)" \
+                --environment production
+              
+              echo "UI tests completed"
+            displayName: 'Run UI tests'
+            env:
+              JOB_ID: $(JOB_ID)
+              CI_JOB_ID: $(JOB_ID)
+              BUILD_BUILDID: $(Build.BuildId)
+              AGENT_NAME: $(Agent.Name)
+          
+          - task: PublishTestResults@2
+            displayName: 'Publish test results'
+            inputs:
+              testResultsFormat: 'JUnit'
+              testResultsFiles: '$(PERFORMANCE_RESULTS_DIR)/junit.xml'
+              failTaskOnFailedTests: false
+            condition: always()
+          
+          - task: PublishBuildArtifacts@1
+            displayName: 'Publish performance artifacts'
+            inputs:
+              pathToPublish: '$(PERFORMANCE_RESULTS_DIR)'
+              artifactName: 'ui-performance-data'
+            condition: always()
+
+  # Stage 2: Aggregate Results and Generate Reports
+  - stage: AggregateAndReport
+    displayName: 'Aggregate Results and Generate Reports'
+    dependsOn: TestParallel
+    condition: always()
+    jobs:
+      # Job 1: Aggregate Results
+      - job: AggregateResults
+        displayName: 'Aggregate Performance Results'
+        pool:
+          vmImage: 'ubuntu-latest'
+        variables:
+          JOB_IDS: 'auth-tests-$(Build.BuildId),api-tests-$(Build.BuildId),ui-tests-$(Build.BuildId)'
+        steps:
+          - task: NodeTool@0
+            displayName: 'Install Node.js'
+            inputs:
+              versionSpec: '$(NODE_VERSION)'
+          
+          - script: npm ci
+            displayName: 'Install dependencies'
+          
+          - task: DownloadBuildArtifacts@1
+            displayName: 'Download all performance artifacts'
+            inputs:
+              buildType: 'current'
+              downloadType: 'specific'
+              itemPattern: '**'
+              downloadPath: '$(System.ArtifactsDirectory)'
+          
+          - script: |
+              echo "Aggregating performance results..."
+              echo "Job IDs: $(JOB_IDS)"
+              echo "Build ID: $(Build.BuildId)"
+              
+              # Aggregate results from all parallel jobs
+              npx perf-sentinel aggregate \
+                --config ./examples/perf-sentinel-ci.yml \
+                --project-id "$(PROJECT_ID)" \
+                --job-ids "$(JOB_IDS)" \
+                --wait-for-jobs true \
+                --timeout $(AGGREGATE_TIMEOUT) \
+                --output-file ./aggregated-results.json
+              
+              echo "Aggregation completed"
+              ls -la aggregated-results.json
+            displayName: 'Aggregate performance results'
+          
+          - task: PublishBuildArtifacts@1
+            displayName: 'Publish aggregated results'
+            inputs:
+              pathToPublish: 'aggregated-results.json'
+              artifactName: 'aggregated-results'
+
+      # Job 2: Generate HTML Report
+      - job: GenerateReport
+        displayName: 'Generate HTML Performance Report'
+        pool:
+          vmImage: 'ubuntu-latest'
+        dependsOn: AggregateResults
+        steps:
+          - task: NodeTool@0
+            displayName: 'Install Node.js'
+            inputs:
+              versionSpec: '$(NODE_VERSION)'
+          
+          - script: npm ci
+            displayName: 'Install dependencies'
+          
+          - task: DownloadBuildArtifacts@1
+            displayName: 'Download aggregated results'
+            inputs:
+              buildType: 'current'
+              artifactName: 'aggregated-results'
+              downloadPath: '$(System.ArtifactsDirectory)'
+          
+          - script: |
+              echo "Generating HTML performance report..."
+              echo "Input file: $(System.ArtifactsDirectory)/aggregated-results/aggregated-results.json"
+              
+              # Copy aggregated results to workspace
+              cp "$(System.ArtifactsDirectory)/aggregated-results/aggregated-results.json" ./aggregated-results.json
+              
+              # Generate comprehensive HTML report
+              npx perf-sentinel analyze \
+                --run-file ./aggregated-results.json \
+                --config ./examples/perf-sentinel-ci.yml \
+                --project-id "$(PROJECT_ID)" \
+                --environment production \
+                --reporter html \
+                --html-output ./performance-report.html
+              
+              echo "HTML report generated"
+              ls -la performance-report.html
+            displayName: 'Generate HTML report'
+          
+          - task: PublishBuildArtifacts@1
+            displayName: 'Publish HTML report'
+            inputs:
+              pathToPublish: 'performance-report.html'
+              artifactName: 'performance-report'
+          
+          - task: PublishHtmlReport@1
+            displayName: 'Publish HTML report to Azure DevOps'
+            inputs:
+              htmlDirectory: '$(System.DefaultWorkingDirectory)'
+              htmlFiles: 'performance-report.html'
+              tabName: 'Performance Report'
+            condition: always()
+
+      # Job 3: S3 Storage Analysis (conditional)
+      - job: S3Analysis
+        displayName: 'S3 Storage Analysis'
+        pool:
+          vmImage: 'ubuntu-latest'
+        condition: and(always(), ne(variables['S3_BUCKET_NAME'], ''))
+        variables:
+          JOB_IDS: 'auth-tests-$(Build.BuildId),api-tests-$(Build.BuildId),ui-tests-$(Build.BuildId)'
+        steps:
+          - task: NodeTool@0
+            displayName: 'Install Node.js'
+            inputs:
+              versionSpec: '$(NODE_VERSION)'
+          
+          - script: npm ci
+            displayName: 'Install dependencies'
+          
+          - task: AzureCLI@2
+            displayName: 'Configure AWS credentials'
+            inputs:
+              azureSubscription: 'AWS-Connection'
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                # Configure AWS credentials for S3 access
+                aws configure set aws_access_key_id $(AWS_ACCESS_KEY_ID)
+                aws configure set aws_secret_access_key $(AWS_SECRET_ACCESS_KEY)
+                aws configure set region $(AWS_REGION)
+          
+          - script: |
+              echo "Aggregating results from S3 storage..."
+              echo "S3 Bucket: $(S3_BUCKET_NAME)"
+              echo "AWS Region: $(AWS_REGION)"
+              
+              # Aggregate results from S3
+              npx perf-sentinel aggregate \
+                --bucket-name "$(S3_BUCKET_NAME)" \
+                --s3-region "$(AWS_REGION)" \
+                --project-id "$(PROJECT_ID)" \
+                --job-ids "$(JOB_IDS)" \
+                --wait-for-jobs true \
+                --timeout $(AGGREGATE_TIMEOUT) \
+                --output-file ./s3-aggregated-results.json
+              
+              # Generate S3-based HTML report
+              npx perf-sentinel analyze \
+                --run-file ./s3-aggregated-results.json \
+                --bucket-name "$(S3_BUCKET_NAME)" \
+                --s3-region "$(AWS_REGION)" \
+                --project-id "$(PROJECT_ID)" \
+                --reporter html \
+                --html-output ./s3-performance-report.html
+              
+              echo "S3 analysis completed"
+            displayName: 'S3 storage analysis'
+          
+          - task: PublishBuildArtifacts@1
+            displayName: 'Publish S3 HTML report'
+            inputs:
+              pathToPublish: 's3-performance-report.html'
+              artifactName: 's3-performance-report'
+
+      # Job 4: Database Storage Analysis (conditional)
+      - job: DatabaseAnalysis
+        displayName: 'Database Storage Analysis'
+        pool:
+          vmImage: 'ubuntu-latest'
+        condition: and(always(), ne(variables['MONGODB_CONNECTION_STRING'], ''))
+        variables:
+          JOB_IDS: 'auth-tests-$(Build.BuildId),api-tests-$(Build.BuildId),ui-tests-$(Build.BuildId)'
+        steps:
+          - task: NodeTool@0
+            displayName: 'Install Node.js'
+            inputs:
+              versionSpec: '$(NODE_VERSION)'
+          
+          - script: npm ci
+            displayName: 'Install dependencies'
+          
+          - script: |
+              echo "Aggregating results from database storage..."
+              echo "Database connection configured"
+              
+              # Aggregate results from MongoDB
+              npx perf-sentinel aggregate \
+                --db-connection "$(MONGODB_CONNECTION_STRING)" \
+                --project-id "$(PROJECT_ID)" \
+                --job-ids "$(JOB_IDS)" \
+                --wait-for-jobs true \
+                --timeout $(AGGREGATE_TIMEOUT) \
+                --output-file ./db-aggregated-results.json
+              
+              # Generate database-based HTML report
+              npx perf-sentinel analyze \
+                --run-file ./db-aggregated-results.json \
+                --db-connection "$(MONGODB_CONNECTION_STRING)" \
+                --project-id "$(PROJECT_ID)" \
+                --reporter html \
+                --html-output ./db-performance-report.html
+              
+              echo "Database analysis completed"
+            displayName: 'Database storage analysis'
+          
+          - task: PublishBuildArtifacts@1
+            displayName: 'Publish Database HTML report'
+            inputs:
+              pathToPublish: 'db-performance-report.html'
+              artifactName: 'db-performance-report'
+
+  # Stage 3: PR Comment (only for Pull Requests)
+  - stage: PRComment
+    displayName: 'PR Comment'
+    dependsOn: AggregateAndReport
+    condition: and(always(), eq(variables['Build.Reason'], 'PullRequest'))
+    jobs:
+      - job: CreatePRComment
+        displayName: 'Create PR Comment'
+        pool:
+          vmImage: 'ubuntu-latest'
+        steps:
+          - script: |
+              echo "Creating PR comment with performance results..."
+              
+              # Create performance summary comment
+              cat > pr-comment.md << 'EOF'
+              ## 📊 Performance Analysis Report
+              
+              Performance testing completed for this pull request.
+              
+              **Download the interactive HTML report from the build artifacts.**
+              
+              - **Total Jobs**: 3 (auth, api, ui)
+              - **Build ID**: $(Build.BuildId)
+              - **Commit**: $(Build.SourceVersion)
+              
+              The report includes:
+              - 🔍 Interactive filtering and search
+              - 📈 Performance trend charts
+              - 🎯 Suite-level analysis
+              - 📱 Mobile-responsive design
+              
+              *This report is self-contained and works offline.*
+              
+              **Build**: [View Build Results]($(System.TeamFoundationCollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId))
+              EOF
+              
+              echo "PR comment prepared"
+              cat pr-comment.md
+            displayName: 'Prepare PR comment'
+          
+          - task: PublishBuildArtifacts@1
+            displayName: 'Publish PR comment'
+            inputs:
+              pathToPublish: 'pr-comment.md'
+              artifactName: 'pr-comment' 

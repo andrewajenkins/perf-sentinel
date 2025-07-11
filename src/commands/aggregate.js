@@ -168,20 +168,15 @@ exports.handler = async (argv) => {
     // Save aggregated results if output file specified
     if (argv.outputFile) {
       const outputPath = path.resolve(argv.outputFile);
-      const aggregatedData = {
-        metadata: {
-          aggregationTimestamp: aggregationResult.aggregationTimestamp,
-          jobIds: jobIds,
-          jobCount: aggregationResult.jobCount,
-          runCount: aggregationResult.runCount,
-          stepCount: aggregationResult.aggregatedSteps.length,
-          projectId: projectId
-        },
-        steps: aggregationResult.aggregatedSteps
-      };
+      
+      // Save in the same format as raw performance data (array of steps)
+      // This allows the aggregated results to be used as input for analyze command
+      const aggregatedData = aggregationResult.aggregatedSteps;
 
       await fs.writeFile(outputPath, JSON.stringify(aggregatedData, null, 2));
       console.log(`Aggregated results saved to: ${outputPath}`);
+      console.log(`  - ${aggregatedData.length} steps from ${aggregationResult.runCount} run(s)`);
+      console.log(`  - Job IDs: ${jobIds.join(', ')}`);
     }
 
     // Perform analysis on aggregated data

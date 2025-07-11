@@ -74,6 +74,7 @@ exports.builder = (yargs) => {
 
 exports.handler = async (argv) => {
   const configLoader = new ConfigLoader();
+  let storage;
   
   try {
     // Load configuration
@@ -94,7 +95,7 @@ exports.handler = async (argv) => {
 
     // Get storage options from configuration
     const storageOptions = configLoader.getStorageOptions(config);
-    const storage = new StorageService(storageOptions);
+    storage = new StorageService(storageOptions);
 
     const runFilePath = path.resolve(argv.runFile);
     const historyFilePath = storageOptions.historyFile ? path.resolve(storageOptions.historyFile) : null;
@@ -106,15 +107,32 @@ exports.handler = async (argv) => {
     const latestRunRaw = await fs.readFile(runFilePath, 'utf-8');
     const latestRun = JSON.parse(latestRunRaw);
 
+    // Register job if jobId is available in the data
+    let jobId = null;
+    if (latestRun.length > 0 && latestRun[0].context && latestRun[0].context.jobId) {
+      jobId = latestRun[0].context.jobId;
+      console.log(`Registering job: ${jobId}`);
+      await storage.registerJob(jobId, {
+        startTime: new Date().toISOString(),
+        stepCount: latestRun.length,
+        suites: [...new Set(latestRun.map(step => step.context?.suite).filter(Boolean))],
+        tags: [...new Set(latestRun.flatMap(step => step.context?.tags || []))]
+      });
+    }
+
     console.log(`Using ${storage.getStorageType()} storage`);
     const history = await storage.getHistory(historyFilePath);
 
     const { report, updatedHistory } = analyze(latestRun, history, config, configLoader);
 
-    // Save the current run to database for historical tracking
-    if (storage.getStorageType() === 'database') {
-      await storage.savePerformanceRun(latestRun);
-    }
+    // Save the current run for historical tracking (all storage adapters)
+    await storage.savePerformanceRun(latestRun, {
+      jobId: jobId,
+      timestamp: new Date().toISOString(),
+      stepCount: latestRun.length,
+      suites: [...new Set(latestRun.map(step => step.context?.suite).filter(Boolean))],
+      tags: [...new Set(latestRun.flatMap(step => step.context?.tags || []))]
+    });
 
     // Invoke reporters
     const reporters = config.reporting.default_reporters;
@@ -162,11 +180,39 @@ exports.handler = async (argv) => {
       console.log(`History file updated successfully at ${historyFilePath}`);
     }
 
+    // Update job status to completed if job was registered
+    if (jobId) {
+      console.log(`Marking job ${jobId} as completed`);
+      await storage.updateJobStatus(jobId, 'completed', {
+        endTime: new Date().toISOString(),
+        regressionsFound: report.regressions?.length || 0,
+        newStepsFound: report.newSteps?.length || 0,
+        okStepsFound: report.ok?.length || 0
+      });
+    }
+
     // Clean up
     await storage.close();
 
   } catch (error) {
     console.error('Error during analysis:', error);
+    
+    // Update job status to failed if job was registered
+    try {
+      if (storage && typeof jobId !== 'undefined') {
+        await storage.updateJobStatus(jobId, 'failed', {
+          endTime: new Date().toISOString(),
+          error: error.message
+        });
+      }
+    } catch (updateError) {
+      console.error('Error updating job status:', updateError);
+    }
+    
+    if (storage) {
+      await storage.close();
+    }
+    
     process.exit(1);
   }
 }; 

@@ -1,0 +1,319 @@
+name: Performance Testing with perf-sentinel
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  # Configure perf-sentinel for CI/CD
+  PROJECT_ID: "my-web-app"
+  MONGODB_CONNECTION_STRING: ${{ secrets.MONGODB_CONNECTION_STRING }}
+  S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
+  AWS_REGION: "us-east-1"
+
+jobs:
+  # Phase 1: Parallel Test Execution
+  test-auth:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run authentication tests
+        env:
+          JOB_ID: "auth-tests-${{ github.run_id }}"
+          CI_JOB_ID: "auth-tests-${{ github.run_id }}"
+          GITHUB_JOB: "test-auth"
+          GITHUB_RUNNER_ID: ${{ runner.name }}
+        run: |
+          # Run authentication test suite
+          npm run test:auth
+          
+          # Analyze results immediately (stores in S3/DB)
+          npx perf-sentinel analyze \
+            --run-file ./performance-results/latest-run.json \
+            --config ./examples/perf-sentinel-ci.yml \
+            --project-id "$PROJECT_ID" \
+            --environment production
+      
+      - name: Upload performance data
+        uses: actions/upload-artifact@v4
+        with:
+          name: auth-performance-data
+          path: performance-results/
+          retention-days: 7
+
+  test-api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run API tests
+        env:
+          JOB_ID: "api-tests-${{ github.run_id }}"
+          CI_JOB_ID: "api-tests-${{ github.run_id }}"
+          GITHUB_JOB: "test-api"
+          GITHUB_RUNNER_ID: ${{ runner.name }}
+        run: |
+          # Run API test suite
+          npm run test:api
+          
+          # Analyze results immediately
+          npx perf-sentinel analyze \
+            --run-file ./performance-results/latest-run.json \
+            --config ./examples/perf-sentinel-ci.yml \
+            --project-id "$PROJECT_ID" \
+            --environment production
+      
+      - name: Upload performance data
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-performance-data
+          path: performance-results/
+          retention-days: 7
+
+  test-ui:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run UI tests
+        env:
+          JOB_ID: "ui-tests-${{ github.run_id }}"
+          CI_JOB_ID: "ui-tests-${{ github.run_id }}"
+          GITHUB_JOB: "test-ui"
+          GITHUB_RUNNER_ID: ${{ runner.name }}
+        run: |
+          # Run UI test suite
+          npm run test:ui
+          
+          # Analyze results immediately
+          npx perf-sentinel analyze \
+            --run-file ./performance-results/latest-run.json \
+            --config ./examples/perf-sentinel-ci.yml \
+            --project-id "$PROJECT_ID" \
+            --environment production
+      
+      - name: Upload performance data
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-performance-data
+          path: performance-results/
+          retention-days: 7
+
+  # Phase 2: Aggregate Results and Generate Report
+  performance-analysis:
+    runs-on: ubuntu-latest
+    needs: [test-auth, test-api, test-ui]
+    if: always() # Run even if some tests fail
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Download all performance artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: ./artifacts
+      
+      - name: Aggregate performance results
+        run: |
+          # Wait for all jobs and aggregate results
+          npx perf-sentinel aggregate \
+            --config ./examples/perf-sentinel-ci.yml \
+            --project-id "$PROJECT_ID" \
+            --job-ids "auth-tests-${{ github.run_id }},api-tests-${{ github.run_id }},ui-tests-${{ github.run_id }}" \
+            --wait-for-jobs true \
+            --timeout 600 \
+            --output-file ./aggregated-results.json
+      
+      - name: Generate HTML performance report
+        run: |
+          # Generate comprehensive HTML report
+          npx perf-sentinel analyze \
+            --run-file ./aggregated-results.json \
+            --config ./examples/perf-sentinel-ci.yml \
+            --project-id "$PROJECT_ID" \
+            --environment production \
+            --reporter html \
+            --html-output ./performance-report.html
+      
+      - name: Upload performance report
+        uses: actions/upload-artifact@v4
+        with:
+          name: performance-report
+          path: performance-report.html
+          retention-days: 30
+      
+      - name: Comment on PR with performance results
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            
+            // Check if performance report exists
+            if (fs.existsSync('./performance-report.html')) {
+              const comment = `## 📊 Performance Analysis Report
+              
+              Performance testing completed for this PR.
+              
+              **Download the interactive HTML report from the artifacts section above.**
+              
+              - **Total Jobs**: 3 (auth, api, ui)
+              - **Build ID**: ${{ github.run_id }}
+              - **Commit**: ${{ github.sha }}
+              
+              The report includes:
+              - 🔍 Interactive filtering and search
+              - 📈 Performance trend charts
+              - 🎯 Suite-level analysis
+              - 📱 Mobile-responsive design
+              
+              *This report is self-contained and works offline.*`;
+              
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: comment
+              });
+            }
+
+  # Optional: S3 Storage Example
+  performance-analysis-s3:
+    runs-on: ubuntu-latest
+    needs: [test-auth, test-api, test-ui]
+    if: always() && vars.USE_S3_STORAGE == 'true'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+      
+      - name: Aggregate results from S3
+        run: |
+          # Aggregate results stored in S3
+          npx perf-sentinel aggregate \
+            --bucket-name "$S3_BUCKET_NAME" \
+            --s3-region "$AWS_REGION" \
+            --project-id "$PROJECT_ID" \
+            --job-ids "auth-tests-${{ github.run_id }},api-tests-${{ github.run_id }},ui-tests-${{ github.run_id }}" \
+            --wait-for-jobs true \
+            --timeout 600 \
+            --output-file ./s3-aggregated-results.json
+      
+      - name: Generate S3-based HTML report
+        run: |
+          npx perf-sentinel analyze \
+            --run-file ./s3-aggregated-results.json \
+            --bucket-name "$S3_BUCKET_NAME" \
+            --s3-region "$AWS_REGION" \
+            --project-id "$PROJECT_ID" \
+            --reporter html \
+            --html-output ./s3-performance-report.html
+      
+      - name: Upload S3 performance report
+        uses: actions/upload-artifact@v4
+        with:
+          name: s3-performance-report
+          path: s3-performance-report.html
+          retention-days: 30
+
+  # Optional: Database Storage Example
+  performance-analysis-db:
+    runs-on: ubuntu-latest
+    needs: [test-auth, test-api, test-ui]
+    if: always() && vars.USE_DATABASE_STORAGE == 'true'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Aggregate results from Database
+        run: |
+          # Aggregate results stored in MongoDB
+          npx perf-sentinel aggregate \
+            --db-connection "$MONGODB_CONNECTION_STRING" \
+            --project-id "$PROJECT_ID" \
+            --job-ids "auth-tests-${{ github.run_id }},api-tests-${{ github.run_id }},ui-tests-${{ github.run_id }}" \
+            --wait-for-jobs true \
+            --timeout 600 \
+            --output-file ./db-aggregated-results.json
+      
+      - name: Generate Database-based HTML report
+        run: |
+          npx perf-sentinel analyze \
+            --run-file ./db-aggregated-results.json \
+            --db-connection "$MONGODB_CONNECTION_STRING" \
+            --project-id "$PROJECT_ID" \
+            --reporter html \
+            --html-output ./db-performance-report.html
+      
+      - name: Upload Database performance report
+        uses: actions/upload-artifact@v4
+        with:
+          name: db-performance-report
+          path: db-performance-report.html
+          retention-days: 30 

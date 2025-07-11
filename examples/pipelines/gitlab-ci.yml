@@ -1,0 +1,397 @@
+# GitLab CI/CD Pipeline for Performance Testing with perf-sentinel
+
+variables:
+  # Configure perf-sentinel for CI/CD
+  PROJECT_ID: "my-web-app"
+  NODE_VERSION: "20"
+  AWS_REGION: "us-east-1"
+  
+  # Performance testing configuration
+  PERFORMANCE_RESULTS_DIR: "performance-results"
+  AGGREGATE_TIMEOUT: "600"
+
+# Define stages for the pipeline
+stages:
+  - setup
+  - test-parallel
+  - aggregate
+  - report
+  - cleanup
+
+# Cache node_modules between jobs
+cache:
+  paths:
+    - node_modules/
+
+# Setup job - prepare environment
+setup:
+  stage: setup
+  image: node:${NODE_VERSION}
+  before_script:
+    - npm ci
+    - mkdir -p ${PERFORMANCE_RESULTS_DIR}
+  script:
+    - echo "Environment setup complete"
+    - echo "Project ID: ${PROJECT_ID}"
+    - echo "Node version: ${NODE_VERSION}"
+    - echo "GitLab CI Job ID: ${CI_JOB_ID}"
+    - echo "GitLab Pipeline ID: ${CI_PIPELINE_ID}"
+  artifacts:
+    paths:
+      - node_modules/
+    expire_in: 1 hour
+
+# Parallel test execution phase
+.test-template: &test-template
+  stage: test-parallel
+  image: node:${NODE_VERSION}
+  dependencies:
+    - setup
+  before_script:
+    - mkdir -p ${PERFORMANCE_RESULTS_DIR}
+  artifacts:
+    paths:
+      - ${PERFORMANCE_RESULTS_DIR}/
+    expire_in: 1 day
+    reports:
+      junit: ${PERFORMANCE_RESULTS_DIR}/junit.xml
+  variables:
+    CI_JOB_ID: "${CI_JOB_ID}"
+    CI_PIPELINE_ID: "${CI_PIPELINE_ID}"
+    CI_RUNNER_ID: "${CI_RUNNER_ID}"
+
+# Authentication tests job
+test-auth:
+  <<: *test-template
+  variables:
+    JOB_ID: "auth-tests-${CI_PIPELINE_ID}"
+    TEST_SUITE: "authentication"
+  script:
+    - echo "Running authentication tests..."
+    - echo "Job ID: ${JOB_ID}"
+    - echo "Test Suite: ${TEST_SUITE}"
+    
+    # Run authentication test suite
+    - npm run test:auth || true
+    
+    # Analyze results immediately
+    - |
+      npx perf-sentinel analyze \
+        --run-file ./${PERFORMANCE_RESULTS_DIR}/latest-run.json \
+        --config ./examples/perf-sentinel-ci.yml \
+        --project-id "${PROJECT_ID}" \
+        --environment production
+    
+    - echo "Authentication tests completed"
+
+# API tests job
+test-api:
+  <<: *test-template
+  variables:
+    JOB_ID: "api-tests-${CI_PIPELINE_ID}"
+    TEST_SUITE: "api"
+  script:
+    - echo "Running API tests..."
+    - echo "Job ID: ${JOB_ID}"
+    - echo "Test Suite: ${TEST_SUITE}"
+    
+    # Run API test suite
+    - npm run test:api || true
+    
+    # Analyze results immediately
+    - |
+      npx perf-sentinel analyze \
+        --run-file ./${PERFORMANCE_RESULTS_DIR}/latest-run.json \
+        --config ./examples/perf-sentinel-ci.yml \
+        --project-id "${PROJECT_ID}" \
+        --environment production
+    
+    - echo "API tests completed"
+
+# UI tests job
+test-ui:
+  <<: *test-template
+  variables:
+    JOB_ID: "ui-tests-${CI_PIPELINE_ID}"
+    TEST_SUITE: "ui"
+  script:
+    - echo "Running UI tests..."
+    - echo "Job ID: ${JOB_ID}"
+    - echo "Test Suite: ${TEST_SUITE}"
+    
+    # Run UI test suite
+    - npm run test:ui || true
+    
+    # Analyze results immediately
+    - |
+      npx perf-sentinel analyze \
+        --run-file ./${PERFORMANCE_RESULTS_DIR}/latest-run.json \
+        --config ./examples/perf-sentinel-ci.yml \
+        --project-id "${PROJECT_ID}" \
+        --environment production
+    
+    - echo "UI tests completed"
+
+# Aggregate results from all parallel jobs
+aggregate-results:
+  stage: aggregate
+  image: node:${NODE_VERSION}
+  dependencies:
+    - setup
+    - test-auth
+    - test-api
+    - test-ui
+  variables:
+    JOB_IDS: "auth-tests-${CI_PIPELINE_ID},api-tests-${CI_PIPELINE_ID},ui-tests-${CI_PIPELINE_ID}"
+  script:
+    - echo "Aggregating performance results..."
+    - echo "Job IDs: ${JOB_IDS}"
+    - echo "Pipeline ID: ${CI_PIPELINE_ID}"
+    
+    # Aggregate results from all parallel jobs
+    - |
+      npx perf-sentinel aggregate \
+        --config ./examples/perf-sentinel-ci.yml \
+        --project-id "${PROJECT_ID}" \
+        --job-ids "${JOB_IDS}" \
+        --wait-for-jobs true \
+        --timeout ${AGGREGATE_TIMEOUT} \
+        --output-file ./aggregated-results.json
+    
+    - echo "Aggregation completed"
+    - ls -la aggregated-results.json
+  artifacts:
+    paths:
+      - aggregated-results.json
+    expire_in: 1 day
+  allow_failure: false
+
+# Generate HTML performance report
+generate-report:
+  stage: report
+  image: node:${NODE_VERSION}
+  dependencies:
+    - setup
+    - aggregate-results
+  script:
+    - echo "Generating HTML performance report..."
+    - echo "Input file: aggregated-results.json"
+    
+    # Generate comprehensive HTML report
+    - |
+      npx perf-sentinel analyze \
+        --run-file ./aggregated-results.json \
+        --config ./examples/perf-sentinel-ci.yml \
+        --project-id "${PROJECT_ID}" \
+        --environment production \
+        --reporter html \
+        --html-output ./performance-report.html
+    
+    - echo "HTML report generated"
+    - ls -la performance-report.html
+  artifacts:
+    paths:
+      - performance-report.html
+    expire_in: 30 days
+    reports:
+      # GitLab can display HTML reports in the UI
+      performance: performance-report.html
+  allow_failure: false
+
+# S3 Storage variant (only runs when S3 variables are set)
+aggregate-s3:
+  stage: aggregate
+  image: node:${NODE_VERSION}
+  dependencies:
+    - setup
+  variables:
+    JOB_IDS: "auth-tests-${CI_PIPELINE_ID},api-tests-${CI_PIPELINE_ID},ui-tests-${CI_PIPELINE_ID}"
+  script:
+    - echo "Aggregating results from S3 storage..."
+    - echo "S3 Bucket: ${S3_BUCKET_NAME}"
+    - echo "AWS Region: ${AWS_REGION}"
+    
+    # Aggregate results from S3
+    - |
+      npx perf-sentinel aggregate \
+        --bucket-name "${S3_BUCKET_NAME}" \
+        --s3-region "${AWS_REGION}" \
+        --project-id "${PROJECT_ID}" \
+        --job-ids "${JOB_IDS}" \
+        --wait-for-jobs true \
+        --timeout ${AGGREGATE_TIMEOUT} \
+        --output-file ./s3-aggregated-results.json
+    
+    - echo "S3 aggregation completed"
+  artifacts:
+    paths:
+      - s3-aggregated-results.json
+    expire_in: 1 day
+  rules:
+    - if: $S3_BUCKET_NAME != null
+  allow_failure: true
+
+# S3 HTML report generation
+generate-s3-report:
+  stage: report
+  image: node:${NODE_VERSION}
+  dependencies:
+    - setup
+    - aggregate-s3
+  script:
+    - echo "Generating S3-based HTML report..."
+    
+    # Generate S3-based HTML report
+    - |
+      npx perf-sentinel analyze \
+        --run-file ./s3-aggregated-results.json \
+        --bucket-name "${S3_BUCKET_NAME}" \
+        --s3-region "${AWS_REGION}" \
+        --project-id "${PROJECT_ID}" \
+        --reporter html \
+        --html-output ./s3-performance-report.html
+    
+    - echo "S3 HTML report generated"
+  artifacts:
+    paths:
+      - s3-performance-report.html
+    expire_in: 30 days
+  rules:
+    - if: $S3_BUCKET_NAME != null
+  allow_failure: true
+
+# Database storage variant (only runs when database variables are set)
+aggregate-database:
+  stage: aggregate
+  image: node:${NODE_VERSION}
+  dependencies:
+    - setup
+  variables:
+    JOB_IDS: "auth-tests-${CI_PIPELINE_ID},api-tests-${CI_PIPELINE_ID},ui-tests-${CI_PIPELINE_ID}"
+  script:
+    - echo "Aggregating results from database storage..."
+    - echo "Database connection configured"
+    
+    # Aggregate results from MongoDB
+    - |
+      npx perf-sentinel aggregate \
+        --db-connection "${MONGODB_CONNECTION_STRING}" \
+        --project-id "${PROJECT_ID}" \
+        --job-ids "${JOB_IDS}" \
+        --wait-for-jobs true \
+        --timeout ${AGGREGATE_TIMEOUT} \
+        --output-file ./db-aggregated-results.json
+    
+    - echo "Database aggregation completed"
+  artifacts:
+    paths:
+      - db-aggregated-results.json
+    expire_in: 1 day
+  rules:
+    - if: $MONGODB_CONNECTION_STRING != null
+  allow_failure: true
+
+# Database HTML report generation
+generate-db-report:
+  stage: report
+  image: node:${NODE_VERSION}
+  dependencies:
+    - setup
+    - aggregate-database
+  script:
+    - echo "Generating database-based HTML report..."
+    
+    # Generate database-based HTML report
+    - |
+      npx perf-sentinel analyze \
+        --run-file ./db-aggregated-results.json \
+        --db-connection "${MONGODB_CONNECTION_STRING}" \
+        --project-id "${PROJECT_ID}" \
+        --reporter html \
+        --html-output ./db-performance-report.html
+    
+    - echo "Database HTML report generated"
+  artifacts:
+    paths:
+      - db-performance-report.html
+    expire_in: 30 days
+  rules:
+    - if: $MONGODB_CONNECTION_STRING != null
+  allow_failure: true
+
+# Cleanup job - remove temporary files
+cleanup:
+  stage: cleanup
+  image: node:${NODE_VERSION}
+  dependencies:
+    - aggregate-results
+  script:
+    - echo "Cleaning up temporary files..."
+    - rm -f aggregated-results.json s3-aggregated-results.json db-aggregated-results.json
+    - echo "Cleanup completed"
+  when: always
+  allow_failure: true
+
+# Pages job - publish HTML reports to GitLab Pages (optional)
+pages:
+  stage: report
+  image: node:${NODE_VERSION}
+  dependencies:
+    - generate-report
+  script:
+    - echo "Publishing performance reports to GitLab Pages..."
+    - mkdir -p public
+    - cp performance-report.html public/index.html
+    - cp -r ${PERFORMANCE_RESULTS_DIR} public/ || true
+    - echo "Reports published to GitLab Pages"
+  artifacts:
+    paths:
+      - public
+    expire_in: 30 days
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  allow_failure: true
+
+# Merge request performance comment (only on merge requests)
+mr-comment:
+  stage: report
+  image: node:${NODE_VERSION}
+  dependencies:
+    - generate-report
+  script:
+    - echo "Adding performance comment to merge request..."
+    - |
+      if [ -f "performance-report.html" ]; then
+        # Create a simple performance summary comment
+        cat > mr-comment.md << EOF
+      ## 📊 Performance Analysis Report
+      
+      Performance testing completed for this merge request.
+      
+      **Download the interactive HTML report from the job artifacts.**
+      
+      - **Total Jobs**: 3 (auth, api, ui)
+      - **Pipeline ID**: ${CI_PIPELINE_ID}
+      - **Commit**: ${CI_COMMIT_SHA}
+      
+      The report includes:
+      - 🔍 Interactive filtering and search
+      - 📈 Performance trend charts
+      - 🎯 Suite-level analysis
+      - 📱 Mobile-responsive design
+      
+      *This report is self-contained and works offline.*
+      
+      **Artifacts**: [Download Performance Report](${CI_JOB_URL}/artifacts/file/performance-report.html)
+      EOF
+        
+        echo "Performance comment prepared"
+        cat mr-comment.md
+      fi
+  artifacts:
+    paths:
+      - mr-comment.md
+    expire_in: 7 days
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+  allow_failure: true 
