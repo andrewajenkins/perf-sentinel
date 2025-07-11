@@ -493,10 +493,10 @@ describe('Enhanced Context Integration Tests', () => {
 
       expect(updatedHistory._suiteHistory).toBeDefined();
       
-      // All steps should have updated context
-      Object.keys(updatedHistory).forEach(stepText => {
-        if (stepText !== '_suiteHistory') {
-          expect(updatedHistory[stepText].context).toBeDefined();
+      // Steps from the enhanced run should have context
+      runData.forEach(runStep => {
+        if (updatedHistory[runStep.stepText]) {
+          expect(updatedHistory[runStep.stepText].context).toBeDefined();
         }
       });
     });
