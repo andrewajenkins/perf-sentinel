@@ -18,6 +18,13 @@ A lightweight, generic, and automated system that detects performance regression
 - **🔄 Auto-Detection**: Automatic adapter selection based on configuration
 - **🔗 Multi-Job Coordination**: Built-in job aggregation and result collection
 
+**✅ IMPLEMENTED: Interactive HTML Reports**
+- **📊 Rich Dashboard**: Self-contained HTML reports with embedded charts and interactivity
+- **🔍 Advanced Filtering**: Real-time filtering by step status, suite, tags, and search text
+- **📱 Responsive Design**: Mobile-friendly interface that works offline
+- **💾 Export Features**: CSV export for filtered data and print-optimized layouts
+- **⚡ Performance Visualization**: Interactive Chart.js charts for trends and health scores
+
 ## Features
 
 -   **Easy Integration**: Add a simple hook to your Cucumber.js test suite to start capturing data.
@@ -30,7 +37,7 @@ A lightweight, generic, and automated system that detects performance regression
 -   **Multi-Job Coordination**: Aggregate results from parallel test jobs with built-in coordination.
 -   **Auto-Detection**: Automatically selects the best storage adapter based on your configuration.
 -   **Multi-Project Support**: Organize performance data by project across all storage adapters.
--   **Multiple Reporters**: Get results where you need them: Console, Markdown, Slack (TBD), PR Comment (TBD), and HTML (TBD).
+-   **Multiple Reporters**: Get results where you need them: Console, Markdown, **HTML (Interactive Dashboard)**, Slack (TBD), and PR Comment (TBD).
 -   **CI/CD Ready**: Designed to be a part of your automated pipeline with enterprise-scale features.
 -   **Auto-Fallback**: Automatically falls back to filesystem storage if other adapters fail.
 
@@ -627,6 +634,51 @@ npx perf-sentinel analyze \
   --bucket-name "shared-perf-bucket" \
   --project-id "project-b"
 ```
+
+## Interactive HTML Reports 📊
+
+**✅ IMPLEMENTED: Rich Interactive Dashboard**
+
+Generate comprehensive, self-contained HTML reports with interactive charts and filtering capabilities:
+
+```bash
+# Generate HTML report with interactive dashboard
+npx perf-sentinel analyze \
+  --run-file ./performance-results/latest-run.json \
+  --history-file ./performance-results/history.json \
+  --reporter html \
+  --html-output performance-report.html
+```
+
+### Features
+
+- **🎨 Self-Contained**: Works offline with embedded CSS, JavaScript, and Chart.js
+- **📊 Interactive Charts**: Real-time data visualization with Chart.js integration
+- **🔍 Advanced Filtering**: Filter by step status, suite, or search text
+- **📱 Responsive Design**: Works on desktop, tablet, and mobile devices
+- **⚡ Fast Navigation**: Tabbed interface with smooth transitions
+- **📈 Historical Trends**: Visual trend analysis and performance drift detection
+- **💾 Export Options**: Export filtered data to CSV for further analysis
+- **🎯 Context-Aware**: Shows suite health, tag analysis, and hierarchical performance data
+
+### Report Sections
+
+1. **Executive Summary**: Key metrics with visual status indicators
+2. **Performance Overview**: Interactive charts showing step status distribution and suite health
+3. **Test Suite Analysis**: Detailed suite-by-suite breakdown with health scores
+4. **Performance Regressions**: Filterable list of regressions with impact analysis
+5. **Tag Analysis**: Cross-cutting performance insights by test tags
+6. **Step Details**: Comprehensive searchable table with sorting and filtering
+7. **Recommendations**: AI-powered suggestions for performance optimization
+8. **Analysis Metadata**: Technical details and configuration information
+
+### Interactive Features
+
+- **Real-time Filtering**: Filter regressions and steps by text, status, or suite
+- **Sortable Tables**: Click column headers to sort by different criteria
+- **Data Export**: Export filtered step data to CSV
+- **Mobile-Friendly**: Responsive design that works on all devices
+- **Print Support**: Clean print layouts for documentation
 
 ## Advanced Features
 

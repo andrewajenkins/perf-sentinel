@@ -69,8 +69,8 @@ class StorageService {
       } catch (error) {
         // If the primary adapter fails and it's not filesystem, fallback to filesystem
         if (this.adapter.getType() !== 'filesystem') {
-          console.warn(`${this.adapter.getType()} storage failed, falling back to filesystem storage:`, error.message);
-          console.log('Using filesystem storage');
+          console.warn(`${this.adapter.getType()} storage failed, falling back to file storage:`, error.message);
+          console.log('Using file storage');
           
           // Switch to filesystem adapter
           this.adapter = new FileSystemAdapter({

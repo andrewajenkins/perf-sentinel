@@ -1,0 +1,145 @@
+[
+  {
+    "stepText": "I navigate to the login page",
+    "duration": 152.5,
+    "timestamp": "2024-01-15T10:30:00.000Z",
+    "context": {
+      "testFile": "examples/features/authentication/login.feature",
+      "testName": "Successful login with valid credentials",
+      "suite": "authentication",
+      "tags": ["@authentication", "@critical", "@smoke", "@fast"],
+      "jobId": "job-auth-123",
+      "workerId": "worker-1"
+    }
+  },
+  {
+    "stepText": "I enter valid username and password",
+    "duration": 45.2,
+    "timestamp": "2024-01-15T10:30:01.000Z",
+    "context": {
+      "testFile": "examples/features/authentication/login.feature",
+      "testName": "Successful login with valid credentials",
+      "suite": "authentication",
+      "tags": ["@authentication", "@critical", "@smoke", "@fast"],
+      "jobId": "job-auth-123",
+      "workerId": "worker-1"
+    }
+  },
+  {
+    "stepText": "I click the login button",
+    "duration": 1200.8,
+    "timestamp": "2024-01-15T10:30:02.000Z",
+    "context": {
+      "testFile": "examples/features/authentication/login.feature",
+      "testName": "Successful login with valid credentials",
+      "suite": "authentication",
+      "tags": ["@authentication", "@critical", "@smoke", "@fast"],
+      "jobId": "job-auth-123",
+      "workerId": "worker-1"
+    }
+  },
+  {
+    "stepText": "I should be redirected to the dashboard",
+    "duration": 850.3,
+    "timestamp": "2024-01-15T10:30:03.000Z",
+    "context": {
+      "testFile": "examples/features/authentication/login.feature",
+      "testName": "Successful login with valid credentials",
+      "suite": "authentication",
+      "tags": ["@authentication", "@critical", "@smoke", "@fast"],
+      "jobId": "job-auth-123",
+      "workerId": "worker-1"
+    }
+  },
+  {
+    "stepText": "I am on the checkout page",
+    "duration": 325.1,
+    "timestamp": "2024-01-15T10:32:00.000Z",
+    "context": {
+      "testFile": "examples/features/shopping/checkout.feature",
+      "testName": "Successful checkout with credit card",
+      "suite": "shopping",
+      "tags": ["@shopping", "@checkout", "@medium", "@smoke", "@payment"],
+      "jobId": "job-shopping-456",
+      "workerId": "worker-2"
+    }
+  },
+  {
+    "stepText": "I select credit card as payment method",
+    "duration": 89.7,
+    "timestamp": "2024-01-15T10:32:01.000Z",
+    "context": {
+      "testFile": "examples/features/shopping/checkout.feature",
+      "testName": "Successful checkout with credit card",
+      "suite": "shopping",
+      "tags": ["@shopping", "@checkout", "@medium", "@smoke", "@payment"],
+      "jobId": "job-shopping-456",
+      "workerId": "worker-2"
+    }
+  },
+  {
+    "stepText": "I enter valid credit card details",
+    "duration": 156.4,
+    "timestamp": "2024-01-15T10:32:02.000Z",
+    "context": {
+      "testFile": "examples/features/shopping/checkout.feature",
+      "testName": "Successful checkout with credit card",
+      "suite": "shopping",
+      "tags": ["@shopping", "@checkout", "@medium", "@smoke", "@payment"],
+      "jobId": "job-shopping-456",
+      "workerId": "worker-2"
+    }
+  },
+  {
+    "stepText": "I click the complete purchase button",
+    "duration": 2100.6,
+    "timestamp": "2024-01-15T10:32:03.000Z",
+    "context": {
+      "testFile": "examples/features/shopping/checkout.feature",
+      "testName": "Successful checkout with credit card",
+      "suite": "shopping",
+      "tags": ["@shopping", "@checkout", "@medium", "@smoke", "@payment"],
+      "jobId": "job-shopping-456",
+      "workerId": "worker-2"
+    }
+  },
+  {
+    "stepText": "I should see order confirmation",
+    "duration": 445.8,
+    "timestamp": "2024-01-15T10:32:04.000Z",
+    "context": {
+      "testFile": "examples/features/shopping/checkout.feature",
+      "testName": "Successful checkout with credit card",
+      "suite": "shopping",
+      "tags": ["@shopping", "@checkout", "@medium", "@smoke", "@payment"],
+      "jobId": "job-shopping-456",
+      "workerId": "worker-2"
+    }
+  },
+  {
+    "stepText": "I attempt to login with wrong credentials 5 times",
+    "duration": 5250.2,
+    "timestamp": "2024-01-15T10:34:00.000Z",
+    "context": {
+      "testFile": "examples/features/authentication/login.feature",
+      "testName": "Account lockout after multiple failed attempts",
+      "suite": "authentication",
+      "tags": ["@authentication", "@critical", "@security"],
+      "jobId": "job-auth-123",
+      "workerId": "worker-1"
+    }
+  },
+  {
+    "stepText": "my account should be locked",
+    "duration": 123.7,
+    "timestamp": "2024-01-15T10:34:01.000Z",
+    "context": {
+      "testFile": "examples/features/authentication/login.feature",
+      "testName": "Account lockout after multiple failed attempts",
+      "suite": "authentication",
+      "tags": ["@authentication", "@critical", "@security"],
+      "jobId": "job-auth-123",
+      "workerId": "worker-1"
+    }
+  }
+] 

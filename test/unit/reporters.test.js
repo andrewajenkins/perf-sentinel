@@ -87,12 +87,135 @@ describe('Reporters', () => {
     });
   });
 
-  describe('Placeholder Reporters', () => {
-    it('should log a "not implemented" message for the html reporter', () => {
-      htmlReporter.generateReport({});
-      expect(consoleOutput).toContain('HTML reporter is not yet implemented');
+  describe('HTML Reporter', () => {
+    it('should generate valid HTML content', async () => {
+      const report = {
+        regressions: [{ 
+          stepText: 'A slow step', 
+          currentDuration: 200, 
+          average: 100, 
+          slowdown: 100, 
+          percentage: 100,
+          context: {
+            suite: 'test-suite',
+            testFile: 'test.feature',
+            tags: ['@slow']
+          }
+        }],
+        ok: [{ 
+          stepText: 'A good step', 
+          duration: 100,
+          context: {
+            suite: 'test-suite',
+            testFile: 'test.feature',
+            tags: ['@fast']
+          }
+        }],
+        newSteps: [{ 
+          stepText: 'A new step', 
+          duration: 150,
+          context: {
+            suite: 'test-suite',
+            testFile: 'test.feature',
+            tags: ['@new']
+          }
+        }],
+        suites: {
+          'test-suite': {
+            suite: 'test-suite',
+            totalSteps: 3,
+            regressions: 1,
+            newSteps: 1,
+            okSteps: 1,
+            avgDuration: 150,
+            healthScore: 75,
+            category: 'good',
+            severity: 'medium'
+          }
+        },
+        tagAnalysis: {
+          '@slow': {
+            stepCount: 1,
+            avgDuration: 200,
+            suites: ['test-suite']
+          }
+        },
+        metadata: {
+          totalSteps: 3,
+          uniqueSteps: 3,
+          suites: ['test-suite'],
+          tags: ['@slow', '@fast', '@new'],
+          overallHealth: 75
+        },
+        recommendations: ['Consider optimizing slow steps']
+      };
+
+      const html = await htmlReporter.generateReport(report);
+      
+      // Check that HTML is generated (not the old "not implemented" message)
+      expect(html).toContain('<!DOCTYPE html>');
+      expect(html).toContain('<title>Performance Analysis Report</title>');
+      expect(html).toContain('Performance Sentinel');
+      expect(html).not.toContain('HTML reporter is not yet implemented');
+      
+      // Check for key sections
+      expect(html).toContain('executive-summary');
+      expect(html).toContain('nav-tabs');
+      expect(html).toContain('A slow step');
+      expect(html).toContain('A good step');
+      expect(html).toContain('A new step');
+      
+      // Check for embedded styles and scripts
+      expect(html).toContain('<style>');
+      expect(html).toContain('<script>');
+      expect(html).toContain('chart.js'); // Chart.js CDN URL contains lowercase chart.js
     });
 
+    it('should handle empty reports gracefully', async () => {
+      const emptyReport = {
+        regressions: [],
+        ok: [],
+        newSteps: [],
+        suites: {},
+        tagAnalysis: {},
+        metadata: {
+          totalSteps: 0,
+          uniqueSteps: 0,
+          suites: [],
+          tags: [],
+          overallHealth: 100
+        },
+        recommendations: []
+      };
+
+      const html = await htmlReporter.generateReport(emptyReport);
+      
+      expect(html).toContain('<!DOCTYPE html>');
+      expect(html).toContain('No Performance Regressions Found');
+      expect(html).toContain('All steps are performing within expected thresholds');
+    });
+
+    it('should generate HTML with custom options', async () => {
+      const report = {
+        regressions: [],
+        ok: [],
+        newSteps: [],
+        suites: {},
+        metadata: { totalSteps: 0 }
+      };
+
+      const html = await htmlReporter.generateReport(report, {
+        title: 'Custom Performance Report',
+        includeCharts: false,
+        includeInteractive: false
+      });
+      
+      expect(html).toContain('<title>Custom Performance Report</title>');
+      expect(html).not.toContain('chart.js');
+    });
+  });
+
+  describe('Placeholder Reporters', () => {
     it('should log a "not implemented" message for the pr-comment reporter', () => {
       prCommentReporter.generateReport({});
       expect(consoleOutput).toContain('PR Comment reporter is not yet implemented');

@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Analysis Report - default</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .performance-warning {
+            background: #fff3cd;
+            border: 1px solid #ffeeba;
+            border-radius: 4px;
+            padding: 1rem;
+            margin: 1rem 0;
+            color: #856404;
+        }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .summary-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid #667eea;
+        }
+        
+        .summary-card.critical { border-left-color: #e74c3c; }
+        .summary-card.warning { border-left-color: #f39c12; }
+        .summary-card.success { border-left-color: #27ae60; }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .metric-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+        
+        .controls {
+            margin: 1rem 0;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-input, .filter-select {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        .filter-input {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            background: #667eea;
+            color: white;
+            transition: background 0.2s;
+        }
+        
+        .btn:hover { background: #5a67d8; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        
+        .steps-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        
+        .steps-table th,
+        .steps-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .steps-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        .steps-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .status-badge {
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .status-badge.regression { background: #f8d7da; color: #721c24; }
+        .status-badge.new { background: #fff3cd; color: #856404; }
+        .status-badge.ok { background: #d4edda; color: #155724; }
+        
+        .tag {
+            background: #e9ecef;
+            color: #495057;
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-right: 0.25rem;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+        
+        .pagination-info {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .pagination-controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+            }
+            
+            .pagination {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚡ Performance Analysis Report</h1>
+            <p>Generated: 7/11/2025, 11:03:54 AM</p>
+        </div>
+        
+        
+    <div class="summary-grid">
+        <div class="summary-card success">
+            <div class="metric-label">Overall Status</div>
+            <div class="metric-value">All Good</div>
+        </div>
+        
+        <div class="summary-card critical">
+            <div class="metric-label">Regressions</div>
+            <div class="metric-value">0</div>
+        </div>
+        
+        <div class="summary-card warning">
+            <div class="metric-label">New Steps</div>
+            <div class="metric-value">0</div>
+        </div>
+        
+        <div class="summary-card success">
+            <div class="metric-label">Healthy Steps</div>
+            <div class="metric-value">11</div>
+        </div>
+        
+        <div class="summary-card">
+            <div class="metric-label">Total Steps</div>
+            <div class="metric-value">11</div>
+        </div>
+    </div>
+        
+        
+        
+        <div class="controls">
+            <input type="text" id="searchInput" placeholder="Search steps..." class="filter-input">
+            <select id="statusFilter" class="filter-select">
+                <option value="">All Status</option>
+                <option value="regression">Regressions</option>
+                <option value="new">New Steps</option>
+                <option value="ok">OK Steps</option>
+            </select>
+            <select id="pageSizeSelect" class="filter-select">
+                <option value="50">50 per page</option>
+                <option value="100" >100 per page</option>
+                <option value="200">200 per page</option>
+            </select>
+            <button id="exportBtn" class="btn">Export CSV</button>
+        </div>
+        
+        <div class="table-container">
+            <table class="steps-table">
+                <thead>
+                    <tr>
+                        <th>Step</th>
+                        <th>Status</th>
+                        <th>Duration</th>
+                        <th>Suite</th>
+                        <th>Impact</th>
+                    </tr>
+                </thead>
+                <tbody id="stepsTableBody">
+                    
+      <tr>
+          <td>I navigate to the login page</td>
+          <td><span class="status-badge ok">OK</span></td>
+          <td>152.5ms</td>
+          <td>authentication</td>
+          <td>OK</td>
+      </tr>
+      <tr>
+          <td>I enter valid username and password</td>
+          <td><span class="status-badge ok">OK</span></td>
+          <td>45.2ms</td>
+          <td>authentication</td>
+          <td>OK</td>
+      </tr>
+      <tr>
+          <td>I click the login button</td>
+          <td><span class="status-badge ok">OK</span></td>
+          <td>1200.8ms</td>
+          <td>authentication</td>
+          <td>OK</td>
+      </tr>
+      <tr>
+          <td>I should be redirected to the dashboard</td>
+          <td><span class="status-badge ok">OK</span></td>
+          <td>850.3ms</td>
+          <td>authentication</td>
+          <td>OK</td>
+      </tr>
+      <tr>
+          <td>I am on the checkout page</td>
+          <td><span class="status-badge ok">OK</span></td>
+          <td>325.1ms</td>
+          <td>shopping</td>
+          <td>OK</td>
+      </tr>
+      <tr>
+          <td>I select credit card as payment method</td>
+          <td><span class="status-badge ok">OK</span></td>
+          <td>89.7ms</td>
+          <td>shopping</td>
+          <td>OK</td>
+      </tr>
+      <tr>
+          <td>I enter valid credit card details</td>
+          <td><span class="status-badge ok">OK</span></td>
+          <td>156.4ms</td>
+          <td>shopping</td>
+          <td>OK</td>
+      </tr>
+      <tr>
+          <td>I click the complete purchase button</td>
+          <td><span class="status-badge ok">OK</span></td>
+          <td>2100.6ms</td>
+          <td>shopping</td>
+          <td>OK</td>
+      </tr>
+      <tr>
+          <td>I should see order confirmation</td>
+          <td><span class="status-badge ok">OK</span></td>
+          <td>445.8ms</td>
+          <td>shopping</td>
+          <td>OK</td>
+      </tr>
+      <tr>
+          <td>I attempt to login with wrong credentials 5 times</td>
+          <td><span class="status-badge ok">OK</span></td>
+          <td>5250.2ms</td>
+          <td>authentication</td>
+          <td>OK</td>
+      </tr>
+      <tr>
+          <td>my account should be locked</td>
+          <td><span class="status-badge ok">OK</span></td>
+          <td>123.7ms</td>
+          <td>authentication</td>
+          <td>OK</td>
+      </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        
+    </div>
+    
+    <script>
+        // Store all step data
+        const allStepsData = [{"stepText":"I navigate to the login page","duration":152.5,"context":{"testFile":"examples/features/authentication/login.feature","testName":"Successful login with valid credentials","suite":"authentication","tags":["@authentication","@critical","@smoke","@fast"],"jobId":"job-auth-123","workerId":"worker-1"},"timestamp":"2024-01-15T10:30:00.000Z","status":"ok"},{"stepText":"I enter valid username and password","duration":45.2,"context":{"testFile":"examples/features/authentication/login.feature","testName":"Successful login with valid credentials","suite":"authentication","tags":["@authentication","@critical","@smoke","@fast"],"jobId":"job-auth-123","workerId":"worker-1"},"timestamp":"2024-01-15T10:30:01.000Z","status":"ok"},{"stepText":"I click the login button","duration":1200.8,"context":{"testFile":"examples/features/authentication/login.feature","testName":"Successful login with valid credentials","suite":"authentication","tags":["@authentication","@critical","@smoke","@fast"],"jobId":"job-auth-123","workerId":"worker-1"},"timestamp":"2024-01-15T10:30:02.000Z","status":"ok"},{"stepText":"I should be redirected to the dashboard","duration":850.3,"context":{"testFile":"examples/features/authentication/login.feature","testName":"Successful login with valid credentials","suite":"authentication","tags":["@authentication","@critical","@smoke","@fast"],"jobId":"job-auth-123","workerId":"worker-1"},"timestamp":"2024-01-15T10:30:03.000Z","status":"ok"},{"stepText":"I am on the checkout page","duration":325.1,"context":{"testFile":"examples/features/shopping/checkout.feature","testName":"Successful checkout with credit card","suite":"shopping","tags":["@shopping","@checkout","@medium","@smoke","@payment"],"jobId":"job-shopping-456","workerId":"worker-2"},"timestamp":"2024-01-15T10:32:00.000Z","status":"ok"},{"stepText":"I select credit card as payment method","duration":89.7,"context":{"testFile":"examples/features/shopping/checkout.feature","testName":"Successful checkout with credit card","suite":"shopping","tags":["@shopping","@checkout","@medium","@smoke","@payment"],"jobId":"job-shopping-456","workerId":"worker-2"},"timestamp":"2024-01-15T10:32:01.000Z","status":"ok"},{"stepText":"I enter valid credit card details","duration":156.4,"context":{"testFile":"examples/features/shopping/checkout.feature","testName":"Successful checkout with credit card","suite":"shopping","tags":["@shopping","@checkout","@medium","@smoke","@payment"],"jobId":"job-shopping-456","workerId":"worker-2"},"timestamp":"2024-01-15T10:32:02.000Z","status":"ok"},{"stepText":"I click the complete purchase button","duration":2100.6,"context":{"testFile":"examples/features/shopping/checkout.feature","testName":"Successful checkout with credit card","suite":"shopping","tags":["@shopping","@checkout","@medium","@smoke","@payment"],"jobId":"job-shopping-456","workerId":"worker-2"},"timestamp":"2024-01-15T10:32:03.000Z","status":"ok"},{"stepText":"I should see order confirmation","duration":445.8,"context":{"testFile":"examples/features/shopping/checkout.feature","testName":"Successful checkout with credit card","suite":"shopping","tags":["@shopping","@checkout","@medium","@smoke","@payment"],"jobId":"job-shopping-456","workerId":"worker-2"},"timestamp":"2024-01-15T10:32:04.000Z","status":"ok"},{"stepText":"I attempt to login with wrong credentials 5 times","duration":5250.2,"context":{"testFile":"examples/features/authentication/login.feature","testName":"Account lockout after multiple failed attempts","suite":"authentication","tags":["@authentication","@critical","@security"],"jobId":"job-auth-123","workerId":"worker-1"},"timestamp":"2024-01-15T10:34:00.000Z","status":"ok"},{"stepText":"my account should be locked","duration":123.7,"context":{"testFile":"examples/features/authentication/login.feature","testName":"Account lockout after multiple failed attempts","suite":"authentication","tags":["@authentication","@critical","@security"],"jobId":"job-auth-123","workerId":"worker-1"},"timestamp":"2024-01-15T10:34:01.000Z","status":"ok"}];
+        let filteredData = [...allStepsData];
+        let currentPage = 1;
+        let pageSize = 50;
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeFilters();
+            initializePagination();
+            initializeExport();
+        });
+        
+        function initializeFilters() {
+            document.getElementById('searchInput').addEventListener('input', filterSteps);
+            document.getElementById('statusFilter').addEventListener('change', filterSteps);
+            document.getElementById('pageSizeSelect').addEventListener('change', function(e) {
+                pageSize = parseInt(e.target.value);
+                currentPage = 1;
+                renderTable();
+                updatePagination();
+            });
+        }
+        
+        function initializePagination() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            if (prevBtn) {
+                prevBtn.addEventListener('click', function() {
+                    if (currentPage > 1) {
+                        currentPage--;
+                        renderTable();
+                        updatePagination();
+                    }
+                });
+            }
+            
+            if (nextBtn) {
+                nextBtn.addEventListener('click', function() {
+                    const totalPages = Math.ceil(filteredData.length / pageSize);
+                    if (currentPage < totalPages) {
+                        currentPage++;
+                        renderTable();
+                        updatePagination();
+                    }
+                });
+            }
+        }
+        
+        function initializeExport() {
+            const exportBtn = document.getElementById('exportBtn');
+            if (exportBtn) {
+                exportBtn.addEventListener('click', exportToCSV);
+            }
+        }
+        
+        function filterSteps() {
+            const searchText = document.getElementById('searchInput').value.toLowerCase();
+            const statusFilter = document.getElementById('statusFilter').value;
+            
+            filteredData = allStepsData.filter(step => {
+                const textMatch = step.stepText.toLowerCase().includes(searchText);
+                const statusMatch = !statusFilter || step.status === statusFilter;
+                return textMatch && statusMatch;
+            });
+            
+            currentPage = 1;
+            renderTable();
+            updatePagination();
+        }
+        
+        function renderTable() {
+            const tbody = document.getElementById('stepsTableBody');
+            const start = (currentPage - 1) * pageSize;
+            const end = start + pageSize;
+            const pageData = filteredData.slice(start, end);
+            
+            tbody.innerHTML = pageData.map(step => {
+                const suite = step.context?.suite || 'Unknown';
+                const duration = step.duration || step.currentDuration || 0;
+                const tags = step.context?.tags || [];
+                
+                let impact = '';
+                if (step.status === 'regression') {
+                    impact = '+' + (step.slowdown || 0).toFixed(1) + 'ms';
+                } else if (step.status === 'new') {
+                    impact = 'New';
+                } else {
+                    impact = 'OK';
+                }
+                
+                return '<tr>' +
+                    '<td>' + step.stepText + '</td>' +
+                    '<td><span class="status-badge ' + step.status + '">' + step.status.toUpperCase() + '</span></td>' +
+                    '<td>' + duration.toFixed(1) + 'ms</td>' +
+                    '<td>' + suite + '</td>' +
+                    '<td>' + impact + '</td>' +
+                    '</tr>';
+            }).join('');
+        }
+        
+        function updatePagination() {
+            const totalPages = Math.ceil(filteredData.length / pageSize);
+            const start = (currentPage - 1) * pageSize + 1;
+            const end = Math.min(currentPage * pageSize, filteredData.length);
+            
+            const showingStart = document.getElementById('showingStart');
+            const showingEnd = document.getElementById('showingEnd');
+            const totalCount = document.getElementById('totalCount');
+            const pageInfo = document.getElementById('pageInfo');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            if (showingStart) showingStart.textContent = start;
+            if (showingEnd) showingEnd.textContent = end;
+            if (totalCount) totalCount.textContent = filteredData.length;
+            if (pageInfo) pageInfo.textContent = 'Page ' + currentPage + ' of ' + totalPages;
+            if (prevBtn) prevBtn.disabled = currentPage === 1;
+            if (nextBtn) nextBtn.disabled = currentPage === totalPages;
+        }
+        
+        function exportToCSV() {
+            const headers = ['Step', 'Status', 'Duration (ms)', 'Suite', 'Impact'];
+            const rows = [headers];
+            
+            filteredData.forEach(step => {
+                const suite = step.context?.suite || 'Unknown';
+                const duration = step.duration || step.currentDuration || 0;
+                
+                let impact = '';
+                if (step.status === 'regression') {
+                    impact = '+' + (step.slowdown || 0).toFixed(1) + 'ms';
+                } else if (step.status === 'new') {
+                    impact = 'New';
+                } else {
+                    impact = 'OK';
+                }
+                
+                rows.push([
+                    step.stepText,
+                    step.status.toUpperCase(),
+                    duration.toFixed(1),
+                    suite,
+                    impact
+                ]);
+            });
+            
+            const csvContent = rows.map(row => 
+                row.map(cell => '"' + cell.toString().replace(/"/g, '""') + '"').join(',')
+            ).join('\n');
+            
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'performance-steps-' + new Date().toISOString().split('T')[0] + '.csv';
+            link.click();
+            URL.revokeObjectURL(link.href);
+        }
+    </script>
+</body>
+</html>

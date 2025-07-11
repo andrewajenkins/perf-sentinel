@@ -47,7 +47,7 @@ exports.builder = (yargs) => {
     })
     .check((argv) => {
       if (!argv.config && !argv.dbConnection && !argv.historyFile) {
-        throw new Error('Either --config, --db-connection, or --history-file must be provided');
+        throw new Error('Either --db-connection or --history-file must be provided');
       }
       return true;
     });

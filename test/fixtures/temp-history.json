@@ -1,0 +1,10 @@
+{
+  "I checkout my cart": {
+    "durations": [
+      400,
+      420
+    ],
+    "average": 410,
+    "stdDev": 14.142135623730951
+  }
+}

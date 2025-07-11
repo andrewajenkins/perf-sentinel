@@ -48,8 +48,12 @@ exports.builder = (yargs) => {
       type: 'string',
     })
     .option('reporter', {
-      describe: 'Specify the reporter(s) to use (e.g., console, markdown)',
+      describe: 'Specify the reporter(s) to use (e.g., console, markdown, html)',
       type: 'array',
+    })
+    .option('html-output', {
+      describe: 'Path to save HTML report file (when using html reporter)',
+      type: 'string',
     })
     .option('db-connection', {
       describe: 'MongoDB connection string (enables database storage)',
@@ -192,8 +196,33 @@ exports.handler = async (argv) => {
     const reporters = config.reporting.default_reporters;
     for (const reporterName of reporters) {
       try {
-        const reporter = require(`../reporters/${reporterName}`);
-        reporter.generateReport(report, config.reporting[reporterName] || {});
+        let reporter;
+        
+        // Use optimized HTML reporter for all datasets (fallback due to complex reporter issues)
+        if (reporterName === 'html') {
+          const totalSteps = (report.regressions?.length || 0) + (report.newSteps?.length || 0) + (report.ok?.length || 0);
+          
+          if (totalSteps > 500) {
+            console.log(chalk.yellow(`Large dataset detected (${totalSteps} steps) - Using optimized HTML reporter for better performance`));
+          } else {
+            console.log(chalk.blue(`Using optimized HTML reporter`));
+          }
+          reporter = require(`../reporters/html-simple`);
+        } else {
+          reporter = require(`../reporters/${reporterName}`);
+        }
+        
+        // Handle HTML reporter with output file option
+        if (reporterName === 'html' && argv.htmlOutput) {
+          const outputPath = path.resolve(argv.htmlOutput);
+          await reporter.generateReport(report, { 
+            outputPath,
+            title: `Aggregated Performance Analysis Report - ${config.project.id}`,
+            ...config.reporting[reporterName] 
+          });
+        } else {
+          await reporter.generateReport(report, config.reporting[reporterName] || {});
+        }
       } catch (error) {
         console.warn(chalk.yellow(`Could not load reporter: ${reporterName}`));
         console.error(error);
