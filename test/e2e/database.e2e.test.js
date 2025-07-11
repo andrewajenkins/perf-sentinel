@@ -40,7 +40,7 @@ describe('Database E2E Tests', () => {
       
       try {
         await execAsync(`node ${binPath} analyze --run-file ${runFilePath}`);
-        fail('Should have thrown an error');
+        expect(true).toBe(false); // Expecting an error, so this should fail if no error is thrown
       } catch (error) {
         expect(error.stderr).toContain('Either --db-connection or --history-file must be provided');
       }
@@ -51,7 +51,7 @@ describe('Database E2E Tests', () => {
       
       try {
         await execAsync(`node ${binPath} seed --run-files "${runFilesPattern}"`);
-        fail('Should have thrown an error');
+        expect(true).toBe(false); // Expecting an error, so this should fail if no error is thrown
       } catch (error) {
         expect(error.stderr).toContain('Either --db-connection or --history-file must be provided');
       }
@@ -209,15 +209,15 @@ describe('Database E2E Tests', () => {
     it('should handle missing run file gracefully', async () => {
       const historyFilePath = path.join(testDataDir, 'history-baseline.json');
       
-      try {
-        await execAsync(
-          `node ${binPath} analyze --run-file /nonexistent/file.json --db-connection "mongodb://invalid-host:27017" --history-file ${historyFilePath}`
-        );
-        fail('Should have thrown an error');
-              } catch (error) {
-          expect(error.stderr).toContain('Error during analysis');
-        }
-      }, 8000);
+      const { stdout, stderr } = await execAsync(
+        `node ${binPath} analyze --run-file /nonexistent/file.json --db-connection "mongodb://invalid-host:27017" --history-file ${historyFilePath}`
+      );
+      
+      // Should fallback to file storage
+      expect(stdout).toContain('Using file storage');
+      // Should show error message about missing file
+      expect(stderr).toContain('Error during analysis: ENOENT: no such file or directory');
+    }, 8000);
 
     it('should handle invalid JSON in run file', async () => {
       const invalidJsonPath = path.join(testDataDir, 'temp-invalid.json');
@@ -227,21 +227,24 @@ describe('Database E2E Tests', () => {
       await fs.writeFile(invalidJsonPath, '{"invalid": json}');
       
       try {
-        await execAsync(
+        const { stdout, stderr } = await execAsync(
           `node ${binPath} analyze --run-file ${invalidJsonPath} --db-connection "mongodb://invalid-host:27017" --history-file ${historyFilePath}`
         );
-        fail('Should have thrown an error');
-      } catch (error) {
-        expect(error.stderr).toContain('Error during analysis');
+        
+        // Should fallback to file storage
+        expect(stdout).toContain('Using file storage');
+        // Should show error message about invalid JSON
+        expect(stderr).toContain('Error during analysis');
+        expect(stderr).toMatch(/not valid JSON|Unexpected token/);
       } finally {
         // Clean up
         try {
           await fs.unlink(invalidJsonPath);
         } catch (error) {
           // Ignore cleanup errors
-                  }
         }
-      }, 8000);
+      }
+    }, 8000);
 
     it('should handle glob patterns with no matches in seed command', async () => {
       const historyFilePath = path.join(testDataDir, 'temp-history.json');
