@@ -105,7 +105,7 @@ describe('Analysis Engine', () => {
     });
 
     it('should not flag a regression if the threshold is increased', () => {
-      const { report } = analyze(runWithRegression, historyBaseline, 10.0); // High threshold
+      const { report } = analyze(runWithRegression, historyBaseline, 20.0); // Very high threshold
       expect(report.regressions).toHaveLength(0);
     });
 

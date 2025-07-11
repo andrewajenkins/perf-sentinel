@@ -15,28 +15,10 @@
       152,
       152,
       152,
-      152,
-      152,
-      152,
-      152,
-      152,
-      152,
-      152,
-      152,
-      152,
-      152,
-      152,
-      152,
-      152,
-      152,
-      152,
-      152,
-      152,
-      152,
       152
     ],
-    "average": 151.9090909090909,
-    "stdDev": 0.9474847084398109
+    "average": 151.8,
+    "stdDev": 1.424279266355945
   },
   "I log in as a standard user": {
     "durations": [
@@ -54,8027 +36,7009 @@
       545,
       545,
       545,
-      545,
-      545,
-      545,
-      545,
-      545,
-      545,
-      545,
-      545,
-      545,
-      545,
-      545,
-      545,
-      545,
-      545,
-      545,
-      545,
-      545,
-      545,
       545
     ],
-    "average": 544.6969696969697,
-    "stdDev": 2.143082599972065
+    "average": 544.3333333333334,
+    "stdDev": 3.1997023671109233
   },
   "Step 0": {
     "durations": [
-      987,
-      522
+      859
     ],
-    "average": 754.5,
-    "stdDev": 328.8046532517446
+    "average": 859,
+    "stdDev": 0
   },
   "Step 1": {
     "durations": [
-      1079,
-      592
+      640
     ],
-    "average": 835.5,
-    "stdDev": 344.36100243784864
+    "average": 640,
+    "stdDev": 0
   },
   "Step 2": {
     "durations": [
-      600,
-      1023
+      1075
     ],
-    "average": 811.5,
-    "stdDev": 299.10616844190963
+    "average": 1075,
+    "stdDev": 0
   },
   "Step 3": {
     "durations": [
-      935,
-      347
+      888
     ],
-    "average": 641,
-    "stdDev": 415.77878733768995
+    "average": 888,
+    "stdDev": 0
   },
   "Step 4": {
     "durations": [
-      815,
-      817
+      893
     ],
-    "average": 816,
-    "stdDev": 1.4142135623730951
+    "average": 893,
+    "stdDev": 0
   },
   "Step 5": {
     "durations": [
-      1062,
-      487
+      257
     ],
-    "average": 774.5,
-    "stdDev": 406.5863991822648
+    "average": 257,
+    "stdDev": 0
   },
   "Step 6": {
     "durations": [
-      1058,
-      410
+      1015
     ],
-    "average": 734,
-    "stdDev": 458.2051942088828
+    "average": 1015,
+    "stdDev": 0
   },
   "Step 7": {
     "durations": [
-      630,
-      697
+      693
     ],
-    "average": 663.5,
-    "stdDev": 47.37615433949868
+    "average": 693,
+    "stdDev": 0
   },
   "Step 8": {
     "durations": [
-      1074,
-      114
+      294
     ],
-    "average": 594,
-    "stdDev": 678.8225099390856
+    "average": 294,
+    "stdDev": 0
   },
   "Step 9": {
     "durations": [
-      607,
-      666
+      1041
     ],
-    "average": 636.5,
-    "stdDev": 41.71930009000631
+    "average": 1041,
+    "stdDev": 0
   },
   "Step 10": {
     "durations": [
-      957,
-      445
+      733
     ],
-    "average": 701,
-    "stdDev": 362.03867196751236
+    "average": 733,
+    "stdDev": 0
   },
   "Step 11": {
     "durations": [
-      928,
-      363
+      610
     ],
-    "average": 645.5,
-    "stdDev": 399.51533137039934
+    "average": 610,
+    "stdDev": 0
   },
   "Step 12": {
     "durations": [
-      130,
-      950
+      943
     ],
-    "average": 540,
-    "stdDev": 579.827560572969
+    "average": 943,
+    "stdDev": 0
   },
   "Step 13": {
     "durations": [
-      234,
-      225
+      774
     ],
-    "average": 229.5,
-    "stdDev": 6.363961030678928
+    "average": 774,
+    "stdDev": 0
   },
   "Step 14": {
     "durations": [
-      995,
-      716
+      1002
     ],
-    "average": 855.5,
-    "stdDev": 197.28279195104676
+    "average": 1002,
+    "stdDev": 0
   },
   "Step 15": {
     "durations": [
-      807,
-      1032
+      547
     ],
-    "average": 919.5,
-    "stdDev": 159.0990257669732
+    "average": 547,
+    "stdDev": 0
   },
   "Step 16": {
     "durations": [
-      949,
-      103
+      632
     ],
-    "average": 526,
-    "stdDev": 598.2123368838193
+    "average": 632,
+    "stdDev": 0
   },
   "Step 17": {
     "durations": [
-      1065,
-      550
+      293
     ],
-    "average": 807.5,
-    "stdDev": 364.15999231107196
+    "average": 293,
+    "stdDev": 0
   },
   "Step 18": {
     "durations": [
-      773,
-      734
+      1027
     ],
-    "average": 753.5,
-    "stdDev": 27.577164466275352
+    "average": 1027,
+    "stdDev": 0
   },
   "Step 19": {
     "durations": [
-      442,
-      493
+      526
     ],
-    "average": 467.5,
-    "stdDev": 36.062445840513924
+    "average": 526,
+    "stdDev": 0
   },
   "Step 20": {
     "durations": [
-      103,
-      295
+      912
     ],
-    "average": 199,
-    "stdDev": 135.7645019878171
+    "average": 912,
+    "stdDev": 0
   },
   "Step 21": {
     "durations": [
-      323,
-      1005
+      818
     ],
-    "average": 664,
-    "stdDev": 482.2468247692254
+    "average": 818,
+    "stdDev": 0
   },
   "Step 22": {
     "durations": [
-      209,
       803
     ],
-    "average": 506,
-    "stdDev": 420.0214280248092
+    "average": 803,
+    "stdDev": 0
   },
   "Step 23": {
     "durations": [
-      731,
-      706
+      750
     ],
-    "average": 718.5,
-    "stdDev": 17.67766952966369
+    "average": 750,
+    "stdDev": 0
   },
   "Step 24": {
     "durations": [
-      989,
-      356
+      188
     ],
-    "average": 672.5,
-    "stdDev": 447.59859249108456
+    "average": 188,
+    "stdDev": 0
   },
   "Step 25": {
     "durations": [
-      833,
-      336
+      247
     ],
-    "average": 584.5,
-    "stdDev": 351.4320702497141
+    "average": 247,
+    "stdDev": 0
   },
   "Step 26": {
     "durations": [
-      751,
-      268
+      435
     ],
-    "average": 509.5,
-    "stdDev": 341.5325753131024
+    "average": 435,
+    "stdDev": 0
   },
   "Step 27": {
     "durations": [
-      382,
-      610
+      319
     ],
-    "average": 496,
-    "stdDev": 161.22034611053283
+    "average": 319,
+    "stdDev": 0
   },
   "Step 28": {
     "durations": [
-      633,
-      718
+      156
     ],
-    "average": 675.5,
-    "stdDev": 60.10407640085654
+    "average": 156,
+    "stdDev": 0
   },
   "Step 29": {
     "durations": [
-      634,
-      504
+      636
     ],
-    "average": 569,
-    "stdDev": 91.92388155425118
+    "average": 636,
+    "stdDev": 0
   },
   "Step 30": {
     "durations": [
-      108,
-      368
+      497
     ],
-    "average": 238,
-    "stdDev": 183.84776310850236
+    "average": 497,
+    "stdDev": 0
   },
   "Step 31": {
     "durations": [
-      676,
-      1067
+      283
     ],
-    "average": 871.5,
-    "stdDev": 276.4787514439401
+    "average": 283,
+    "stdDev": 0
   },
   "Step 32": {
     "durations": [
-      109,
-      849
+      756
     ],
-    "average": 479,
-    "stdDev": 523.2590180780452
+    "average": 756,
+    "stdDev": 0
   },
   "Step 33": {
     "durations": [
-      969,
-      510
+      320
     ],
-    "average": 739.5,
-    "stdDev": 324.5620125646253
+    "average": 320,
+    "stdDev": 0
   },
   "Step 34": {
     "durations": [
-      930,
-      575
+      822
     ],
-    "average": 752.5,
-    "stdDev": 251.02290732122438
+    "average": 822,
+    "stdDev": 0
   },
   "Step 35": {
     "durations": [
-      862,
-      567
+      1051
     ],
-    "average": 714.5,
-    "stdDev": 208.59650045003153
+    "average": 1051,
+    "stdDev": 0
   },
   "Step 36": {
     "durations": [
-      911,
-      744
+      1037
     ],
-    "average": 827.5,
-    "stdDev": 118.08683245815344
+    "average": 1037,
+    "stdDev": 0
   },
   "Step 37": {
     "durations": [
-      980,
-      283
+      409
     ],
-    "average": 631.5,
-    "stdDev": 492.8534264870236
+    "average": 409,
+    "stdDev": 0
   },
   "Step 38": {
     "durations": [
-      138,
-      430
+      855
     ],
-    "average": 284,
-    "stdDev": 206.47518010647187
+    "average": 855,
+    "stdDev": 0
   },
   "Step 39": {
     "durations": [
-      661,
-      200
+      448
     ],
-    "average": 430.5,
-    "stdDev": 325.9762261269984
+    "average": 448,
+    "stdDev": 0
   },
   "Step 40": {
     "durations": [
-      579,
-      669
+      486
     ],
-    "average": 624,
-    "stdDev": 63.63961030678928
+    "average": 486,
+    "stdDev": 0
   },
   "Step 41": {
     "durations": [
-      427,
-      239
+      610
     ],
-    "average": 333,
-    "stdDev": 132.93607486307093
+    "average": 610,
+    "stdDev": 0
   },
   "Step 42": {
     "durations": [
-      861,
-      516
+      863
     ],
-    "average": 688.5,
-    "stdDev": 243.9518395093589
+    "average": 863,
+    "stdDev": 0
   },
   "Step 43": {
     "durations": [
-      323,
-      335
+      804
     ],
-    "average": 329,
-    "stdDev": 8.48528137423857
+    "average": 804,
+    "stdDev": 0
   },
   "Step 44": {
     "durations": [
-      1059,
-      247
+      280
     ],
-    "average": 653,
-    "stdDev": 574.1707063234766
+    "average": 280,
+    "stdDev": 0
   },
   "Step 45": {
     "durations": [
-      1034,
-      302
+      762
     ],
-    "average": 668,
-    "stdDev": 517.6021638285528
+    "average": 762,
+    "stdDev": 0
   },
   "Step 46": {
     "durations": [
-      370,
-      766
+      1004
     ],
-    "average": 568,
-    "stdDev": 280.0142853498728
+    "average": 1004,
+    "stdDev": 0
   },
   "Step 47": {
     "durations": [
-      505,
-      334
+      967
     ],
-    "average": 419.5,
-    "stdDev": 120.91525958289962
+    "average": 967,
+    "stdDev": 0
   },
   "Step 48": {
     "durations": [
-      819,
-      633
+      667
     ],
-    "average": 726,
-    "stdDev": 131.52186130069785
+    "average": 667,
+    "stdDev": 0
   },
   "Step 49": {
     "durations": [
-      593,
-      428
+      676
     ],
-    "average": 510.5,
-    "stdDev": 116.67261889578035
+    "average": 676,
+    "stdDev": 0
   },
   "Step 50": {
     "durations": [
-      986,
-      155
+      890
     ],
-    "average": 570.5,
-    "stdDev": 587.605735166021
+    "average": 890,
+    "stdDev": 0
   },
   "Step 51": {
     "durations": [
-      988,
-      813
+      571
     ],
-    "average": 900.5,
-    "stdDev": 123.74368670764582
+    "average": 571,
+    "stdDev": 0
   },
   "Step 52": {
     "durations": [
-      351,
-      151
+      418
     ],
-    "average": 251,
-    "stdDev": 141.4213562373095
+    "average": 418,
+    "stdDev": 0
   },
   "Step 53": {
     "durations": [
-      746,
-      794
+      327
     ],
-    "average": 770,
-    "stdDev": 33.94112549695428
+    "average": 327,
+    "stdDev": 0
   },
   "Step 54": {
     "durations": [
-      491,
-      975
+      365
     ],
-    "average": 733,
-    "stdDev": 342.239682094289
+    "average": 365,
+    "stdDev": 0
   },
   "Step 55": {
     "durations": [
-      569,
-      644
+      986
     ],
-    "average": 606.5,
-    "stdDev": 53.033008588991066
+    "average": 986,
+    "stdDev": 0
   },
   "Step 56": {
     "durations": [
-      942,
-      479
+      181
     ],
-    "average": 710.5,
-    "stdDev": 327.3904396893715
+    "average": 181,
+    "stdDev": 0
   },
   "Step 57": {
     "durations": [
-      144,
-      524
+      722
     ],
-    "average": 334,
-    "stdDev": 268.70057685088807
+    "average": 722,
+    "stdDev": 0
   },
   "Step 58": {
     "durations": [
-      1087,
-      257
+      489
     ],
-    "average": 672,
-    "stdDev": 586.8986283848344
+    "average": 489,
+    "stdDev": 0
   },
   "Step 59": {
     "durations": [
-      377,
-      1018
+      802
     ],
-    "average": 697.5,
-    "stdDev": 453.255446740577
+    "average": 802,
+    "stdDev": 0
   },
   "Step 60": {
     "durations": [
-      142,
-      943
+      577
     ],
-    "average": 542.5,
-    "stdDev": 566.3925317304246
+    "average": 577,
+    "stdDev": 0
   },
   "Step 61": {
     "durations": [
-      670,
-      1032
+      256
     ],
-    "average": 851,
-    "stdDev": 255.9726547895302
+    "average": 256,
+    "stdDev": 0
   },
   "Step 62": {
     "durations": [
-      629,
-      196
+      682
     ],
-    "average": 412.5,
-    "stdDev": 306.1772362537751
+    "average": 682,
+    "stdDev": 0
   },
   "Step 63": {
     "durations": [
-      651,
-      512
+      142
     ],
-    "average": 581.5,
-    "stdDev": 98.2878425849301
+    "average": 142,
+    "stdDev": 0
   },
   "Step 64": {
     "durations": [
-      856,
-      379
+      823
     ],
-    "average": 617.5,
-    "stdDev": 337.28993462598316
+    "average": 823,
+    "stdDev": 0
   },
   "Step 65": {
     "durations": [
-      603,
-      347
+      1000
     ],
-    "average": 475,
-    "stdDev": 181.01933598375618
+    "average": 1000,
+    "stdDev": 0
   },
   "Step 66": {
     "durations": [
-      404,
-      228
+      468
     ],
-    "average": 316,
-    "stdDev": 124.45079348883236
+    "average": 468,
+    "stdDev": 0
   },
   "Step 67": {
     "durations": [
-      890,
-      304
+      487
     ],
-    "average": 597,
-    "stdDev": 414.36457377531684
+    "average": 487,
+    "stdDev": 0
   },
   "Step 68": {
     "durations": [
-      1024,
-      826
+      203
     ],
-    "average": 925,
-    "stdDev": 140.0071426749364
+    "average": 203,
+    "stdDev": 0
   },
   "Step 69": {
     "durations": [
-      464,
-      1010
+      427
     ],
-    "average": 737,
-    "stdDev": 386.08030252785494
+    "average": 427,
+    "stdDev": 0
   },
   "Step 70": {
     "durations": [
-      557,
-      463
+      695
     ],
-    "average": 510,
-    "stdDev": 66.46803743153546
+    "average": 695,
+    "stdDev": 0
   },
   "Step 71": {
     "durations": [
-      1004,
-      672
+      917
     ],
-    "average": 838,
-    "stdDev": 234.75945135393377
+    "average": 917,
+    "stdDev": 0
   },
   "Step 72": {
     "durations": [
-      914,
-      875
+      270
     ],
-    "average": 894.5,
-    "stdDev": 27.577164466275352
+    "average": 270,
+    "stdDev": 0
   },
   "Step 73": {
     "durations": [
-      200,
-      415
+      334
     ],
-    "average": 307.5,
-    "stdDev": 152.02795795510772
+    "average": 334,
+    "stdDev": 0
   },
   "Step 74": {
     "durations": [
-      157,
-      252
+      820
     ],
-    "average": 204.5,
-    "stdDev": 67.17514421272202
+    "average": 820,
+    "stdDev": 0
   },
   "Step 75": {
     "durations": [
-      1083,
-      1038
+      346
     ],
-    "average": 1060.5,
-    "stdDev": 31.81980515339464
+    "average": 346,
+    "stdDev": 0
   },
   "Step 76": {
     "durations": [
-      234,
-      715
+      756
     ],
-    "average": 474.5,
-    "stdDev": 340.1183617507294
+    "average": 756,
+    "stdDev": 0
   },
   "Step 77": {
     "durations": [
-      412,
-      394
+      964
     ],
-    "average": 403,
-    "stdDev": 12.727922061357855
+    "average": 964,
+    "stdDev": 0
   },
   "Step 78": {
     "durations": [
-      702,
-      101
+      436
     ],
-    "average": 401.5,
-    "stdDev": 424.9711754931151
+    "average": 436,
+    "stdDev": 0
   },
   "Step 79": {
     "durations": [
-      767,
-      649
+      735
     ],
-    "average": 708,
-    "stdDev": 83.43860018001261
+    "average": 735,
+    "stdDev": 0
   },
   "Step 80": {
     "durations": [
-      1094,
-      151
+      1050
     ],
-    "average": 622.5,
-    "stdDev": 666.8016946589144
+    "average": 1050,
+    "stdDev": 0
   },
   "Step 81": {
     "durations": [
-      957,
-      940
+      644
     ],
-    "average": 948.5,
-    "stdDev": 12.020815280171307
+    "average": 644,
+    "stdDev": 0
   },
   "Step 82": {
     "durations": [
-      1020,
-      114
+      294
     ],
-    "average": 567,
-    "stdDev": 640.638743755012
+    "average": 294,
+    "stdDev": 0
   },
   "Step 83": {
     "durations": [
-      980,
-      246
+      257
     ],
-    "average": 613,
-    "stdDev": 519.0163773909259
+    "average": 257,
+    "stdDev": 0
   },
   "Step 84": {
     "durations": [
-      240,
-      218
+      463
     ],
-    "average": 229,
-    "stdDev": 15.556349186104045
+    "average": 463,
+    "stdDev": 0
   },
   "Step 85": {
     "durations": [
-      973,
-      557
+      555
     ],
-    "average": 765,
-    "stdDev": 294.15642097360376
+    "average": 555,
+    "stdDev": 0
   },
   "Step 86": {
     "durations": [
-      847,
-      988
+      612
     ],
-    "average": 917.5,
-    "stdDev": 99.7020561473032
+    "average": 612,
+    "stdDev": 0
   },
   "Step 87": {
     "durations": [
-      828,
-      894
+      392
     ],
-    "average": 861,
-    "stdDev": 46.66904755831214
+    "average": 392,
+    "stdDev": 0
   },
   "Step 88": {
     "durations": [
-      877,
-      911
+      462
     ],
-    "average": 894,
-    "stdDev": 24.041630560342615
+    "average": 462,
+    "stdDev": 0
   },
   "Step 89": {
     "durations": [
-      158,
-      552
+      909
     ],
-    "average": 355,
-    "stdDev": 278.6000717874997
+    "average": 909,
+    "stdDev": 0
   },
   "Step 90": {
     "durations": [
-      858,
-      491
+      987
     ],
-    "average": 674.5,
-    "stdDev": 259.50818869546293
+    "average": 987,
+    "stdDev": 0
   },
   "Step 91": {
     "durations": [
-      915,
-      340
+      1090
     ],
-    "average": 627.5,
-    "stdDev": 406.5863991822648
+    "average": 1090,
+    "stdDev": 0
   },
   "Step 92": {
     "durations": [
-      420,
-      925
+      619
     ],
-    "average": 672.5,
-    "stdDev": 357.0889244992065
+    "average": 619,
+    "stdDev": 0
   },
   "Step 93": {
     "durations": [
-      256,
-      508
+      269
     ],
-    "average": 382,
-    "stdDev": 178.19090885900997
+    "average": 269,
+    "stdDev": 0
   },
   "Step 94": {
     "durations": [
-      866,
-      100
+      394
     ],
-    "average": 483,
-    "stdDev": 541.6437943888955
+    "average": 394,
+    "stdDev": 0
   },
   "Step 95": {
     "durations": [
-      1081,
-      931
+      136
     ],
-    "average": 1006,
-    "stdDev": 106.06601717798213
+    "average": 136,
+    "stdDev": 0
   },
   "Step 96": {
     "durations": [
-      766,
-      426
+      163
     ],
-    "average": 596,
-    "stdDev": 240.41630560342617
+    "average": 163,
+    "stdDev": 0
   },
   "Step 97": {
     "durations": [
-      506,
-      504
+      1076
     ],
-    "average": 505,
-    "stdDev": 1.4142135623730951
+    "average": 1076,
+    "stdDev": 0
   },
   "Step 98": {
     "durations": [
-      932,
-      712
+      104
     ],
-    "average": 822,
-    "stdDev": 155.56349186104046
+    "average": 104,
+    "stdDev": 0
   },
   "Step 99": {
     "durations": [
-      214,
-      570
+      187
     ],
-    "average": 392,
-    "stdDev": 251.7300141024109
+    "average": 187,
+    "stdDev": 0
   },
   "Step 100": {
     "durations": [
-      493,
-      1038
+      460
     ],
-    "average": 765.5,
-    "stdDev": 385.3731957466684
+    "average": 460,
+    "stdDev": 0
   },
   "Step 101": {
     "durations": [
-      1062,
-      832
+      548
     ],
-    "average": 947,
-    "stdDev": 162.63455967290594
+    "average": 548,
+    "stdDev": 0
   },
   "Step 102": {
     "durations": [
-      185,
-      506
+      986
     ],
-    "average": 345.5,
-    "stdDev": 226.98127676088177
+    "average": 986,
+    "stdDev": 0
   },
   "Step 103": {
     "durations": [
-      163,
-      420
+      435
     ],
-    "average": 291.5,
-    "stdDev": 181.7264427649427
+    "average": 435,
+    "stdDev": 0
   },
   "Step 104": {
     "durations": [
-      469,
-      118
+      899
     ],
-    "average": 293.5,
-    "stdDev": 248.19448019647817
+    "average": 899,
+    "stdDev": 0
   },
   "Step 105": {
     "durations": [
-      356,
-      979
+      1002
     ],
-    "average": 667.5,
-    "stdDev": 440.5275246792191
+    "average": 1002,
+    "stdDev": 0
   },
   "Step 106": {
     "durations": [
-      370,
-      172
+      1033
     ],
-    "average": 271,
-    "stdDev": 140.0071426749364
+    "average": 1033,
+    "stdDev": 0
   },
   "Step 107": {
     "durations": [
-      386,
-      385
+      469
     ],
-    "average": 385.5,
-    "stdDev": 0.7071067811865476
+    "average": 469,
+    "stdDev": 0
   },
   "Step 108": {
     "durations": [
-      203,
-      227
+      403
     ],
-    "average": 215,
-    "stdDev": 16.97056274847714
+    "average": 403,
+    "stdDev": 0
   },
   "Step 109": {
     "durations": [
-      776,
-      815
+      720
     ],
-    "average": 795.5,
-    "stdDev": 27.577164466275352
+    "average": 720,
+    "stdDev": 0
   },
   "Step 110": {
     "durations": [
-      319,
-      832
+      612
     ],
-    "average": 575.5,
-    "stdDev": 362.74577874869885
+    "average": 612,
+    "stdDev": 0
   },
   "Step 111": {
     "durations": [
-      1095,
-      527
+      632
     ],
-    "average": 811,
-    "stdDev": 401.636651713959
+    "average": 632,
+    "stdDev": 0
   },
   "Step 112": {
     "durations": [
-      897,
-      689
+      1053
     ],
-    "average": 793,
-    "stdDev": 147.07821048680188
+    "average": 1053,
+    "stdDev": 0
   },
   "Step 113": {
     "durations": [
-      973,
-      461
+      482
     ],
-    "average": 717,
-    "stdDev": 362.03867196751236
+    "average": 482,
+    "stdDev": 0
   },
   "Step 114": {
     "durations": [
-      882,
-      337
+      205
     ],
-    "average": 609.5,
-    "stdDev": 385.3731957466684
+    "average": 205,
+    "stdDev": 0
   },
   "Step 115": {
     "durations": [
-      528,
-      107
+      1043
     ],
-    "average": 317.5,
-    "stdDev": 297.6919548795365
+    "average": 1043,
+    "stdDev": 0
   },
   "Step 116": {
     "durations": [
-      261,
-      1033
+      176
     ],
-    "average": 647,
-    "stdDev": 545.8864350760147
+    "average": 176,
+    "stdDev": 0
   },
   "Step 117": {
     "durations": [
-      202,
-      809
+      184
     ],
-    "average": 505.5,
-    "stdDev": 429.21381618023435
+    "average": 184,
+    "stdDev": 0
   },
   "Step 118": {
     "durations": [
-      302,
-      1033
+      185
     ],
-    "average": 667.5,
-    "stdDev": 516.8950570473662
+    "average": 185,
+    "stdDev": 0
   },
   "Step 119": {
     "durations": [
-      1058,
-      989
+      714
     ],
-    "average": 1023.5,
-    "stdDev": 48.79036790187178
+    "average": 714,
+    "stdDev": 0
   },
   "Step 120": {
     "durations": [
-      736,
-      114
+      198
     ],
-    "average": 425,
-    "stdDev": 439.8204178980326
+    "average": 198,
+    "stdDev": 0
   },
   "Step 121": {
     "durations": [
-      1080,
-      513
+      619
     ],
-    "average": 796.5,
-    "stdDev": 400.92954493277244
+    "average": 619,
+    "stdDev": 0
   },
   "Step 122": {
     "durations": [
-      318,
-      236
+      242
     ],
-    "average": 277,
-    "stdDev": 57.982756057296896
+    "average": 242,
+    "stdDev": 0
   },
   "Step 123": {
     "durations": [
-      861,
-      532
+      443
     ],
-    "average": 696.5,
-    "stdDev": 232.63813101037414
+    "average": 443,
+    "stdDev": 0
   },
   "Step 124": {
     "durations": [
-      1097,
-      555
+      448
     ],
-    "average": 826,
-    "stdDev": 383.2518754031088
+    "average": 448,
+    "stdDev": 0
   },
   "Step 125": {
     "durations": [
-      732,
-      901
+      992
     ],
-    "average": 816.5,
-    "stdDev": 119.50104602052653
+    "average": 992,
+    "stdDev": 0
   },
   "Step 126": {
     "durations": [
-      677,
-      1080
+      530
     ],
-    "average": 878.5,
-    "stdDev": 284.9640328181787
+    "average": 530,
+    "stdDev": 0
   },
   "Step 127": {
     "durations": [
-      210,
-      1053
+      102
     ],
-    "average": 631.5,
-    "stdDev": 596.0910165402596
+    "average": 102,
+    "stdDev": 0
   },
   "Step 128": {
     "durations": [
-      607,
-      916
+      902
     ],
-    "average": 761.5,
-    "stdDev": 218.4959953866432
+    "average": 902,
+    "stdDev": 0
   },
   "Step 129": {
     "durations": [
-      884,
-      148
+      954
     ],
-    "average": 516,
-    "stdDev": 520.430590953299
+    "average": 954,
+    "stdDev": 0
   },
   "Step 130": {
     "durations": [
-      1076,
-      274
+      867
     ],
-    "average": 675,
-    "stdDev": 567.0996385116111
+    "average": 867,
+    "stdDev": 0
   },
   "Step 131": {
     "durations": [
-      343,
-      460
+      914
     ],
-    "average": 401.5,
-    "stdDev": 82.73149339882606
+    "average": 914,
+    "stdDev": 0
   },
   "Step 132": {
     "durations": [
-      1058,
-      275
+      1077
     ],
-    "average": 666.5,
-    "stdDev": 553.6646096690667
+    "average": 1077,
+    "stdDev": 0
   },
   "Step 133": {
     "durations": [
-      734,
-      550
+      1019
     ],
-    "average": 642,
-    "stdDev": 130.10764773832474
+    "average": 1019,
+    "stdDev": 0
   },
   "Step 134": {
     "durations": [
-      161,
-      558
+      832
     ],
-    "average": 359.5,
-    "stdDev": 280.72139213105936
+    "average": 832,
+    "stdDev": 0
   },
   "Step 135": {
     "durations": [
-      219,
-      325
+      311
     ],
-    "average": 272,
-    "stdDev": 74.95331880577403
+    "average": 311,
+    "stdDev": 0
   },
   "Step 136": {
     "durations": [
-      209,
-      725
+      436
     ],
-    "average": 467,
-    "stdDev": 364.8670990922585
+    "average": 436,
+    "stdDev": 0
   },
   "Step 137": {
     "durations": [
-      629,
-      725
+      437
     ],
-    "average": 677,
-    "stdDev": 67.88225099390856
+    "average": 437,
+    "stdDev": 0
   },
   "Step 138": {
     "durations": [
-      217,
-      413
+      375
     ],
-    "average": 315,
-    "stdDev": 138.59292911256333
+    "average": 375,
+    "stdDev": 0
   },
   "Step 139": {
     "durations": [
-      1056,
-      104
+      247
     ],
-    "average": 580,
-    "stdDev": 673.1656556895932
+    "average": 247,
+    "stdDev": 0
   },
   "Step 140": {
     "durations": [
-      673,
-      259
+      642
     ],
-    "average": 466,
-    "stdDev": 292.74220741123065
+    "average": 642,
+    "stdDev": 0
   },
   "Step 141": {
     "durations": [
-      671,
-      892
+      573
     ],
-    "average": 781.5,
-    "stdDev": 156.27059864222701
+    "average": 573,
+    "stdDev": 0
   },
   "Step 142": {
     "durations": [
-      236,
-      627
+      479
     ],
-    "average": 431.5,
-    "stdDev": 276.4787514439401
+    "average": 479,
+    "stdDev": 0
   },
   "Step 143": {
     "durations": [
-      170,
-      626
+      210
     ],
-    "average": 398,
-    "stdDev": 322.44069222106566
+    "average": 210,
+    "stdDev": 0
   },
   "Step 144": {
     "durations": [
-      350,
-      295
+      239
     ],
-    "average": 322.5,
-    "stdDev": 38.890872965260115
+    "average": 239,
+    "stdDev": 0
   },
   "Step 145": {
     "durations": [
-      1006,
-      242
+      204
     ],
-    "average": 624,
-    "stdDev": 540.2295808265224
+    "average": 204,
+    "stdDev": 0
   },
   "Step 146": {
     "durations": [
-      880,
-      264
+      1017
     ],
-    "average": 572,
-    "stdDev": 435.57777721091327
+    "average": 1017,
+    "stdDev": 0
   },
   "Step 147": {
     "durations": [
-      411,
-      628
+      731
     ],
-    "average": 519.5,
-    "stdDev": 153.4421715174808
+    "average": 731,
+    "stdDev": 0
   },
   "Step 148": {
     "durations": [
-      425,
-      750
+      161
     ],
-    "average": 587.5,
-    "stdDev": 229.80970388562795
+    "average": 161,
+    "stdDev": 0
   },
   "Step 149": {
     "durations": [
-      907,
-      740
+      194
     ],
-    "average": 823.5,
-    "stdDev": 118.08683245815344
+    "average": 194,
+    "stdDev": 0
   },
   "Step 150": {
     "durations": [
-      414,
-      898
+      885
     ],
-    "average": 656,
-    "stdDev": 342.239682094289
+    "average": 885,
+    "stdDev": 0
   },
   "Step 151": {
     "durations": [
-      618,
-      791
+      1029
     ],
-    "average": 704.5,
-    "stdDev": 122.32947314527271
+    "average": 1029,
+    "stdDev": 0
   },
   "Step 152": {
     "durations": [
-      958,
-      705
+      729
     ],
-    "average": 831.5,
-    "stdDev": 178.89801564019652
+    "average": 729,
+    "stdDev": 0
   },
   "Step 153": {
     "durations": [
-      146,
-      832
+      733
     ],
-    "average": 489,
-    "stdDev": 485.0752518939716
+    "average": 733,
+    "stdDev": 0
   },
   "Step 154": {
     "durations": [
-      812,
-      910
+      782
     ],
-    "average": 861,
-    "stdDev": 69.29646455628166
+    "average": 782,
+    "stdDev": 0
   },
   "Step 155": {
     "durations": [
-      212,
-      901
+      913
     ],
-    "average": 556.5,
-    "stdDev": 487.19657223753126
+    "average": 913,
+    "stdDev": 0
   },
   "Step 156": {
     "durations": [
-      135,
-      1016
+      868
     ],
-    "average": 575.5,
-    "stdDev": 622.9610742253484
+    "average": 868,
+    "stdDev": 0
   },
   "Step 157": {
     "durations": [
-      162,
-      1044
+      669
     ],
-    "average": 603,
-    "stdDev": 623.668181006535
+    "average": 669,
+    "stdDev": 0
   },
   "Step 158": {
     "durations": [
-      315,
-      213
+      282
     ],
-    "average": 264,
-    "stdDev": 72.12489168102785
+    "average": 282,
+    "stdDev": 0
   },
   "Step 159": {
     "durations": [
-      363,
-      131
+      947
     ],
-    "average": 247,
-    "stdDev": 164.04877323527901
+    "average": 947,
+    "stdDev": 0
   },
   "Step 160": {
     "durations": [
-      952,
-      469
+      590
     ],
-    "average": 710.5,
-    "stdDev": 341.5325753131024
+    "average": 590,
+    "stdDev": 0
   },
   "Step 161": {
     "durations": [
-      809,
-      542
+      390
     ],
-    "average": 675.5,
-    "stdDev": 188.79751057680818
+    "average": 390,
+    "stdDev": 0
   },
   "Step 162": {
     "durations": [
-      337,
-      869
+      378
     ],
-    "average": 603,
-    "stdDev": 376.1808075912433
+    "average": 378,
+    "stdDev": 0
   },
   "Step 163": {
     "durations": [
-      689,
-      318
+      486
     ],
-    "average": 503.5,
-    "stdDev": 262.33661582020915
+    "average": 486,
+    "stdDev": 0
   },
   "Step 164": {
     "durations": [
-      755,
-      247
+      170
     ],
-    "average": 501,
-    "stdDev": 359.21024484276614
+    "average": 170,
+    "stdDev": 0
   },
   "Step 165": {
     "durations": [
-      546,
-      238
+      289
     ],
-    "average": 392,
-    "stdDev": 217.78888860545663
+    "average": 289,
+    "stdDev": 0
   },
   "Step 166": {
     "durations": [
-      1086,
-      180
+      1026
     ],
-    "average": 633,
-    "stdDev": 640.638743755012
+    "average": 1026,
+    "stdDev": 0
   },
   "Step 167": {
     "durations": [
-      1020,
-      557
+      641
     ],
-    "average": 788.5,
-    "stdDev": 327.3904396893715
+    "average": 641,
+    "stdDev": 0
   },
   "Step 168": {
     "durations": [
-      563,
-      997
+      314
     ],
-    "average": 780,
-    "stdDev": 306.8843430349616
+    "average": 314,
+    "stdDev": 0
   },
   "Step 169": {
     "durations": [
-      1086,
-      510
+      318
     ],
-    "average": 798,
-    "stdDev": 407.29350596345137
+    "average": 318,
+    "stdDev": 0
   },
   "Step 170": {
     "durations": [
-      157,
-      188
+      823
     ],
-    "average": 172.5,
-    "stdDev": 21.920310216782973
+    "average": 823,
+    "stdDev": 0
   },
   "Step 171": {
     "durations": [
-      348,
-      584
+      922
     ],
-    "average": 466,
-    "stdDev": 166.87720036002523
+    "average": 922,
+    "stdDev": 0
   },
   "Step 172": {
     "durations": [
-      331,
-      783
+      412
     ],
-    "average": 557,
-    "stdDev": 319.6122650963195
+    "average": 412,
+    "stdDev": 0
   },
   "Step 173": {
     "durations": [
-      793,
-      794
+      372
     ],
-    "average": 793.5,
-    "stdDev": 0.7071067811865476
+    "average": 372,
+    "stdDev": 0
   },
   "Step 174": {
     "durations": [
-      587,
-      927
+      724
     ],
-    "average": 757,
-    "stdDev": 240.41630560342617
+    "average": 724,
+    "stdDev": 0
   },
   "Step 175": {
     "durations": [
-      238,
-      279
+      610
     ],
-    "average": 258.5,
-    "stdDev": 28.991378028648448
+    "average": 610,
+    "stdDev": 0
   },
   "Step 176": {
     "durations": [
-      999,
-      599
+      974
     ],
-    "average": 799,
-    "stdDev": 282.842712474619
+    "average": 974,
+    "stdDev": 0
   },
   "Step 177": {
     "durations": [
-      833,
-      901
+      219
     ],
-    "average": 867,
-    "stdDev": 48.08326112068523
+    "average": 219,
+    "stdDev": 0
   },
   "Step 178": {
     "durations": [
-      964,
-      1022
+      628
     ],
-    "average": 993,
-    "stdDev": 41.012193308819754
+    "average": 628,
+    "stdDev": 0
   },
   "Step 179": {
     "durations": [
-      338,
-      864
+      666
     ],
-    "average": 601,
-    "stdDev": 371.938166904124
+    "average": 666,
+    "stdDev": 0
   },
   "Step 180": {
     "durations": [
-      715,
-      335
+      657
     ],
-    "average": 525,
-    "stdDev": 268.70057685088807
+    "average": 657,
+    "stdDev": 0
   },
   "Step 181": {
     "durations": [
-      225,
-      381
+      976
     ],
-    "average": 303,
-    "stdDev": 110.30865786510141
+    "average": 976,
+    "stdDev": 0
   },
   "Step 182": {
     "durations": [
-      195,
-      878
+      109
     ],
-    "average": 536.5,
-    "stdDev": 482.95393155041194
+    "average": 109,
+    "stdDev": 0
   },
   "Step 183": {
     "durations": [
-      165,
-      772
+      492
     ],
-    "average": 468.5,
-    "stdDev": 429.21381618023435
+    "average": 492,
+    "stdDev": 0
   },
   "Step 184": {
     "durations": [
-      732,
-      780
+      546
     ],
-    "average": 756,
-    "stdDev": 33.94112549695428
+    "average": 546,
+    "stdDev": 0
   },
   "Step 185": {
     "durations": [
-      148,
-      959
+      845
     ],
-    "average": 553.5,
-    "stdDev": 573.46359954229
+    "average": 845,
+    "stdDev": 0
   },
   "Step 186": {
     "durations": [
-      733,
-      338
+      291
     ],
-    "average": 535.5,
-    "stdDev": 279.30717856868625
+    "average": 291,
+    "stdDev": 0
   },
   "Step 187": {
     "durations": [
-      524,
-      530
+      942
     ],
-    "average": 527,
-    "stdDev": 4.242640687119285
+    "average": 942,
+    "stdDev": 0
   },
   "Step 188": {
     "durations": [
-      947,
-      144
+      251
     ],
-    "average": 545.5,
-    "stdDev": 567.8067452927977
+    "average": 251,
+    "stdDev": 0
   },
   "Step 189": {
     "durations": [
-      112,
-      172
+      721
     ],
-    "average": 142,
-    "stdDev": 42.42640687119285
+    "average": 721,
+    "stdDev": 0
   },
   "Step 190": {
     "durations": [
-      314,
-      500
+      939
     ],
-    "average": 407,
-    "stdDev": 131.52186130069785
+    "average": 939,
+    "stdDev": 0
   },
   "Step 191": {
     "durations": [
-      106,
-      1082
+      967
     ],
-    "average": 594,
-    "stdDev": 690.1362184380704
+    "average": 967,
+    "stdDev": 0
   },
   "Step 192": {
     "durations": [
-      165,
-      997
+      905
     ],
-    "average": 581,
-    "stdDev": 588.3128419472075
+    "average": 905,
+    "stdDev": 0
   },
   "Step 193": {
     "durations": [
-      254,
-      305
+      956
     ],
-    "average": 279.5,
-    "stdDev": 36.062445840513924
+    "average": 956,
+    "stdDev": 0
   },
   "Step 194": {
     "durations": [
-      339,
-      832
+      473
     ],
-    "average": 585.5,
-    "stdDev": 348.6036431249679
+    "average": 473,
+    "stdDev": 0
   },
   "Step 195": {
     "durations": [
-      232,
-      1028
+      260
     ],
-    "average": 630,
-    "stdDev": 562.8569978244918
+    "average": 260,
+    "stdDev": 0
   },
   "Step 196": {
     "durations": [
-      319,
-      384
+      377
     ],
-    "average": 351.5,
-    "stdDev": 45.96194077712559
+    "average": 377,
+    "stdDev": 0
   },
   "Step 197": {
     "durations": [
-      598,
-      692
+      187
     ],
-    "average": 645,
-    "stdDev": 66.46803743153546
+    "average": 187,
+    "stdDev": 0
   },
   "Step 198": {
     "durations": [
-      461,
-      106
+      882
     ],
-    "average": 283.5,
-    "stdDev": 251.02290732122438
+    "average": 882,
+    "stdDev": 0
   },
   "Step 199": {
     "durations": [
-      303,
-      112
+      560
     ],
-    "average": 207.5,
-    "stdDev": 135.0573952066306
+    "average": 560,
+    "stdDev": 0
   },
   "Step 200": {
     "durations": [
-      930,
-      595
+      573
     ],
-    "average": 762.5,
-    "stdDev": 236.88077169749343
+    "average": 573,
+    "stdDev": 0
   },
   "Step 201": {
     "durations": [
-      691,
-      278
+      398
     ],
-    "average": 484.5,
-    "stdDev": 292.03510063004416
+    "average": 398,
+    "stdDev": 0
   },
   "Step 202": {
     "durations": [
-      815,
-      697
+      274
     ],
-    "average": 756,
-    "stdDev": 83.43860018001261
+    "average": 274,
+    "stdDev": 0
   },
   "Step 203": {
     "durations": [
-      853,
-      748
+      433
     ],
-    "average": 800.5,
-    "stdDev": 74.24621202458749
+    "average": 433,
+    "stdDev": 0
   },
   "Step 204": {
     "durations": [
-      1025,
-      279
+      586
     ],
-    "average": 652,
-    "stdDev": 527.5016587651645
+    "average": 586,
+    "stdDev": 0
   },
   "Step 205": {
     "durations": [
-      790,
-      893
+      983
     ],
-    "average": 841.5,
-    "stdDev": 72.8319984622144
+    "average": 983,
+    "stdDev": 0
   },
   "Step 206": {
     "durations": [
-      439,
-      158
+      177
     ],
-    "average": 298.5,
-    "stdDev": 198.69700551341987
+    "average": 177,
+    "stdDev": 0
   },
   "Step 207": {
     "durations": [
-      1092,
-      856
+      100
     ],
-    "average": 974,
-    "stdDev": 166.87720036002523
+    "average": 100,
+    "stdDev": 0
   },
   "Step 208": {
     "durations": [
-      436,
-      140
+      509
     ],
-    "average": 288,
-    "stdDev": 209.30360723121808
+    "average": 509,
+    "stdDev": 0
   },
   "Step 209": {
     "durations": [
-      458,
-      660
+      971
     ],
-    "average": 559,
-    "stdDev": 142.8355697996826
+    "average": 971,
+    "stdDev": 0
   },
   "Step 210": {
     "durations": [
-      872,
-      357
+      726
     ],
-    "average": 614.5,
-    "stdDev": 364.15999231107196
+    "average": 726,
+    "stdDev": 0
   },
   "Step 211": {
     "durations": [
-      855,
-      1098
+      718
     ],
-    "average": 976.5,
-    "stdDev": 171.82694782833104
+    "average": 718,
+    "stdDev": 0
   },
   "Step 212": {
     "durations": [
-      127,
-      1020
+      611
     ],
-    "average": 573.5,
-    "stdDev": 631.4463555995869
+    "average": 611,
+    "stdDev": 0
   },
   "Step 213": {
     "durations": [
-      151,
-      674
+      607
     ],
-    "average": 412.5,
-    "stdDev": 369.81684656056433
+    "average": 607,
+    "stdDev": 0
   },
   "Step 214": {
     "durations": [
-      524,
-      820
+      896
     ],
-    "average": 672,
-    "stdDev": 209.30360723121808
+    "average": 896,
+    "stdDev": 0
   },
   "Step 215": {
     "durations": [
-      860,
-      570
+      1094
     ],
-    "average": 715,
-    "stdDev": 205.0609665440988
+    "average": 1094,
+    "stdDev": 0
   },
   "Step 216": {
     "durations": [
-      522,
-      570
+      1029
     ],
-    "average": 546,
-    "stdDev": 33.94112549695428
+    "average": 1029,
+    "stdDev": 0
   },
   "Step 217": {
     "durations": [
-      1092,
-      995
+      214
     ],
-    "average": 1043.5,
-    "stdDev": 68.58935777509511
+    "average": 214,
+    "stdDev": 0
   },
   "Step 218": {
     "durations": [
-      926,
-      182
+      456
     ],
-    "average": 554,
-    "stdDev": 526.0874452027914
+    "average": 456,
+    "stdDev": 0
   },
   "Step 219": {
     "durations": [
-      201,
-      188
+      432
     ],
-    "average": 194.5,
-    "stdDev": 9.192388155425117
+    "average": 432,
+    "stdDev": 0
   },
   "Step 220": {
     "durations": [
-      718,
-      752
+      382
     ],
-    "average": 735,
-    "stdDev": 24.041630560342615
+    "average": 382,
+    "stdDev": 0
   },
   "Step 221": {
     "durations": [
-      296,
-      348
+      423
     ],
-    "average": 322,
-    "stdDev": 36.76955262170047
+    "average": 423,
+    "stdDev": 0
   },
   "Step 222": {
     "durations": [
-      523,
-      837
+      138
     ],
-    "average": 680,
-    "stdDev": 222.03152929257593
+    "average": 138,
+    "stdDev": 0
   },
   "Step 223": {
     "durations": [
-      797,
-      665
+      519
     ],
-    "average": 731,
-    "stdDev": 93.33809511662427
+    "average": 519,
+    "stdDev": 0
   },
   "Step 224": {
     "durations": [
-      1066,
-      623
+      485
     ],
-    "average": 844.5,
-    "stdDev": 313.2483040656405
+    "average": 485,
+    "stdDev": 0
   },
   "Step 225": {
     "durations": [
-      511,
-      380
+      500
     ],
-    "average": 445.5,
-    "stdDev": 92.63098833543772
+    "average": 500,
+    "stdDev": 0
   },
   "Step 226": {
     "durations": [
-      154,
-      628
+      805
     ],
-    "average": 391,
-    "stdDev": 335.1686142824235
+    "average": 805,
+    "stdDev": 0
   },
   "Step 227": {
     "durations": [
-      639,
-      627
+      1047
     ],
-    "average": 633,
-    "stdDev": 8.48528137423857
+    "average": 1047,
+    "stdDev": 0
   },
   "Step 228": {
     "durations": [
-      645,
-      811
+      377
     ],
-    "average": 728,
-    "stdDev": 117.37972567696688
+    "average": 377,
+    "stdDev": 0
   },
   "Step 229": {
     "durations": [
-      682,
-      271
+      458
     ],
-    "average": 476.5,
-    "stdDev": 290.62088706767105
+    "average": 458,
+    "stdDev": 0
   },
   "Step 230": {
     "durations": [
-      987,
-      383
+      272
     ],
-    "average": 685,
-    "stdDev": 427.0924958366747
+    "average": 272,
+    "stdDev": 0
   },
   "Step 231": {
     "durations": [
-      1037,
-      287
+      363
     ],
-    "average": 662,
-    "stdDev": 530.3300858899106
+    "average": 363,
+    "stdDev": 0
   },
   "Step 232": {
     "durations": [
-      451,
-      660
+      520
     ],
-    "average": 555.5,
-    "stdDev": 147.78531726798843
+    "average": 520,
+    "stdDev": 0
   },
   "Step 233": {
     "durations": [
-      329,
-      915
+      661
     ],
-    "average": 622,
-    "stdDev": 414.36457377531684
+    "average": 661,
+    "stdDev": 0
   },
   "Step 234": {
     "durations": [
-      1045,
-      522
+      163
     ],
-    "average": 783.5,
-    "stdDev": 369.81684656056433
+    "average": 163,
+    "stdDev": 0
   },
   "Step 235": {
     "durations": [
-      703,
-      900
+      275
     ],
-    "average": 801.5,
-    "stdDev": 139.30003589374985
+    "average": 275,
+    "stdDev": 0
   },
   "Step 236": {
     "durations": [
-      375,
-      650
+      663
     ],
-    "average": 512.5,
-    "stdDev": 194.45436482630058
+    "average": 663,
+    "stdDev": 0
   },
   "Step 237": {
     "durations": [
-      332,
-      517
+      1000
     ],
-    "average": 424.5,
-    "stdDev": 130.8147545195113
+    "average": 1000,
+    "stdDev": 0
   },
   "Step 238": {
     "durations": [
-      940,
-      336
+      761
     ],
-    "average": 638,
-    "stdDev": 427.0924958366747
+    "average": 761,
+    "stdDev": 0
   },
   "Step 239": {
     "durations": [
-      499,
-      353
+      1029
     ],
-    "average": 426,
-    "stdDev": 103.23759005323593
+    "average": 1029,
+    "stdDev": 0
   },
   "Step 240": {
     "durations": [
-      549,
-      704
+      994
     ],
-    "average": 626.5,
-    "stdDev": 109.60155108391487
+    "average": 994,
+    "stdDev": 0
   },
   "Step 241": {
     "durations": [
-      900,
-      418
+      1035
     ],
-    "average": 659,
-    "stdDev": 340.82546853191593
+    "average": 1035,
+    "stdDev": 0
   },
   "Step 242": {
     "durations": [
-      378,
-      158
+      652
     ],
-    "average": 268,
-    "stdDev": 155.56349186104046
+    "average": 652,
+    "stdDev": 0
   },
   "Step 243": {
     "durations": [
-      113,
-      549
+      651
     ],
-    "average": 331,
-    "stdDev": 308.2985565973347
+    "average": 651,
+    "stdDev": 0
   },
   "Step 244": {
     "durations": [
-      892,
-      617
+      968
     ],
-    "average": 754.5,
-    "stdDev": 194.45436482630058
+    "average": 968,
+    "stdDev": 0
   },
   "Step 245": {
     "durations": [
-      488,
-      723
+      295
     ],
-    "average": 605.5,
-    "stdDev": 166.17009357883867
+    "average": 295,
+    "stdDev": 0
   },
   "Step 246": {
     "durations": [
-      123,
-      768
+      595
     ],
-    "average": 445.5,
-    "stdDev": 456.08387386532314
+    "average": 595,
+    "stdDev": 0
   },
   "Step 247": {
     "durations": [
-      334,
-      719
+      634
     ],
-    "average": 526.5,
-    "stdDev": 272.2361107568208
+    "average": 634,
+    "stdDev": 0
   },
   "Step 248": {
     "durations": [
-      389,
-      715
+      631
     ],
-    "average": 552,
-    "stdDev": 230.5168106668145
+    "average": 631,
+    "stdDev": 0
   },
   "Step 249": {
     "durations": [
-      945,
-      376
+      426
     ],
-    "average": 660.5,
-    "stdDev": 402.34375849514555
+    "average": 426,
+    "stdDev": 0
   },
   "Step 250": {
     "durations": [
-      1029,
-      891
+      984
     ],
-    "average": 960,
-    "stdDev": 97.58073580374356
+    "average": 984,
+    "stdDev": 0
   },
   "Step 251": {
     "durations": [
-      297,
-      882
+      958
     ],
-    "average": 589.5,
-    "stdDev": 413.6574669941303
+    "average": 958,
+    "stdDev": 0
   },
   "Step 252": {
     "durations": [
-      596,
-      492
+      818
     ],
-    "average": 544,
-    "stdDev": 73.53910524340094
+    "average": 818,
+    "stdDev": 0
   },
   "Step 253": {
     "durations": [
-      879,
-      375
+      193
     ],
-    "average": 627,
-    "stdDev": 356.38181771801993
+    "average": 193,
+    "stdDev": 0
   },
   "Step 254": {
     "durations": [
-      713,
-      476
+      207
     ],
-    "average": 594.5,
-    "stdDev": 167.58430714121175
+    "average": 207,
+    "stdDev": 0
   },
   "Step 255": {
     "durations": [
-      595,
-      380
+      123
     ],
-    "average": 487.5,
-    "stdDev": 152.02795795510772
+    "average": 123,
+    "stdDev": 0
   },
   "Step 256": {
     "durations": [
-      709,
-      607
+      803
     ],
-    "average": 658,
-    "stdDev": 72.12489168102785
+    "average": 803,
+    "stdDev": 0
   },
   "Step 257": {
     "durations": [
-      429,
-      730
+      341
     ],
-    "average": 579.5,
-    "stdDev": 212.83914113715082
+    "average": 341,
+    "stdDev": 0
   },
   "Step 258": {
     "durations": [
-      572,
-      224
+      426
     ],
-    "average": 398,
-    "stdDev": 246.07315985291854
+    "average": 426,
+    "stdDev": 0
   },
   "Step 259": {
     "durations": [
-      1076,
-      571
+      698
     ],
-    "average": 823.5,
-    "stdDev": 357.0889244992065
+    "average": 698,
+    "stdDev": 0
   },
   "Step 260": {
     "durations": [
-      230,
-      306
+      620
     ],
-    "average": 268,
-    "stdDev": 53.74011537017761
+    "average": 620,
+    "stdDev": 0
   },
   "Step 261": {
     "durations": [
-      830,
-      461
+      922
     ],
-    "average": 645.5,
-    "stdDev": 260.92240225783604
+    "average": 922,
+    "stdDev": 0
   },
   "Step 262": {
     "durations": [
-      415,
-      327
+      127
     ],
-    "average": 371,
-    "stdDev": 62.22539674441618
+    "average": 127,
+    "stdDev": 0
   },
   "Step 263": {
     "durations": [
-      776,
-      681
+      675
     ],
-    "average": 728.5,
-    "stdDev": 67.17514421272202
+    "average": 675,
+    "stdDev": 0
   },
   "Step 264": {
     "durations": [
-      791,
-      809
+      1065
     ],
-    "average": 800,
-    "stdDev": 12.727922061357855
+    "average": 1065,
+    "stdDev": 0
   },
   "Step 265": {
     "durations": [
-      719,
-      708
+      171
     ],
-    "average": 713.5,
-    "stdDev": 7.7781745930520225
+    "average": 171,
+    "stdDev": 0
   },
   "Step 266": {
     "durations": [
-      484,
-      510
+      239
     ],
-    "average": 497,
-    "stdDev": 18.384776310850235
+    "average": 239,
+    "stdDev": 0
   },
   "Step 267": {
     "durations": [
-      400,
-      805
+      151
     ],
-    "average": 602.5,
-    "stdDev": 286.37824638055173
+    "average": 151,
+    "stdDev": 0
   },
   "Step 268": {
     "durations": [
-      711,
-      559
+      418
     ],
-    "average": 635,
-    "stdDev": 107.48023074035522
+    "average": 418,
+    "stdDev": 0
   },
   "Step 269": {
     "durations": [
-      968,
-      265
+      172
     ],
-    "average": 616.5,
-    "stdDev": 497.0960671741429
+    "average": 172,
+    "stdDev": 0
   },
   "Step 270": {
     "durations": [
-      982,
-      517
+      156
     ],
-    "average": 749.5,
-    "stdDev": 328.8046532517446
+    "average": 156,
+    "stdDev": 0
   },
   "Step 271": {
     "durations": [
-      285,
-      897
+      956
     ],
-    "average": 591,
-    "stdDev": 432.7493500861671
+    "average": 956,
+    "stdDev": 0
   },
   "Step 272": {
     "durations": [
-      353,
-      270
+      656
     ],
-    "average": 311.5,
-    "stdDev": 58.68986283848344
+    "average": 656,
+    "stdDev": 0
   },
   "Step 273": {
     "durations": [
-      530,
-      882
+      486
     ],
-    "average": 706,
-    "stdDev": 248.90158697766472
+    "average": 486,
+    "stdDev": 0
   },
   "Step 274": {
     "durations": [
-      792,
-      791
+      1059
     ],
-    "average": 791.5,
-    "stdDev": 0.7071067811865476
+    "average": 1059,
+    "stdDev": 0
   },
   "Step 275": {
     "durations": [
-      234,
-      105
+      820
     ],
-    "average": 169.5,
-    "stdDev": 91.21677477306463
+    "average": 820,
+    "stdDev": 0
   },
   "Step 276": {
     "durations": [
-      608,
-      376
+      164
     ],
-    "average": 492,
-    "stdDev": 164.04877323527901
+    "average": 164,
+    "stdDev": 0
   },
   "Step 277": {
     "durations": [
-      804,
-      936
+      880
     ],
-    "average": 870,
-    "stdDev": 93.33809511662427
+    "average": 880,
+    "stdDev": 0
   },
   "Step 278": {
     "durations": [
-      203,
-      708
+      304
     ],
-    "average": 455.5,
-    "stdDev": 357.0889244992065
+    "average": 304,
+    "stdDev": 0
   },
   "Step 279": {
     "durations": [
-      933,
-      494
+      793
     ],
-    "average": 713.5,
-    "stdDev": 310.41987694089437
+    "average": 793,
+    "stdDev": 0
   },
   "Step 280": {
     "durations": [
-      180,
-      422
+      946
     ],
-    "average": 301,
-    "stdDev": 171.1198410471445
+    "average": 946,
+    "stdDev": 0
   },
   "Step 281": {
     "durations": [
-      985,
-      347
+      598
     ],
-    "average": 666,
-    "stdDev": 451.1341263970173
+    "average": 598,
+    "stdDev": 0
   },
   "Step 282": {
     "durations": [
-      193,
-      829
+      153
     ],
-    "average": 511,
-    "stdDev": 449.7199128346442
+    "average": 153,
+    "stdDev": 0
   },
   "Step 283": {
     "durations": [
-      326,
-      589
+      341
     ],
-    "average": 457.5,
-    "stdDev": 185.969083452062
+    "average": 341,
+    "stdDev": 0
   },
   "Step 284": {
     "durations": [
-      621,
-      367
+      310
     ],
-    "average": 494,
-    "stdDev": 179.60512242138307
+    "average": 310,
+    "stdDev": 0
   },
   "Step 285": {
     "durations": [
-      158,
-      1090
+      420
     ],
-    "average": 624,
-    "stdDev": 659.0235200658623
+    "average": 420,
+    "stdDev": 0
   },
   "Step 286": {
     "durations": [
-      501,
-      471
+      171
     ],
-    "average": 486,
-    "stdDev": 21.213203435596427
+    "average": 171,
+    "stdDev": 0
   },
   "Step 287": {
     "durations": [
-      786,
-      489
+      343
     ],
-    "average": 637.5,
-    "stdDev": 210.0107140124046
+    "average": 343,
+    "stdDev": 0
   },
   "Step 288": {
     "durations": [
-      638,
-      760
+      941
     ],
-    "average": 699,
-    "stdDev": 86.2670273047588
+    "average": 941,
+    "stdDev": 0
   },
   "Step 289": {
     "durations": [
-      224,
-      119
+      492
     ],
-    "average": 171.5,
-    "stdDev": 74.24621202458749
+    "average": 492,
+    "stdDev": 0
   },
   "Step 290": {
     "durations": [
-      813,
-      574
+      159
     ],
-    "average": 693.5,
-    "stdDev": 168.99852070358486
+    "average": 159,
+    "stdDev": 0
   },
   "Step 291": {
     "durations": [
-      625,
-      570
+      928
     ],
-    "average": 597.5,
-    "stdDev": 38.890872965260115
+    "average": 928,
+    "stdDev": 0
   },
   "Step 292": {
     "durations": [
-      735,
-      683
+      871
     ],
-    "average": 709,
-    "stdDev": 36.76955262170047
+    "average": 871,
+    "stdDev": 0
   },
   "Step 293": {
     "durations": [
-      1008,
-      693
+      433
     ],
-    "average": 850.5,
-    "stdDev": 222.73863607376248
+    "average": 433,
+    "stdDev": 0
   },
   "Step 294": {
     "durations": [
-      322,
-      857
+      1076
     ],
-    "average": 589.5,
-    "stdDev": 378.3021279348029
+    "average": 1076,
+    "stdDev": 0
   },
   "Step 295": {
     "durations": [
-      468,
-      351
+      931
     ],
-    "average": 409.5,
-    "stdDev": 82.73149339882606
+    "average": 931,
+    "stdDev": 0
   },
   "Step 296": {
     "durations": [
-      859,
-      105
+      736
     ],
-    "average": 482,
-    "stdDev": 533.1585130146568
+    "average": 736,
+    "stdDev": 0
   },
   "Step 297": {
     "durations": [
-      546,
-      156
+      388
     ],
-    "average": 351,
-    "stdDev": 275.77164466275354
+    "average": 388,
+    "stdDev": 0
   },
   "Step 298": {
     "durations": [
-      487,
-      215
+      374
     ],
-    "average": 351,
-    "stdDev": 192.33304448274092
+    "average": 374,
+    "stdDev": 0
   },
   "Step 299": {
     "durations": [
-      254,
-      759
+      481
     ],
-    "average": 506.5,
-    "stdDev": 357.0889244992065
+    "average": 481,
+    "stdDev": 0
   },
   "Step 300": {
     "durations": [
-      487,
-      501
+      863
     ],
-    "average": 494,
-    "stdDev": 9.899494936611665
+    "average": 863,
+    "stdDev": 0
   },
   "Step 301": {
     "durations": [
-      1084,
-      404
+      847
     ],
-    "average": 744,
-    "stdDev": 480.83261120685233
+    "average": 847,
+    "stdDev": 0
   },
   "Step 302": {
     "durations": [
-      881,
-      453
+      479
     ],
-    "average": 667,
-    "stdDev": 302.64170234784234
+    "average": 479,
+    "stdDev": 0
   },
   "Step 303": {
     "durations": [
-      1009,
-      171
+      445
     ],
-    "average": 590,
-    "stdDev": 592.5554826343268
+    "average": 445,
+    "stdDev": 0
   },
   "Step 304": {
     "durations": [
-      788,
-      634
+      282
     ],
-    "average": 711,
-    "stdDev": 108.89444430272832
+    "average": 282,
+    "stdDev": 0
   },
   "Step 305": {
     "durations": [
-      119,
-      408
+      1083
     ],
-    "average": 263.5,
-    "stdDev": 204.35385976291224
+    "average": 1083,
+    "stdDev": 0
   },
   "Step 306": {
     "durations": [
-      394,
-      720
+      196
     ],
-    "average": 557,
-    "stdDev": 230.5168106668145
+    "average": 196,
+    "stdDev": 0
   },
   "Step 307": {
     "durations": [
-      1029,
-      544
+      814
     ],
-    "average": 786.5,
-    "stdDev": 342.94678887547553
+    "average": 814,
+    "stdDev": 0
   },
   "Step 308": {
     "durations": [
-      151,
-      641
+      534
     ],
-    "average": 396,
-    "stdDev": 346.4823227814083
+    "average": 534,
+    "stdDev": 0
   },
   "Step 309": {
     "durations": [
-      596,
-      734
+      875
     ],
-    "average": 665,
-    "stdDev": 97.58073580374356
+    "average": 875,
+    "stdDev": 0
   },
   "Step 310": {
     "durations": [
-      440,
-      577
+      1061
     ],
-    "average": 508.5,
-    "stdDev": 96.87362902255701
+    "average": 1061,
+    "stdDev": 0
   },
   "Step 311": {
     "durations": [
-      751,
-      334
+      859
     ],
-    "average": 542.5,
-    "stdDev": 294.8635277547903
+    "average": 859,
+    "stdDev": 0
   },
   "Step 312": {
     "durations": [
-      370,
-      874
+      333
     ],
-    "average": 622,
-    "stdDev": 356.38181771801993
+    "average": 333,
+    "stdDev": 0
   },
   "Step 313": {
     "durations": [
-      111,
-      148
+      494
     ],
-    "average": 129.5,
-    "stdDev": 26.16295090390226
+    "average": 494,
+    "stdDev": 0
   },
   "Step 314": {
     "durations": [
-      529,
-      653
+      500
     ],
-    "average": 591,
-    "stdDev": 87.68124086713189
+    "average": 500,
+    "stdDev": 0
   },
   "Step 315": {
     "durations": [
-      871,
-      576
+      434
     ],
-    "average": 723.5,
-    "stdDev": 208.59650045003153
+    "average": 434,
+    "stdDev": 0
   },
   "Step 316": {
     "durations": [
-      963,
-      455
+      828
     ],
-    "average": 709,
-    "stdDev": 359.21024484276614
+    "average": 828,
+    "stdDev": 0
   },
   "Step 317": {
     "durations": [
-      643,
-      247
+      899
     ],
-    "average": 445,
-    "stdDev": 280.0142853498728
+    "average": 899,
+    "stdDev": 0
   },
   "Step 318": {
     "durations": [
-      278,
-      1082
+      744
     ],
-    "average": 680,
-    "stdDev": 568.5138520739843
+    "average": 744,
+    "stdDev": 0
   },
   "Step 319": {
     "durations": [
-      108,
-      573
+      510
     ],
-    "average": 340.5,
-    "stdDev": 328.8046532517446
+    "average": 510,
+    "stdDev": 0
   },
   "Step 320": {
     "durations": [
-      846,
-      857
+      817
     ],
-    "average": 851.5,
-    "stdDev": 7.7781745930520225
+    "average": 817,
+    "stdDev": 0
   },
   "Step 321": {
     "durations": [
-      914,
-      1072
+      504
     ],
-    "average": 993,
-    "stdDev": 111.72287142747452
+    "average": 504,
+    "stdDev": 0
   },
   "Step 322": {
     "durations": [
-      791,
-      244
+      142
     ],
-    "average": 517.5,
-    "stdDev": 386.7874093090415
+    "average": 142,
+    "stdDev": 0
   },
   "Step 323": {
     "durations": [
-      525,
-      986
+      1051
     ],
-    "average": 755.5,
-    "stdDev": 325.9762261269984
+    "average": 1051,
+    "stdDev": 0
   },
   "Step 324": {
     "durations": [
-      259,
-      569
+      337
     ],
-    "average": 414,
-    "stdDev": 219.20310216782974
+    "average": 337,
+    "stdDev": 0
   },
   "Step 325": {
     "durations": [
-      116,
-      403
+      380
     ],
-    "average": 259.5,
-    "stdDev": 202.93964620053913
+    "average": 380,
+    "stdDev": 0
   },
   "Step 326": {
     "durations": [
-      401,
-      237
+      841
     ],
-    "average": 319,
-    "stdDev": 115.96551211459379
+    "average": 841,
+    "stdDev": 0
   },
   "Step 327": {
     "durations": [
-      764,
-      851
+      378
     ],
-    "average": 807.5,
-    "stdDev": 61.518289963229634
+    "average": 378,
+    "stdDev": 0
   },
   "Step 328": {
     "durations": [
-      967,
-      965
+      356
     ],
-    "average": 966,
-    "stdDev": 1.4142135623730951
+    "average": 356,
+    "stdDev": 0
   },
   "Step 329": {
     "durations": [
-      778,
-      651
+      1083
     ],
-    "average": 714.5,
-    "stdDev": 89.80256121069154
+    "average": 1083,
+    "stdDev": 0
   },
   "Step 330": {
     "durations": [
-      318,
-      170
+      277
     ],
-    "average": 244,
-    "stdDev": 104.65180361560904
+    "average": 277,
+    "stdDev": 0
   },
   "Step 331": {
     "durations": [
-      509,
-      598
+      463
     ],
-    "average": 553.5,
-    "stdDev": 62.932503525602726
+    "average": 463,
+    "stdDev": 0
   },
   "Step 332": {
     "durations": [
-      875,
-      538
+      222
     ],
-    "average": 706.5,
-    "stdDev": 238.2949852598665
+    "average": 222,
+    "stdDev": 0
   },
   "Step 333": {
     "durations": [
-      370,
-      459
+      309
     ],
-    "average": 414.5,
-    "stdDev": 62.932503525602726
+    "average": 309,
+    "stdDev": 0
   },
   "Step 334": {
     "durations": [
-      465,
-      729
+      930
     ],
-    "average": 597,
-    "stdDev": 186.67619023324855
+    "average": 930,
+    "stdDev": 0
   },
   "Step 335": {
     "durations": [
-      1071,
-      968
+      799
     ],
-    "average": 1019.5,
-    "stdDev": 72.8319984622144
+    "average": 799,
+    "stdDev": 0
   },
   "Step 336": {
     "durations": [
-      959,
-      722
+      810
     ],
-    "average": 840.5,
-    "stdDev": 167.58430714121175
+    "average": 810,
+    "stdDev": 0
   },
   "Step 337": {
     "durations": [
-      437,
-      1074
+      160
     ],
-    "average": 755.5,
-    "stdDev": 450.4270196158308
+    "average": 160,
+    "stdDev": 0
   },
   "Step 338": {
     "durations": [
-      260,
-      761
+      356
     ],
-    "average": 510.5,
-    "stdDev": 354.26049737446033
+    "average": 356,
+    "stdDev": 0
   },
   "Step 339": {
     "durations": [
-      1071,
-      887
+      298
     ],
-    "average": 979,
-    "stdDev": 130.10764773832474
+    "average": 298,
+    "stdDev": 0
   },
   "Step 340": {
     "durations": [
-      692,
-      382
+      401
     ],
-    "average": 537,
-    "stdDev": 219.20310216782974
+    "average": 401,
+    "stdDev": 0
   },
   "Step 341": {
     "durations": [
-      225,
-      816
+      318
     ],
-    "average": 520.5,
-    "stdDev": 417.9001076812496
+    "average": 318,
+    "stdDev": 0
   },
   "Step 342": {
     "durations": [
-      606,
-      639
+      510
     ],
-    "average": 622.5,
-    "stdDev": 23.33452377915607
+    "average": 510,
+    "stdDev": 0
   },
   "Step 343": {
     "durations": [
-      638,
-      394
+      302
     ],
-    "average": 516,
-    "stdDev": 172.5340546095176
+    "average": 302,
+    "stdDev": 0
   },
   "Step 344": {
     "durations": [
-      599,
-      712
+      160
     ],
-    "average": 655.5,
-    "stdDev": 79.90306627407988
+    "average": 160,
+    "stdDev": 0
   },
   "Step 345": {
     "durations": [
-      545,
-      904
+      915
     ],
-    "average": 724.5,
-    "stdDev": 253.85133444597056
+    "average": 915,
+    "stdDev": 0
   },
   "Step 346": {
     "durations": [
-      553,
-      567
+      281
     ],
-    "average": 560,
-    "stdDev": 9.899494936611665
+    "average": 281,
+    "stdDev": 0
   },
   "Step 347": {
     "durations": [
-      844,
-      509
+      143
     ],
-    "average": 676.5,
-    "stdDev": 236.88077169749343
+    "average": 143,
+    "stdDev": 0
   },
   "Step 348": {
     "durations": [
-      769,
-      661
+      843
     ],
-    "average": 715,
-    "stdDev": 76.36753236814714
+    "average": 843,
+    "stdDev": 0
   },
   "Step 349": {
     "durations": [
-      299,
-      205
+      795
     ],
-    "average": 252,
-    "stdDev": 66.46803743153546
+    "average": 795,
+    "stdDev": 0
   },
   "Step 350": {
     "durations": [
-      1067,
-      256
+      353
     ],
-    "average": 661.5,
-    "stdDev": 573.46359954229
+    "average": 353,
+    "stdDev": 0
   },
   "Step 351": {
     "durations": [
-      783,
-      236
+      175
     ],
-    "average": 509.5,
-    "stdDev": 386.7874093090415
+    "average": 175,
+    "stdDev": 0
   },
   "Step 352": {
     "durations": [
-      487,
-      556
+      750
     ],
-    "average": 521.5,
-    "stdDev": 48.79036790187178
+    "average": 750,
+    "stdDev": 0
   },
   "Step 353": {
     "durations": [
-      1074,
-      759
+      707
     ],
-    "average": 916.5,
-    "stdDev": 222.73863607376248
+    "average": 707,
+    "stdDev": 0
   },
   "Step 354": {
     "durations": [
-      425,
-      708
+      438
     ],
-    "average": 566.5,
-    "stdDev": 200.11121907579295
+    "average": 438,
+    "stdDev": 0
   },
   "Step 355": {
     "durations": [
-      991,
-      770
+      287
     ],
-    "average": 880.5,
-    "stdDev": 156.27059864222701
+    "average": 287,
+    "stdDev": 0
   },
   "Step 356": {
     "durations": [
-      950,
-      274
+      1001
     ],
-    "average": 612,
-    "stdDev": 478.0041840821061
+    "average": 1001,
+    "stdDev": 0
   },
   "Step 357": {
     "durations": [
-      289,
-      1036
+      760
     ],
-    "average": 662.5,
-    "stdDev": 528.208765546351
+    "average": 760,
+    "stdDev": 0
   },
   "Step 358": {
     "durations": [
-      591,
-      950
+      110
     ],
-    "average": 770.5,
-    "stdDev": 253.85133444597056
+    "average": 110,
+    "stdDev": 0
   },
   "Step 359": {
     "durations": [
-      233,
-      753
+      855
     ],
-    "average": 493,
-    "stdDev": 367.6955262170047
+    "average": 855,
+    "stdDev": 0
   },
   "Step 360": {
     "durations": [
-      921,
-      848
+      648
     ],
-    "average": 884.5,
-    "stdDev": 51.61879502661797
+    "average": 648,
+    "stdDev": 0
   },
   "Step 361": {
     "durations": [
-      259,
-      588
+      920
     ],
-    "average": 423.5,
-    "stdDev": 232.63813101037414
+    "average": 920,
+    "stdDev": 0
   },
   "Step 362": {
     "durations": [
-      139,
-      128
+      449
     ],
-    "average": 133.5,
-    "stdDev": 7.7781745930520225
+    "average": 449,
+    "stdDev": 0
   },
   "Step 363": {
     "durations": [
-      963,
-      227
+      984
     ],
-    "average": 595,
-    "stdDev": 520.430590953299
+    "average": 984,
+    "stdDev": 0
   },
   "Step 364": {
     "durations": [
-      262,
-      927
+      145
     ],
-    "average": 594.5,
-    "stdDev": 470.2260094890541
+    "average": 145,
+    "stdDev": 0
   },
   "Step 365": {
     "durations": [
-      568,
-      396
+      191
     ],
-    "average": 482,
-    "stdDev": 121.62236636408618
+    "average": 191,
+    "stdDev": 0
   },
   "Step 366": {
     "durations": [
-      765,
-      899
+      581
     ],
-    "average": 832,
-    "stdDev": 94.75230867899737
+    "average": 581,
+    "stdDev": 0
   },
   "Step 367": {
     "durations": [
-      221,
-      348
+      707
     ],
-    "average": 284.5,
-    "stdDev": 89.80256121069154
+    "average": 707,
+    "stdDev": 0
   },
   "Step 368": {
     "durations": [
-      906,
-      815
+      828
     ],
-    "average": 860.5,
-    "stdDev": 64.34671708797582
+    "average": 828,
+    "stdDev": 0
   },
   "Step 369": {
     "durations": [
-      457,
-      926
+      424
     ],
-    "average": 691.5,
-    "stdDev": 331.6330803764908
+    "average": 424,
+    "stdDev": 0
   },
   "Step 370": {
     "durations": [
-      1034,
-      479
+      267
     ],
-    "average": 756.5,
-    "stdDev": 392.44426355853386
+    "average": 267,
+    "stdDev": 0
   },
   "Step 371": {
     "durations": [
-      624,
-      853
+      871
     ],
-    "average": 738.5,
-    "stdDev": 161.92745289171938
+    "average": 871,
+    "stdDev": 0
   },
   "Step 372": {
     "durations": [
-      767,
-      917
+      176
     ],
-    "average": 842,
-    "stdDev": 106.06601717798213
+    "average": 176,
+    "stdDev": 0
   },
   "Step 373": {
     "durations": [
-      541,
-      490
+      212
     ],
-    "average": 515.5,
-    "stdDev": 36.062445840513924
+    "average": 212,
+    "stdDev": 0
   },
   "Step 374": {
     "durations": [
-      229,
-      113
+      1081
     ],
-    "average": 171,
-    "stdDev": 82.02438661763951
+    "average": 1081,
+    "stdDev": 0
   },
   "Step 375": {
     "durations": [
-      804,
-      255
+      307
     ],
-    "average": 529.5,
-    "stdDev": 388.2016228714146
+    "average": 307,
+    "stdDev": 0
   },
   "Step 376": {
     "durations": [
-      599,
-      292
+      734
     ],
-    "average": 445.5,
-    "stdDev": 217.08178182427008
+    "average": 734,
+    "stdDev": 0
   },
   "Step 377": {
     "durations": [
-      785,
-      919
+      632
     ],
-    "average": 852,
-    "stdDev": 94.75230867899737
+    "average": 632,
+    "stdDev": 0
   },
   "Step 378": {
     "durations": [
-      125,
-      611
+      937
     ],
-    "average": 368,
-    "stdDev": 343.6538956566621
+    "average": 937,
+    "stdDev": 0
   },
   "Step 379": {
     "durations": [
-      425,
-      308
+      1026
     ],
-    "average": 366.5,
-    "stdDev": 82.73149339882606
+    "average": 1026,
+    "stdDev": 0
   },
   "Step 380": {
     "durations": [
-      666,
-      555
+      621
     ],
-    "average": 610.5,
-    "stdDev": 78.48885271170677
+    "average": 621,
+    "stdDev": 0
   },
   "Step 381": {
     "durations": [
-      891,
-      380
+      781
     ],
-    "average": 635.5,
-    "stdDev": 361.3315651863258
+    "average": 781,
+    "stdDev": 0
   },
   "Step 382": {
     "durations": [
-      193,
-      708
+      238
     ],
-    "average": 450.5,
-    "stdDev": 364.15999231107196
+    "average": 238,
+    "stdDev": 0
   },
   "Step 383": {
     "durations": [
-      524,
-      1023
+      429
     ],
-    "average": 773.5,
-    "stdDev": 352.8462838120872
+    "average": 429,
+    "stdDev": 0
   },
   "Step 384": {
     "durations": [
-      1038,
-      714
+      382
     ],
-    "average": 876,
-    "stdDev": 229.1025971044414
+    "average": 382,
+    "stdDev": 0
   },
   "Step 385": {
     "durations": [
-      1035,
-      422
+      938
     ],
-    "average": 728.5,
-    "stdDev": 433.4564568673536
+    "average": 938,
+    "stdDev": 0
   },
   "Step 386": {
     "durations": [
-      680,
-      382
+      319
     ],
-    "average": 531,
-    "stdDev": 210.71782079359116
+    "average": 319,
+    "stdDev": 0
   },
   "Step 387": {
     "durations": [
-      162,
-      409
+      516
     ],
-    "average": 285.5,
-    "stdDev": 174.65537495307723
+    "average": 516,
+    "stdDev": 0
   },
   "Step 388": {
     "durations": [
-      1044,
-      879
+      1096
     ],
-    "average": 961.5,
-    "stdDev": 116.67261889578035
+    "average": 1096,
+    "stdDev": 0
   },
   "Step 389": {
     "durations": [
-      967,
-      256
+      587
     ],
-    "average": 611.5,
-    "stdDev": 502.7529214236353
+    "average": 587,
+    "stdDev": 0
   },
   "Step 390": {
     "durations": [
-      686,
-      755
+      636
     ],
-    "average": 720.5,
-    "stdDev": 48.79036790187178
+    "average": 636,
+    "stdDev": 0
   },
   "Step 391": {
     "durations": [
-      764,
-      395
+      477
     ],
-    "average": 579.5,
-    "stdDev": 260.92240225783604
+    "average": 477,
+    "stdDev": 0
   },
   "Step 392": {
     "durations": [
-      143,
-      842
+      193
     ],
-    "average": 492.5,
-    "stdDev": 494.26764004939673
+    "average": 193,
+    "stdDev": 0
   },
   "Step 393": {
     "durations": [
-      933,
-      905
+      753
     ],
-    "average": 919,
-    "stdDev": 19.79898987322333
+    "average": 753,
+    "stdDev": 0
   },
   "Step 394": {
     "durations": [
-      1008,
-      912
+      394
     ],
-    "average": 960,
-    "stdDev": 67.88225099390856
+    "average": 394,
+    "stdDev": 0
   },
   "Step 395": {
     "durations": [
-      385,
-      634
+      1087
     ],
-    "average": 509.5,
-    "stdDev": 176.06958851545033
+    "average": 1087,
+    "stdDev": 0
   },
   "Step 396": {
     "durations": [
-      1055,
-      820
+      474
     ],
-    "average": 937.5,
-    "stdDev": 166.17009357883867
+    "average": 474,
+    "stdDev": 0
   },
   "Step 397": {
     "durations": [
-      1095,
-      136
+      293
     ],
-    "average": 615.5,
-    "stdDev": 678.1154031578991
+    "average": 293,
+    "stdDev": 0
   },
   "Step 398": {
     "durations": [
-      980,
-      591
+      815
     ],
-    "average": 785.5,
-    "stdDev": 275.064537881567
+    "average": 815,
+    "stdDev": 0
   },
   "Step 399": {
     "durations": [
-      762,
-      871
+      587
     ],
-    "average": 816.5,
-    "stdDev": 77.07463914933368
+    "average": 587,
+    "stdDev": 0
   },
   "Step 400": {
     "durations": [
-      601,
-      217
+      833
     ],
-    "average": 409,
-    "stdDev": 271.5290039756342
+    "average": 833,
+    "stdDev": 0
   },
   "Step 401": {
     "durations": [
-      505,
-      581
+      242
     ],
-    "average": 543,
-    "stdDev": 53.74011537017761
+    "average": 242,
+    "stdDev": 0
   },
   "Step 402": {
     "durations": [
-      624,
-      1038
+      921
     ],
-    "average": 831,
-    "stdDev": 292.74220741123065
+    "average": 921,
+    "stdDev": 0
   },
   "Step 403": {
     "durations": [
-      611,
-      1000
+      222
     ],
-    "average": 805.5,
-    "stdDev": 275.064537881567
+    "average": 222,
+    "stdDev": 0
   },
   "Step 404": {
     "durations": [
-      105,
-      226
+      550
     ],
-    "average": 165.5,
-    "stdDev": 85.55992052357225
+    "average": 550,
+    "stdDev": 0
   },
   "Step 405": {
     "durations": [
-      917,
-      1014
+      205
     ],
-    "average": 965.5,
-    "stdDev": 68.58935777509511
+    "average": 205,
+    "stdDev": 0
   },
   "Step 406": {
     "durations": [
-      733,
-      355
+      679
     ],
-    "average": 544,
-    "stdDev": 267.28636328851496
+    "average": 679,
+    "stdDev": 0
   },
   "Step 407": {
     "durations": [
-      402,
-      214
+      1088
     ],
-    "average": 308,
-    "stdDev": 132.93607486307093
+    "average": 1088,
+    "stdDev": 0
   },
   "Step 408": {
     "durations": [
-      818,
-      659
+      631
     ],
-    "average": 738.5,
-    "stdDev": 112.42997820866105
+    "average": 631,
+    "stdDev": 0
   },
   "Step 409": {
     "durations": [
-      144,
-      321
+      461
     ],
-    "average": 232.5,
-    "stdDev": 125.15790027001891
+    "average": 461,
+    "stdDev": 0
   },
   "Step 410": {
     "durations": [
-      322,
-      985
+      493
     ],
-    "average": 653.5,
-    "stdDev": 468.811795926681
+    "average": 493,
+    "stdDev": 0
   },
   "Step 411": {
     "durations": [
-      528,
-      820
+      1096
     ],
-    "average": 674,
-    "stdDev": 206.47518010647187
+    "average": 1096,
+    "stdDev": 0
   },
   "Step 412": {
     "durations": [
-      809,
-      656
+      746
     ],
-    "average": 732.5,
-    "stdDev": 108.18733752154178
+    "average": 746,
+    "stdDev": 0
   },
   "Step 413": {
     "durations": [
-      667,
-      416
+      331
     ],
-    "average": 541.5,
-    "stdDev": 177.48380207782344
+    "average": 331,
+    "stdDev": 0
   },
   "Step 414": {
     "durations": [
-      664,
-      332
+      570
     ],
-    "average": 498,
-    "stdDev": 234.75945135393377
+    "average": 570,
+    "stdDev": 0
   },
   "Step 415": {
     "durations": [
-      136,
-      1049
+      419
     ],
-    "average": 592.5,
-    "stdDev": 645.5884912233179
+    "average": 419,
+    "stdDev": 0
   },
   "Step 416": {
     "durations": [
-      1008,
-      579
+      891
     ],
-    "average": 793.5,
-    "stdDev": 303.3488091290289
+    "average": 891,
+    "stdDev": 0
   },
   "Step 417": {
     "durations": [
-      698,
-      402
+      568
     ],
-    "average": 550,
-    "stdDev": 209.30360723121808
+    "average": 568,
+    "stdDev": 0
   },
   "Step 418": {
     "durations": [
-      990,
-      190
+      1024
     ],
-    "average": 590,
-    "stdDev": 565.685424949238
+    "average": 1024,
+    "stdDev": 0
   },
   "Step 419": {
     "durations": [
-      240,
-      1073
+      143
     ],
-    "average": 656.5,
-    "stdDev": 589.0199487283941
+    "average": 143,
+    "stdDev": 0
   },
   "Step 420": {
     "durations": [
-      539,
-      1015
+      1071
     ],
-    "average": 777,
-    "stdDev": 336.5828278447966
+    "average": 1071,
+    "stdDev": 0
   },
   "Step 421": {
     "durations": [
-      599,
-      741
+      1088
     ],
-    "average": 670,
-    "stdDev": 100.40916292848975
+    "average": 1088,
+    "stdDev": 0
   },
   "Step 422": {
     "durations": [
-      1099,
-      1003
+      494
     ],
-    "average": 1051,
-    "stdDev": 67.88225099390856
+    "average": 494,
+    "stdDev": 0
   },
   "Step 423": {
     "durations": [
-      645,
-      157
+      1088
     ],
-    "average": 401,
-    "stdDev": 345.0681092190352
+    "average": 1088,
+    "stdDev": 0
   },
   "Step 424": {
     "durations": [
-      725,
-      282
+      578
     ],
-    "average": 503.5,
-    "stdDev": 313.2483040656405
+    "average": 578,
+    "stdDev": 0
   },
   "Step 425": {
     "durations": [
-      627,
-      778
+      133
     ],
-    "average": 702.5,
-    "stdDev": 106.77312395916867
+    "average": 133,
+    "stdDev": 0
   },
   "Step 426": {
     "durations": [
-      324,
-      362
+      490
     ],
-    "average": 343,
-    "stdDev": 26.870057685088806
+    "average": 490,
+    "stdDev": 0
   },
   "Step 427": {
     "durations": [
-      723,
-      109
+      1029
     ],
-    "average": 416,
-    "stdDev": 434.16356364854016
+    "average": 1029,
+    "stdDev": 0
   },
   "Step 428": {
     "durations": [
-      1030,
-      616
+      471
     ],
-    "average": 823,
-    "stdDev": 292.74220741123065
+    "average": 471,
+    "stdDev": 0
   },
   "Step 429": {
     "durations": [
-      827,
-      357
+      1016
     ],
-    "average": 592,
-    "stdDev": 332.34018715767735
+    "average": 1016,
+    "stdDev": 0
   },
   "Step 430": {
     "durations": [
-      358,
-      217
+      864
     ],
-    "average": 287.5,
-    "stdDev": 99.7020561473032
+    "average": 864,
+    "stdDev": 0
   },
   "Step 431": {
     "durations": [
-      971,
-      815
+      416
     ],
-    "average": 893,
-    "stdDev": 110.30865786510141
+    "average": 416,
+    "stdDev": 0
   },
   "Step 432": {
     "durations": [
-      461,
-      334
+      493
     ],
-    "average": 397.5,
-    "stdDev": 89.80256121069154
+    "average": 493,
+    "stdDev": 0
   },
   "Step 433": {
     "durations": [
-      902,
-      322
+      702
     ],
-    "average": 612,
-    "stdDev": 410.1219330881976
+    "average": 702,
+    "stdDev": 0
   },
   "Step 434": {
     "durations": [
-      988,
-      724
+      634
     ],
-    "average": 856,
-    "stdDev": 186.67619023324855
+    "average": 634,
+    "stdDev": 0
   },
   "Step 435": {
     "durations": [
-      843,
-      438
+      995
     ],
-    "average": 640.5,
-    "stdDev": 286.37824638055173
+    "average": 995,
+    "stdDev": 0
   },
   "Step 436": {
     "durations": [
-      147,
-      135
+      495
     ],
-    "average": 141,
-    "stdDev": 8.48528137423857
+    "average": 495,
+    "stdDev": 0
   },
   "Step 437": {
     "durations": [
-      981,
-      554
+      299
     ],
-    "average": 767.5,
-    "stdDev": 301.9345955666558
+    "average": 299,
+    "stdDev": 0
   },
   "Step 438": {
     "durations": [
-      419,
-      835
+      189
     ],
-    "average": 627,
-    "stdDev": 294.15642097360376
+    "average": 189,
+    "stdDev": 0
   },
   "Step 439": {
     "durations": [
-      551,
-      881
+      895
     ],
-    "average": 716,
-    "stdDev": 233.3452377915607
+    "average": 895,
+    "stdDev": 0
   },
   "Step 440": {
     "durations": [
-      769,
-      308
+      947
     ],
-    "average": 538.5,
-    "stdDev": 325.9762261269984
+    "average": 947,
+    "stdDev": 0
   },
   "Step 441": {
     "durations": [
-      915,
-      351
+      479
     ],
-    "average": 633,
-    "stdDev": 398.8082245892128
+    "average": 479,
+    "stdDev": 0
   },
   "Step 442": {
     "durations": [
-      593,
-      494
+      374
     ],
-    "average": 543.5,
-    "stdDev": 70.0035713374682
+    "average": 374,
+    "stdDev": 0
   },
   "Step 443": {
     "durations": [
-      902,
-      409
+      1092
     ],
-    "average": 655.5,
-    "stdDev": 348.6036431249679
+    "average": 1092,
+    "stdDev": 0
   },
   "Step 444": {
     "durations": [
-      760,
-      965
+      945
     ],
-    "average": 862.5,
-    "stdDev": 144.95689014324225
+    "average": 945,
+    "stdDev": 0
   },
   "Step 445": {
     "durations": [
-      1066,
-      848
+      364
     ],
-    "average": 957,
-    "stdDev": 154.14927829866735
+    "average": 364,
+    "stdDev": 0
   },
   "Step 446": {
     "durations": [
-      774,
-      997
+      758
     ],
-    "average": 885.5,
-    "stdDev": 157.6848122046001
+    "average": 758,
+    "stdDev": 0
   },
   "Step 447": {
     "durations": [
-      1018,
-      102
+      466
     ],
-    "average": 560,
-    "stdDev": 647.7098115668775
+    "average": 466,
+    "stdDev": 0
   },
   "Step 448": {
     "durations": [
-      859,
-      828
+      1016
     ],
-    "average": 843.5,
-    "stdDev": 21.920310216782973
+    "average": 1016,
+    "stdDev": 0
   },
   "Step 449": {
     "durations": [
-      672,
-      383
+      490
     ],
-    "average": 527.5,
-    "stdDev": 204.35385976291224
+    "average": 490,
+    "stdDev": 0
   },
   "Step 450": {
     "durations": [
-      214,
-      694
+      771
     ],
-    "average": 454,
-    "stdDev": 339.4112549695428
+    "average": 771,
+    "stdDev": 0
   },
   "Step 451": {
     "durations": [
-      282,
-      814
+      177
     ],
-    "average": 548,
-    "stdDev": 376.1808075912433
+    "average": 177,
+    "stdDev": 0
   },
   "Step 452": {
     "durations": [
-      668,
-      402
+      482
     ],
-    "average": 535,
-    "stdDev": 188.09040379562165
+    "average": 482,
+    "stdDev": 0
   },
   "Step 453": {
     "durations": [
-      282,
-      499
+      1013
     ],
-    "average": 390.5,
-    "stdDev": 153.4421715174808
+    "average": 1013,
+    "stdDev": 0
   },
   "Step 454": {
     "durations": [
-      125,
-      619
+      717
     ],
-    "average": 372,
-    "stdDev": 349.31074990615446
+    "average": 717,
+    "stdDev": 0
   },
   "Step 455": {
     "durations": [
-      984,
-      705
+      561
     ],
-    "average": 844.5,
-    "stdDev": 197.28279195104676
+    "average": 561,
+    "stdDev": 0
   },
   "Step 456": {
     "durations": [
-      434,
-      975
+      199
     ],
-    "average": 704.5,
-    "stdDev": 382.54476862192223
+    "average": 199,
+    "stdDev": 0
   },
   "Step 457": {
     "durations": [
-      382,
-      335
+      1055
     ],
-    "average": 358.5,
-    "stdDev": 33.23401871576773
+    "average": 1055,
+    "stdDev": 0
   },
   "Step 458": {
     "durations": [
-      426,
-      908
+      992
     ],
-    "average": 667,
-    "stdDev": 340.82546853191593
+    "average": 992,
+    "stdDev": 0
   },
   "Step 459": {
     "durations": [
-      1086,
-      615
+      767
     ],
-    "average": 850.5,
-    "stdDev": 333.0472939388639
+    "average": 767,
+    "stdDev": 0
   },
   "Step 460": {
     "durations": [
-      951,
-      1071
+      118
     ],
-    "average": 1011,
-    "stdDev": 84.8528137423857
+    "average": 118,
+    "stdDev": 0
   },
   "Step 461": {
     "durations": [
-      805,
-      492
+      376
     ],
-    "average": 648.5,
-    "stdDev": 221.32442251138937
+    "average": 376,
+    "stdDev": 0
   },
   "Step 462": {
     "durations": [
-      1017,
-      351
+      685
     ],
-    "average": 684,
-    "stdDev": 470.93311627024065
+    "average": 685,
+    "stdDev": 0
   },
   "Step 463": {
     "durations": [
-      356,
-      392
+      747
     ],
-    "average": 374,
-    "stdDev": 25.45584412271571
+    "average": 747,
+    "stdDev": 0
   },
   "Step 464": {
     "durations": [
-      650,
-      785
+      320
     ],
-    "average": 717.5,
-    "stdDev": 95.45941546018392
+    "average": 320,
+    "stdDev": 0
   },
   "Step 465": {
     "durations": [
-      565,
-      483
+      763
     ],
-    "average": 524,
-    "stdDev": 57.982756057296896
+    "average": 763,
+    "stdDev": 0
   },
   "Step 466": {
     "durations": [
-      662,
-      729
+      499
     ],
-    "average": 695.5,
-    "stdDev": 47.37615433949868
+    "average": 499,
+    "stdDev": 0
   },
   "Step 467": {
     "durations": [
-      305,
-      917
+      387
     ],
-    "average": 611,
-    "stdDev": 432.7493500861671
+    "average": 387,
+    "stdDev": 0
   },
   "Step 468": {
     "durations": [
-      847,
-      652
+      470
     ],
-    "average": 749.5,
-    "stdDev": 137.88582233137677
+    "average": 470,
+    "stdDev": 0
   },
   "Step 469": {
     "durations": [
-      274,
-      862
+      455
     ],
-    "average": 568,
-    "stdDev": 415.77878733768995
+    "average": 455,
+    "stdDev": 0
   },
   "Step 470": {
     "durations": [
-      585,
-      611
+      640
     ],
-    "average": 598,
-    "stdDev": 18.384776310850235
+    "average": 640,
+    "stdDev": 0
   },
   "Step 471": {
     "durations": [
-      576,
-      1028
+      907
     ],
-    "average": 802,
-    "stdDev": 319.6122650963195
+    "average": 907,
+    "stdDev": 0
   },
   "Step 472": {
     "durations": [
-      155,
-      271
+      231
     ],
-    "average": 213,
-    "stdDev": 82.02438661763951
+    "average": 231,
+    "stdDev": 0
   },
   "Step 473": {
     "durations": [
-      991,
-      972
+      935
     ],
-    "average": 981.5,
-    "stdDev": 13.435028842544403
+    "average": 935,
+    "stdDev": 0
   },
   "Step 474": {
     "durations": [
-      149,
-      450
+      176
     ],
-    "average": 299.5,
-    "stdDev": 212.83914113715082
+    "average": 176,
+    "stdDev": 0
   },
   "Step 475": {
     "durations": [
-      357,
-      274
+      1038
     ],
-    "average": 315.5,
-    "stdDev": 58.68986283848344
+    "average": 1038,
+    "stdDev": 0
   },
   "Step 476": {
     "durations": [
-      1097,
-      748
+      399
     ],
-    "average": 922.5,
-    "stdDev": 246.7802666341051
+    "average": 399,
+    "stdDev": 0
   },
   "Step 477": {
     "durations": [
-      1033,
-      109
+      747
     ],
-    "average": 571,
-    "stdDev": 653.36666581637
+    "average": 747,
+    "stdDev": 0
   },
   "Step 478": {
     "durations": [
-      453,
-      313
+      760
     ],
-    "average": 383,
-    "stdDev": 98.99494936611666
+    "average": 760,
+    "stdDev": 0
   },
   "Step 479": {
     "durations": [
-      677,
-      242
+      793
     ],
-    "average": 459.5,
-    "stdDev": 307.59144981614816
+    "average": 793,
+    "stdDev": 0
   },
   "Step 480": {
     "durations": [
-      1008,
-      741
+      1045
     ],
-    "average": 874.5,
-    "stdDev": 188.79751057680818
+    "average": 1045,
+    "stdDev": 0
   },
   "Step 481": {
     "durations": [
-      329,
-      233
+      394
     ],
-    "average": 281,
-    "stdDev": 67.88225099390856
+    "average": 394,
+    "stdDev": 0
   },
   "Step 482": {
     "durations": [
-      580,
-      541
+      1021
     ],
-    "average": 560.5,
-    "stdDev": 27.577164466275352
+    "average": 1021,
+    "stdDev": 0
   },
   "Step 483": {
     "durations": [
-      416,
-      693
+      462
     ],
-    "average": 554.5,
-    "stdDev": 195.86857838867365
+    "average": 462,
+    "stdDev": 0
   },
   "Step 484": {
     "durations": [
-      1044,
-      1045
+      297
     ],
-    "average": 1044.5,
-    "stdDev": 0.7071067811865476
+    "average": 297,
+    "stdDev": 0
   },
   "Step 485": {
     "durations": [
-      894,
-      408
+      153
     ],
-    "average": 651,
-    "stdDev": 343.6538956566621
+    "average": 153,
+    "stdDev": 0
   },
   "Step 486": {
     "durations": [
-      501,
-      660
+      737
     ],
-    "average": 580.5,
-    "stdDev": 112.42997820866105
+    "average": 737,
+    "stdDev": 0
   },
   "Step 487": {
     "durations": [
-      470,
-      383
+      840
     ],
-    "average": 426.5,
-    "stdDev": 61.518289963229634
+    "average": 840,
+    "stdDev": 0
   },
   "Step 488": {
     "durations": [
-      823,
-      1037
+      1020
     ],
-    "average": 930,
-    "stdDev": 151.32085117392117
+    "average": 1020,
+    "stdDev": 0
   },
   "Step 489": {
     "durations": [
-      470,
-      598
+      126
     ],
-    "average": 534,
-    "stdDev": 90.50966799187809
+    "average": 126,
+    "stdDev": 0
   },
   "Step 490": {
     "durations": [
-      513,
-      778
+      478
     ],
-    "average": 645.5,
-    "stdDev": 187.3832970144351
+    "average": 478,
+    "stdDev": 0
   },
   "Step 491": {
     "durations": [
-      140,
-      518
+      1004
     ],
-    "average": 329,
-    "stdDev": 267.28636328851496
+    "average": 1004,
+    "stdDev": 0
   },
   "Step 492": {
     "durations": [
-      903,
-      600
+      666
     ],
-    "average": 751.5,
-    "stdDev": 214.2533546995239
+    "average": 666,
+    "stdDev": 0
   },
   "Step 493": {
     "durations": [
-      823,
-      721
+      449
     ],
-    "average": 772,
-    "stdDev": 72.12489168102785
+    "average": 449,
+    "stdDev": 0
   },
   "Step 494": {
     "durations": [
-      743,
-      715
+      816
     ],
-    "average": 729,
-    "stdDev": 19.79898987322333
+    "average": 816,
+    "stdDev": 0
   },
   "Step 495": {
     "durations": [
-      102,
-      795
+      947
     ],
-    "average": 448.5,
-    "stdDev": 490.0249993622774
+    "average": 947,
+    "stdDev": 0
   },
   "Step 496": {
     "durations": [
-      171,
-      146
+      844
     ],
-    "average": 158.5,
-    "stdDev": 17.67766952966369
+    "average": 844,
+    "stdDev": 0
   },
   "Step 497": {
     "durations": [
-      916,
-      1028
+      337
     ],
-    "average": 972,
-    "stdDev": 79.19595949289332
+    "average": 337,
+    "stdDev": 0
   },
   "Step 498": {
     "durations": [
-      982,
-      875
+      865
     ],
-    "average": 928.5,
-    "stdDev": 75.66042558696059
+    "average": 865,
+    "stdDev": 0
   },
   "Step 499": {
     "durations": [
-      1026,
-      1018
+      693
     ],
-    "average": 1022,
-    "stdDev": 5.656854249492381
+    "average": 693,
+    "stdDev": 0
   },
   "Step 500": {
     "durations": [
-      607,
-      179
+      111
     ],
-    "average": 393,
-    "stdDev": 302.64170234784234
+    "average": 111,
+    "stdDev": 0
   },
   "Step 501": {
     "durations": [
-      990,
-      333
+      638
     ],
-    "average": 661.5,
-    "stdDev": 464.5691552395617
+    "average": 638,
+    "stdDev": 0
   },
   "Step 502": {
     "durations": [
-      1009,
-      222
+      399
     ],
-    "average": 615.5,
-    "stdDev": 556.4930367938128
+    "average": 399,
+    "stdDev": 0
   },
   "Step 503": {
     "durations": [
-      653,
-      485
+      635
     ],
-    "average": 569,
-    "stdDev": 118.79393923933998
+    "average": 635,
+    "stdDev": 0
   },
   "Step 504": {
     "durations": [
-      424,
-      491
+      788
     ],
-    "average": 457.5,
-    "stdDev": 47.37615433949868
+    "average": 788,
+    "stdDev": 0
   },
   "Step 505": {
     "durations": [
-      471,
-      518
+      594
     ],
-    "average": 494.5,
-    "stdDev": 33.23401871576773
+    "average": 594,
+    "stdDev": 0
   },
   "Step 506": {
     "durations": [
-      704,
       803
     ],
-    "average": 753.5,
-    "stdDev": 70.0035713374682
+    "average": 803,
+    "stdDev": 0
   },
   "Step 507": {
     "durations": [
-      946,
-      778
+      333
     ],
-    "average": 862,
-    "stdDev": 118.79393923933998
+    "average": 333,
+    "stdDev": 0
   },
   "Step 508": {
     "durations": [
-      594,
-      431
+      331
     ],
-    "average": 512.5,
-    "stdDev": 115.25840533340725
+    "average": 331,
+    "stdDev": 0
   },
   "Step 509": {
     "durations": [
-      942,
-      414
+      442
     ],
-    "average": 678,
-    "stdDev": 373.3523804664971
+    "average": 442,
+    "stdDev": 0
   },
   "Step 510": {
     "durations": [
-      548,
-      665
+      996
     ],
-    "average": 606.5,
-    "stdDev": 82.73149339882606
+    "average": 996,
+    "stdDev": 0
   },
   "Step 511": {
     "durations": [
-      229,
-      545
+      1072
     ],
-    "average": 387,
-    "stdDev": 223.44574285494903
+    "average": 1072,
+    "stdDev": 0
   },
   "Step 512": {
     "durations": [
-      894,
-      199
+      680
     ],
-    "average": 546.5,
-    "stdDev": 491.4392129246505
+    "average": 680,
+    "stdDev": 0
   },
   "Step 513": {
     "durations": [
-      986,
-      942
+      883
     ],
-    "average": 964,
-    "stdDev": 31.11269837220809
+    "average": 883,
+    "stdDev": 0
   },
   "Step 514": {
     "durations": [
-      1061,
-      1073
+      208
     ],
-    "average": 1067,
-    "stdDev": 8.48528137423857
+    "average": 208,
+    "stdDev": 0
   },
   "Step 515": {
     "durations": [
-      677,
-      194
+      376
     ],
-    "average": 435.5,
-    "stdDev": 341.5325753131024
+    "average": 376,
+    "stdDev": 0
   },
   "Step 516": {
     "durations": [
-      569,
-      545
+      485
     ],
-    "average": 557,
-    "stdDev": 16.97056274847714
+    "average": 485,
+    "stdDev": 0
   },
   "Step 517": {
     "durations": [
-      287,
-      389
+      913
     ],
-    "average": 338,
-    "stdDev": 72.12489168102785
+    "average": 913,
+    "stdDev": 0
   },
   "Step 518": {
     "durations": [
-      176,
-      890
+      755
     ],
-    "average": 533,
-    "stdDev": 504.8742417671949
+    "average": 755,
+    "stdDev": 0
   },
   "Step 519": {
     "durations": [
-      771,
-      221
+      119
     ],
-    "average": 496,
-    "stdDev": 388.90872965260115
+    "average": 119,
+    "stdDev": 0
   },
   "Step 520": {
     "durations": [
-      534,
-      992
+      126
     ],
-    "average": 763,
-    "stdDev": 323.85490578343877
+    "average": 126,
+    "stdDev": 0
   },
   "Step 521": {
     "durations": [
-      198,
-      480
+      730
     ],
-    "average": 339,
-    "stdDev": 199.4041122946064
+    "average": 730,
+    "stdDev": 0
   },
   "Step 522": {
     "durations": [
-      251,
-      798
+      569
     ],
-    "average": 524.5,
-    "stdDev": 386.7874093090415
+    "average": 569,
+    "stdDev": 0
   },
   "Step 523": {
     "durations": [
-      642,
-      798
+      505
     ],
-    "average": 720,
-    "stdDev": 110.30865786510141
+    "average": 505,
+    "stdDev": 0
   },
   "Step 524": {
     "durations": [
-      530,
-      758
+      403
     ],
-    "average": 644,
-    "stdDev": 161.22034611053283
+    "average": 403,
+    "stdDev": 0
   },
   "Step 525": {
     "durations": [
-      905,
-      977
+      745
     ],
-    "average": 941,
-    "stdDev": 50.91168824543142
+    "average": 745,
+    "stdDev": 0
   },
   "Step 526": {
     "durations": [
-      701,
-      404
+      267
     ],
-    "average": 552.5,
-    "stdDev": 210.0107140124046
+    "average": 267,
+    "stdDev": 0
   },
   "Step 527": {
     "durations": [
-      648,
-      763
+      560
     ],
-    "average": 705.5,
-    "stdDev": 81.31727983645297
+    "average": 560,
+    "stdDev": 0
   },
   "Step 528": {
     "durations": [
-      573,
-      1085
+      724
     ],
-    "average": 829,
-    "stdDev": 362.03867196751236
+    "average": 724,
+    "stdDev": 0
   },
   "Step 529": {
     "durations": [
-      856,
-      591
+      844
     ],
-    "average": 723.5,
-    "stdDev": 187.3832970144351
+    "average": 844,
+    "stdDev": 0
   },
   "Step 530": {
     "durations": [
-      279,
-      572
+      632
     ],
-    "average": 425.5,
-    "stdDev": 207.18228688765842
+    "average": 632,
+    "stdDev": 0
   },
   "Step 531": {
     "durations": [
-      568,
-      860
+      514
     ],
-    "average": 714,
-    "stdDev": 206.47518010647187
+    "average": 514,
+    "stdDev": 0
   },
   "Step 532": {
     "durations": [
-      961,
-      684
+      119
     ],
-    "average": 822.5,
-    "stdDev": 195.86857838867365
+    "average": 119,
+    "stdDev": 0
   },
   "Step 533": {
     "durations": [
-      917,
-      439
+      472
     ],
-    "average": 678,
-    "stdDev": 337.9970414071697
+    "average": 472,
+    "stdDev": 0
   },
   "Step 534": {
     "durations": [
-      760,
-      618
+      761
     ],
-    "average": 689,
-    "stdDev": 100.40916292848975
+    "average": 761,
+    "stdDev": 0
   },
   "Step 535": {
     "durations": [
-      1053,
-      341
+      348
     ],
-    "average": 697,
-    "stdDev": 503.4600282048218
+    "average": 348,
+    "stdDev": 0
   },
   "Step 536": {
     "durations": [
-      190,
-      493
+      490
     ],
-    "average": 341.5,
-    "stdDev": 214.2533546995239
+    "average": 490,
+    "stdDev": 0
   },
   "Step 537": {
     "durations": [
-      326,
-      1025
+      418
     ],
-    "average": 675.5,
-    "stdDev": 494.26764004939673
+    "average": 418,
+    "stdDev": 0
   },
   "Step 538": {
     "durations": [
-      574,
-      1074
+      891
     ],
-    "average": 824,
-    "stdDev": 353.5533905932738
+    "average": 891,
+    "stdDev": 0
   },
   "Step 539": {
     "durations": [
-      279,
-      241
+      631
     ],
-    "average": 260,
-    "stdDev": 26.870057685088806
+    "average": 631,
+    "stdDev": 0
   },
   "Step 540": {
     "durations": [
-      452,
-      633
+      1046
     ],
-    "average": 542.5,
-    "stdDev": 127.9863273947651
+    "average": 1046,
+    "stdDev": 0
   },
   "Step 541": {
     "durations": [
-      387,
-      1098
+      406
     ],
-    "average": 742.5,
-    "stdDev": 502.7529214236353
+    "average": 406,
+    "stdDev": 0
   },
   "Step 542": {
     "durations": [
-      131,
-      238
+      373
     ],
-    "average": 184.5,
-    "stdDev": 75.66042558696059
+    "average": 373,
+    "stdDev": 0
   },
   "Step 543": {
     "durations": [
-      726,
-      473
+      344
     ],
-    "average": 599.5,
-    "stdDev": 178.89801564019652
+    "average": 344,
+    "stdDev": 0
   },
   "Step 544": {
     "durations": [
-      121,
-      771
+      735
     ],
-    "average": 446,
-    "stdDev": 459.6194077712559
+    "average": 735,
+    "stdDev": 0
   },
   "Step 545": {
     "durations": [
-      379,
-      326
+      876
     ],
-    "average": 352.5,
-    "stdDev": 37.476659402887016
+    "average": 876,
+    "stdDev": 0
   },
   "Step 546": {
     "durations": [
-      549,
-      1028
+      257
     ],
-    "average": 788.5,
-    "stdDev": 338.70414818835627
+    "average": 257,
+    "stdDev": 0
   },
   "Step 547": {
     "durations": [
-      408,
-      466
+      278
     ],
-    "average": 437,
-    "stdDev": 41.012193308819754
+    "average": 278,
+    "stdDev": 0
   },
   "Step 548": {
     "durations": [
-      680,
-      889
+      281
     ],
-    "average": 784.5,
-    "stdDev": 147.78531726798843
+    "average": 281,
+    "stdDev": 0
   },
   "Step 549": {
     "durations": [
-      731,
-      288
+      221
     ],
-    "average": 509.5,
-    "stdDev": 313.2483040656405
+    "average": 221,
+    "stdDev": 0
   },
   "Step 550": {
     "durations": [
-      348,
-      953
+      467
     ],
-    "average": 650.5,
-    "stdDev": 427.79960261786124
+    "average": 467,
+    "stdDev": 0
   },
   "Step 551": {
     "durations": [
-      848,
-      391
+      981
     ],
-    "average": 619.5,
-    "stdDev": 323.1477990022522
+    "average": 981,
+    "stdDev": 0
   },
   "Step 552": {
     "durations": [
-      420,
-      550
+      401
     ],
-    "average": 485,
-    "stdDev": 91.92388155425118
+    "average": 401,
+    "stdDev": 0
   },
   "Step 553": {
     "durations": [
-      418,
-      1082
+      570
     ],
-    "average": 750,
-    "stdDev": 469.51890270786754
+    "average": 570,
+    "stdDev": 0
   },
   "Step 554": {
     "durations": [
-      320,
-      802
+      317
     ],
-    "average": 561,
-    "stdDev": 340.82546853191593
+    "average": 317,
+    "stdDev": 0
   },
   "Step 555": {
     "durations": [
-      886,
-      859
+      1028
     ],
-    "average": 872.5,
-    "stdDev": 19.091883092036785
+    "average": 1028,
+    "stdDev": 0
   },
   "Step 556": {
     "durations": [
-      168,
-      956
+      409
     ],
-    "average": 562,
-    "stdDev": 557.2001435749994
+    "average": 409,
+    "stdDev": 0
   },
   "Step 557": {
     "durations": [
-      535,
-      1015
+      310
     ],
-    "average": 775,
-    "stdDev": 339.4112549695428
+    "average": 310,
+    "stdDev": 0
   },
   "Step 558": {
     "durations": [
-      312,
-      556
+      995
     ],
-    "average": 434,
-    "stdDev": 172.5340546095176
+    "average": 995,
+    "stdDev": 0
   },
   "Step 559": {
     "durations": [
-      438,
-      949
+      175
     ],
-    "average": 693.5,
-    "stdDev": 361.3315651863258
+    "average": 175,
+    "stdDev": 0
   },
   "Step 560": {
     "durations": [
-      276,
-      813
+      414
     ],
-    "average": 544.5,
-    "stdDev": 379.716341497176
+    "average": 414,
+    "stdDev": 0
   },
   "Step 561": {
     "durations": [
-      857,
-      601
+      1011
     ],
-    "average": 729,
-    "stdDev": 181.01933598375618
+    "average": 1011,
+    "stdDev": 0
   },
   "Step 562": {
     "durations": [
-      993,
-      807
+      1052
     ],
-    "average": 900,
-    "stdDev": 131.52186130069785
+    "average": 1052,
+    "stdDev": 0
   },
   "Step 563": {
     "durations": [
-      1020,
-      1055
+      172
     ],
-    "average": 1037.5,
-    "stdDev": 24.748737341529164
+    "average": 172,
+    "stdDev": 0
   },
   "Step 564": {
     "durations": [
-      789,
-      958
+      984
     ],
-    "average": 873.5,
-    "stdDev": 119.50104602052653
+    "average": 984,
+    "stdDev": 0
   },
   "Step 565": {
     "durations": [
-      969,
-      1008
+      211
     ],
-    "average": 988.5,
-    "stdDev": 27.577164466275352
+    "average": 211,
+    "stdDev": 0
   },
   "Step 566": {
     "durations": [
-      843,
-      973
+      1019
     ],
-    "average": 908,
-    "stdDev": 91.92388155425118
+    "average": 1019,
+    "stdDev": 0
   },
   "Step 567": {
     "durations": [
-      567,
-      565
+      498
     ],
-    "average": 566,
-    "stdDev": 1.4142135623730951
+    "average": 498,
+    "stdDev": 0
   },
   "Step 568": {
     "durations": [
-      1078,
-      200
+      728
     ],
-    "average": 639,
-    "stdDev": 620.8397538817887
+    "average": 728,
+    "stdDev": 0
   },
   "Step 569": {
     "durations": [
-      497,
-      735
+      130
     ],
-    "average": 616,
-    "stdDev": 168.2914139223983
+    "average": 130,
+    "stdDev": 0
   },
   "Step 570": {
     "durations": [
-      550,
-      743
+      858
     ],
-    "average": 646.5,
-    "stdDev": 136.47160876900367
+    "average": 858,
+    "stdDev": 0
   },
   "Step 571": {
     "durations": [
-      206,
-      112
+      856
     ],
-    "average": 159,
-    "stdDev": 66.46803743153546
+    "average": 856,
+    "stdDev": 0
   },
   "Step 572": {
     "durations": [
-      238,
-      648
+      816
     ],
-    "average": 443,
-    "stdDev": 289.9137802864845
+    "average": 816,
+    "stdDev": 0
   },
   "Step 573": {
     "durations": [
-      667,
-      221
+      693
     ],
-    "average": 444,
-    "stdDev": 315.3696244092002
+    "average": 693,
+    "stdDev": 0
   },
   "Step 574": {
     "durations": [
-      902,
-      919
+      928
     ],
-    "average": 910.5,
-    "stdDev": 12.020815280171307
+    "average": 928,
+    "stdDev": 0
   },
   "Step 575": {
     "durations": [
-      595,
-      679
+      779
     ],
-    "average": 637,
-    "stdDev": 59.39696961966999
+    "average": 779,
+    "stdDev": 0
   },
   "Step 576": {
     "durations": [
-      640,
-      970
+      963
     ],
-    "average": 805,
-    "stdDev": 233.3452377915607
+    "average": 963,
+    "stdDev": 0
   },
   "Step 577": {
     "durations": [
-      1036,
-      999
+      274
     ],
-    "average": 1017.5,
-    "stdDev": 26.16295090390226
+    "average": 274,
+    "stdDev": 0
   },
   "Step 578": {
     "durations": [
-      320,
-      813
+      326
     ],
-    "average": 566.5,
-    "stdDev": 348.6036431249679
+    "average": 326,
+    "stdDev": 0
   },
   "Step 579": {
     "durations": [
-      766,
-      652
+      410
     ],
-    "average": 709,
-    "stdDev": 80.61017305526642
+    "average": 410,
+    "stdDev": 0
   },
   "Step 580": {
     "durations": [
-      635,
-      320
+      1000
     ],
-    "average": 477.5,
-    "stdDev": 222.73863607376248
+    "average": 1000,
+    "stdDev": 0
   },
   "Step 581": {
     "durations": [
-      1077,
-      402
+      910
     ],
-    "average": 739.5,
-    "stdDev": 477.29707730091957
+    "average": 910,
+    "stdDev": 0
   },
   "Step 582": {
     "durations": [
-      148,
-      715
+      592
     ],
-    "average": 431.5,
-    "stdDev": 400.92954493277244
+    "average": 592,
+    "stdDev": 0
   },
   "Step 583": {
     "durations": [
-      925,
-      681
+      576
     ],
-    "average": 803,
-    "stdDev": 172.5340546095176
+    "average": 576,
+    "stdDev": 0
   },
   "Step 584": {
     "durations": [
-      679,
-      707
+      485
     ],
-    "average": 693,
-    "stdDev": 19.79898987322333
+    "average": 485,
+    "stdDev": 0
   },
   "Step 585": {
     "durations": [
-      201,
-      601
+      116
     ],
-    "average": 401,
-    "stdDev": 282.842712474619
+    "average": 116,
+    "stdDev": 0
   },
   "Step 586": {
     "durations": [
-      791,
-      1029
+      766
     ],
-    "average": 910,
-    "stdDev": 168.2914139223983
+    "average": 766,
+    "stdDev": 0
   },
   "Step 587": {
     "durations": [
-      626,
-      316
+      788
     ],
-    "average": 471,
-    "stdDev": 219.20310216782974
+    "average": 788,
+    "stdDev": 0
   },
   "Step 588": {
     "durations": [
-      455,
-      1024
+      913
     ],
-    "average": 739.5,
-    "stdDev": 402.34375849514555
+    "average": 913,
+    "stdDev": 0
   },
   "Step 589": {
     "durations": [
-      764,
-      292
+      996
     ],
-    "average": 528,
-    "stdDev": 333.75440072005046
+    "average": 996,
+    "stdDev": 0
   },
   "Step 590": {
     "durations": [
-      381,
-      177
+      186
     ],
-    "average": 279,
-    "stdDev": 144.2497833620557
+    "average": 186,
+    "stdDev": 0
   },
   "Step 591": {
     "durations": [
-      826,
-      322
+      871
     ],
-    "average": 574,
-    "stdDev": 356.38181771801993
+    "average": 871,
+    "stdDev": 0
   },
   "Step 592": {
     "durations": [
-      986,
-      901
+      265
     ],
-    "average": 943.5,
-    "stdDev": 60.10407640085654
+    "average": 265,
+    "stdDev": 0
   },
   "Step 593": {
     "durations": [
-      1006,
-      431
+      544
     ],
-    "average": 718.5,
-    "stdDev": 406.5863991822648
+    "average": 544,
+    "stdDev": 0
   },
   "Step 594": {
     "durations": [
-      162,
-      1004
+      134
     ],
-    "average": 583,
-    "stdDev": 595.383909759073
+    "average": 134,
+    "stdDev": 0
   },
   "Step 595": {
     "durations": [
-      942,
-      640
+      644
     ],
-    "average": 791,
-    "stdDev": 213.54624791833734
+    "average": 644,
+    "stdDev": 0
   },
   "Step 596": {
     "durations": [
-      114,
-      560
+      1052
     ],
-    "average": 337,
-    "stdDev": 315.3696244092002
+    "average": 1052,
+    "stdDev": 0
   },
   "Step 597": {
     "durations": [
-      609,
-      350
+      655
     ],
-    "average": 479.5,
-    "stdDev": 183.1406563273158
+    "average": 655,
+    "stdDev": 0
   },
   "Step 598": {
     "durations": [
-      778,
-      270
+      391
     ],
-    "average": 524,
-    "stdDev": 359.21024484276614
+    "average": 391,
+    "stdDev": 0
   },
   "Step 599": {
     "durations": [
-      932,
-      1069
+      304
     ],
-    "average": 1000.5,
-    "stdDev": 96.87362902255701
+    "average": 304,
+    "stdDev": 0
   },
   "Step 600": {
     "durations": [
-      633,
-      847
+      112
     ],
-    "average": 740,
-    "stdDev": 151.32085117392117
+    "average": 112,
+    "stdDev": 0
   },
   "Step 601": {
     "durations": [
-      214,
-      645
+      219
     ],
-    "average": 429.5,
-    "stdDev": 304.763022691402
+    "average": 219,
+    "stdDev": 0
   },
   "Step 602": {
     "durations": [
-      941,
-      756
+      767
     ],
-    "average": 848.5,
-    "stdDev": 130.8147545195113
+    "average": 767,
+    "stdDev": 0
   },
   "Step 603": {
     "durations": [
-      296,
-      1049
+      926
     ],
-    "average": 672.5,
-    "stdDev": 532.4514062334703
+    "average": 926,
+    "stdDev": 0
   },
   "Step 604": {
     "durations": [
-      742,
-      1090
+      164
     ],
-    "average": 916,
-    "stdDev": 246.07315985291854
+    "average": 164,
+    "stdDev": 0
   },
   "Step 605": {
     "durations": [
-      972,
-      579
+      876
     ],
-    "average": 775.5,
-    "stdDev": 277.8929650063132
+    "average": 876,
+    "stdDev": 0
   },
   "Step 606": {
     "durations": [
-      802,
-      854
+      949
     ],
-    "average": 828,
-    "stdDev": 36.76955262170047
+    "average": 949,
+    "stdDev": 0
   },
   "Step 607": {
     "durations": [
-      939,
-      672
+      391
     ],
-    "average": 805.5,
-    "stdDev": 188.79751057680818
+    "average": 391,
+    "stdDev": 0
   },
   "Step 608": {
     "durations": [
-      332,
-      592
+      873
     ],
-    "average": 462,
-    "stdDev": 183.84776310850236
+    "average": 873,
+    "stdDev": 0
   },
   "Step 609": {
     "durations": [
-      168,
-      322
+      126
     ],
-    "average": 245,
-    "stdDev": 108.89444430272832
+    "average": 126,
+    "stdDev": 0
   },
   "Step 610": {
     "durations": [
-      937,
-      684
+      261
     ],
-    "average": 810.5,
-    "stdDev": 178.89801564019652
+    "average": 261,
+    "stdDev": 0
   },
   "Step 611": {
     "durations": [
-      506,
-      727
+      956
     ],
-    "average": 616.5,
-    "stdDev": 156.27059864222701
+    "average": 956,
+    "stdDev": 0
   },
   "Step 612": {
     "durations": [
-      553,
-      202
+      890
     ],
-    "average": 377.5,
-    "stdDev": 248.19448019647817
+    "average": 890,
+    "stdDev": 0
   },
   "Step 613": {
     "durations": [
-      712,
-      778
+      286
     ],
-    "average": 745,
-    "stdDev": 46.66904755831214
+    "average": 286,
+    "stdDev": 0
   },
   "Step 614": {
     "durations": [
-      105,
-      725
+      976
     ],
-    "average": 415,
-    "stdDev": 438.4062043356595
+    "average": 976,
+    "stdDev": 0
   },
   "Step 615": {
     "durations": [
-      739,
-      475
+      1034
     ],
-    "average": 607,
-    "stdDev": 186.67619023324855
+    "average": 1034,
+    "stdDev": 0
   },
   "Step 616": {
     "durations": [
-      1088,
-      167
+      139
     ],
-    "average": 627.5,
-    "stdDev": 651.2453454728103
+    "average": 139,
+    "stdDev": 0
   },
   "Step 617": {
     "durations": [
-      916,
-      363
+      282
     ],
-    "average": 639.5,
-    "stdDev": 391.03004999616076
+    "average": 282,
+    "stdDev": 0
   },
   "Step 618": {
     "durations": [
-      870,
-      417
+      843
     ],
-    "average": 643.5,
-    "stdDev": 320.319371877506
+    "average": 843,
+    "stdDev": 0
   },
   "Step 619": {
     "durations": [
-      890,
-      372
+      971
     ],
-    "average": 631,
-    "stdDev": 366.2813126546316
+    "average": 971,
+    "stdDev": 0
   },
   "Step 620": {
     "durations": [
-      658,
-      813
+      708
     ],
-    "average": 735.5,
-    "stdDev": 109.60155108391487
+    "average": 708,
+    "stdDev": 0
   },
   "Step 621": {
     "durations": [
-      848,
-      433
+      319
     ],
-    "average": 640.5,
-    "stdDev": 293.4493141924172
+    "average": 319,
+    "stdDev": 0
   },
   "Step 622": {
     "durations": [
-      537,
-      731
+      971
     ],
-    "average": 634,
-    "stdDev": 137.17871555019022
+    "average": 971,
+    "stdDev": 0
   },
   "Step 623": {
     "durations": [
-      580,
-      702
+      603
     ],
-    "average": 641,
-    "stdDev": 86.2670273047588
+    "average": 603,
+    "stdDev": 0
   },
   "Step 624": {
     "durations": [
-      556,
-      700
+      1085
     ],
-    "average": 628,
-    "stdDev": 101.82337649086284
+    "average": 1085,
+    "stdDev": 0
   },
   "Step 625": {
     "durations": [
-      949,
-      1080
+      416
     ],
-    "average": 1014.5,
-    "stdDev": 92.63098833543772
+    "average": 416,
+    "stdDev": 0
   },
   "Step 626": {
     "durations": [
-      817,
-      406
+      531
     ],
-    "average": 611.5,
-    "stdDev": 290.62088706767105
+    "average": 531,
+    "stdDev": 0
   },
   "Step 627": {
     "durations": [
-      130,
-      378
+      366
     ],
-    "average": 254,
-    "stdDev": 175.36248173426378
+    "average": 366,
+    "stdDev": 0
   },
   "Step 628": {
     "durations": [
-      876,
-      512
+      911
     ],
-    "average": 694,
-    "stdDev": 257.3868683519033
+    "average": 911,
+    "stdDev": 0
   },
   "Step 629": {
     "durations": [
-      990,
-      201
+      693
     ],
-    "average": 595.5,
-    "stdDev": 557.907250356186
+    "average": 693,
+    "stdDev": 0
   },
   "Step 630": {
     "durations": [
-      574,
-      741
+      408
     ],
-    "average": 657.5,
-    "stdDev": 118.08683245815344
+    "average": 408,
+    "stdDev": 0
   },
   "Step 631": {
     "durations": [
-      1001,
-      1013
+      936
     ],
-    "average": 1007,
-    "stdDev": 8.48528137423857
+    "average": 936,
+    "stdDev": 0
   },
   "Step 632": {
     "durations": [
-      454,
-      312
+      886
     ],
-    "average": 383,
-    "stdDev": 100.40916292848975
+    "average": 886,
+    "stdDev": 0
   },
   "Step 633": {
     "durations": [
-      244,
-      762
+      563
     ],
-    "average": 503,
-    "stdDev": 366.2813126546316
+    "average": 563,
+    "stdDev": 0
   },
   "Step 634": {
     "durations": [
-      980,
-      470
+      690
     ],
-    "average": 725,
-    "stdDev": 360.62445840513925
+    "average": 690,
+    "stdDev": 0
   },
   "Step 635": {
     "durations": [
-      840,
-      155
+      329
     ],
-    "average": 497.5,
-    "stdDev": 484.36814511278504
+    "average": 329,
+    "stdDev": 0
   },
   "Step 636": {
     "durations": [
-      961,
-      105
+      1008
     ],
-    "average": 533,
-    "stdDev": 605.2834046956847
+    "average": 1008,
+    "stdDev": 0
   },
   "Step 637": {
     "durations": [
-      468,
-      885
+      856
     ],
-    "average": 676.5,
-    "stdDev": 294.8635277547903
+    "average": 856,
+    "stdDev": 0
   },
   "Step 638": {
     "durations": [
-      1082,
-      1024
+      919
     ],
-    "average": 1053,
-    "stdDev": 41.012193308819754
+    "average": 919,
+    "stdDev": 0
   },
   "Step 639": {
     "durations": [
-      181,
-      415
+      957
     ],
-    "average": 298,
-    "stdDev": 165.46298679765212
+    "average": 957,
+    "stdDev": 0
   },
   "Step 640": {
     "durations": [
-      1059,
-      659
+      462
     ],
-    "average": 859,
-    "stdDev": 282.842712474619
+    "average": 462,
+    "stdDev": 0
   },
   "Step 641": {
     "durations": [
-      140,
-      1032
+      555
     ],
-    "average": 586,
-    "stdDev": 630.7392488184004
+    "average": 555,
+    "stdDev": 0
   },
   "Step 642": {
     "durations": [
-      507,
-      415
+      159
     ],
-    "average": 461,
-    "stdDev": 65.05382386916237
+    "average": 159,
+    "stdDev": 0
   },
   "Step 643": {
     "durations": [
-      844,
-      752
+      416
     ],
-    "average": 798,
-    "stdDev": 65.05382386916237
+    "average": 416,
+    "stdDev": 0
   },
   "Step 644": {
     "durations": [
-      387,
-      202
+      407
     ],
-    "average": 294.5,
-    "stdDev": 130.8147545195113
+    "average": 407,
+    "stdDev": 0
   },
   "Step 645": {
     "durations": [
-      688,
-      339
+      870
     ],
-    "average": 513.5,
-    "stdDev": 246.7802666341051
+    "average": 870,
+    "stdDev": 0
   },
   "Step 646": {
     "durations": [
-      836,
-      302
+      476
     ],
-    "average": 569,
-    "stdDev": 377.59502115361636
+    "average": 476,
+    "stdDev": 0
   },
   "Step 647": {
     "durations": [
-      800,
-      720
+      614
     ],
-    "average": 760,
-    "stdDev": 56.568542494923804
+    "average": 614,
+    "stdDev": 0
   },
   "Step 648": {
     "durations": [
-      839,
-      742
+      103
     ],
-    "average": 790.5,
-    "stdDev": 68.58935777509511
+    "average": 103,
+    "stdDev": 0
   },
   "Step 649": {
     "durations": [
-      1023,
-      383
+      579
     ],
-    "average": 703,
-    "stdDev": 452.54833995939043
+    "average": 579,
+    "stdDev": 0
   },
   "Step 650": {
     "durations": [
-      625,
-      1028
+      720
     ],
-    "average": 826.5,
-    "stdDev": 284.9640328181787
+    "average": 720,
+    "stdDev": 0
   },
   "Step 651": {
     "durations": [
-      197,
-      918
+      133
     ],
-    "average": 557.5,
-    "stdDev": 509.8239892355008
+    "average": 133,
+    "stdDev": 0
   },
   "Step 652": {
     "durations": [
-      913,
-      683
+      432
     ],
-    "average": 798,
-    "stdDev": 162.63455967290594
+    "average": 432,
+    "stdDev": 0
   },
   "Step 653": {
     "durations": [
-      623,
-      247
+      989
     ],
-    "average": 435,
-    "stdDev": 265.87214972614186
+    "average": 989,
+    "stdDev": 0
   },
   "Step 654": {
     "durations": [
-      597,
-      844
+      870
     ],
-    "average": 720.5,
-    "stdDev": 174.65537495307723
+    "average": 870,
+    "stdDev": 0
   },
   "Step 655": {
     "durations": [
-      745,
-      970
+      428
     ],
-    "average": 857.5,
-    "stdDev": 159.0990257669732
+    "average": 428,
+    "stdDev": 0
   },
   "Step 656": {
     "durations": [
-      209,
-      735
+      761
     ],
-    "average": 472,
-    "stdDev": 371.938166904124
+    "average": 761,
+    "stdDev": 0
   },
   "Step 657": {
     "durations": [
-      743,
-      414
+      920
     ],
-    "average": 578.5,
-    "stdDev": 232.63813101037414
+    "average": 920,
+    "stdDev": 0
   },
   "Step 658": {
     "durations": [
-      1066,
-      851
+      911
     ],
-    "average": 958.5,
-    "stdDev": 152.02795795510772
+    "average": 911,
+    "stdDev": 0
   },
   "Step 659": {
     "durations": [
-      499,
-      1035
+      884
     ],
-    "average": 767,
-    "stdDev": 379.00923471598946
+    "average": 884,
+    "stdDev": 0
   },
   "Step 660": {
     "durations": [
-      559,
-      634
+      478
     ],
-    "average": 596.5,
-    "stdDev": 53.033008588991066
+    "average": 478,
+    "stdDev": 0
   },
   "Step 661": {
     "durations": [
-      157,
-      547
+      149
     ],
-    "average": 352,
-    "stdDev": 275.77164466275354
+    "average": 149,
+    "stdDev": 0
   },
   "Step 662": {
     "durations": [
-      1006,
-      203
+      360
     ],
-    "average": 604.5,
-    "stdDev": 567.8067452927977
+    "average": 360,
+    "stdDev": 0
   },
   "Step 663": {
     "durations": [
-      1029,
-      581
+      884
     ],
-    "average": 805,
-    "stdDev": 316.7838379715733
+    "average": 884,
+    "stdDev": 0
   },
   "Step 664": {
     "durations": [
-      932,
-      894
+      304
     ],
-    "average": 913,
-    "stdDev": 26.870057685088806
+    "average": 304,
+    "stdDev": 0
   },
   "Step 665": {
     "durations": [
-      286,
-      832
+      194
     ],
-    "average": 559,
-    "stdDev": 386.08030252785494
+    "average": 194,
+    "stdDev": 0
   },
   "Step 666": {
     "durations": [
-      972,
-      521
+      930
     ],
-    "average": 746.5,
-    "stdDev": 318.90515831513295
+    "average": 930,
+    "stdDev": 0
   },
   "Step 667": {
     "durations": [
-      1017,
-      278
+      426
     ],
-    "average": 647.5,
-    "stdDev": 522.5519112968586
+    "average": 426,
+    "stdDev": 0
   },
   "Step 668": {
     "durations": [
-      361,
-      688
+      941
     ],
-    "average": 524.5,
-    "stdDev": 231.22391744800103
+    "average": 941,
+    "stdDev": 0
   },
   "Step 669": {
     "durations": [
-      113,
-      421
+      859
     ],
-    "average": 267,
-    "stdDev": 217.78888860545663
+    "average": 859,
+    "stdDev": 0
   },
   "Step 670": {
     "durations": [
-      518,
-      648
+      534
     ],
-    "average": 583,
-    "stdDev": 91.92388155425118
+    "average": 534,
+    "stdDev": 0
   },
   "Step 671": {
     "durations": [
-      267,
-      543
+      590
     ],
-    "average": 405,
-    "stdDev": 195.16147160748713
+    "average": 590,
+    "stdDev": 0
   },
   "Step 672": {
     "durations": [
-      736,
-      417
+      731
     ],
-    "average": 576.5,
-    "stdDev": 225.56706319850866
+    "average": 731,
+    "stdDev": 0
   },
   "Step 673": {
     "durations": [
-      570,
-      370
+      633
     ],
-    "average": 470,
-    "stdDev": 141.4213562373095
+    "average": 633,
+    "stdDev": 0
   },
   "Step 674": {
     "durations": [
-      957,
-      468
+      969
     ],
-    "average": 712.5,
-    "stdDev": 345.77521600022175
+    "average": 969,
+    "stdDev": 0
   },
   "Step 675": {
     "durations": [
-      975,
-      698
+      656
     ],
-    "average": 836.5,
-    "stdDev": 195.86857838867365
+    "average": 656,
+    "stdDev": 0
   },
   "Step 676": {
     "durations": [
-      526,
-      461
+      662
     ],
-    "average": 493.5,
-    "stdDev": 45.96194077712559
+    "average": 662,
+    "stdDev": 0
   },
   "Step 677": {
     "durations": [
-      308,
-      710
+      649
     ],
-    "average": 509,
-    "stdDev": 284.2569260369921
+    "average": 649,
+    "stdDev": 0
   },
   "Step 678": {
     "durations": [
-      762,
-      198
+      861
     ],
-    "average": 480,
-    "stdDev": 398.8082245892128
+    "average": 861,
+    "stdDev": 0
   },
   "Step 679": {
     "durations": [
-      746,
-      840
+      690
     ],
-    "average": 793,
-    "stdDev": 66.46803743153546
+    "average": 690,
+    "stdDev": 0
   },
   "Step 680": {
     "durations": [
-      1006,
-      240
+      1081
     ],
-    "average": 623,
-    "stdDev": 541.6437943888955
+    "average": 1081,
+    "stdDev": 0
   },
   "Step 681": {
     "durations": [
-      600,
-      892
+      789
     ],
-    "average": 746,
-    "stdDev": 206.47518010647187
+    "average": 789,
+    "stdDev": 0
   },
   "Step 682": {
     "durations": [
-      180,
-      409
+      1096
     ],
-    "average": 294.5,
-    "stdDev": 161.92745289171938
+    "average": 1096,
+    "stdDev": 0
   },
   "Step 683": {
     "durations": [
-      716,
-      983
+      590
     ],
-    "average": 849.5,
-    "stdDev": 188.79751057680818
+    "average": 590,
+    "stdDev": 0
   },
   "Step 684": {
     "durations": [
-      406,
-      840
+      347
     ],
-    "average": 623,
-    "stdDev": 306.8843430349616
+    "average": 347,
+    "stdDev": 0
   },
   "Step 685": {
     "durations": [
-      832,
-      770
+      664
     ],
-    "average": 801,
-    "stdDev": 43.840620433565945
+    "average": 664,
+    "stdDev": 0
   },
   "Step 686": {
     "durations": [
-      347,
-      111
+      170
     ],
-    "average": 229,
-    "stdDev": 166.87720036002523
+    "average": 170,
+    "stdDev": 0
   },
   "Step 687": {
     "durations": [
-      571,
-      656
+      1007
     ],
-    "average": 613.5,
-    "stdDev": 60.10407640085654
+    "average": 1007,
+    "stdDev": 0
   },
   "Step 688": {
     "durations": [
-      185,
-      352
+      617
     ],
-    "average": 268.5,
-    "stdDev": 118.08683245815344
+    "average": 617,
+    "stdDev": 0
   },
   "Step 689": {
     "durations": [
-      259,
-      858
+      388
     ],
-    "average": 558.5,
-    "stdDev": 423.556961930742
+    "average": 388,
+    "stdDev": 0
   },
   "Step 690": {
     "durations": [
-      398,
-      547
+      888
     ],
-    "average": 472.5,
-    "stdDev": 105.35891039679558
+    "average": 888,
+    "stdDev": 0
   },
   "Step 691": {
     "durations": [
-      646,
-      379
+      915
     ],
-    "average": 512.5,
-    "stdDev": 188.79751057680818
+    "average": 915,
+    "stdDev": 0
   },
   "Step 692": {
     "durations": [
-      741,
-      637
+      234
     ],
-    "average": 689,
-    "stdDev": 73.53910524340094
+    "average": 234,
+    "stdDev": 0
   },
   "Step 693": {
     "durations": [
-      352,
-      516
+      841
     ],
-    "average": 434,
-    "stdDev": 115.96551211459379
+    "average": 841,
+    "stdDev": 0
   },
   "Step 694": {
     "durations": [
-      191,
-      300
+      571
     ],
-    "average": 245.5,
-    "stdDev": 77.07463914933368
+    "average": 571,
+    "stdDev": 0
   },
   "Step 695": {
     "durations": [
-      478,
-      763
+      664
     ],
-    "average": 620.5,
-    "stdDev": 201.52543263816605
+    "average": 664,
+    "stdDev": 0
   },
   "Step 696": {
     "durations": [
-      285,
-      594
+      405
     ],
-    "average": 439.5,
-    "stdDev": 218.4959953866432
+    "average": 405,
+    "stdDev": 0
   },
   "Step 697": {
     "durations": [
-      569,
-      653
+      475
     ],
-    "average": 611,
-    "stdDev": 59.39696961966999
+    "average": 475,
+    "stdDev": 0
   },
   "Step 698": {
     "durations": [
-      968,
-      765
+      134
     ],
-    "average": 866.5,
-    "stdDev": 143.54267658086914
+    "average": 134,
+    "stdDev": 0
   },
   "Step 699": {
     "durations": [
-      691,
-      664
+      194
     ],
-    "average": 677.5,
-    "stdDev": 19.091883092036785
+    "average": 194,
+    "stdDev": 0
   },
   "Step 700": {
     "durations": [
-      614,
-      361
+      936
     ],
-    "average": 487.5,
-    "stdDev": 178.89801564019652
+    "average": 936,
+    "stdDev": 0
   },
   "Step 701": {
     "durations": [
-      551,
-      717
+      923
     ],
-    "average": 634,
-    "stdDev": 117.37972567696688
+    "average": 923,
+    "stdDev": 0
   },
   "Step 702": {
     "durations": [
-      695,
-      958
+      931
     ],
-    "average": 826.5,
-    "stdDev": 185.969083452062
+    "average": 931,
+    "stdDev": 0
   },
   "Step 703": {
     "durations": [
-      221,
-      140
+      521
     ],
-    "average": 180.5,
-    "stdDev": 57.27564927611035
+    "average": 521,
+    "stdDev": 0
   },
   "Step 704": {
     "durations": [
-      1089,
-      903
+      1006
     ],
-    "average": 996,
-    "stdDev": 131.52186130069785
+    "average": 1006,
+    "stdDev": 0
   },
   "Step 705": {
     "durations": [
-      1077,
-      742
+      416
     ],
-    "average": 909.5,
-    "stdDev": 236.88077169749343
+    "average": 416,
+    "stdDev": 0
   },
   "Step 706": {
     "durations": [
-      883,
-      292
+      996
     ],
-    "average": 587.5,
-    "stdDev": 417.9001076812496
+    "average": 996,
+    "stdDev": 0
   },
   "Step 707": {
     "durations": [
-      249,
-      629
+      158
     ],
-    "average": 439,
-    "stdDev": 268.70057685088807
+    "average": 158,
+    "stdDev": 0
   },
   "Step 708": {
     "durations": [
-      694,
-      936
+      630
     ],
-    "average": 815,
-    "stdDev": 171.1198410471445
+    "average": 630,
+    "stdDev": 0
   },
   "Step 709": {
     "durations": [
-      945,
-      447
+      131
     ],
-    "average": 696,
-    "stdDev": 352.13917703090067
+    "average": 131,
+    "stdDev": 0
   },
   "Step 710": {
     "durations": [
-      480,
-      659
+      132
     ],
-    "average": 569.5,
-    "stdDev": 126.572113832392
+    "average": 132,
+    "stdDev": 0
   },
   "Step 711": {
     "durations": [
-      949,
-      315
+      1062
     ],
-    "average": 632,
-    "stdDev": 448.3056992722711
+    "average": 1062,
+    "stdDev": 0
   },
   "Step 712": {
     "durations": [
-      899,
-      658
+      1065
     ],
-    "average": 778.5,
-    "stdDev": 170.41273426595797
+    "average": 1065,
+    "stdDev": 0
   },
   "Step 713": {
     "durations": [
-      211,
-      770
+      463
     ],
-    "average": 490.5,
-    "stdDev": 395.2726906832801
+    "average": 463,
+    "stdDev": 0
   },
   "Step 714": {
     "durations": [
-      145,
-      165
+      232
     ],
-    "average": 155,
-    "stdDev": 14.142135623730951
+    "average": 232,
+    "stdDev": 0
   },
   "Step 715": {
     "durations": [
-      212,
-      907
+      233
     ],
-    "average": 559.5,
-    "stdDev": 491.4392129246505
+    "average": 233,
+    "stdDev": 0
   },
   "Step 716": {
     "durations": [
-      1005,
-      1056
+      230
     ],
-    "average": 1030.5,
-    "stdDev": 36.062445840513924
+    "average": 230,
+    "stdDev": 0
   },
   "Step 717": {
     "durations": [
-      697,
-      1099
+      763
     ],
-    "average": 898,
-    "stdDev": 284.2569260369921
+    "average": 763,
+    "stdDev": 0
   },
   "Step 718": {
     "durations": [
-      183,
-      975
+      778
     ],
-    "average": 579,
-    "stdDev": 560.0285706997456
+    "average": 778,
+    "stdDev": 0
   },
   "Step 719": {
     "durations": [
-      712,
-      746
+      114
     ],
-    "average": 729,
-    "stdDev": 24.041630560342615
+    "average": 114,
+    "stdDev": 0
   },
   "Step 720": {
     "durations": [
-      570,
-      135
+      113
     ],
-    "average": 352.5,
-    "stdDev": 307.59144981614816
+    "average": 113,
+    "stdDev": 0
   },
   "Step 721": {
     "durations": [
-      682,
-      583
+      449
     ],
-    "average": 632.5,
-    "stdDev": 70.0035713374682
+    "average": 449,
+    "stdDev": 0
   },
   "Step 722": {
     "durations": [
-      836,
-      327
+      703
     ],
-    "average": 581.5,
-    "stdDev": 359.9173516239527
+    "average": 703,
+    "stdDev": 0
   },
   "Step 723": {
     "durations": [
-      622,
-      105
+      427
     ],
-    "average": 363.5,
-    "stdDev": 365.57420587344507
+    "average": 427,
+    "stdDev": 0
   },
   "Step 724": {
     "durations": [
-      828,
-      462
+      876
     ],
-    "average": 645,
-    "stdDev": 258.8010819142764
+    "average": 876,
+    "stdDev": 0
   },
   "Step 725": {
     "durations": [
-      633,
-      489
+      490
     ],
-    "average": 561,
-    "stdDev": 101.82337649086284
+    "average": 490,
+    "stdDev": 0
   },
   "Step 726": {
     "durations": [
-      676,
-      996
+      415
     ],
-    "average": 836,
-    "stdDev": 226.27416997969522
+    "average": 415,
+    "stdDev": 0
   },
   "Step 727": {
     "durations": [
-      680,
-      164
+      660
     ],
-    "average": 422,
-    "stdDev": 364.8670990922585
+    "average": 660,
+    "stdDev": 0
   },
   "Step 728": {
     "durations": [
-      694,
-      325
+      521
     ],
-    "average": 509.5,
-    "stdDev": 260.92240225783604
+    "average": 521,
+    "stdDev": 0
   },
   "Step 729": {
     "durations": [
-      920,
-      264
+      757
     ],
-    "average": 592,
-    "stdDev": 463.86204845837517
+    "average": 757,
+    "stdDev": 0
   },
   "Step 730": {
     "durations": [
-      880,
-      988
+      829
     ],
-    "average": 934,
-    "stdDev": 76.36753236814714
+    "average": 829,
+    "stdDev": 0
   },
   "Step 731": {
     "durations": [
-      974,
-      724
+      694
     ],
-    "average": 849,
-    "stdDev": 176.7766952966369
+    "average": 694,
+    "stdDev": 0
   },
   "Step 732": {
     "durations": [
-      633,
-      831
+      610
     ],
-    "average": 732,
-    "stdDev": 140.0071426749364
+    "average": 610,
+    "stdDev": 0
   },
   "Step 733": {
     "durations": [
-      369,
-      605
+      548
     ],
-    "average": 487,
-    "stdDev": 166.87720036002523
+    "average": 548,
+    "stdDev": 0
   },
   "Step 734": {
     "durations": [
-      1043,
-      705
+      559
     ],
-    "average": 874,
-    "stdDev": 239.00209204105306
+    "average": 559,
+    "stdDev": 0
   },
   "Step 735": {
     "durations": [
-      1044,
-      689
+      914
     ],
-    "average": 866.5,
-    "stdDev": 251.02290732122438
+    "average": 914,
+    "stdDev": 0
   },
   "Step 736": {
     "durations": [
-      226,
-      657
+      388
     ],
-    "average": 441.5,
-    "stdDev": 304.763022691402
+    "average": 388,
+    "stdDev": 0
   },
   "Step 737": {
     "durations": [
-      1037,
-      1031
+      611
     ],
-    "average": 1034,
-    "stdDev": 4.242640687119285
+    "average": 611,
+    "stdDev": 0
   },
   "Step 738": {
     "durations": [
-      194,
-      663
+      558
     ],
-    "average": 428.5,
-    "stdDev": 331.6330803764908
+    "average": 558,
+    "stdDev": 0
   },
   "Step 739": {
     "durations": [
-      645,
-      239
+      316
     ],
-    "average": 442,
-    "stdDev": 287.0853531617383
+    "average": 316,
+    "stdDev": 0
   },
   "Step 740": {
     "durations": [
-      329,
-      677
+      733
     ],
-    "average": 503,
-    "stdDev": 246.07315985291854
+    "average": 733,
+    "stdDev": 0
   },
   "Step 741": {
     "durations": [
-      767,
-      133
+      466
     ],
-    "average": 450,
-    "stdDev": 448.3056992722711
+    "average": 466,
+    "stdDev": 0
   },
   "Step 742": {
     "durations": [
-      544,
-      702
+      587
     ],
-    "average": 623,
-    "stdDev": 111.72287142747452
+    "average": 587,
+    "stdDev": 0
   },
   "Step 743": {
     "durations": [
-      713,
-      353
+      979
     ],
-    "average": 533,
-    "stdDev": 254.55844122715712
+    "average": 979,
+    "stdDev": 0
   },
   "Step 744": {
     "durations": [
-      145,
-      755
+      1036
     ],
-    "average": 450,
-    "stdDev": 431.335136523794
+    "average": 1036,
+    "stdDev": 0
   },
   "Step 745": {
     "durations": [
-      780,
-      996
+      731
     ],
-    "average": 888,
-    "stdDev": 152.73506473629428
+    "average": 731,
+    "stdDev": 0
   },
   "Step 746": {
     "durations": [
-      863,
-      661
+      413
     ],
-    "average": 762,
-    "stdDev": 142.8355697996826
+    "average": 413,
+    "stdDev": 0
   },
   "Step 747": {
     "durations": [
-      800,
-      194
+      876
     ],
-    "average": 497,
-    "stdDev": 428.5067093990478
+    "average": 876,
+    "stdDev": 0
   },
   "Step 748": {
     "durations": [
-      483,
-      776
+      858
     ],
-    "average": 629.5,
-    "stdDev": 207.18228688765842
+    "average": 858,
+    "stdDev": 0
   },
   "Step 749": {
     "durations": [
-      765,
-      259
+      1091
     ],
-    "average": 512,
-    "stdDev": 357.79603128039304
+    "average": 1091,
+    "stdDev": 0
   },
   "Step 750": {
     "durations": [
-      109,
-      802
+      505
     ],
-    "average": 455.5,
-    "stdDev": 490.0249993622774
+    "average": 505,
+    "stdDev": 0
   },
   "Step 751": {
     "durations": [
-      516,
-      1031
+      793
     ],
-    "average": 773.5,
-    "stdDev": 364.15999231107196
+    "average": 793,
+    "stdDev": 0
   },
   "Step 752": {
     "durations": [
-      715,
-      690
+      585
     ],
-    "average": 702.5,
-    "stdDev": 17.67766952966369
+    "average": 585,
+    "stdDev": 0
   },
   "Step 753": {
     "durations": [
-      473,
-      470
+      381
     ],
-    "average": 471.5,
-    "stdDev": 2.1213203435596424
+    "average": 381,
+    "stdDev": 0
   },
   "Step 754": {
     "durations": [
-      390,
-      1026
+      1017
     ],
-    "average": 708,
-    "stdDev": 449.7199128346442
+    "average": 1017,
+    "stdDev": 0
   },
   "Step 755": {
     "durations": [
-      1002,
-      549
+      497
     ],
-    "average": 775.5,
-    "stdDev": 320.319371877506
+    "average": 497,
+    "stdDev": 0
   },
   "Step 756": {
     "durations": [
-      214,
-      534
+      1011
     ],
-    "average": 374,
-    "stdDev": 226.27416997969522
+    "average": 1011,
+    "stdDev": 0
   },
   "Step 757": {
     "durations": [
-      875,
-      1082
+      1069
     ],
-    "average": 978.5,
-    "stdDev": 146.37110370561533
+    "average": 1069,
+    "stdDev": 0
   },
   "Step 758": {
     "durations": [
-      888,
-      918
+      843
     ],
-    "average": 903,
-    "stdDev": 21.213203435596427
+    "average": 843,
+    "stdDev": 0
   },
   "Step 759": {
     "durations": [
-      987,
-      817
+      993
     ],
-    "average": 902,
-    "stdDev": 120.20815280171308
+    "average": 993,
+    "stdDev": 0
   },
   "Step 760": {
     "durations": [
-      1000,
-      639
+      872
     ],
-    "average": 819.5,
-    "stdDev": 255.26554800834364
+    "average": 872,
+    "stdDev": 0
   },
   "Step 761": {
     "durations": [
-      656,
-      163
+      183
     ],
-    "average": 409.5,
-    "stdDev": 348.6036431249679
+    "average": 183,
+    "stdDev": 0
   },
   "Step 762": {
     "durations": [
-      451,
-      978
+      480
     ],
-    "average": 714.5,
-    "stdDev": 372.64527368531054
+    "average": 480,
+    "stdDev": 0
   },
   "Step 763": {
     "durations": [
-      150,
-      138
+      854
     ],
-    "average": 144,
-    "stdDev": 8.48528137423857
+    "average": 854,
+    "stdDev": 0
   },
   "Step 764": {
     "durations": [
-      133,
-      498
+      900
     ],
-    "average": 315.5,
-    "stdDev": 258.0939751330898
+    "average": 900,
+    "stdDev": 0
   },
   "Step 765": {
     "durations": [
-      610,
-      786
+      833
     ],
-    "average": 698,
-    "stdDev": 124.45079348883236
+    "average": 833,
+    "stdDev": 0
   },
   "Step 766": {
     "durations": [
-      907,
-      242
+      121
     ],
-    "average": 574.5,
-    "stdDev": 470.2260094890541
+    "average": 121,
+    "stdDev": 0
   },
   "Step 767": {
     "durations": [
-      551,
-      420
+      530
     ],
-    "average": 485.5,
-    "stdDev": 92.63098833543772
+    "average": 530,
+    "stdDev": 0
   },
   "Step 768": {
     "durations": [
-      458,
-      529
+      661
     ],
-    "average": 493.5,
-    "stdDev": 50.204581464244875
+    "average": 661,
+    "stdDev": 0
   },
   "Step 769": {
     "durations": [
-      160,
-      1028
+      303
     ],
-    "average": 594,
-    "stdDev": 613.7686860699232
+    "average": 303,
+    "stdDev": 0
   },
   "Step 770": {
     "durations": [
-      857,
-      511
+      174
     ],
-    "average": 684,
-    "stdDev": 244.65894629054543
+    "average": 174,
+    "stdDev": 0
   },
   "Step 771": {
     "durations": [
-      332,
-      678
+      187
     ],
-    "average": 505,
-    "stdDev": 244.65894629054543
+    "average": 187,
+    "stdDev": 0
   },
   "Step 772": {
     "durations": [
-      108,
-      787
+      479
     ],
-    "average": 447.5,
-    "stdDev": 480.1255044256658
+    "average": 479,
+    "stdDev": 0
   },
   "Step 773": {
     "durations": [
-      576,
-      364
+      187
     ],
-    "average": 470,
-    "stdDev": 149.90663761154806
+    "average": 187,
+    "stdDev": 0
   },
   "Step 774": {
     "durations": [
-      765,
-      514
+      833
     ],
-    "average": 639.5,
-    "stdDev": 177.48380207782344
+    "average": 833,
+    "stdDev": 0
   },
   "Step 775": {
     "durations": [
-      645,
-      799
+      683
     ],
-    "average": 722,
-    "stdDev": 108.89444430272832
+    "average": 683,
+    "stdDev": 0
   },
   "Step 776": {
     "durations": [
-      969,
-      317
+      820
     ],
-    "average": 643,
-    "stdDev": 461.033621333629
+    "average": 820,
+    "stdDev": 0
   },
   "Step 777": {
     "durations": [
-      446,
-      533
+      943
     ],
-    "average": 489.5,
-    "stdDev": 61.518289963229634
+    "average": 943,
+    "stdDev": 0
   },
   "Step 778": {
     "durations": [
-      278,
-      665
+      908
     ],
-    "average": 471.5,
-    "stdDev": 273.6503243191939
+    "average": 908,
+    "stdDev": 0
   },
   "Step 779": {
     "durations": [
-      501,
-      536
+      185
     ],
-    "average": 518.5,
-    "stdDev": 24.748737341529164
+    "average": 185,
+    "stdDev": 0
   },
   "Step 780": {
     "durations": [
-      729,
-      379
+      100
     ],
-    "average": 554,
-    "stdDev": 247.48737341529164
+    "average": 100,
+    "stdDev": 0
   },
   "Step 781": {
     "durations": [
-      335,
-      622
+      1004
     ],
-    "average": 478.5,
-    "stdDev": 202.93964620053913
+    "average": 1004,
+    "stdDev": 0
   },
   "Step 782": {
     "durations": [
-      385,
-      213
+      1023
     ],
-    "average": 299,
-    "stdDev": 121.62236636408618
+    "average": 1023,
+    "stdDev": 0
   },
   "Step 783": {
     "durations": [
-      614,
-      711
+      663
     ],
-    "average": 662.5,
-    "stdDev": 68.58935777509511
+    "average": 663,
+    "stdDev": 0
   },
   "Step 784": {
     "durations": [
-      326,
-      163
+      835
     ],
-    "average": 244.5,
-    "stdDev": 115.25840533340725
+    "average": 835,
+    "stdDev": 0
   },
   "Step 785": {
     "durations": [
-      178,
-      459
+      1022
     ],
-    "average": 318.5,
-    "stdDev": 198.69700551341987
+    "average": 1022,
+    "stdDev": 0
   },
   "Step 786": {
     "durations": [
-      115,
-      130
+      823
     ],
-    "average": 122.5,
-    "stdDev": 10.606601717798213
+    "average": 823,
+    "stdDev": 0
   },
   "Step 787": {
     "durations": [
-      234,
-      858
+      439
     ],
-    "average": 546,
-    "stdDev": 441.23463146040564
+    "average": 439,
+    "stdDev": 0
   },
   "Step 788": {
     "durations": [
-      825,
-      747
+      168
     ],
-    "average": 786,
-    "stdDev": 55.154328932550705
+    "average": 168,
+    "stdDev": 0
   },
   "Step 789": {
     "durations": [
-      808,
-      676
+      732
     ],
-    "average": 742,
-    "stdDev": 93.33809511662427
+    "average": 732,
+    "stdDev": 0
   },
   "Step 790": {
     "durations": [
-      211,
-      497
+      593
     ],
-    "average": 354,
-    "stdDev": 202.2325394193526
+    "average": 593,
+    "stdDev": 0
   },
   "Step 791": {
     "durations": [
-      427,
-      679
+      1080
     ],
-    "average": 553,
-    "stdDev": 178.19090885900997
+    "average": 1080,
+    "stdDev": 0
   },
   "Step 792": {
     "durations": [
-      186,
-      764
+      475
     ],
     "average": 475,
-    "stdDev": 408.7077195258245
+    "stdDev": 0
   },
   "Step 793": {
     "durations": [
-      522,
-      1045
+      197
     ],
-    "average": 783.5,
-    "stdDev": 369.81684656056433
+    "average": 197,
+    "stdDev": 0
   },
   "Step 794": {
     "durations": [
-      506,
-      868
+      746
     ],
-    "average": 687,
-    "stdDev": 255.9726547895302
+    "average": 746,
+    "stdDev": 0
   },
   "Step 795": {
     "durations": [
-      919,
-      700
+      529
     ],
-    "average": 809.5,
-    "stdDev": 154.8563850798539
+    "average": 529,
+    "stdDev": 0
   },
   "Step 796": {
     "durations": [
-      689,
-      320
+      581
     ],
-    "average": 504.5,
-    "stdDev": 260.92240225783604
+    "average": 581,
+    "stdDev": 0
   },
   "Step 797": {
     "durations": [
-      453,
-      484
+      443
     ],
-    "average": 468.5,
-    "stdDev": 21.920310216782973
+    "average": 443,
+    "stdDev": 0
   },
   "Step 798": {
     "durations": [
-      1016,
-      853
+      681
     ],
-    "average": 934.5,
-    "stdDev": 115.25840533340725
+    "average": 681,
+    "stdDev": 0
   },
   "Step 799": {
     "durations": [
-      1048,
-      670
+      728
     ],
-    "average": 859,
-    "stdDev": 267.28636328851496
+    "average": 728,
+    "stdDev": 0
   },
   "Step 800": {
     "durations": [
-      487,
-      219
+      531
     ],
-    "average": 353,
-    "stdDev": 189.50461735799473
+    "average": 531,
+    "stdDev": 0
   },
   "Step 801": {
     "durations": [
-      203,
-      588
+      233
     ],
-    "average": 395.5,
-    "stdDev": 272.2361107568208
+    "average": 233,
+    "stdDev": 0
   },
   "Step 802": {
     "durations": [
-      1033,
-      256
+      512
     ],
-    "average": 644.5,
-    "stdDev": 549.4219689819474
+    "average": 512,
+    "stdDev": 0
   },
   "Step 803": {
     "durations": [
-      1090,
-      729
+      964
     ],
-    "average": 909.5,
-    "stdDev": 255.26554800834364
+    "average": 964,
+    "stdDev": 0
   },
   "Step 804": {
     "durations": [
-      232,
-      722
+      1003
     ],
-    "average": 477,
-    "stdDev": 346.4823227814083
+    "average": 1003,
+    "stdDev": 0
   },
   "Step 805": {
     "durations": [
-      782,
-      797
+      1030
     ],
-    "average": 789.5,
-    "stdDev": 10.606601717798213
+    "average": 1030,
+    "stdDev": 0
   },
   "Step 806": {
     "durations": [
-      1084,
-      1020
+      648
     ],
-    "average": 1052,
-    "stdDev": 45.254833995939045
+    "average": 648,
+    "stdDev": 0
   },
   "Step 807": {
     "durations": [
-      960,
-      961
+      633
     ],
-    "average": 960.5,
-    "stdDev": 0.7071067811865476
+    "average": 633,
+    "stdDev": 0
   },
   "Step 808": {
     "durations": [
-      141,
-      307
+      893
     ],
-    "average": 224,
-    "stdDev": 117.37972567696688
+    "average": 893,
+    "stdDev": 0
   },
   "Step 809": {
     "durations": [
-      234,
-      370
+      672
     ],
-    "average": 302,
-    "stdDev": 96.16652224137046
+    "average": 672,
+    "stdDev": 0
   },
   "Step 810": {
     "durations": [
-      825,
-      648
+      994
     ],
-    "average": 736.5,
-    "stdDev": 125.15790027001891
+    "average": 994,
+    "stdDev": 0
   },
   "Step 811": {
     "durations": [
-      1052,
-      744
+      135
     ],
-    "average": 898,
-    "stdDev": 217.78888860545663
+    "average": 135,
+    "stdDev": 0
   },
   "Step 812": {
     "durations": [
-      784,
-      249
+      736
     ],
-    "average": 516.5,
-    "stdDev": 378.3021279348029
+    "average": 736,
+    "stdDev": 0
   },
   "Step 813": {
     "durations": [
-      196,
-      1033
+      250
     ],
-    "average": 614.5,
-    "stdDev": 591.8483758531403
+    "average": 250,
+    "stdDev": 0
   },
   "Step 814": {
     "durations": [
-      476,
-      289
+      219
     ],
-    "average": 382.5,
-    "stdDev": 132.22896808188437
+    "average": 219,
+    "stdDev": 0
   },
   "Step 815": {
     "durations": [
-      608,
-      277
+      692
     ],
-    "average": 442.5,
-    "stdDev": 234.05234457274722
+    "average": 692,
+    "stdDev": 0
   },
   "Step 816": {
     "durations": [
-      874,
-      934
+      737
     ],
-    "average": 904,
-    "stdDev": 42.42640687119285
+    "average": 737,
+    "stdDev": 0
   },
   "Step 817": {
     "durations": [
-      730,
-      558
+      832
     ],
-    "average": 644,
-    "stdDev": 121.62236636408618
+    "average": 832,
+    "stdDev": 0
   },
   "Step 818": {
     "durations": [
-      675,
-      336
+      801
     ],
-    "average": 505.5,
-    "stdDev": 239.7091988222396
+    "average": 801,
+    "stdDev": 0
   },
   "Step 819": {
     "durations": [
-      672,
-      730
+      536
     ],
-    "average": 701,
-    "stdDev": 41.012193308819754
+    "average": 536,
+    "stdDev": 0
   },
   "Step 820": {
     "durations": [
-      1073,
-      775
+      391
     ],
-    "average": 924,
-    "stdDev": 210.71782079359116
+    "average": 391,
+    "stdDev": 0
   },
   "Step 821": {
     "durations": [
-      908,
-      998
+      178
     ],
-    "average": 953,
-    "stdDev": 63.63961030678928
+    "average": 178,
+    "stdDev": 0
   },
   "Step 822": {
     "durations": [
-      252,
-      543
+      392
     ],
-    "average": 397.5,
-    "stdDev": 205.76807332528534
+    "average": 392,
+    "stdDev": 0
   },
   "Step 823": {
     "durations": [
-      905,
-      1092
+      881
     ],
-    "average": 998.5,
-    "stdDev": 132.22896808188437
+    "average": 881,
+    "stdDev": 0
   },
   "Step 824": {
     "durations": [
-      707,
-      403
+      378
     ],
-    "average": 555,
-    "stdDev": 214.96046148071045
+    "average": 378,
+    "stdDev": 0
   },
   "Step 825": {
     "durations": [
-      923,
-      465
+      203
     ],
-    "average": 694,
-    "stdDev": 323.85490578343877
+    "average": 203,
+    "stdDev": 0
   },
   "Step 826": {
     "durations": [
-      331,
-      679
+      432
     ],
-    "average": 505,
-    "stdDev": 246.07315985291854
+    "average": 432,
+    "stdDev": 0
   },
   "Step 827": {
     "durations": [
-      617,
-      341
+      141
     ],
-    "average": 479,
-    "stdDev": 195.16147160748713
+    "average": 141,
+    "stdDev": 0
   },
   "Step 828": {
     "durations": [
-      487,
-      337
+      103
     ],
-    "average": 412,
-    "stdDev": 106.06601717798213
+    "average": 103,
+    "stdDev": 0
   },
   "Step 829": {
     "durations": [
-      994,
-      776
+      994
     ],
-    "average": 885,
-    "stdDev": 154.14927829866735
+    "average": 994,
+    "stdDev": 0
   },
   "Step 830": {
     "durations": [
-      1024,
-      390
+      660
     ],
-    "average": 707,
-    "stdDev": 448.3056992722711
+    "average": 660,
+    "stdDev": 0
   },
   "Step 831": {
     "durations": [
-      907,
-      102
+      833
     ],
-    "average": 504.5,
-    "stdDev": 569.2209588551708
+    "average": 833,
+    "stdDev": 0
   },
   "Step 832": {
     "durations": [
-      1067,
-      994
+      788
     ],
-    "average": 1030.5,
-    "stdDev": 51.61879502661797
+    "average": 788,
+    "stdDev": 0
   },
   "Step 833": {
     "durations": [
-      1097,
-      619
+      101
     ],
-    "average": 858,
-    "stdDev": 337.9970414071697
+    "average": 101,
+    "stdDev": 0
   },
   "Step 834": {
     "durations": [
-      815,
-      589
+      853
     ],
-    "average": 702,
-    "stdDev": 159.80613254815975
+    "average": 853,
+    "stdDev": 0
   },
   "Step 835": {
     "durations": [
-      1020,
-      421
+      140
     ],
-    "average": 720.5,
-    "stdDev": 423.556961930742
+    "average": 140,
+    "stdDev": 0
   },
   "Step 836": {
     "durations": [
-      1064,
-      327
+      913
     ],
-    "average": 695.5,
-    "stdDev": 521.1376977344855
+    "average": 913,
+    "stdDev": 0
   },
   "Step 837": {
     "durations": [
-      628,
-      731
+      414
     ],
-    "average": 679.5,
-    "stdDev": 72.8319984622144
+    "average": 414,
+    "stdDev": 0
   },
   "Step 838": {
     "durations": [
-      678,
-      210
+      1086
     ],
-    "average": 444,
-    "stdDev": 330.92597359530424
+    "average": 1086,
+    "stdDev": 0
   },
   "Step 839": {
     "durations": [
-      716,
-      1010
+      772
     ],
-    "average": 863,
-    "stdDev": 207.88939366884497
+    "average": 772,
+    "stdDev": 0
   },
   "Step 840": {
     "durations": [
-      762,
-      756
+      163
     ],
-    "average": 759,
-    "stdDev": 4.242640687119285
+    "average": 163,
+    "stdDev": 0
   },
   "Step 841": {
     "durations": [
-      476,
-      959
+      729
     ],
-    "average": 717.5,
-    "stdDev": 341.5325753131024
+    "average": 729,
+    "stdDev": 0
   },
   "Step 842": {
     "durations": [
-      506,
-      816
+      673
     ],
-    "average": 661,
-    "stdDev": 219.20310216782974
+    "average": 673,
+    "stdDev": 0
   },
   "Step 843": {
     "durations": [
-      329,
-      656
+      350
     ],
-    "average": 492.5,
-    "stdDev": 231.22391744800103
+    "average": 350,
+    "stdDev": 0
   },
   "Step 844": {
     "durations": [
-      543,
-      1087
+      470
     ],
-    "average": 815,
-    "stdDev": 384.66608896548183
+    "average": 470,
+    "stdDev": 0
   },
   "Step 845": {
     "durations": [
-      854,
-      525
+      446
     ],
-    "average": 689.5,
-    "stdDev": 232.63813101037414
+    "average": 446,
+    "stdDev": 0
   },
   "Step 846": {
     "durations": [
-      283,
-      939
+      696
     ],
-    "average": 611,
-    "stdDev": 463.86204845837517
+    "average": 696,
+    "stdDev": 0
   },
   "Step 847": {
     "durations": [
-      430,
-      291
+      553
     ],
-    "average": 360.5,
-    "stdDev": 98.2878425849301
+    "average": 553,
+    "stdDev": 0
   },
   "Step 848": {
     "durations": [
-      358,
-      285
+      899
     ],
-    "average": 321.5,
-    "stdDev": 51.61879502661797
+    "average": 899,
+    "stdDev": 0
   },
   "Step 849": {
     "durations": [
-      160,
-      525
+      835
     ],
-    "average": 342.5,
-    "stdDev": 258.0939751330898
+    "average": 835,
+    "stdDev": 0
   },
   "Step 850": {
     "durations": [
-      701,
-      927
+      558
     ],
-    "average": 814,
-    "stdDev": 159.80613254815975
+    "average": 558,
+    "stdDev": 0
   },
   "Step 851": {
     "durations": [
-      856,
-      351
+      595
     ],
-    "average": 603.5,
-    "stdDev": 357.0889244992065
+    "average": 595,
+    "stdDev": 0
   },
   "Step 852": {
     "durations": [
-      321,
-      1008
+      367
     ],
-    "average": 664.5,
-    "stdDev": 485.78235867515815
+    "average": 367,
+    "stdDev": 0
   },
   "Step 853": {
     "durations": [
-      884,
-      250
+      196
     ],
-    "average": 567,
-    "stdDev": 448.3056992722711
+    "average": 196,
+    "stdDev": 0
   },
   "Step 854": {
     "durations": [
-      327,
-      568
+      586
     ],
-    "average": 447.5,
-    "stdDev": 170.41273426595797
+    "average": 586,
+    "stdDev": 0
   },
   "Step 855": {
     "durations": [
-      792,
-      753
+      271
     ],
-    "average": 772.5,
-    "stdDev": 27.577164466275352
+    "average": 271,
+    "stdDev": 0
   },
   "Step 856": {
     "durations": [
-      579,
-      310
+      745
     ],
-    "average": 444.5,
-    "stdDev": 190.21172413918129
+    "average": 745,
+    "stdDev": 0
   },
   "Step 857": {
     "durations": [
-      786,
-      198
+      866
     ],
-    "average": 492,
-    "stdDev": 415.77878733768995
+    "average": 866,
+    "stdDev": 0
   },
   "Step 858": {
     "durations": [
-      561,
-      801
+      314
     ],
-    "average": 681,
-    "stdDev": 169.7056274847714
+    "average": 314,
+    "stdDev": 0
   },
   "Step 859": {
     "durations": [
-      881,
-      505
+      604
     ],
-    "average": 693,
-    "stdDev": 265.87214972614186
+    "average": 604,
+    "stdDev": 0
   },
   "Step 860": {
     "durations": [
-      358,
-      539
+      1012
     ],
-    "average": 448.5,
-    "stdDev": 127.9863273947651
+    "average": 1012,
+    "stdDev": 0
   },
   "Step 861": {
     "durations": [
-      1097,
-      748
+      388
     ],
-    "average": 922.5,
-    "stdDev": 246.7802666341051
+    "average": 388,
+    "stdDev": 0
   },
   "Step 862": {
     "durations": [
-      476,
-      817
+      903
     ],
-    "average": 646.5,
-    "stdDev": 241.1234123846127
+    "average": 903,
+    "stdDev": 0
   },
   "Step 863": {
     "durations": [
-      1027,
-      926
+      592
     ],
-    "average": 976.5,
-    "stdDev": 71.4177848998413
+    "average": 592,
+    "stdDev": 0
   },
   "Step 864": {
     "durations": [
-      815,
-      556
+      385
     ],
-    "average": 685.5,
-    "stdDev": 183.1406563273158
+    "average": 385,
+    "stdDev": 0
   },
   "Step 865": {
     "durations": [
-      184,
-      956
+      332
     ],
-    "average": 570,
-    "stdDev": 545.8864350760147
+    "average": 332,
+    "stdDev": 0
   },
   "Step 866": {
     "durations": [
-      211,
-      184
+      929
     ],
-    "average": 197.5,
-    "stdDev": 19.091883092036785
+    "average": 929,
+    "stdDev": 0
   },
   "Step 867": {
     "durations": [
-      169,
-      384
+      934
     ],
-    "average": 276.5,
-    "stdDev": 152.02795795510772
+    "average": 934,
+    "stdDev": 0
   },
   "Step 868": {
     "durations": [
-      594,
-      148
+      785
     ],
-    "average": 371,
-    "stdDev": 315.3696244092002
+    "average": 785,
+    "stdDev": 0
   },
   "Step 869": {
     "durations": [
-      942,
-      784
+      1003
     ],
-    "average": 863,
-    "stdDev": 111.72287142747452
+    "average": 1003,
+    "stdDev": 0
   },
   "Step 870": {
     "durations": [
-      680,
-      932
+      331
     ],
-    "average": 806,
-    "stdDev": 178.19090885900997
+    "average": 331,
+    "stdDev": 0
   },
   "Step 871": {
     "durations": [
-      665,
-      828
+      973
     ],
-    "average": 746.5,
-    "stdDev": 115.25840533340725
+    "average": 973,
+    "stdDev": 0
   },
   "Step 872": {
     "durations": [
-      713,
-      726
+      535
     ],
-    "average": 719.5,
-    "stdDev": 9.192388155425117
+    "average": 535,
+    "stdDev": 0
   },
   "Step 873": {
     "durations": [
-      717,
-      758
+      126
     ],
-    "average": 737.5,
-    "stdDev": 28.991378028648448
+    "average": 126,
+    "stdDev": 0
   },
   "Step 874": {
     "durations": [
-      251,
-      357
+      1069
     ],
-    "average": 304,
-    "stdDev": 74.95331880577403
+    "average": 1069,
+    "stdDev": 0
   },
   "Step 875": {
     "durations": [
-      418,
-      1073
+      1080
     ],
-    "average": 745.5,
-    "stdDev": 463.1549416771886
+    "average": 1080,
+    "stdDev": 0
   },
   "Step 876": {
     "durations": [
-      372,
-      807
+      823
     ],
-    "average": 589.5,
-    "stdDev": 307.59144981614816
+    "average": 823,
+    "stdDev": 0
   },
   "Step 877": {
     "durations": [
-      854,
-      576
+      1013
     ],
-    "average": 715,
-    "stdDev": 196.5756851698602
+    "average": 1013,
+    "stdDev": 0
   },
   "Step 878": {
     "durations": [
-      508,
-      419
+      993
     ],
-    "average": 463.5,
-    "stdDev": 62.932503525602726
+    "average": 993,
+    "stdDev": 0
   },
   "Step 879": {
     "durations": [
-      442,
-      203
+      429
     ],
-    "average": 322.5,
-    "stdDev": 168.99852070358486
+    "average": 429,
+    "stdDev": 0
   },
   "Step 880": {
     "durations": [
-      476,
-      452
+      424
     ],
-    "average": 464,
-    "stdDev": 16.97056274847714
+    "average": 424,
+    "stdDev": 0
   },
   "Step 881": {
     "durations": [
-      1013,
-      312
+      840
     ],
-    "average": 662.5,
-    "stdDev": 495.68185361176984
+    "average": 840,
+    "stdDev": 0
   },
   "Step 882": {
     "durations": [
-      370,
-      1051
+      279
     ],
-    "average": 710.5,
-    "stdDev": 481.5397179880389
+    "average": 279,
+    "stdDev": 0
   },
   "Step 883": {
     "durations": [
-      791,
-      388
+      175
     ],
-    "average": 589.5,
-    "stdDev": 284.9640328181787
+    "average": 175,
+    "stdDev": 0
   },
   "Step 884": {
     "durations": [
-      943,
-      538
+      521
     ],
-    "average": 740.5,
-    "stdDev": 286.37824638055173
+    "average": 521,
+    "stdDev": 0
   },
   "Step 885": {
     "durations": [
-      116,
-      145
+      1049
     ],
-    "average": 130.5,
-    "stdDev": 20.506096654409877
+    "average": 1049,
+    "stdDev": 0
   },
   "Step 886": {
     "durations": [
-      287,
-      161
+      650
     ],
-    "average": 224,
-    "stdDev": 89.09545442950498
+    "average": 650,
+    "stdDev": 0
   },
   "Step 887": {
     "durations": [
-      642,
-      1000
+      143
     ],
-    "average": 821,
-    "stdDev": 253.144227664784
+    "average": 143,
+    "stdDev": 0
   },
   "Step 888": {
     "durations": [
-      486,
-      327
+      903
     ],
-    "average": 406.5,
-    "stdDev": 112.42997820866105
+    "average": 903,
+    "stdDev": 0
   },
   "Step 889": {
     "durations": [
-      994,
-      987
+      842
     ],
-    "average": 990.5,
-    "stdDev": 4.949747468305833
+    "average": 842,
+    "stdDev": 0
   },
   "Step 890": {
     "durations": [
-      1080,
-      163
+      302
     ],
-    "average": 621.5,
-    "stdDev": 648.4169183480641
+    "average": 302,
+    "stdDev": 0
   },
   "Step 891": {
     "durations": [
-      558,
-      102
+      853
     ],
-    "average": 330,
-    "stdDev": 322.44069222106566
+    "average": 853,
+    "stdDev": 0
   },
   "Step 892": {
     "durations": [
-      879,
-      729
+      524
     ],
-    "average": 804,
-    "stdDev": 106.06601717798213
+    "average": 524,
+    "stdDev": 0
   },
   "Step 893": {
     "durations": [
-      1009,
-      106
+      663
     ],
-    "average": 557.5,
-    "stdDev": 638.5174234114525
+    "average": 663,
+    "stdDev": 0
   },
   "Step 894": {
     "durations": [
-      700,
-      556
+      871
     ],
-    "average": 628,
-    "stdDev": 101.82337649086284
+    "average": 871,
+    "stdDev": 0
   },
   "Step 895": {
     "durations": [
-      687,
-      678
+      1094
     ],
-    "average": 682.5,
-    "stdDev": 6.363961030678928
+    "average": 1094,
+    "stdDev": 0
   },
   "Step 896": {
     "durations": [
-      915,
-      485
+      329
     ],
-    "average": 700,
-    "stdDev": 304.05591591021545
+    "average": 329,
+    "stdDev": 0
   },
   "Step 897": {
     "durations": [
-      257,
-      805
+      412
     ],
-    "average": 531,
-    "stdDev": 387.49451609022805
+    "average": 412,
+    "stdDev": 0
   },
   "Step 898": {
     "durations": [
-      885,
-      630
+      849
     ],
-    "average": 757.5,
-    "stdDev": 180.31222920256963
+    "average": 849,
+    "stdDev": 0
   },
   "Step 899": {
     "durations": [
-      820,
-      859
+      1024
     ],
-    "average": 839.5,
-    "stdDev": 27.577164466275352
+    "average": 1024,
+    "stdDev": 0
   },
   "Step 900": {
     "durations": [
-      715,
-      703
+      378
     ],
-    "average": 709,
-    "stdDev": 8.48528137423857
+    "average": 378,
+    "stdDev": 0
   },
   "Step 901": {
     "durations": [
-      490,
-      968
+      1081
     ],
-    "average": 729,
-    "stdDev": 337.9970414071697
+    "average": 1081,
+    "stdDev": 0
   },
   "Step 902": {
     "durations": [
-      1010,
-      287
+      928
     ],
-    "average": 648.5,
-    "stdDev": 511.23820279787384
+    "average": 928,
+    "stdDev": 0
   },
   "Step 903": {
     "durations": [
-      376,
-      623
+      411
     ],
-    "average": 499.5,
-    "stdDev": 174.65537495307723
+    "average": 411,
+    "stdDev": 0
   },
   "Step 904": {
     "durations": [
-      705,
-      169
+      418
     ],
-    "average": 437,
-    "stdDev": 379.00923471598946
+    "average": 418,
+    "stdDev": 0
   },
   "Step 905": {
     "durations": [
-      705,
-      492
+      469
     ],
-    "average": 598.5,
-    "stdDev": 150.61374439273462
+    "average": 469,
+    "stdDev": 0
   },
   "Step 906": {
     "durations": [
-      458,
-      653
+      616
     ],
-    "average": 555.5,
-    "stdDev": 137.88582233137677
+    "average": 616,
+    "stdDev": 0
   },
   "Step 907": {
     "durations": [
-      608,
-      405
+      559
     ],
-    "average": 506.5,
-    "stdDev": 143.54267658086914
+    "average": 559,
+    "stdDev": 0
   },
   "Step 908": {
     "durations": [
-      192,
-      799
+      424
     ],
-    "average": 495.5,
-    "stdDev": 429.21381618023435
+    "average": 424,
+    "stdDev": 0
   },
   "Step 909": {
     "durations": [
-      449,
-      1067
+      792
     ],
-    "average": 758,
-    "stdDev": 436.9919907732864
+    "average": 792,
+    "stdDev": 0
   },
   "Step 910": {
     "durations": [
-      375,
-      425
+      225
     ],
-    "average": 400,
-    "stdDev": 35.35533905932738
+    "average": 225,
+    "stdDev": 0
   },
   "Step 911": {
     "durations": [
-      1093,
-      521
+      1095
     ],
-    "average": 807,
-    "stdDev": 404.4650788387052
+    "average": 1095,
+    "stdDev": 0
   },
   "Step 912": {
     "durations": [
-      860,
-      454
+      607
     ],
-    "average": 657,
-    "stdDev": 287.0853531617383
+    "average": 607,
+    "stdDev": 0
   },
   "Step 913": {
     "durations": [
-      531,
-      1087
+      289
     ],
-    "average": 809,
-    "stdDev": 393.1513703397204
+    "average": 289,
+    "stdDev": 0
   },
   "Step 914": {
     "durations": [
-      937,
-      850
+      450
     ],
-    "average": 893.5,
-    "stdDev": 61.518289963229634
+    "average": 450,
+    "stdDev": 0
   },
   "Step 915": {
     "durations": [
-      338,
-      791
+      817
     ],
-    "average": 564.5,
-    "stdDev": 320.319371877506
+    "average": 817,
+    "stdDev": 0
   },
   "Step 916": {
     "durations": [
-      349,
-      737
+      619
     ],
-    "average": 543,
-    "stdDev": 274.35743110038044
+    "average": 619,
+    "stdDev": 0
   },
   "Step 917": {
     "durations": [
-      520,
-      669
+      1007
     ],
-    "average": 594.5,
-    "stdDev": 105.35891039679558
+    "average": 1007,
+    "stdDev": 0
   },
   "Step 918": {
     "durations": [
-      823,
-      927
+      906
     ],
-    "average": 875,
-    "stdDev": 73.53910524340094
+    "average": 906,
+    "stdDev": 0
   },
   "Step 919": {
     "durations": [
-      452,
-      532
+      753
     ],
-    "average": 492,
-    "stdDev": 56.568542494923804
+    "average": 753,
+    "stdDev": 0
   },
   "Step 920": {
     "durations": [
-      557,
-      1063
+      793
     ],
-    "average": 810,
-    "stdDev": 357.79603128039304
+    "average": 793,
+    "stdDev": 0
   },
   "Step 921": {
     "durations": [
-      111,
-      107
+      349
     ],
-    "average": 109,
-    "stdDev": 2.8284271247461903
+    "average": 349,
+    "stdDev": 0
   },
   "Step 922": {
     "durations": [
-      724,
-      462
+      404
     ],
-    "average": 593,
-    "stdDev": 185.26197667087544
+    "average": 404,
+    "stdDev": 0
   },
   "Step 923": {
     "durations": [
-      901,
-      753
+      233
     ],
-    "average": 827,
-    "stdDev": 104.65180361560904
+    "average": 233,
+    "stdDev": 0
   },
   "Step 924": {
     "durations": [
-      691,
-      313
+      623
     ],
-    "average": 502,
-    "stdDev": 267.28636328851496
+    "average": 623,
+    "stdDev": 0
   },
   "Step 925": {
     "durations": [
-      534,
-      403
+      864
     ],
-    "average": 468.5,
-    "stdDev": 92.63098833543772
+    "average": 864,
+    "stdDev": 0
   },
   "Step 926": {
     "durations": [
-      741,
-      207
+      607
     ],
-    "average": 474,
-    "stdDev": 377.59502115361636
+    "average": 607,
+    "stdDev": 0
   },
   "Step 927": {
     "durations": [
-      156,
-      107
+      964
     ],
-    "average": 131.5,
-    "stdDev": 34.64823227814083
+    "average": 964,
+    "stdDev": 0
   },
   "Step 928": {
     "durations": [
-      667,
-      488
+      880
     ],
-    "average": 577.5,
-    "stdDev": 126.572113832392
+    "average": 880,
+    "stdDev": 0
   },
   "Step 929": {
     "durations": [
-      124,
-      162
+      1099
     ],
-    "average": 143,
-    "stdDev": 26.870057685088806
+    "average": 1099,
+    "stdDev": 0
   },
   "Step 930": {
     "durations": [
-      657,
-      910
+      866
     ],
-    "average": 783.5,
-    "stdDev": 178.89801564019652
+    "average": 866,
+    "stdDev": 0
   },
   "Step 931": {
     "durations": [
-      1077,
-      1095
+      250
     ],
-    "average": 1086,
-    "stdDev": 12.727922061357855
+    "average": 250,
+    "stdDev": 0
   },
   "Step 932": {
     "durations": [
-      318,
-      963
+      431
     ],
-    "average": 640.5,
-    "stdDev": 456.08387386532314
+    "average": 431,
+    "stdDev": 0
   },
   "Step 933": {
     "durations": [
-      661,
-      678
+      974
     ],
-    "average": 669.5,
-    "stdDev": 12.020815280171307
+    "average": 974,
+    "stdDev": 0
   },
   "Step 934": {
     "durations": [
-      639,
-      344
+      1094
     ],
-    "average": 491.5,
-    "stdDev": 208.59650045003153
+    "average": 1094,
+    "stdDev": 0
   },
   "Step 935": {
     "durations": [
-      664,
-      493
+      265
     ],
-    "average": 578.5,
-    "stdDev": 120.91525958289962
+    "average": 265,
+    "stdDev": 0
   },
   "Step 936": {
     "durations": [
-      434,
-      742
+      426
     ],
-    "average": 588,
-    "stdDev": 217.78888860545663
+    "average": 426,
+    "stdDev": 0
   },
   "Step 937": {
     "durations": [
-      1012,
-      279
+      578
     ],
-    "average": 645.5,
-    "stdDev": 518.3092706097393
+    "average": 578,
+    "stdDev": 0
   },
   "Step 938": {
     "durations": [
-      663,
-      197
+      894
     ],
-    "average": 430,
-    "stdDev": 329.51176003293114
+    "average": 894,
+    "stdDev": 0
   },
   "Step 939": {
     "durations": [
-      1047,
-      399
+      456
     ],
-    "average": 723,
-    "stdDev": 458.2051942088828
+    "average": 456,
+    "stdDev": 0
   },
   "Step 940": {
     "durations": [
-      674,
-      650
+      403
     ],
-    "average": 662,
-    "stdDev": 16.97056274847714
+    "average": 403,
+    "stdDev": 0
   },
   "Step 941": {
     "durations": [
-      353,
-      175
+      447
     ],
-    "average": 264,
-    "stdDev": 125.86500705120545
+    "average": 447,
+    "stdDev": 0
   },
   "Step 942": {
     "durations": [
-      961,
-      970
+      689
     ],
-    "average": 965.5,
-    "stdDev": 6.363961030678928
+    "average": 689,
+    "stdDev": 0
   },
   "Step 943": {
     "durations": [
-      249,
-      1090
+      973
     ],
-    "average": 669.5,
-    "stdDev": 594.6768029778865
+    "average": 973,
+    "stdDev": 0
   },
   "Step 944": {
     "durations": [
-      851,
-      493
+      518
     ],
-    "average": 672,
-    "stdDev": 253.144227664784
+    "average": 518,
+    "stdDev": 0
   },
   "Step 945": {
     "durations": [
-      304,
-      1087
+      803
     ],
-    "average": 695.5,
-    "stdDev": 553.6646096690667
+    "average": 803,
+    "stdDev": 0
   },
   "Step 946": {
     "durations": [
-      382,
-      438
+      971
     ],
-    "average": 410,
-    "stdDev": 39.59797974644666
+    "average": 971,
+    "stdDev": 0
   },
   "Step 947": {
     "durations": [
-      775,
-      539
+      853
     ],
-    "average": 657,
-    "stdDev": 166.87720036002523
+    "average": 853,
+    "stdDev": 0
   },
   "Step 948": {
     "durations": [
-      442,
-      130
+      286
     ],
     "average": 286,
-    "stdDev": 220.61731573020282
+    "stdDev": 0
   },
   "Step 949": {
     "durations": [
-      901,
-      306
+      941
     ],
-    "average": 603.5,
-    "stdDev": 420.72853480599576
+    "average": 941,
+    "stdDev": 0
   },
   "Step 950": {
     "durations": [
-      963,
-      195
+      285
     ],
-    "average": 579,
-    "stdDev": 543.0580079512685
+    "average": 285,
+    "stdDev": 0
   },
   "Step 951": {
     "durations": [
-      416,
-      504
+      949
     ],
-    "average": 460,
-    "stdDev": 62.22539674441618
+    "average": 949,
+    "stdDev": 0
   },
   "Step 952": {
     "durations": [
-      783,
-      1075
+      437
     ],
-    "average": 929,
-    "stdDev": 206.47518010647187
+    "average": 437,
+    "stdDev": 0
   },
   "Step 953": {
     "durations": [
-      803,
-      561
+      148
     ],
-    "average": 682,
-    "stdDev": 171.1198410471445
+    "average": 148,
+    "stdDev": 0
   },
   "Step 954": {
     "durations": [
-      934,
-      763
+      1051
     ],
-    "average": 848.5,
-    "stdDev": 120.91525958289962
+    "average": 1051,
+    "stdDev": 0
   },
   "Step 955": {
     "durations": [
-      503,
-      588
+      584
     ],
-    "average": 545.5,
-    "stdDev": 60.10407640085654
+    "average": 584,
+    "stdDev": 0
   },
   "Step 956": {
     "durations": [
-      1005,
-      722
+      765
     ],
-    "average": 863.5,
-    "stdDev": 200.11121907579295
+    "average": 765,
+    "stdDev": 0
   },
   "Step 957": {
     "durations": [
-      117,
-      1057
+      576
     ],
-    "average": 587,
-    "stdDev": 664.6803743153547
+    "average": 576,
+    "stdDev": 0
   },
   "Step 958": {
     "durations": [
-      1023,
-      238
+      543
     ],
-    "average": 630.5,
-    "stdDev": 555.0788232314399
+    "average": 543,
+    "stdDev": 0
   },
   "Step 959": {
     "durations": [
-      356,
-      907
+      296
     ],
-    "average": 631.5,
-    "stdDev": 389.6158364337877
+    "average": 296,
+    "stdDev": 0
   },
   "Step 960": {
     "durations": [
-      185,
-      344
+      1074
     ],
-    "average": 264.5,
-    "stdDev": 112.42997820866105
+    "average": 1074,
+    "stdDev": 0
   },
   "Step 961": {
     "durations": [
-      755,
-      618
+      314
     ],
-    "average": 686.5,
-    "stdDev": 96.87362902255701
+    "average": 314,
+    "stdDev": 0
   },
   "Step 962": {
     "durations": [
-      343,
-      474
+      147
     ],
-    "average": 408.5,
-    "stdDev": 92.63098833543772
+    "average": 147,
+    "stdDev": 0
   },
   "Step 963": {
     "durations": [
-      695,
-      287
+      348
     ],
-    "average": 491,
-    "stdDev": 288.4995667241114
+    "average": 348,
+    "stdDev": 0
   },
   "Step 964": {
     "durations": [
-      511,
-      516
+      298
     ],
-    "average": 513.5,
-    "stdDev": 3.5355339059327378
+    "average": 298,
+    "stdDev": 0
   },
   "Step 965": {
     "durations": [
-      347,
-      950
+      628
     ],
-    "average": 648.5,
-    "stdDev": 426.38538905548813
+    "average": 628,
+    "stdDev": 0
   },
   "Step 966": {
     "durations": [
-      917,
-      328
+      437
     ],
-    "average": 622.5,
-    "stdDev": 416.4858941188765
+    "average": 437,
+    "stdDev": 0
   },
   "Step 967": {
     "durations": [
-      828,
-      928
+      1058
     ],
-    "average": 878,
-    "stdDev": 70.71067811865476
+    "average": 1058,
+    "stdDev": 0
   },
   "Step 968": {
     "durations": [
-      849,
-      526
+      1091
     ],
-    "average": 687.5,
-    "stdDev": 228.39549032325485
+    "average": 1091,
+    "stdDev": 0
   },
   "Step 969": {
     "durations": [
-      670,
-      1066
+      146
     ],
-    "average": 868,
-    "stdDev": 280.0142853498728
+    "average": 146,
+    "stdDev": 0
   },
   "Step 970": {
     "durations": [
-      666,
-      625
+      466
     ],
-    "average": 645.5,
-    "stdDev": 28.991378028648448
+    "average": 466,
+    "stdDev": 0
   },
   "Step 971": {
     "durations": [
-      185,
-      284
+      142
     ],
-    "average": 234.5,
-    "stdDev": 70.0035713374682
+    "average": 142,
+    "stdDev": 0
   },
   "Step 972": {
     "durations": [
-      391,
-      1021
+      193
     ],
-    "average": 706,
-    "stdDev": 445.47727214752496
+    "average": 193,
+    "stdDev": 0
   },
   "Step 973": {
     "durations": [
-      400,
-      499
+      748
     ],
-    "average": 449.5,
-    "stdDev": 70.0035713374682
+    "average": 748,
+    "stdDev": 0
   },
   "Step 974": {
     "durations": [
-      831,
-      235
+      714
     ],
-    "average": 533,
-    "stdDev": 421.4356415871823
+    "average": 714,
+    "stdDev": 0
   },
   "Step 975": {
     "durations": [
-      357,
-      346
+      778
     ],
-    "average": 351.5,
-    "stdDev": 7.7781745930520225
+    "average": 778,
+    "stdDev": 0
   },
   "Step 976": {
     "durations": [
-      393,
-      185
+      1094
     ],
-    "average": 289,
-    "stdDev": 147.07821048680188
+    "average": 1094,
+    "stdDev": 0
   },
   "Step 977": {
     "durations": [
-      281,
-      1031
+      644
     ],
-    "average": 656,
-    "stdDev": 530.3300858899106
+    "average": 644,
+    "stdDev": 0
   },
   "Step 978": {
     "durations": [
-      624,
-      381
+      548
     ],
-    "average": 502.5,
-    "stdDev": 171.82694782833104
+    "average": 548,
+    "stdDev": 0
   },
   "Step 979": {
     "durations": [
-      310,
-      749
+      459
     ],
-    "average": 529.5,
-    "stdDev": 310.41987694089437
+    "average": 459,
+    "stdDev": 0
   },
   "Step 980": {
     "durations": [
-      439,
-      739
+      756
     ],
-    "average": 589,
-    "stdDev": 212.13203435596427
+    "average": 756,
+    "stdDev": 0
   },
   "Step 981": {
     "durations": [
-      419,
-      699
+      880
     ],
-    "average": 559,
-    "stdDev": 197.9898987322333
+    "average": 880,
+    "stdDev": 0
   },
   "Step 982": {
     "durations": [
-      316,
-      1014
+      244
     ],
-    "average": 665,
-    "stdDev": 493.5605332682102
+    "average": 244,
+    "stdDev": 0
   },
   "Step 983": {
     "durations": [
-      927,
-      572
+      749
     ],
-    "average": 749.5,
-    "stdDev": 251.02290732122438
+    "average": 749,
+    "stdDev": 0
   },
   "Step 984": {
     "durations": [
-      976,
-      963
+      774
     ],
-    "average": 969.5,
-    "stdDev": 9.192388155425117
+    "average": 774,
+    "stdDev": 0
   },
   "Step 985": {
     "durations": [
-      164,
-      301
+      955
     ],
-    "average": 232.5,
-    "stdDev": 96.87362902255701
+    "average": 955,
+    "stdDev": 0
   },
   "Step 986": {
     "durations": [
-      590,
-      272
+      1042
     ],
-    "average": 431,
-    "stdDev": 224.8599564173221
+    "average": 1042,
+    "stdDev": 0
   },
   "Step 987": {
     "durations": [
-      167,
-      369
+      922
     ],
-    "average": 268,
-    "stdDev": 142.8355697996826
+    "average": 922,
+    "stdDev": 0
   },
   "Step 988": {
     "durations": [
-      690,
-      186
+      332
     ],
-    "average": 438,
-    "stdDev": 356.38181771801993
+    "average": 332,
+    "stdDev": 0
   },
   "Step 989": {
     "durations": [
-      337,
-      899
+      636
     ],
-    "average": 618,
-    "stdDev": 397.39401102683973
+    "average": 636,
+    "stdDev": 0
   },
   "Step 990": {
     "durations": [
-      655,
-      799
+      950
     ],
-    "average": 727,
-    "stdDev": 101.82337649086284
+    "average": 950,
+    "stdDev": 0
   },
   "Step 991": {
     "durations": [
-      1052,
-      658
+      514
     ],
-    "average": 855,
-    "stdDev": 278.6000717874997
+    "average": 514,
+    "stdDev": 0
   },
   "Step 992": {
     "durations": [
-      642,
-      501
+      736
     ],
-    "average": 571.5,
-    "stdDev": 99.7020561473032
+    "average": 736,
+    "stdDev": 0
   },
   "Step 993": {
     "durations": [
-      470,
-      774
+      255
     ],
-    "average": 622,
-    "stdDev": 214.96046148071045
+    "average": 255,
+    "stdDev": 0
   },
   "Step 994": {
     "durations": [
-      675,
-      208
+      896
     ],
-    "average": 441.5,
-    "stdDev": 330.2188668141177
+    "average": 896,
+    "stdDev": 0
   },
   "Step 995": {
     "durations": [
-      199,
-      1068
+      1099
     ],
-    "average": 633.5,
-    "stdDev": 614.4757928511098
+    "average": 1099,
+    "stdDev": 0
   },
   "Step 996": {
     "durations": [
-      1053,
-      784
+      244
     ],
-    "average": 918.5,
-    "stdDev": 190.21172413918129
+    "average": 244,
+    "stdDev": 0
   },
   "Step 997": {
     "durations": [
-      345,
-      447
+      982
     ],
-    "average": 396,
-    "stdDev": 72.12489168102785
+    "average": 982,
+    "stdDev": 0
   },
   "Step 998": {
     "durations": [
-      1099,
-      762
+      866
     ],
-    "average": 930.5,
-    "stdDev": 238.2949852598665
+    "average": 866,
+    "stdDev": 0
   },
   "Step 999": {
     "durations": [
-      589,
-      832
+      557
     ],
-    "average": 710.5,
-    "stdDev": 171.82694782833104
+    "average": 557,
+    "stdDev": 0
   }
 }

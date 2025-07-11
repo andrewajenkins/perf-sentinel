@@ -90,17 +90,17 @@ describe('Reporters', () => {
   describe('Placeholder Reporters', () => {
     it('should log a "not implemented" message for the html reporter', () => {
       htmlReporter.generateReport({});
-      expect(consoleOutput).toContain('HTML reporter not implemented');
+      expect(consoleOutput).toContain('HTML reporter is not yet implemented');
     });
 
     it('should log a "not implemented" message for the pr-comment reporter', () => {
       prCommentReporter.generateReport({});
-      expect(consoleOutput).toContain('PR Comment reporter not implemented');
+      expect(consoleOutput).toContain('PR Comment reporter is not yet implemented');
     });
 
     it('should log a "not implemented" message for the slack reporter', () => {
       slackReporter.generateReport({});
-      expect(consoleOutput).toContain('Slack reporter not implemented');
+      expect(consoleOutput).toContain('Slack reporter is not yet implemented');
     });
   });
 }); 
