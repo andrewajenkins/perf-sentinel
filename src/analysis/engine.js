@@ -317,7 +317,12 @@ function validateAndNormalizeContext(context) {
       suite: 'unknown',
       tags: [],
       jobId: 'local',
-      workerId: 'local'
+      workerId: 'local',
+      // Add PR-level context placeholders
+      prNumber: null,
+      commitSha: null,
+      branch: null,
+      targetBranch: null
     };
   }
   
@@ -327,7 +332,16 @@ function validateAndNormalizeContext(context) {
     suite: context.suite || 'unknown',
     tags: Array.isArray(context.tags) ? context.tags : [],
     jobId: context.jobId || 'local',
-    workerId: context.workerId || 'local'
+    workerId: context.workerId || 'local',
+    // Add PR-level context
+    prNumber: context.prNumber || process.env.PR_NUMBER || process.env.PULL_REQUEST_NUMBER || 
+              process.env.GITHUB_PR_NUMBER || process.env.CI_MERGE_REQUEST_IID || null,
+    commitSha: context.commitSha || process.env.COMMIT_SHA || process.env.GITHUB_SHA || 
+               process.env.CI_COMMIT_SHA || process.env.GIT_COMMIT || null,
+    branch: context.branch || process.env.BRANCH_NAME || process.env.GITHUB_HEAD_REF || 
+            process.env.CI_COMMIT_REF_NAME || process.env.GIT_BRANCH || null,
+    targetBranch: context.targetBranch || process.env.TARGET_BRANCH || process.env.GITHUB_BASE_REF || 
+                  process.env.CI_MERGE_REQUEST_TARGET_BRANCH_NAME || 'main'
   };
 }
 
@@ -386,12 +400,13 @@ function shouldReportRegression(currentDuration, average, stdDev, historyEntry, 
   return true;
 }
 
-function analyze(latestRun, history, config, configLoader) {
+function analyze(latestRun, history, config, configLoader, options = {}) {
   const threshold = config.analysis.threshold;
   const maxHistory = config.analysis.max_history;
   const trendConfig = config.analysis.trends;
   const analysisTimestamp = new Date().toISOString(); // Global timestamp for this analysis
   
+  // Enhanced report structure with PR intelligence support
   const report = {
     regressions: [],
     newSteps: [],
@@ -409,7 +424,15 @@ function analyze(latestRun, history, config, configLoader) {
       tags: [],
       jobs: [],
       timestamp: analysisTimestamp,
-      overallHealth: 0 // Overall system health score
+      overallHealth: 0, // Overall system health score
+      // Add PR-level metadata
+      prContext: {
+        prNumber: null,
+        commitSha: null,
+        branch: null,
+        targetBranch: null,
+        platform: null
+      }
     }
   };
 
@@ -418,7 +441,11 @@ function analyze(latestRun, history, config, configLoader) {
   const runMetadata = {
     tags: new Set(),
     jobs: new Set(),
-    suites: new Set()
+    suites: new Set(),
+    // Add PR-level metadata collection
+    prNumbers: new Set(),
+    commitShas: new Set(),
+    branches: new Set()
   };
 
   // Initialize suite history if not exists
@@ -426,15 +453,25 @@ function analyze(latestRun, history, config, configLoader) {
     updatedHistory._suiteHistory = {};
   }
 
+  // Initialize PR history if not exists
+  if (!updatedHistory._prHistory) {
+    updatedHistory._prHistory = {};
+  }
+
   for (const step of latestRun) {
     const stepData = extractStepData(step);
     const { stepText, duration, timestamp, context } = stepData;
     
-    // Collect metadata
+    // Collect metadata including PR context
     report.metadata.totalSteps++;
     context.tags.forEach(tag => runMetadata.tags.add(tag));
     runMetadata.jobs.add(context.jobId);
     runMetadata.suites.add(context.suite);
+    
+    // Collect PR-level metadata
+    if (context.prNumber) runMetadata.prNumbers.add(context.prNumber);
+    if (context.commitSha) runMetadata.commitShas.add(context.commitSha);
+    if (context.branch) runMetadata.branches.add(context.branch);
     
     // Track suite statistics
     if (!suiteStats[context.suite]) {
@@ -644,11 +681,47 @@ function analyze(latestRun, history, config, configLoader) {
   const suiteCount = Object.keys(suiteStats).length;
   report.metadata.overallHealth = suiteCount > 0 ? Math.round(totalHealthScore / suiteCount) : 100;
 
-  // Populate run metadata
+  // Populate run metadata including PR context
   report.metadata.uniqueSteps = Object.keys(updatedHistory).length;
   report.metadata.suites = Array.from(runMetadata.suites);
   report.metadata.tags = Array.from(runMetadata.tags);
   report.metadata.jobs = Array.from(runMetadata.jobs);
+  
+  // Add PR-level metadata
+  report.metadata.prContext = {
+    prNumbers: Array.from(runMetadata.prNumbers),
+    commitShas: Array.from(runMetadata.commitShas),
+    branches: Array.from(runMetadata.branches),
+    primaryPrNumber: runMetadata.prNumbers.size > 0 ? Array.from(runMetadata.prNumbers)[0] : null,
+    primaryCommitSha: runMetadata.commitShas.size > 0 ? Array.from(runMetadata.commitShas)[0] : null,
+    primaryBranch: runMetadata.branches.size > 0 ? Array.from(runMetadata.branches)[0] : null
+  };
+
+  // Store current analysis in PR history if PR context is available
+  if (report.metadata.prContext.primaryPrNumber) {
+    const prNumber = report.metadata.prContext.primaryPrNumber;
+    if (!updatedHistory._prHistory[prNumber]) {
+      updatedHistory._prHistory[prNumber] = [];
+    }
+    
+    updatedHistory._prHistory[prNumber].push({
+      commitSha: report.metadata.prContext.primaryCommitSha,
+      timestamp: analysisTimestamp,
+      report: {
+        regressions: report.regressions,
+        newSteps: report.newSteps,
+        ok: report.ok,
+        trends: report.trends,
+        metadata: report.metadata
+      }
+    });
+    
+    // Keep PR history manageable
+    const maxPRHistory = 50;
+    if (updatedHistory._prHistory[prNumber].length > maxPRHistory) {
+      updatedHistory._prHistory[prNumber].shift();
+    }
+  }
 
   // Perform tag-based analysis
   const allSteps = [...report.regressions, ...report.newSteps, ...report.ok, ...report.trends];

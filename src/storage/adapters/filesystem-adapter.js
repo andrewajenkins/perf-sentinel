@@ -28,7 +28,7 @@ class FileSystemAdapter extends BaseStorageAdapter {
   }
 
   getType() {
-    return 'file';
+    return 'filesystem';
   }
 
   async ensureDirectoryStructure() {

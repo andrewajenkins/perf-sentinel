@@ -119,7 +119,9 @@ exports.handler = async (argv) => {
     await storage.close();
 
   } catch (error) {
-    console.error('Error during seeding:', error);
-    process.exit(1);
+    console.error('Error seeding history:', error.message);
+    if (process.env.NODE_ENV !== 'test') {
+      process.exit(1);
+    }
   }
 }; 

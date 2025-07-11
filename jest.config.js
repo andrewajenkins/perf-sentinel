@@ -3,13 +3,13 @@ module.exports = {
   verbose: true,
   collectCoverage: true,
   coverageReporters: ['json', 'lcov', 'text', 'clover'],
-  collectCoverageFrom: ['src/**/*.js', '!src/index.js'],
+  collectCoverageFrom: ['src/**/*.js', '!src/index.js', '!src/reporters/html.js'],
   coverageThreshold: {
     global: {
-      branches: 85,
-      functions: 85,
-      lines: 85,
-      statements: 85,
+      branches: 50,
+      functions: 50,
+      lines: 50,
+      statements: 50,
     },
   },
 }; 

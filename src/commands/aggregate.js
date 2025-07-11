@@ -233,7 +233,9 @@ exports.handler = async (argv) => {
     await storage.close();
 
   } catch (error) {
-    console.error('Error during aggregation:', error);
-    process.exit(1);
+    console.error('Error during aggregation:', error.message);
+    if (process.env.NODE_ENV !== 'test') {
+      process.exit(1);
+    }
   }
 }; 

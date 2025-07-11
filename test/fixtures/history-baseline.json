@@ -31,10 +31,22 @@
       152,
       152,
       152,
-      153
+      153,
+      152,
+      152,
+      152,
+      152,
+      152,
+      152,
+      152,
+      152,
+      152,
+      152,
+      152,
+      152
     ],
-    "average": 151.93548387096774,
-    "stdDev": 0.9978471449732078,
+    "average": 151.95348837209303,
+    "stdDev": 0.8438429207272959,
     "lastSeen": "2025-07-12T10:00:00.000Z",
     "context": {
       "testFile": "unknown.feature",
@@ -42,7 +54,11 @@
       "suite": "unknown",
       "tags": [],
       "jobId": "local",
-      "workerId": "local"
+      "workerId": "local",
+      "prNumber": null,
+      "commitSha": null,
+      "branch": null,
+      "targetBranch": null
     }
   },
   "I log in as a standard user": {
@@ -77,10 +93,22 @@
       545,
       545,
       545,
-      600
+      600,
+      545,
+      545,
+      545,
+      545,
+      545,
+      545,
+      545,
+      545,
+      545,
+      545,
+      545,
+      545
     ],
-    "average": 546.4516129032259,
-    "stdDev": 10.181154845030823,
+    "average": 546.046511627907,
+    "stdDev": 8.62983056825372,
     "lastSeen": "2025-07-12T10:00:01.000Z",
     "context": {
       "testFile": "unknown.feature",
@@ -88,7 +116,11 @@
       "suite": "unknown",
       "tags": [],
       "jobId": "local",
-      "workerId": "local"
+      "workerId": "local",
+      "prNumber": null,
+      "commitSha": null,
+      "branch": null,
+      "targetBranch": null
     }
   },
   "Step 0": {
@@ -7101,6 +7133,7 @@
         348.5,
         348.5,
         348.5,
+        376.5,
         348.5,
         348.5,
         348.5,
@@ -7109,9 +7142,16 @@
         348.5,
         348.5,
         348.5,
-        376.5
+        348.5,
+        348.5,
+        348.5,
+        348.5
       ],
       "totalStepsHistory": [
+        2,
+        2,
+        2,
+        2,
         2,
         2,
         2,
@@ -7137,6 +7177,7 @@
         0,
         0,
         0,
+        0.5,
         0,
         0,
         0,
@@ -7145,9 +7186,13 @@
         0,
         0,
         0,
-        0.5
+        0,
+        0,
+        0,
+        0
       ],
-      "lastUpdated": "2025-07-11T17:44:53.328Z"
+      "lastUpdated": "2025-07-11T20:02:37.322Z"
     }
-  }
+  },
+  "_prHistory": {}
 }

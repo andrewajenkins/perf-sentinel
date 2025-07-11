@@ -634,8 +634,92 @@ function generateMetadataSection(report) {
                     </div>
                 </div>
             </div>
+            
+            ${generatePRIntelligenceCard(report)}
         </div>
     </section>`;
+}
+
+/**
+ * Generate PR Intelligence card for metadata section
+ */
+function generatePRIntelligenceCard(report) {
+  const metadata = report.metadata || {};
+  const prContext = metadata.prContext;
+  const prIntelligence = report.prIntelligence;
+  
+  if (!prContext && !prIntelligence) {
+    return '';
+  }
+  
+  let prItems = '';
+  
+  if (prContext?.primaryPrNumber) {
+    prItems += `
+      <div class="metadata-item">
+        <span class="metadata-label">PR Number:</span>
+        <span class="metadata-value">${prContext.primaryPrNumber}</span>
+      </div>
+    `;
+  }
+  
+  if (prContext?.primaryCommitSha) {
+    prItems += `
+      <div class="metadata-item">
+        <span class="metadata-label">Commit SHA:</span>
+        <span class="metadata-value">${prContext.primaryCommitSha.substring(0, 8)}...</span>
+      </div>
+    `;
+  }
+  
+  if (prContext?.primaryBranch) {
+    prItems += `
+      <div class="metadata-item">
+        <span class="metadata-label">Branch:</span>
+        <span class="metadata-value">${prContext.primaryBranch}</span>
+      </div>
+    `;
+  }
+  
+  if (prIntelligence?.confidence) {
+    prItems += `
+      <div class="metadata-item">
+        <span class="metadata-label">Analysis Confidence:</span>
+        <span class="metadata-value">${(prIntelligence.confidence * 100).toFixed(1)}%</span>
+      </div>
+    `;
+  }
+  
+  if (prIntelligence?.summary?.overallHealthTrend) {
+    prItems += `
+      <div class="metadata-item">
+        <span class="metadata-label">Health Trend:</span>
+        <span class="metadata-value">${prIntelligence.summary.overallHealthTrend}</span>
+      </div>
+    `;
+  }
+  
+  if (prIntelligence?.summary?.totalCommits) {
+    prItems += `
+      <div class="metadata-item">
+        <span class="metadata-label">Total Commits:</span>
+        <span class="metadata-value">${prIntelligence.summary.totalCommits}</span>
+      </div>
+    `;
+  }
+  
+  if (prItems) {
+    return `
+      <div class="metadata-card pr-intelligence">
+        <h3>🔍 PR Intelligence</h3>
+        <div class="metadata-list">
+          ${prItems}
+        </div>
+      </div>
+    `;
+  }
+  
+  return '';
 }
 
 /**
@@ -1922,13 +2006,13 @@ async function getEmbeddedJavaScript() {
             
             // Data rows
             filteredSteps.forEach(step => {
-                const suite = step.context?.suite || 'Unknown';
-                const tags = (step.context?.tags || []).join(';');
+                const suite = (step.context && step.context.suite) || 'Unknown';
+                const tags = (step.context && step.context.tags || []).join(';');
                 const duration = step.duration || step.currentDuration || 0;
                 let impact = '';
                 
                 if (step.status === 'regression') {
-                    impact = `+${step.slowdown?.toFixed(1)}ms (+${step.percentage?.toFixed(1)}%)`;
+                    impact = '+' + (step.slowdown ? step.slowdown.toFixed(1) : '0') + 'ms (+' + (step.percentage ? step.percentage.toFixed(1) : '0') + '%)';
                 } else if (step.status === 'new') {
                     impact = 'New';
                 } else {
@@ -1947,7 +2031,7 @@ async function getEmbeddedJavaScript() {
             
             // Create and download CSV
             const csvContent = csvData.map(row => 
-                row.map(cell => `"${cell.toString().replace(/"/g, '""')}"`).join(',')
+                row.map(cell => '"' + cell.toString().replace(/"/g, '""') + '"').join(',')
             ).join('\\n');
             
             const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
@@ -1981,9 +2065,9 @@ async function getEmbeddedJavaScript() {
  * Generate Chart.js scripts for data visualization
  */
 function generateChartsScript(report) {
-  const regressionCount = report.regressions?.length || 0;
-  const newStepCount = report.newSteps?.length || 0;
-  const okStepCount = report.ok?.length || 0;
+  const regressionCount = (report.regressions && report.regressions.length) || 0;
+  const newStepCount = (report.newSteps && report.newSteps.length) || 0;
+  const okStepCount = (report.ok && report.ok.length) || 0;
   
   const suites = Object.values(report.suites || {});
   const suiteNames = suites.map(s => s.suite);

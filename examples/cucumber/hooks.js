@@ -85,7 +85,20 @@ AfterStep(function (testStep, testCase) {
     const jobId = process.env.CI_JOB_ID || process.env.GITHUB_JOB || process.env.JENKINS_BUILD_NUMBER || 'local';
     const workerId = process.env.CI_RUNNER_ID || process.env.GITHUB_RUNNER_ID || process.env.EXECUTOR_NUMBER || 'local';
     
-    // Create enhanced performance data with rich context
+    // Get PR-level context information
+    const prNumber = process.env.PR_NUMBER || process.env.PULL_REQUEST_NUMBER || 
+                     process.env.GITHUB_PR_NUMBER || process.env.CI_MERGE_REQUEST_IID || null;
+    const commitSha = process.env.COMMIT_SHA || process.env.GITHUB_SHA || 
+                      process.env.CI_COMMIT_SHA || process.env.GIT_COMMIT || null;
+    const branch = process.env.BRANCH_NAME || process.env.GITHUB_HEAD_REF || 
+                   process.env.CI_COMMIT_REF_NAME || process.env.GIT_BRANCH || null;
+    const targetBranch = process.env.TARGET_BRANCH || process.env.GITHUB_BASE_REF || 
+                         process.env.CI_MERGE_REQUEST_TARGET_BRANCH_NAME || 'main';
+    const authorName = process.env.COMMIT_AUTHOR_NAME || process.env.GITHUB_ACTOR || 
+                       process.env.CI_COMMIT_AUTHOR || null;
+    const authorEmail = process.env.COMMIT_AUTHOR_EMAIL || process.env.CI_COMMIT_AUTHOR_EMAIL || null;
+    
+    // Create enhanced performance data with rich context including PR information
     performanceData.push({
       stepText: testStep.pickleStep.text,
       // The duration from Cucumber is in nanoseconds. We convert to milliseconds.
@@ -97,7 +110,14 @@ AfterStep(function (testStep, testCase) {
         suite: suite,
         tags: tags,
         jobId: jobId,
-        workerId: workerId
+        workerId: workerId,
+        // Add PR-level context
+        prNumber: prNumber,
+        commitSha: commitSha,
+        branch: branch,
+        targetBranch: targetBranch,
+        authorName: authorName,
+        authorEmail: authorEmail
       }
     });
   }
@@ -117,7 +137,7 @@ After(async function () {
     JSON.stringify(performanceData, null, 2)
   );
   
-  // Log summary of collected data for debugging
+  // Enhanced logging with suite, tag, and PR information
   console.log(`\n📊 Performance data collected:`);
   console.log(`   • ${performanceData.length} steps recorded`);
   
@@ -149,7 +169,29 @@ After(async function () {
     console.log(`   • Tags found: ${Array.from(allTags).join(', ')}`);
   }
   
+  // Enhanced logging with PR context
   console.log(`   • Job ID: ${performanceData[0]?.context?.jobId || 'N/A'}`);
   console.log(`   • Worker ID: ${performanceData[0]?.context?.workerId || 'N/A'}`);
+  
+  // Add PR-level context to logging
+  const prContext = performanceData[0]?.context;
+  if (prContext) {
+    if (prContext.prNumber) {
+      console.log(`   • PR Number: ${prContext.prNumber}`);
+    }
+    if (prContext.commitSha) {
+      console.log(`   • Commit SHA: ${prContext.commitSha.substring(0, 8)}...`);
+    }
+    if (prContext.branch) {
+      console.log(`   • Branch: ${prContext.branch}`);
+    }
+    if (prContext.targetBranch && prContext.targetBranch !== 'main') {
+      console.log(`   • Target Branch: ${prContext.targetBranch}`);
+    }
+    if (prContext.authorName) {
+      console.log(`   • Author: ${prContext.authorName}`);
+    }
+  }
+  
   console.log(`   • Data saved to: ${path.join(outputDir, 'latest-run.json')}\n`);
 }); 

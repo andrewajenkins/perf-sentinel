@@ -103,11 +103,23 @@ describe('Analysis Engine', () => {
       };
       
       const result = validateAndNormalizeContext(validContext);
-      expect(result).toEqual(validContext);
+      expect(result).toEqual({
+        testFile: 'auth/login.feature',
+        testName: 'User Login',
+        suite: 'authentication',
+        tags: ['@auth', '@critical'],
+        jobId: 'job-123',
+        workerId: 'worker-1',
+        // New PR-related fields
+        prNumber: null,
+        commitSha: null,
+        branch: null,
+        targetBranch: 'main'
+      });
     });
 
     it('should provide defaults for missing context', () => {
-      const invalidContext = null;
+      const invalidContext = { invalid: 'context' };
       const result = validateAndNormalizeContext(invalidContext);
       
       expect(result).toEqual({
@@ -116,7 +128,12 @@ describe('Analysis Engine', () => {
         suite: 'unknown',
         tags: [],
         jobId: 'local',
-        workerId: 'local'
+        workerId: 'local',
+        // New PR-related fields
+        prNumber: null,
+        commitSha: null,
+        branch: null,
+        targetBranch: 'main'
       });
     });
 

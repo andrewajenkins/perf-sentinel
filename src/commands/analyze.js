@@ -1,8 +1,9 @@
 const fs = require('fs').promises;
 const path = require('path');
 const { analyze } = require('../analysis/engine');
-const StorageService = require('../storage/storage');
+const { PRIntelligence } = require('../analysis/pr-intelligence');
 const ConfigLoader = require('../config/config-loader');
+const StorageService = require('../storage/storage');
 const chalk = require('chalk');
 
 exports.command = 'analyze';
@@ -93,6 +94,9 @@ exports.handler = async (argv) => {
       }
     });
 
+    // Initialize PR intelligence
+    const prIntelligence = new PRIntelligence(config.pr_intelligence || {});
+
     // Get storage options from configuration
     const storageOptions = configLoader.getStorageOptions(config);
     storage = new StorageService(storageOptions);
@@ -106,6 +110,24 @@ exports.handler = async (argv) => {
     console.log(`Reading latest run data from: ${runFilePath}`);
     const latestRunRaw = await fs.readFile(runFilePath, 'utf-8');
     const latestRun = JSON.parse(latestRunRaw);
+
+    // Extract PR context for logging
+    const prContext = prIntelligence.extractPRContext();
+    console.log(`🔍 Analysis Context:`);
+    console.log(`   • Steps: ${latestRun.length}`);
+    console.log(`   • Project: ${config.project?.id || 'Default'}`);
+    console.log(`   • Storage: ${storage.getStorageType()}`);
+    
+    // Log PR context if available
+    if (prContext.prNumber) {
+      console.log(`   • PR Number: ${prContext.prNumber}`);
+    }
+    if (prContext.commitSha) {
+      console.log(`   • Commit SHA: ${prContext.commitSha.substring(0, 8)}...`);
+    }
+    if (prContext.branch) {
+      console.log(`   • Branch: ${prContext.branch}`);
+    }
 
     // Register job if jobId is available in the data
     let jobId = null;
@@ -123,7 +145,32 @@ exports.handler = async (argv) => {
     console.log(`Using ${storage.getStorageType()} storage`);
     const history = await storage.getHistory(historyFilePath);
 
-    const { report, updatedHistory } = analyze(latestRun, history, config, configLoader);
+    // Perform standard analysis
+    const { report, updatedHistory } = analyze(latestRun, history, config, configLoader, { 
+      prIntelligence: prIntelligence 
+    });
+
+    // Perform PR-level analysis if PR context is available
+    let prAnalysis = null;
+    if (prContext.prNumber && history._prHistory && history._prHistory[prContext.prNumber]) {
+      const currentPRHistory = history._prHistory[prContext.prNumber];
+      console.log(`🔄 PR-level analysis for PR #${prContext.prNumber} (${currentPRHistory.length} commits)`);
+      
+      prAnalysis = prIntelligence.analyzePRPerformance(report, currentPRHistory, {
+        project: config.project?.id || 'Default',
+        storage: storage.getStorageType()
+      });
+      
+      // Update the report with PR intelligence
+      report.prIntelligence = prAnalysis.summary;
+      report.regressions = prAnalysis.enhancedRegressions;
+      
+      console.log(`📈 PR Intelligence Summary:`);
+      console.log(`   • Confidence: ${(prAnalysis.confidence * 100).toFixed(1)}%`);
+      console.log(`   • Health Trend: ${prAnalysis.summary.summary.overallHealthTrend}`);
+      console.log(`   • Consistent Regressions: ${prAnalysis.summary.summary.consistentRegressions}`);
+      console.log(`   • Improvements: ${prAnalysis.summary.summary.improvements}`);
+    }
 
     // Save the current run for historical tracking (all storage adapters)
     await storage.savePerformanceRun(latestRun, {
@@ -191,11 +238,43 @@ exports.handler = async (argv) => {
       });
     }
 
+    // Display PR-specific recommendations if available
+    if (prAnalysis && prAnalysis.summary.recommendations.length > 0) {
+      console.log(`\n🎯 PR-Specific Recommendations:`);
+      prAnalysis.summary.recommendations.forEach(rec => {
+        const priority = rec.priority.toUpperCase();
+        const icon = rec.priority === 'high' ? '🔴' : rec.priority === 'medium' ? '🟡' : '🟢';
+        console.log(`   ${icon} ${priority}: ${rec.message}`);
+        if (rec.actions && rec.actions.length > 0) {
+          rec.actions.forEach(action => console.log(`      • ${action}`));
+        }
+      });
+    }
+
     // Clean up
     await storage.close();
 
+    // Exit with appropriate code based on regressions and PR analysis
+    const hasRegressions = report.regressions.length > 0;
+    const hasHighPriorityIssues = prAnalysis?.summary.recommendations.some(rec => rec.priority === 'high');
+    
+    if (hasRegressions || hasHighPriorityIssues) {
+      console.log(`\n❌ Analysis completed with ${report.regressions.length} regression(s) detected`);
+      if (hasHighPriorityIssues) {
+        console.log(`⚠️  High priority PR issues detected - immediate attention required`);
+      }
+      if (process.env.NODE_ENV !== 'test') {
+        process.exit(1);
+      }
+    } else {
+      console.log(`\n✅ Analysis completed successfully - no regressions detected`);
+      if (process.env.NODE_ENV !== 'test') {
+        process.exit(0);
+      }
+    }
+
   } catch (error) {
-    console.error('Error during analysis:', error);
+    console.error('Error during analysis:', error.message);
     
     // Update job status to failed if job was registered
     try {
@@ -213,6 +292,8 @@ exports.handler = async (argv) => {
       await storage.close();
     }
     
-    process.exit(1);
+    if (process.env.NODE_ENV !== 'test') {
+      process.exit(1);
+    }
   }
 }; 
