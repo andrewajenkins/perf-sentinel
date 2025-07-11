@@ -54,9 +54,15 @@ exports.builder = (yargs) => {
 };
 
 exports.handler = async (argv) => {
+  const startTime = Date.now();
   const configLoader = new ConfigLoader();
   
   try {
+    // Debug logging
+    if (argv.debug || global.PERF_SENTINEL_DEBUG) {
+      console.log('🔧 Debug mode enabled for seed command');
+      console.log('📋 Seed arguments:', JSON.stringify(argv, null, 2));
+    }
     // Load configuration
     const config = await configLoader.load({
       configPath: argv.config,
@@ -118,8 +124,31 @@ exports.handler = async (argv) => {
     // Clean up
     await storage.close();
 
+    // Log execution metrics
+    const executionTime = Date.now() - startTime;
+    const memoryUsage = process.memoryUsage();
+    const totalSteps = Object.keys(aggregatedData).length;
+    
+    console.log(`\n⏱️  Seeding completed:`);
+    console.log(`   • Files processed: ${allFiles.length}`);
+    console.log(`   • Unique steps seeded: ${totalSteps}`);
+    console.log(`   • Seeding duration: ${(executionTime / 1000).toFixed(1)}s`);
+    console.log(`   • Memory usage: ${Math.round(memoryUsage.heapUsed / 1024 / 1024)}MB`);
+
   } catch (error) {
     console.error('Error seeding history:', error.message);
+    
+    // Log execution metrics even on failure
+    const executionTime = Date.now() - startTime;
+    const memoryUsage = process.memoryUsage();
+    
+    console.log(`\n⏱️  Seeding failed after ${(executionTime / 1000).toFixed(1)}s`);
+    console.log(`   • Memory usage: ${Math.round(memoryUsage.heapUsed / 1024 / 1024)}MB`);
+    
+    if (argv.debug || global.PERF_SENTINEL_DEBUG) {
+      console.error('🔧 Full error details:', error);
+    }
+    
     if (process.env.NODE_ENV !== 'test') {
       process.exit(1);
     }

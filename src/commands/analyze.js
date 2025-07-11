@@ -74,10 +74,16 @@ exports.builder = (yargs) => {
 };
 
 exports.handler = async (argv) => {
+  const startTime = Date.now();
   const configLoader = new ConfigLoader();
   let storage;
   
   try {
+    // Debug logging
+    if (argv.debug || global.PERF_SENTINEL_DEBUG) {
+      console.log('🔧 Debug mode enabled for analyze command');
+      console.log('📋 Analyze arguments:', JSON.stringify(argv, null, 2));
+    }
     // Load configuration
     const config = await configLoader.load({
       configPath: argv.config,
@@ -254,6 +260,20 @@ exports.handler = async (argv) => {
     // Clean up
     await storage.close();
 
+    // Log execution metrics
+    const executionTime = Date.now() - startTime;
+    const memoryUsage = process.memoryUsage();
+    const totalSteps = latestRun.length;
+    const suiteCount = new Set(latestRun.map(step => step.context?.suite).filter(Boolean)).size;
+    const reportGenerationTime = executionTime; // Approximate since we don't have separate timing
+    
+    console.log(`\n⏱️  Analysis completed:`);
+    console.log(`   • Steps analyzed: ${totalSteps}`);
+    console.log(`   • Suites analyzed: ${suiteCount}`);
+    console.log(`   • Analysis duration: ${(executionTime / 1000).toFixed(1)}s`);
+    console.log(`   • Memory usage: ${Math.round(memoryUsage.heapUsed / 1024 / 1024)}MB`);
+    console.log(`   • Report generation: ${(reportGenerationTime / 1000).toFixed(1)}s`);
+    
     // Exit with appropriate code based on regressions and PR analysis
     const hasRegressions = report.regressions.length > 0;
     const hasHighPriorityIssues = prAnalysis?.summary.recommendations.some(rec => rec.priority === 'high');
@@ -275,6 +295,17 @@ exports.handler = async (argv) => {
 
   } catch (error) {
     console.error('Error during analysis:', error.message);
+    
+    // Log execution metrics even on failure
+    const executionTime = Date.now() - startTime;
+    const memoryUsage = process.memoryUsage();
+    
+    console.log(`\n⏱️  Analysis failed after ${(executionTime / 1000).toFixed(1)}s`);
+    console.log(`   • Memory usage: ${Math.round(memoryUsage.heapUsed / 1024 / 1024)}MB`);
+    
+    if (argv.debug || global.PERF_SENTINEL_DEBUG) {
+      console.error('🔧 Full error details:', error);
+    }
     
     // Update job status to failed if job was registered
     try {

@@ -88,9 +88,15 @@ exports.builder = (yargs) => {
 };
 
 exports.handler = async (argv) => {
+  const startTime = Date.now();
   const configLoader = new ConfigLoader();
   
   try {
+    // Debug logging
+    if (argv.debug || global.PERF_SENTINEL_DEBUG) {
+      console.log('🔧 Debug mode enabled for aggregate command');
+      console.log('📋 Aggregate arguments:', JSON.stringify(argv, null, 2));
+    }
     // Load configuration
     const config = await configLoader.load({
       configPath: argv.config,
@@ -232,8 +238,32 @@ exports.handler = async (argv) => {
     // Clean up
     await storage.close();
 
+    // Log execution metrics
+    const executionTime = Date.now() - startTime;
+    const memoryUsage = process.memoryUsage();
+    const totalJobs = jobIds.length || 0;
+    const totalSteps = aggregationResult.aggregatedSteps.length;
+    
+    console.log(`\n⏱️  Aggregation completed:`);
+    console.log(`   • Jobs processed: ${totalJobs}`);
+    console.log(`   • Steps aggregated: ${totalSteps}`);
+    console.log(`   • Aggregation duration: ${(executionTime / 1000).toFixed(1)}s`);
+    console.log(`   • Memory usage: ${Math.round(memoryUsage.heapUsed / 1024 / 1024)}MB`);
+
   } catch (error) {
     console.error('Error during aggregation:', error.message);
+    
+    // Log execution metrics even on failure
+    const executionTime = Date.now() - startTime;
+    const memoryUsage = process.memoryUsage();
+    
+    console.log(`\n⏱️  Aggregation failed after ${(executionTime / 1000).toFixed(1)}s`);
+    console.log(`   • Memory usage: ${Math.round(memoryUsage.heapUsed / 1024 / 1024)}MB`);
+    
+    if (argv.debug || global.PERF_SENTINEL_DEBUG) {
+      console.error('🔧 Full error details:', error);
+    }
+    
     if (process.env.NODE_ENV !== 'test') {
       process.exit(1);
     }

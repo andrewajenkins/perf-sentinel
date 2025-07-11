@@ -755,57 +755,62 @@ This roadmap breaks down the enterprise-scale upgrade into manageable, sequentia
 
 ### Phase 6: Production Readiness (Weeks 21-24)
 
-#### 6.1 Performance Optimization
-- [ ] **Analysis Engine Optimization** - Improve performance
-  - [ ] Profile analysis engine performance
-  - [ ] Optimize memory usage for large datasets
-  - [ ] Add streaming analysis for large files
-  - [ ] Test performance improvements
+**Phase 6: Minimum Viable Production Readiness (Alpha)**
 
-- [ ] **Report Generation Optimization** - Faster HTML reports
-  - [ ] Optimize HTML template rendering
-  - [ ] Add report caching mechanisms
-  - [ ] Optimize embedded assets
-  - [ ] Test report generation speed
+This revised phase focuses on the essentials for stability, maintainability, and user support for the initial alpha release. It defers advanced optimizations until they are proven necessary.
 
-#### 6.2 Data Lifecycle Management
-- [ ] **Automated Cleanup** - Manage data retention
-  - [ ] Add data retention policies
-  - [ ] Add automatic archival
-  - [ ] Add cleanup commands
-  - [ ] Test lifecycle management
+#### 6.1 Core Data Management (Essential)
+This is critical for managing storage costs and ensuring data quality.
 
-- [ ] **Storage Optimization** - Efficient storage usage
-  - [ ] Add data compression
-  - [ ] Add storage tiering
-  - [ ] Add usage monitoring
-  - [ ] Test storage efficiency
+- [ ] **Implement Data Retention Policies**:
+  - Add a configuration option to automatically delete test run data older than a specified number of days (e.g., `dataRetentionDays: 90`)
+  - This prevents indefinite data growth and keeps storage costs (like S3) under control
 
-#### 6.3 Monitoring & Observability
-- [ ] **Performance Monitoring** - Monitor tool performance
-  - [ ] Add performance metrics collection
-  - [ ] Add analysis duration tracking
-  - [ ] Add error rate monitoring
-  - [ ] Test monitoring integration
+- [ ] **Create a Manual Cleanup Command**:
+  - Add a CLI command (`perf-sentinel cleanup --older-than 30d`) to allow users to manually purge old data
+  - This is crucial for housekeeping and managing corrupted or unwanted test data
 
-- [ ] **Operational Tools** - Support production use
-  - [ ] Add health check commands
-  - [ ] Add diagnostic tools
-  - [ ] Add troubleshooting documentation
-  - [ ] Test operational procedures
+#### 6.2 Essential Observability & Support (The "It Works" Essentials)
+Instead of full-blown monitoring, this focuses on basic diagnostics.
 
-#### 6.4 Phase 6 Testing & Validation
-- [ ] **Production Readiness Tests** - Final validation
-  - [ ] Add load testing scenarios
-  - [ ] Test data retention and cleanup
-  - [ ] Test error handling and recovery
-  - [ ] Validate production deployment
+- [ ] **Tool Execution Logging**:
+  - Enhance the tool's output to include its own performance metrics. For example:
+    ```
+    Analysis complete.
+    - Steps analyzed: 150
+    - Analysis duration: 12.5s
+    - Report generation: 1.2s
+    ```
+  - This helps identify if the tool itself is a performance bottleneck in the CI pipeline
 
-- [ ] **Documentation & Examples** - Complete documentation
-  - [ ] Update README with enterprise features
-  - [ ] Add comprehensive configuration examples
-  - [ ] Add troubleshooting guides
-  - [ ] Create video tutorials/demos
+- [ ] **Implement a health-check Command**:
+  - Create a simple command (`perf-sentinel health-check`) that:
+    - Validates the config.yml file syntax
+    - Attempts to connect to the configured storage backend (S3, MongoDB, etc.) with the provided credentials
+    - Reports success or provides a clear error message (e.g., "Connection to S3 failed: Invalid access key")
+
+- [ ] **Add a --debug Flag**:
+  - Implement a global `--debug` or `--verbose` flag that enables detailed logging for easier troubleshooting of user-reported issues
+
+#### 6.3 Foundational Documentation (Essential for Adoption)
+Focus on practical, "how-to" documentation. Defer video tutorials.
+
+- [ ] **Update README.md**:
+  - Ensure the main README.md is a comprehensive guide for the alpha version, covering installation, basic usage, and the PR comparison workflow
+
+- [ ] **Create a Configuration Guide**:
+  - Add a CONFIGURATION.md file with clear, copy-pasteable examples for setting up the different storage adapters (S3, MongoDB) and CI integration (GitHub Actions)
+
+- [ ] **Create a Basic Troubleshooting Guide**:
+  - Add a TROUBLESHOOTING.md that lists common errors (e.g., from the health-check) and their solutions
+
+#### 6.4 Deferred for Post-Alpha
+These items from the original plan are important for a mature product but are not critical for the alpha.
+
+- **Deferred**: Analysis Engine Optimization (Profile only if it becomes a problem)
+- **Deferred**: Data Compression (Implement only when storage costs or transfer times are a proven issue)
+- **Deferred**: Advanced Operational Tools
+- **Deferred**: Video Tutorials/Demos
 
 ### Development Guidelines for Cursor & Claude-4
 
