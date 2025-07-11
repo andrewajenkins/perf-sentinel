@@ -202,8 +202,45 @@ class ConfigLoader {
     return JSON.parse(JSON.stringify(obj));
   }
 
-  // Helper method to get step configuration
-  getStepConfig(stepText, averageDuration, config) {
+  // Helper method to apply context-based overrides
+  applyContextOverrides(baseConfig, context, config) {
+    let result = this.deepClone(baseConfig);
+    
+    // Apply suite-level overrides
+    if (context.suite && config.analysis.suite_overrides && config.analysis.suite_overrides[context.suite]) {
+      const suiteOverrides = config.analysis.suite_overrides[context.suite];
+      result = this.mergeConfigs(result, suiteOverrides);
+    }
+    
+    // Apply tag-based overrides (higher priority than suite)
+    if (context.tags && Array.isArray(context.tags) && config.analysis.tag_overrides) {
+      // Apply tag overrides in order - later tags override earlier ones
+      for (const tag of context.tags) {
+        if (config.analysis.tag_overrides[tag]) {
+          const tagOverrides = config.analysis.tag_overrides[tag];
+          result = this.mergeConfigs(result, tagOverrides);
+        }
+      }
+    }
+    
+    return result;
+  }
+
+  // Helper method to get step configuration with context awareness
+  getStepConfig(stepText, averageDuration, config, context = null) {
+    // Start with base configuration
+    let stepConfig = this.getBaseStepConfig(stepText, averageDuration, config);
+    
+    // Apply context-based overrides if context is provided
+    if (context) {
+      stepConfig = this.applyContextOverrides(stepConfig, context, config);
+    }
+    
+    return stepConfig;
+  }
+
+  // Helper method to get base step configuration (original logic)
+  getBaseStepConfig(stepText, averageDuration, config) {
     // Check for step-specific overrides first
     if (config.analysis.step_overrides && config.analysis.step_overrides[stepText]) {
       const override = config.analysis.step_overrides[stepText];
@@ -224,6 +261,76 @@ class ConfigLoader {
       threshold: config.analysis.threshold,
       rules: this.mergeConfigs(config.analysis.global_rules, stepConfig.rules || {})
     };
+  }
+
+  // Helper method to get step configuration for a specific context
+  getStepConfigForContext(stepText, averageDuration, config, context) {
+    return this.getStepConfig(stepText, averageDuration, config, context);
+  }
+
+  // Helper method to get suite-specific configuration
+  getSuiteConfig(suiteName, config) {
+    const baseConfig = {
+      threshold: config.analysis.threshold,
+      rules: config.analysis.global_rules
+    };
+    
+    if (config.analysis.suite_overrides && config.analysis.suite_overrides[suiteName]) {
+      return this.mergeConfigs(baseConfig, config.analysis.suite_overrides[suiteName]);
+    }
+    
+    return baseConfig;
+  }
+
+  // Helper method to get tag-specific configuration
+  getTagConfig(tagName, config) {
+    const baseConfig = {
+      threshold: config.analysis.threshold,
+      rules: config.analysis.global_rules
+    };
+    
+    if (config.analysis.tag_overrides && config.analysis.tag_overrides[tagName]) {
+      return this.mergeConfigs(baseConfig, config.analysis.tag_overrides[tagName]);
+    }
+    
+    return baseConfig;
+  }
+
+  // Helper method to get effective configuration for a step with context
+  getEffectiveStepConfig(stepText, averageDuration, config, context) {
+    // Get base step config
+    let effectiveConfig = this.getBaseStepConfig(stepText, averageDuration, config);
+    
+    // Apply context-based overrides in order of priority:
+    // 1. Suite overrides
+    // 2. Tag overrides (each tag can override previous)
+    // 3. Step-specific overrides (highest priority)
+    
+    if (context) {
+      // Apply suite overrides
+      if (context.suite && config.analysis.suite_overrides && config.analysis.suite_overrides[context.suite]) {
+        const suiteOverrides = config.analysis.suite_overrides[context.suite];
+        effectiveConfig = this.mergeConfigs(effectiveConfig, suiteOverrides);
+      }
+      
+      // Apply tag overrides (in order, so later tags override earlier ones)
+      if (context.tags && Array.isArray(context.tags) && config.analysis.tag_overrides) {
+        for (const tag of context.tags) {
+          if (config.analysis.tag_overrides[tag]) {
+            const tagOverrides = config.analysis.tag_overrides[tag];
+            effectiveConfig = this.mergeConfigs(effectiveConfig, tagOverrides);
+          }
+        }
+      }
+    }
+    
+    // Step-specific overrides always take highest priority
+    if (config.analysis.step_overrides && config.analysis.step_overrides[stepText]) {
+      const stepOverrides = config.analysis.step_overrides[stepText];
+      effectiveConfig = this.mergeConfigs(effectiveConfig, stepOverrides);
+    }
+    
+    return effectiveConfig;
   }
 
   getStepTypeForDuration(duration, config) {

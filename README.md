@@ -2,10 +2,23 @@
 
 A lightweight, generic, and automated system that detects performance regressions early in the development lifecycle. It empowers teams by providing immediate feedback on how their code changes impact application speed, directly within their existing workflows.
 
+## ✨ Enterprise-Scale Features
+
+**NEW: Rich Context & Hierarchical Analysis**
+- **🏢 Suite-Level Intelligence**: Track performance across test suites with health scoring and regression detection
+- **🏷️ Tag-Based Analysis**: Cross-cutting performance insights for `@critical`, `@smoke`, `@slow` operations
+- **📊 Multi-Level Reporting**: Suite → Test → Step level performance breakdown
+- **🎯 Context-Aware Configuration**: Different thresholds and rules based on test context
+- **💡 Smart Recommendations**: Automated suggestions based on performance patterns
+
 ## Features
 
 -   **Easy Integration**: Add a simple hook to your Cucumber.js test suite to start capturing data.
 -   **Statistical Analysis**: Uses standard deviation to intelligently detect performance regressions, avoiding noise from minor fluctuations.
+-   **Rich Context Collection**: Automatically captures test suite, file, tags, and job information for comprehensive analysis.
+-   **Hierarchical Performance Analysis**: Monitor performance at suite, test, and step levels with health scoring.
+-   **Tag-Based Insights**: Identify critical path issues and cross-cutting performance patterns.
+-   **Context-Aware Configuration**: Apply different performance rules based on test suite, tags, or specific steps.
 -   **Flexible Storage**: Choose between file-based storage (JSON) or database storage (MongoDB/DocumentDB).
 -   **Multi-Project Support**: Organize performance data by project when using database storage.
 -   **Multiple Reporters**: Get results where you need them: Console, Markdown, Slack (TBD), PR Comment (TBD), and HTML (TBD).
@@ -28,10 +41,11 @@ npm install perf-sentinel --save-dev
 - Create custom configuration files for different environments
 - Override settings via command-line arguments
 - Use predefined profiles for common scenarios
+- Configure suite-specific and tag-based performance rules
 
-### 3. Add the Cucumber Hook
+### 3. Add the Enhanced Cucumber Hook
 
-Create a `support/hooks.js` file (or add to your existing one) in your test suite:
+Create a `support/hooks.js` file (or add to your existing one) in your test suite with rich context collection:
 
 ```javascript
 const { AfterStep, After, Status } = require('@cucumber/cucumber');
@@ -40,12 +54,77 @@ const path = require('path');
 
 const performanceData = [];
 
-AfterStep(function (testStep) {
+// Helper functions for context extraction
+function extractSuiteName(filePath) {
+  if (!filePath) return 'unknown';
+  const dir = path.dirname(filePath);
+  const dirName = path.basename(dir);
+  if (dirName && dirName !== '.' && dirName !== 'features') {
+    return dirName;
+  }
+  const fileName = path.basename(filePath, '.feature');
+  return fileName || 'unknown';
+}
+
+function extractTags(testCase) {
+  const tags = [];
+  // Get tags from scenario and feature levels
+  if (testCase.pickle && testCase.pickle.tags) {
+    testCase.pickle.tags.forEach(tag => {
+      if (tag.name && tag.name.startsWith('@')) {
+        tags.push(tag.name);
+      }
+    });
+  }
+  if (testCase.gherkinDocument && testCase.gherkinDocument.feature && testCase.gherkinDocument.feature.tags) {
+    testCase.gherkinDocument.feature.tags.forEach(tag => {
+      if (tag.name && tag.name.startsWith('@') && !tags.includes(tag.name)) {
+        tags.push(tag.name);
+      }
+    });
+  }
+  return tags;
+}
+
+function getTestName(testCase) {
+  if (testCase.pickle && testCase.pickle.name) {
+    return testCase.pickle.name;
+  }
+  return 'Unknown Test';
+}
+
+function getRelativeTestPath(testCase) {
+  if (testCase.pickle && testCase.pickle.uri) {
+    return path.relative(process.cwd(), testCase.pickle.uri);
+  }
+  return 'unknown.feature';
+}
+
+AfterStep(function (testStep, testCase) {
   if (testStep.result.status === Status.PASSED && testStep.pickleStep) {
+    // Extract rich context information
+    const testFile = getRelativeTestPath(testCase);
+    const suite = extractSuiteName(testFile);
+    const testName = getTestName(testCase);
+    const tags = extractTags(testCase);
+    
+    // Get job and worker information from environment variables
+    const jobId = process.env.CI_JOB_ID || process.env.GITHUB_JOB || process.env.JENKINS_BUILD_NUMBER || 'local';
+    const workerId = process.env.CI_RUNNER_ID || process.env.GITHUB_RUNNER_ID || process.env.EXECUTOR_NUMBER || 'local';
+    
+    // Create enhanced performance data with rich context
     performanceData.push({
       stepText: testStep.pickleStep.text,
       duration: testStep.result.duration.nanos / 1_000_000, // Convert to ms
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
+      context: {
+        testFile: testFile,
+        testName: testName,
+        suite: suite,
+        tags: tags,
+        jobId: jobId,
+        workerId: workerId
+      }
     });
   }
 });
@@ -55,16 +134,51 @@ After(async function () {
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true });
   }
+  
   fs.writeFileSync(
     path.join(outputDir, 'latest-run.json'),
     JSON.stringify(performanceData, null, 2)
   );
+  
+  // Enhanced logging with suite and tag information
+  console.log(`\n📊 Performance data collected:`);
+  console.log(`   • ${performanceData.length} steps recorded`);
+  
+  // Group by suite for summary
+  const suiteStats = {};
+  performanceData.forEach(step => {
+    const suite = step.context.suite;
+    if (!suiteStats[suite]) {
+      suiteStats[suite] = { count: 0, avgDuration: 0, totalDuration: 0 };
+    }
+    suiteStats[suite].count++;
+    suiteStats[suite].totalDuration += step.duration;
+  });
+  
+  Object.keys(suiteStats).forEach(suite => {
+    const stats = suiteStats[suite];
+    stats.avgDuration = stats.totalDuration / stats.count;
+    console.log(`   • Suite "${suite}": ${stats.count} steps, avg ${stats.avgDuration.toFixed(1)}ms`);
+  });
+  
+  // Show unique tags found
+  const allTags = new Set();
+  performanceData.forEach(step => {
+    step.context.tags.forEach(tag => allTags.add(tag));
+  });
+  
+  if (allTags.size > 0) {
+    console.log(`   • Tags found: ${Array.from(allTags).join(', ')}`);
+  }
+  
+  console.log(`   • Job ID: ${performanceData[0]?.context?.jobId || 'N/A'}`);
+  console.log(`   • Data saved to: ${path.join(outputDir, 'latest-run.json')}\n`);
 });
 ```
 
 ## Configuration
 
-### Configuration Files
+### Enhanced Configuration with Suite & Tag Support
 
 Create a `perf-sentinel.yml` configuration file to customize analysis behavior:
 
@@ -106,6 +220,36 @@ analysis:
         min_absolute_slowdown: 50
         min_percentage_change: 3
 
+  # NEW: Suite-level configuration overrides
+  suite_overrides:
+    authentication:
+      threshold: 1.5          # More sensitive for auth suite
+      rules:
+        min_percentage_change: 2
+        min_absolute_slowdown: 15
+    shopping:
+      threshold: 2.5          # More lenient for shopping suite
+      rules:
+        min_percentage_change: 5
+
+  # NEW: Tag-based configuration overrides
+  tag_overrides:
+    "@critical":
+      threshold: 1.2          # Very sensitive for critical tagged steps
+      rules:
+        min_absolute_slowdown: 10
+        min_percentage_change: 5
+    "@smoke":
+      threshold: 1.8          # Moderately sensitive for smoke tests
+      rules:
+        min_absolute_slowdown: 12
+        min_percentage_change: 8
+    "@slow":
+      threshold: 3.0          # More lenient for known slow operations
+      rules:
+        min_absolute_slowdown: 100
+        min_percentage_change: 10
+
   # Trend detection
   trends:
     enabled: true
@@ -137,14 +281,21 @@ environments:
   production:
     analysis:
       threshold: 1.8          # Stricter in production
-      global_rules:
-        min_percentage_change: 2
+      suite_overrides:
+        authentication:
+          threshold: 1.5      # Extra strict for auth in production
+      tag_overrides:
+        "@critical":
+          threshold: 1.2      # Ultra strict for critical in production
         
   development:
     analysis:
-      threshold: 3.0          # More lenient in development
+      threshold: 2.5          # More lenient in dev
       trends:
         enabled: false        # Skip trend analysis in dev
+      suite_overrides:
+        authentication:
+          threshold: 2.0      # Less strict for auth in dev
 ```
 
 ### Predefined Profiles
@@ -160,6 +311,38 @@ npx perf-sentinel analyze --config perf-sentinel.yml --profile lenient
 
 # CI/CD optimized settings
 npx perf-sentinel analyze --config perf-sentinel.yml --profile ci_focused
+```
+
+## Enhanced Analysis Output
+
+The enhanced analysis provides multi-level insights:
+
+### Suite-Level Analysis
+```
+🏢 Suite Analysis:
+   📁 Suite: authentication
+      • Performance: GOOD (low severity)
+      • Health Score: 95% 🎯
+      • Steps: 4 total (R:0 N:1 OK:3)
+      • Duration: 425.2ms avg (45-1200ms range)
+      • Critical Steps: 3, Smoke Steps: 2
+      • Recommendations:
+        - All steps performing within expected thresholds
+```
+
+### Tag-Based Analysis
+```
+🏷️ Tag Analysis:
+   • @critical: 5 steps, avg 675ms across 2 suites
+   • @smoke: 3 steps, avg 245ms across 3 suites
+   • @slow: 2 steps, avg 1850ms - consider optimization
+```
+
+### Critical Path Analysis
+```
+🚨 Critical Path Issues:
+   • 1 regression(s) detected in critical path steps
+   • High priority: Investigate critical regressions immediately
 ```
 
 ## Storage Options
@@ -355,6 +538,31 @@ npx perf-sentinel analyze \
   --project-id "project-b"
 ```
 
+## Advanced Features
+
+### Enterprise-Scale Performance Intelligence
+
+**Suite Health Scoring**: Automated health scores (0-100) based on:
+- Regression rate (30% weight)
+- Performance trends (25% weight) 
+- Step stability (20% weight)
+- Critical path impact (25% weight)
+
+**Smart Recommendations**: Context-aware suggestions:
+- "Investigate 2 regressed step(s) in authentication suite"
+- "Critical steps averaging 1250ms - performance impact on user experience"
+- "Smoke tests span 4 suites - consider test suite organization"
+
+**Tag-Based Intelligence**: Cross-cutting analysis:
+- Critical path monitoring (`@critical`, `@smoke`, `@security`)
+- Performance impact analysis across test suites
+- Optimization recommendations for slow operations
+
+**Context-Aware Configuration**: Different rules based on:
+- Test suite (stricter for authentication, lenient for data processing)
+- Tags (ultra-strict for `@critical`, relaxed for `@slow`)
+- Environment (production vs development vs staging)
+
 ## Pros and Cons
 
 ### File-Based Storage
@@ -406,23 +614,31 @@ For applications where performance is critical, use strict monitoring:
 # perf-sentinel-strict.yml
 analysis:
   threshold: 1.5              # More sensitive
-  step_types:
-    very_fast:
-      max_duration: 25        # Tighter categories
+  suite_overrides:
+    authentication:
+      threshold: 1.2          # Ultra-strict for auth
       rules:
+        min_percentage_change: 2
+        min_absolute_slowdown: 10
+    payment:
+      threshold: 1.3          # Strict for payment
+      rules:
+        min_percentage_change: 3
+        min_absolute_slowdown: 15
+  tag_overrides:
+    "@critical":
+      threshold: 1.0          # Extremely strict for critical
+      rules:
+        min_percentage_change: 1
         min_absolute_slowdown: 5
-        min_percentage_change: 5
-    fast:
-      max_duration: 50
+    "@smoke":
+      threshold: 1.4          # Strict for smoke tests
       rules:
+        min_percentage_change: 4
         min_absolute_slowdown: 8
-        min_percentage_change: 8
   global_rules:
     min_percentage_change: 2   # Report 2%+ changes
     filter_stable_steps: false # Don't filter anything
-  trends:
-    window_size: 5            # Better trend detection
-    min_significance: 5
 ```
 
 ### Development Environment
@@ -433,12 +649,16 @@ For development, use lenient settings to avoid noise:
 # perf-sentinel-dev.yml
 analysis:
   threshold: 3.0              # Very lenient
-  step_types:
-    very_fast:
-      max_duration: 100       # Larger categories
-      rules:
-        min_absolute_slowdown: 50
-        min_percentage_change: 25
+  suite_overrides:
+    authentication:
+      threshold: 2.5          # Less strict for auth in dev
+    shopping:
+      threshold: 3.5          # Very lenient for shopping
+  tag_overrides:
+    "@critical":
+      threshold: 2.0          # Less strict for critical in dev
+    "@slow":
+      threshold: 4.0          # Very lenient for slow ops
   global_rules:
     min_percentage_change: 15 # Only major changes
   trends:
@@ -453,6 +673,16 @@ For continuous integration, focus on immediate regressions:
 # perf-sentinel-ci.yml  
 analysis:
   threshold: 1.8
+  suite_overrides:
+    authentication:
+      threshold: 1.5          # Keep auth strict in CI
+    api:
+      threshold: 2.0          # Moderate for API tests
+  tag_overrides:
+    "@critical":
+      threshold: 1.3          # Strict for critical in CI
+    "@smoke":
+      threshold: 1.6          # Moderate for smoke tests
   trends:
     enabled: false            # Faster execution
 reporting:
@@ -508,14 +738,32 @@ environments:
   production:
     analysis:
       threshold: 1.5
-      global_rules:
-        min_percentage_change: 2
+      suite_overrides:
+        authentication:
+          threshold: 1.2
+        payment:
+          threshold: 1.3
+      tag_overrides:
+        "@critical":
+          threshold: 1.0
   staging:
     analysis:
       threshold: 2.0
+      suite_overrides:
+        authentication:
+          threshold: 1.6
+      tag_overrides:
+        "@critical":
+          threshold: 1.4
   development:
     analysis:
       threshold: 3.0
+      suite_overrides:
+        authentication:
+          threshold: 2.5
+      tag_overrides:
+        "@critical":
+          threshold: 2.0
       trends:
         enabled: false
 ```

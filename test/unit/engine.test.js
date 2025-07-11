@@ -1,4 +1,15 @@
-const { analyze, calculateAverage, calculateStdDev, calculateTrend, shouldReportRegression } = require('../../src/analysis/engine');
+const { 
+  analyze, 
+  calculateAverage, 
+  calculateStdDev, 
+  calculateTrend, 
+  shouldReportRegression,
+  validateAndNormalizeContext,
+  extractStepData,
+  calculateSuiteHealthScore,
+  detectSuiteRegression,
+  categorizeSuitePerformance
+} = require('../../src/analysis/engine');
 const ConfigLoader = require('../../src/config/config-loader');
 const historyBaseline = require('../fixtures/history-baseline.json');
 const runNormal = require('../fixtures/run-normal.json');
@@ -43,6 +54,24 @@ describe('Analysis Engine', () => {
     };
   }
 
+  // Helper function to create enhanced run data with context
+  function createContextualStep(stepText, duration, context = {}) {
+    return {
+      stepText,
+      duration,
+      timestamp: new Date().toISOString(),
+      context: {
+        testFile: 'test.feature',
+        testName: 'Test Scenario',
+        suite: 'test-suite',
+        tags: ['@test'],
+        jobId: 'job-123',
+        workerId: 'worker-1',
+        ...context
+      }
+    };
+  }
+
   describe('Statistical Functions', () => {
     it('should calculate the average of a set of durations', () => {
       expect(calculateAverage([10, 20, 30])).toBe(20);
@@ -59,6 +88,210 @@ describe('Analysis Engine', () => {
 
      it('should return 0 for standard deviation if there are less than 2 durations', () => {
       expect(calculateStdDev([150], 150)).toBe(0);
+    });
+  });
+
+  describe('Context Validation and Extraction', () => {
+    it('should validate and normalize valid context', () => {
+      const validContext = {
+        testFile: 'auth/login.feature',
+        testName: 'User Login',
+        suite: 'authentication',
+        tags: ['@auth', '@critical'],
+        jobId: 'job-123',
+        workerId: 'worker-1'
+      };
+      
+      const result = validateAndNormalizeContext(validContext);
+      expect(result).toEqual(validContext);
+    });
+
+    it('should provide defaults for missing context', () => {
+      const invalidContext = null;
+      const result = validateAndNormalizeContext(invalidContext);
+      
+      expect(result).toEqual({
+        testFile: 'unknown.feature',
+        testName: 'Unknown Test',
+        suite: 'unknown',
+        tags: [],
+        jobId: 'local',
+        workerId: 'local'
+      });
+    });
+
+    it('should handle partial context with defaults', () => {
+      const partialContext = {
+        testFile: 'test.feature',
+        suite: 'api'
+      };
+      
+      const result = validateAndNormalizeContext(partialContext);
+      expect(result.testFile).toBe('test.feature');
+      expect(result.suite).toBe('api');
+      expect(result.testName).toBe('Unknown Test');
+      expect(result.tags).toEqual([]);
+      expect(result.jobId).toBe('local');
+      expect(result.workerId).toBe('local');
+    });
+
+    it('should extract step data with context validation', () => {
+      const step = createContextualStep('I log in', 150, {
+        suite: 'authentication',
+        tags: ['@auth', '@critical']
+      });
+      
+      const result = extractStepData(step);
+      expect(result.stepText).toBe('I log in');
+      expect(result.duration).toBe(150);
+      expect(result.context.suite).toBe('authentication');
+      expect(result.context.tags).toEqual(['@auth', '@critical']);
+    });
+  });
+
+  describe('Suite Health Scoring', () => {
+    it('should calculate perfect health score for suite with no issues', () => {
+      const goodSuiteData = {
+        suite: 'authentication',
+        totalSteps: 10,
+        regressions: 0,
+        newSteps: 0,
+        avgDuration: 150,
+        tags: ['@auth']
+      };
+      
+      const score = calculateSuiteHealthScore(goodSuiteData);
+      expect(score).toBe(100);
+    });
+
+    it('should penalize suites with high regression rate', () => {
+      const regressedSuiteData = {
+        suite: 'problematic',
+        totalSteps: 10,
+        regressions: 5, // 50% regression rate
+        newSteps: 0,
+        avgDuration: 150,
+        tags: ['@api']
+      };
+      
+      const score = calculateSuiteHealthScore(regressedSuiteData);
+      expect(score).toBeLessThan(80); // Should be penalized
+    });
+
+    it('should penalize suites with many new steps (instability)', () => {
+      const unstableSuiteData = {
+        suite: 'unstable',
+        totalSteps: 10,
+        regressions: 0,
+        newSteps: 3, // 30% new steps
+        avgDuration: 150,
+        tags: ['@api']
+      };
+      
+      const score = calculateSuiteHealthScore(unstableSuiteData);
+      expect(score).toBeLessThan(90); // Should be penalized for instability
+    });
+
+    it('should heavily penalize critical suites with regressions', () => {
+      const criticalSuiteData = {
+        suite: 'authentication',
+        totalSteps: 10,
+        regressions: 2,
+        newSteps: 0,
+        avgDuration: 150,
+        tags: ['@critical', '@auth']
+      };
+      
+      const score = calculateSuiteHealthScore(criticalSuiteData);
+      expect(score).toBeLessThan(85); // Should be heavily penalized
+    });
+  });
+
+  describe('Suite Regression Detection', () => {
+    it('should detect suite-level regression', () => {
+      const suiteData = {
+        suite: 'api',
+        avgDuration: 500
+      };
+      
+      const suiteHistory = {
+        avgDurationHistory: [300, 310, 305, 320, 315]
+      };
+      
+      const suiteConfig = { threshold: 2.0 };
+      
+      const regression = detectSuiteRegression(suiteData, suiteHistory, suiteConfig);
+      expect(regression).toBeTruthy();
+      expect(regression.type).toBe('suite_regression');
+      expect(regression.suite).toBe('api');
+      expect(regression.currentAvg).toBe(500);
+    });
+
+    it('should not detect regression with insufficient history', () => {
+      const suiteData = {
+        suite: 'api',
+        avgDuration: 500
+      };
+      
+      const suiteHistory = {
+        avgDurationHistory: [300] // Not enough history
+      };
+      
+      const suiteConfig = { threshold: 2.0 };
+      
+      const regression = detectSuiteRegression(suiteData, suiteHistory, suiteConfig);
+      expect(regression).toBeNull();
+    });
+  });
+
+  describe('Suite Performance Categorization', () => {
+    it('should categorize good performance suite', () => {
+      const goodSuiteData = {
+        suite: 'authentication',
+        regressions: 0,
+        totalSteps: 10,
+        healthScore: 95,
+        tags: ['@auth'],
+        testFiles: ['auth/login.feature', 'auth/register.feature'],
+        avgDuration: 150
+      };
+      
+      const category = categorizeSuitePerformance(goodSuiteData, {});
+      expect(category.category).toBe('good');
+      expect(category.severity).toBe('low');
+    });
+
+    it('should categorize critical performance suite', () => {
+      const criticalSuiteData = {
+        suite: 'payment',
+        regressions: 4,
+        totalSteps: 10, // 40% regression rate
+        healthScore: 30,
+        tags: ['@payment', '@critical'],
+        testFiles: ['payment/checkout.feature', 'payment/billing.feature'],
+        avgDuration: 800
+      };
+      
+      const category = categorizeSuitePerformance(criticalSuiteData, {});
+      expect(category.category).toBe('critical');
+      expect(category.severity).toBe('high');
+      expect(category.recommendations).toContain('Investigate 4 regressed step(s) in this suite');
+    });
+
+    it('should categorize warning performance suite', () => {
+      const warningSuiteData = {
+        suite: 'api',
+        regressions: 2,
+        totalSteps: 10, // 20% regression rate
+        healthScore: 65,
+        tags: ['@api'],
+        testFiles: ['api/users.feature', 'api/products.feature'],
+        avgDuration: 300
+      };
+      
+      const category = categorizeSuitePerformance(warningSuiteData, {});
+      expect(category.category).toBe('warning');
+      expect(category.severity).toBe('medium');
     });
   });
 
@@ -181,6 +414,151 @@ describe('Analysis Engine', () => {
       const trendConfig = createTrendConfig();
       const shouldReport = shouldReportRegression(105, 102, 1, historyEntry, stepConfig, trendConfig); // 3ms slowdown, ~3%
       expect(shouldReport).toBe(true);
+    });
+  });
+
+  describe('Enhanced Analysis with Context', () => {
+    const contextualRunData = [
+      createContextualStep('I log in', 150, {
+        suite: 'authentication',
+        tags: ['@auth', '@critical'],
+        testFile: 'auth/login.feature',
+        testName: 'User Login'
+      }),
+      createContextualStep('I view dashboard', 300, {
+        suite: 'dashboard',
+        tags: ['@dashboard', '@smoke'],
+        testFile: 'dashboard/view.feature',
+        testName: 'Dashboard View'
+      }),
+      createContextualStep('I search products', 450, {
+        suite: 'search',
+        tags: ['@search', '@slow'],
+        testFile: 'search/products.feature',
+        testName: 'Product Search'
+      }),
+      createContextualStep('I add to cart', 200, {
+        suite: 'shopping',
+        tags: ['@shopping', '@critical'],
+        testFile: 'shopping/cart.feature',
+        testName: 'Add to Cart'
+      })
+    ];
+
+    const contextualHistory = {
+      'I log in': {
+        durations: [145, 150, 148],
+        average: 147.7,
+        stdDev: 2.5,
+        context: { suite: 'authentication', tags: ['@auth', '@critical'] }
+      },
+      'I view dashboard': {
+        durations: [295, 300, 305],
+        average: 300,
+        stdDev: 5,
+        context: { suite: 'dashboard', tags: ['@dashboard', '@smoke'] }
+      },
+      'I search products': {
+        durations: [400, 420, 410],
+        average: 410,
+        stdDev: 10,
+        context: { suite: 'search', tags: ['@search', '@slow'] }
+      }
+    };
+
+    it('should analyze with rich context data', () => {
+      const { report } = analyze(contextualRunData, contextualHistory, defaultConfig, configLoader);
+      
+      expect(report.metadata.totalSteps).toBe(4);
+      expect(report.metadata.suites).toContain('authentication');
+      expect(report.metadata.suites).toContain('dashboard');
+      expect(report.metadata.suites).toContain('search');
+      expect(report.metadata.suites).toContain('shopping');
+      expect(report.metadata.tags).toContain('@critical');
+      expect(report.metadata.tags).toContain('@smoke');
+      expect(report.metadata.tags).toContain('@slow');
+    });
+
+    it('should provide suite-level analysis', () => {
+      const { report } = analyze(contextualRunData, contextualHistory, defaultConfig, configLoader);
+      
+      expect(report.suites).toBeDefined();
+      expect(report.suites['authentication']).toBeDefined();
+      expect(report.suites['authentication'].totalSteps).toBe(1);
+      expect(report.suites['authentication'].avgDuration).toBe(150);
+      expect(report.suites['authentication'].healthScore).toBeDefined();
+      expect(report.suites['authentication'].category).toBeDefined();
+      expect(report.suites['authentication'].tags).toContain('@auth');
+      expect(report.suites['authentication'].tags).toContain('@critical');
+    });
+
+    it('should track suite statistics correctly', () => {
+      const { report } = analyze(contextualRunData, contextualHistory, defaultConfig, configLoader);
+      
+      const authSuite = report.suites['authentication'];
+      expect(authSuite.criticalSteps).toBe(1);
+      expect(authSuite.testFiles).toContain('auth/login.feature');
+      expect(authSuite.minDuration).toBe(150);
+      expect(authSuite.maxDuration).toBe(150);
+    });
+
+    it('should provide tag-based analysis', () => {
+      const { report } = analyze(contextualRunData, contextualHistory, defaultConfig, configLoader);
+      
+      expect(report.tagAnalysis).toBeDefined();
+      expect(report.tagAnalysis['@critical']).toBeDefined();
+      expect(report.tagAnalysis['@critical'].stepCount).toBe(2);
+      expect(report.tagAnalysis['@critical'].suites).toContain('authentication');
+      expect(report.tagAnalysis['@critical'].suites).toContain('shopping');
+    });
+
+    it('should provide critical path analysis', () => {
+      const { report } = analyze(contextualRunData, contextualHistory, defaultConfig, configLoader);
+      
+      expect(report.criticalPath).toBeDefined();
+      expect(report.criticalPath.overallSeverity).toBeDefined();
+      expect(report.criticalPath.totalIssues).toBeDefined();
+      expect(report.criticalPath.issues).toBeDefined();
+    });
+
+    it('should generate system-wide recommendations', () => {
+      const { report } = analyze(contextualRunData, contextualHistory, defaultConfig, configLoader);
+      
+      expect(report.recommendations).toBeDefined();
+      expect(Array.isArray(report.recommendations)).toBe(true);
+    });
+
+    it('should calculate overall system health', () => {
+      const { report } = analyze(contextualRunData, contextualHistory, defaultConfig, configLoader);
+      
+      expect(report.metadata.overallHealth).toBeDefined();
+      expect(report.metadata.overallHealth).toBeGreaterThanOrEqual(0);
+      expect(report.metadata.overallHealth).toBeLessThanOrEqual(100);
+    });
+
+    it('should detect suite-level regressions', () => {
+      const { report } = analyze(contextualRunData, contextualHistory, defaultConfig, configLoader);
+      
+      expect(report.suiteRegressions).toBeDefined();
+      expect(Array.isArray(report.suiteRegressions)).toBe(true);
+    });
+
+    it('should preserve context in updated history', () => {
+      const { updatedHistory } = analyze(contextualRunData, contextualHistory, defaultConfig, configLoader);
+      
+      expect(updatedHistory['I log in'].context).toBeDefined();
+      expect(updatedHistory['I log in'].context.suite).toBe('authentication');
+      expect(updatedHistory['I log in'].context.tags).toContain('@auth');
+      expect(updatedHistory['I log in'].context.tags).toContain('@critical');
+    });
+
+    it('should update suite history', () => {
+      const { updatedHistory } = analyze(contextualRunData, contextualHistory, defaultConfig, configLoader);
+      
+      expect(updatedHistory._suiteHistory).toBeDefined();
+      expect(updatedHistory._suiteHistory['authentication']).toBeDefined();
+      expect(updatedHistory._suiteHistory['authentication'].avgDurationHistory).toBeDefined();
+      expect(updatedHistory._suiteHistory['authentication'].avgDurationHistory.length).toBeGreaterThan(0);
     });
   });
 
@@ -317,6 +695,38 @@ describe('Analysis Engine', () => {
       const { report } = analyze(runWithRegression, historyBaseline, customConfig, configLoader);
       expect(report.regressions).toHaveLength(1);
       expect(report.regressions[0].stepText).toBe('I log in as a standard user');
+    });
+  });
+
+  describe('Backward Compatibility', () => {
+    it('should handle legacy run data without context', () => {
+      const legacyRun = [
+        { stepText: 'I navigate to the login page', duration: 152, timestamp: '2023-01-01T00:00:00.000Z' },
+        { stepText: 'I log in as a standard user', duration: 545, timestamp: '2023-01-01T00:00:01.000Z' }
+      ];
+      
+      const { report } = analyze(legacyRun, historyBaseline, defaultConfig, configLoader);
+      expect(report.regressions).toHaveLength(0);
+      expect(report.ok).toHaveLength(2);
+      
+      // Should create default context
+      expect(report.metadata.suites).toContain('unknown');
+      expect(report.suites['unknown']).toBeDefined();
+    });
+
+    it('should handle legacy history without context', () => {
+      const legacyHistory = {
+        'I navigate to the login page': {
+          durations: [150, 155, 148],
+          average: 151,
+          stdDev: 3.6
+        }
+      };
+      
+      const contextualRun = [createContextualStep('I navigate to the login page', 152)];
+      
+      const { updatedHistory } = analyze(contextualRun, legacyHistory, defaultConfig, configLoader);
+      expect(updatedHistory['I navigate to the login page'].context).toBeDefined();
     });
   });
 }); 

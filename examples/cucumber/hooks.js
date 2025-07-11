@@ -6,14 +6,99 @@ const path = require('path');
 // Use a temporary array to store results during the run
 const performanceData = [];
 
-AfterStep(function (testStep) {
+// Helper function to extract suite name from file path
+function extractSuiteName(filePath) {
+  if (!filePath) return 'unknown';
+  
+  // Extract the directory name containing the feature file
+  const dir = path.dirname(filePath);
+  const dirName = path.basename(dir);
+  
+  // If the feature file is in a subdirectory, use that as the suite name
+  // Otherwise, use the feature file name without extension
+  if (dirName && dirName !== '.' && dirName !== 'features') {
+    return dirName;
+  }
+  
+  // Fallback to feature file name without extension
+  const fileName = path.basename(filePath, '.feature');
+  return fileName || 'unknown';
+}
+
+// Helper function to extract tags from test scenario
+function extractTags(testCase) {
+  const tags = [];
+  
+  // Get tags from the test case (scenario level)
+  if (testCase.pickle && testCase.pickle.tags) {
+    testCase.pickle.tags.forEach(tag => {
+      if (tag.name && tag.name.startsWith('@')) {
+        tags.push(tag.name);
+      }
+    });
+  }
+  
+  // Get tags from the feature level
+  if (testCase.gherkinDocument && testCase.gherkinDocument.feature && testCase.gherkinDocument.feature.tags) {
+    testCase.gherkinDocument.feature.tags.forEach(tag => {
+      if (tag.name && tag.name.startsWith('@') && !tags.includes(tag.name)) {
+        tags.push(tag.name);
+      }
+    });
+  }
+  
+  return tags;
+}
+
+// Helper function to get test name from scenario
+function getTestName(testCase) {
+  if (testCase.pickle && testCase.pickle.name) {
+    return testCase.pickle.name;
+  }
+  
+  // Fallback to step text if scenario name not available
+  return 'Unknown Test';
+}
+
+// Helper function to get relative test file path
+function getRelativeTestPath(testCase) {
+  if (testCase.pickle && testCase.pickle.uri) {
+    // Convert absolute path to relative path from project root
+    const relativePath = path.relative(process.cwd(), testCase.pickle.uri);
+    return relativePath;
+  }
+  
+  return 'unknown.feature';
+}
+
+AfterStep(function (testStep, testCase) {
   // We only care about the performance of steps that passed successfully
   if (testStep.result.status === Status.PASSED && testStep.pickleStep) {
+    
+    // Extract rich context information
+    const testFile = getRelativeTestPath(testCase);
+    const suite = extractSuiteName(testFile);
+    const testName = getTestName(testCase);
+    const tags = extractTags(testCase);
+    
+    // Get job and worker information from environment variables
+    const jobId = process.env.CI_JOB_ID || process.env.GITHUB_JOB || process.env.JENKINS_BUILD_NUMBER || 'local';
+    const workerId = process.env.CI_RUNNER_ID || process.env.GITHUB_RUNNER_ID || process.env.EXECUTOR_NUMBER || 'local';
+    
+    // Create enhanced performance data with rich context
     performanceData.push({
       stepText: testStep.pickleStep.text,
       // The duration from Cucumber is in nanoseconds. We convert to milliseconds.
       duration: testStep.result.duration.nanos / 1_000_000,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
+      context: {
+        testFile: testFile,
+        testName: testName,
+        suite: suite,
+        tags: tags,
+        jobId: jobId,
+        workerId: workerId
+      }
     });
   }
 });
@@ -25,9 +110,46 @@ After(async function () {
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir);
   }
+  
   // Write the data to a file. This is the input for our CLI tool.
   fs.writeFileSync(
     path.join(outputDir, 'latest-run.json'),
     JSON.stringify(performanceData, null, 2)
   );
+  
+  // Log summary of collected data for debugging
+  console.log(`\n📊 Performance data collected:`);
+  console.log(`   • ${performanceData.length} steps recorded`);
+  
+  // Group by suite for summary
+  const suiteStats = {};
+  performanceData.forEach(step => {
+    const suite = step.context.suite;
+    if (!suiteStats[suite]) {
+      suiteStats[suite] = { count: 0, avgDuration: 0, totalDuration: 0 };
+    }
+    suiteStats[suite].count++;
+    suiteStats[suite].totalDuration += step.duration;
+  });
+  
+  // Calculate averages and display suite summary
+  Object.keys(suiteStats).forEach(suite => {
+    const stats = suiteStats[suite];
+    stats.avgDuration = stats.totalDuration / stats.count;
+    console.log(`   • Suite "${suite}": ${stats.count} steps, avg ${stats.avgDuration.toFixed(1)}ms`);
+  });
+  
+  // Show unique tags found
+  const allTags = new Set();
+  performanceData.forEach(step => {
+    step.context.tags.forEach(tag => allTags.add(tag));
+  });
+  
+  if (allTags.size > 0) {
+    console.log(`   • Tags found: ${Array.from(allTags).join(', ')}`);
+  }
+  
+  console.log(`   • Job ID: ${performanceData[0]?.context?.jobId || 'N/A'}`);
+  console.log(`   • Worker ID: ${performanceData[0]?.context?.workerId || 'N/A'}`);
+  console.log(`   • Data saved to: ${path.join(outputDir, 'latest-run.json')}\n`);
 }); 

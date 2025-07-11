@@ -76,6 +76,40 @@ analysis:
     #   rules:
     #     min_absolute_slowdown: 50
 
+  # NEW: Suite-level configuration overrides
+  suite_overrides: {}
+    # authentication:
+    #   threshold: 1.5  # More sensitive for auth suite
+    #   step_types:
+    #     fast:
+    #       rules:
+    #         min_absolute_slowdown: 15
+    #         min_percentage_change: 8
+    #   global_rules:
+    #     min_percentage_change: 2
+    # shopping:
+    #   threshold: 2.5  # More lenient for shopping suite
+    #   global_rules:
+    #     min_percentage_change: 5
+
+  # NEW: Tag-based configuration overrides
+  tag_overrides: {}
+    # "@critical":
+    #   threshold: 1.2  # Very sensitive for critical tagged steps
+    #   rules:
+    #     min_absolute_slowdown: 10
+    #     min_percentage_change: 5
+    # "@smoke":
+    #   threshold: 1.8  # Moderately sensitive for smoke tests
+    #   rules:
+    #     min_absolute_slowdown: 12
+    #     min_percentage_change: 8
+    # "@slow":
+    #   threshold: 3.0  # More lenient for known slow operations
+    #   rules:
+    #     min_absolute_slowdown: 100
+    #     min_percentage_change: 10
+
 # Environment-specific configurations
 environments:
   production:
@@ -83,16 +117,31 @@ environments:
       threshold: 1.8  # Stricter in production
       global_rules:
         min_percentage_change: 2
+      suite_overrides:
+        authentication:
+          threshold: 1.5  # Extra strict for auth in production
+      tag_overrides:
+        "@critical":
+          threshold: 1.2  # Ultra strict for critical in production
         
   staging:
     analysis:
       threshold: 2.0
+      tag_overrides:
+        "@critical":
+          threshold: 1.5
       
   development:
     analysis:
       threshold: 2.5  # More lenient in dev
       trends:
         enabled: false
+      suite_overrides:
+        authentication:
+          threshold: 2.0  # Less strict for auth in dev
+      tag_overrides:
+        "@critical":
+          threshold: 2.0  # Less strict for critical in dev
 
 # Reporting configuration
 reporting:
@@ -129,6 +178,12 @@ profiles:
       global_rules:
         min_percentage_change: 2
         filter_stable_steps: true
+      suite_overrides:
+        authentication:
+          threshold: 1.2
+      tag_overrides:
+        "@critical":
+          threshold: 1.0
         
   lenient:
     analysis:
@@ -136,11 +191,25 @@ profiles:
       global_rules:
         min_percentage_change: 5
         filter_stable_steps: false
+      suite_overrides:
+        authentication:
+          threshold: 2.5
+      tag_overrides:
+        "@critical":
+          threshold: 2.0
         
   ci_focused:
     analysis:
       threshold: 1.8
       trends:
         enabled: false  # Focus on immediate regressions in CI
+      suite_overrides:
+        authentication:
+          threshold: 1.5
+      tag_overrides:
+        "@critical":
+          threshold: 1.3
+        "@smoke":
+          threshold: 1.6
     reporting:
       default_reporters: ["console"] 
